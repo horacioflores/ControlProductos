@@ -1,0 +1,39 @@
+.GridFocusedRow
+{
+    background-color:#CCFF99;
+}
+
+.GridFocusedGroupRow
+{
+    background-color:#A0A0A0;
+}
+
+.GridGroupRow
+{
+    background-color:#D2D2D2;
+}
+
+.GridRow
+{
+    background-color:#FFFFFF;
+}
+
+.GridRow:hover
+{
+    background-color:#CCFF99;
+}
+
+.GridAlternatingRow
+{
+    background-color:#F2F2F2;
+}
+
+.GridAlternatingRow:hover
+{
+    background-color:#CCFF99;
+}
+
+.GridHeader
+{
+    height:23px;
+}

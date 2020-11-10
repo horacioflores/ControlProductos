@@ -1,0 +1,236 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Principal.master.cs" Inherits="ControlProductos.Principal" %>
+<%@ Register Assembly="DevExpress.Web.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Control de Productos</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+        <meta content="Coderthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="Assets/images/favicon_1.ico">
+        <link href="Assets/plugins/sweetalert/dist/sweetalert.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="Assets/plugins/morris.js/morris.css">
+        <link href="Assets/css/bootstrap.css" rel="stylesheet" type="text/css">  
+        <link href="Assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">                      
+        <link href="Assets/css/jquery-ui.css" rel="stylesheet" type="text/css">
+        <link href="Assets/css/less.css" rel="stylesheet" />
+        <link href="Assets/css/card.css" rel="stylesheet" />
+        <link href="Assets/css/core.css" rel="stylesheet" type="text/css">
+        <link href="Assets/css/icons.css" rel="stylesheet" type="text/css">
+        <link href="Assets/css/components.css" rel="stylesheet" type="text/css">
+        <link href="Assets/css/pages.css" rel="stylesheet" type="text/css">
+        <link href="Assets/css/menu.css" rel="stylesheet" type="text/css">
+        <link href="Assets/css/responsive.css" rel="stylesheet" type="text/css">
+        <link href="Assets/css/app.css" rel="stylesheet" type="text/css">
+        <link href="Assets/plugins/notifications/notification.css" rel="stylesheet">
+        <script src="Assets/js/modernizr.min.js"></script>
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+        <!-- Scripts AngularJS/Controllers/Plugins -->
+        <script src="Assets/js/angular.min.js"></script>
+        <script src="Assets/js/ui-router.js"></script>     
+        <!-- / Scripts AngularJS/Controllers/Plugins -->
+       <asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>
+    </head>
+    <body class="fixed-left">       
+      <form id="form1" runat="server">
+        <!-- Begin page -->
+          <!-- agregamos class="forced enlarged" para que el menu no se expanda por default -->
+        <div id="wrapper" class="forced enlarged">
+            <!-- Top Bar Start -->
+            <div class="topbar">                      
+                <!-- Button mobile view to collapse sidebar menu -->
+                <div class="navbar navbar-default" role="navigation">
+                    <%--<div class="container">--%>
+                        <%--<div class="">--%>
+                            <div class="pull-left">
+                                <button type="button" class="button-menu-mobile open-left waves-effect waves-light">
+                                    <i class="fa fa-bars "></i>
+                                </button>
+                                <span class="clearfix"></span>
+                            </div>
+                             <div class="pull-left"> 
+                                    <div class="text-center">
+                                        <a href="wellcome.aspx" class="logo-nuevo"><i class="md above"></i>
+                                            <span><img src="Assets/images/small/EmpresaLogo2.png" alt="" ></span>
+                                        </a> 
+                                    </div> 
+                            </div>
+                            <div class="pull-left">   
+                                <div class="topbar-left-nuevo">
+                                    <div class="text-center">
+                                        <a href="wellcome.aspx" class="logo-nuevo"><i class="md above"></i>
+                                            <span><img src="Assets/images/small/SistemaLogo.png" alt="" ></span>
+                                        </a> 
+                                    </div>                                                                                                                                                                                                                                                                 
+                                </div>                 
+                            </div>
+                            <ul class="nav navbar-nav navbar-right pull-right">                                
+                                <li class="dropdown hidden-xs">
+                                </li>
+                                <li class="hidden-xs">
+                                    <a href="#" id="btn-fullscreen" class="waves-effect waves-light"><i class="md md-crop-free"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">
+                                     <img src="" alt="user-img" class="img-circle" id="imgProfile" runat="server"> 
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <table style="width:350px; margin:15px 15px 15px 15px;">
+                                                <tr>
+                                                    <td style="width:150px;">
+                                                        <table>
+                                                            <tr>
+                                                                <td>                                                                                                                                      
+                                                                    <img src="" alt="user-img" class="img-rounded" id="imbPhotoBig" runat="server" style="width:150px;height:150px" />
+                                                                </td>
+                                                            </tr>                                                            
+                                                        </table>
+                                                    </td>
+                                                    <td style="width:150px; border-bottom-left-radius:5px" >                                                  
+                                                         <table>
+                                                            <tr>
+                                                                <td><dx:ASPxLabel runat="server" Text="User: " ID="ASPxLabel1"></dx:ASPxLabel></td>
+                                                            </tr>
+                                                            <tr>
+                                                                 <td><dx:ASPxLabel runat="server" Text="" ID="lblUsuario"></dx:ASPxLabel></td>   
+                                                            </tr>
+                                                             <tr>
+                                                                 <td><dx:ASPxLabel runat="server" Text="Depto: " ID="ASPxLabel2"></dx:ASPxLabel></td>
+                                                             </tr>
+                                                            <tr>   
+                                                                 <td><dx:ASPxLabel runat="server" Text="" ID="lblDepartamento"></dx:ASPxLabel></td>   
+                                                            </tr>
+                                                            <tr>
+                                                                <td><dx:ASPxLabel runat="server" Text="Profile: " ID="ASPxLabel3"></dx:ASPxLabel></td>
+                                                            </tr>
+                                                            <tr>   
+                                                                <td><dx:ASPxLabel runat="server" Text="" ID="lblPerfil"></dx:ASPxLabel></td>   
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr> 
+                                            </table>
+                                        </li>
+                                        <li><hr /></li>                                    
+                                        <li onclick="return ChangedPhoto();" ><a href="javascript:void(0)"><i class="md md-face-unlock"></i> Edit Photo</a></li>
+                                        <li onclick="return ChangedPass();" ><a href="javascript:void(0)"><i class="md md-settings"></i> Change Password</a></li>
+                                        <li><a href="Login.aspx"><i class="md md-settings-power"></i> Exit </a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                </div>
+            </div>
+            <!-- Top Bar End -->
+            <!-- Left Sidebar Start -->
+            <div class="left side-menu">
+                <div id="amburguesa" runat="server" class="sidebar-inner slimscrollleft">
+                    <!-- Menu Dinamico-->
+                    <!--- Divider -->
+                    <div id="sidebar-menu"> 
+                        <ul class="respond" id="feedbackTab" runat="server"> 
+                           <!--Menu options created dynamically from the code-->                          
+                        </ul>                       
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!-- Left Sidebar End -->
+            <!-- Contenido-->
+            <!-- Start right Content here -->
+            <div class="content-page" >
+                <!-- Start content -->
+                <div class="content">
+                    <div class="container">                                               
+                        <asp:ContentPlaceHolder ID="MainContent" runat="server">                                   
+                        </asp:ContentPlaceHolder>                        
+                    </div>
+                </div>    
+                <footer class="footer text-right" style="height:10px">
+                    <table style="text-align:right; width:100%">
+                            <tr>
+                                <td>                                    
+                                    <dx:ASPxLabel runat="server" Text="2020 © Smart IT Consulting Services. " ID="FooterBarra"></dx:ASPxLabel>
+                                </td>                                
+                            </tr>
+                    </table>                    
+                </footer>
+            </div>            
+            <!-- End Right content here -->
+            <!-- Chat ->
+            <!-- Right Sidebar -->
+            <!-- /Right-bar -->
+        </div>    
+        <!-- END wrapper --> 
+      </form>   
+        <script>
+            var resizefunc = [];
+        </script>
+     <!-- jQuery  -->
+        <script src="Assets/js/jquery.min.js"></script>
+        <script src="Assets/js/bootstrap.min.js"></script>
+        <script src="Assets/js/detect.js"></script>
+        <script src="Assets/js/fastclick.js"></script>
+        <script src="Assets/js/jquery.slimscroll.js"></script>
+        <script src="Assets/js/jquery.blockUI.js"></script>
+        <script src="Assets/js/waves.js"></script>
+        <script src="Assets/js/wow.min.js"></script>
+        <script src="Assets/js/jquery.nicescroll.js"></script>
+        <script src="Assets/js/jquery.scrollTo.min.js"></script>
+        <script src="Assets/js/jquery.app.js"></script>
+        <!-- jQuery  -->
+        <script src="Assets/plugins/moment/moment.js"></script>
+        <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script> --%>
+        <!-- jQuery  -->
+        <script src="Assets/plugins/waypoints/lib/jquery.waypoints.js"></script>
+        <script src="Assets/plugins/counterup/jquery.counterup.min.js"></script>
+        <!-- jQuery  -->
+        <script src="Assets/plugins/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="Assets/pages/jquery.sweet-alert.init.js"></script>
+        <!-- jQuery  -->
+        <script src="Assets/pages/jquery.todo.js"></script>
+        <!-- jQuery  -->
+        <script src="Assets/pages/jquery.chat.js"></script>
+        <!--Morris Chart
+            <script src="Assets/plugins/raphael/raphael-min.js"></script>
+            <script src="Assets/plugins/morris.js/morris.min.js"></script>
+            <script src="Assets/pages/jquery.dashboard.js"></script>
+        -->
+        <!-- jQuery  -->
+        <script src="Assets/plugins/RWD-Table-Patterns/dist/js/rwd-table.min.js" type="text/javascript"></script>
+        <script src="Assets/plugins/notifyjs/dist/notify.min.js"></script>
+        <script src="Assets/plugins/notifications/notify-metro.js"></script>
+        <script src="Assets/plugins/notifications/notifications.js"></script>
+        <script type="text/javascript">
+            /* ==============================================
+            Counter Up
+            =============================================== */
+            jQuery(document).ready(function($) {
+                $('.counter').counterUp({
+                    delay: 100,
+                    time: 1200
+                });
+                
+            });
+        </script>                                 
+        <script type="text/javascript">
+            function ChangedPass(){
+                document.location.href = "CatPassword.aspx";
+            }
+            
+            function ChangedPhoto() {
+                document.location.href = "CatPhoto.aspx";
+            }
+            
+        </script>
+    </body>
+</html>

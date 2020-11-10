@@ -1,0 +1,46 @@
+﻿.div-container {
+  width: 50px;
+  height:50px;  
+  left: 0;
+  right: 0;
+  align-content:center;
+  margin: 0 auto;
+  /*top: 5px;*/
+}
+.div-img {
+  display: block;
+  /*margin-left: auto;
+  margin-right: auto;*/
+}
+.div-img .img {
+  /*display: block;*/
+  margin-left: auto;
+  margin-right: auto;
+  /*width: 20%;*/
+  transform: scale(1);
+  -ms-transform: scale(1);
+  -moz-transform: scale(1);
+  -webkit-transform: scale(1);
+  -o-transform: scale(1);
+  -webkit-transition: all 500ms ease-in-out;
+  -moz-transition: all 500ms ease-in-out;  
+  -o-transition: all 500ms ease-in-out;
+}
+.div-img:hover .img {
+   /*Aumenta Tamaño*/
+   /*transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -o-transform: scale(1.2);*/
+ 
+  /*Disminuye Tamaño*/
+  transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -webkit-transform: scale(0.8);
+  -o-transform: scale(0.8);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
