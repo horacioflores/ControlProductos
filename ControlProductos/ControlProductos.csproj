@@ -180,9 +180,16 @@
   <ItemGroup>
     <Content Include="CatBrands.aspx" />
     <Content Include="CatBuyers.aspx" />
+    <Content Include="CatCounts.aspx" />
+    <Content Include="CatGlider.aspx" />
     <Content Include="CatMachines.aspx" />
     <Content Include="CatMonedas.aspx" />
+    <Content Include="CatPlans.aspx" />
+    <Content Include="CatSubcategory1.aspx" />
+    <Content Include="CatSubcategory2.aspx" />
+    <Content Include="CatSubcategory3.aspx" />
     <Content Include="CatUM.aspx" />
+    <Content Include="CatUsed.aspx" />
     <Content Include="packages.config" />
     <Content Include="Assets\css\bootstrap-theme.css.map" />
     <Content Include="Assets\css\bootstrap-theme.min.css.map" />
@@ -3531,6 +3538,13 @@
     <Compile Include="CatBuyers.aspx.designer.cs">
       <DependentUpon>CatBuyers.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CatCounts.aspx.cs">
+      <DependentUpon>CatCounts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CatCounts.aspx.designer.cs">
+      <DependentUpon>CatCounts.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CatDepto.aspx.cs">
       <DependentUpon>CatDepto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3544,6 +3558,13 @@
     </Compile>
     <Compile Include="CatEmpleados.aspx.designer.cs">
       <DependentUpon>CatEmpleados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CatGlider.aspx.cs">
+      <DependentUpon>CatGlider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CatGlider.aspx.designer.cs">
+      <DependentUpon>CatGlider.aspx</DependentUpon>
     </Compile>
     <Compile Include="CatMachines.aspx.cs">
       <DependentUpon>CatMachines.aspx</DependentUpon>
@@ -3594,6 +3615,13 @@
     <Compile Include="CatPhoto.aspx.designer.cs">
       <DependentUpon>CatPhoto.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CatPlans.aspx.cs">
+      <DependentUpon>CatPlans.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CatPlans.aspx.designer.cs">
+      <DependentUpon>CatPlans.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CatPlanta.aspx.cs">
       <DependentUpon>CatPlanta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3615,12 +3643,40 @@
     <Compile Include="CatProveedor.aspx.designer.cs">
       <DependentUpon>CatProveedor.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CatSubcategory1.aspx.cs">
+      <DependentUpon>CatSubcategory1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CatSubcategory1.aspx.designer.cs">
+      <DependentUpon>CatSubcategory1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CatSubcategory2.aspx.cs">
+      <DependentUpon>CatSubcategory2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CatSubcategory2.aspx.designer.cs">
+      <DependentUpon>CatSubcategory2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CatSubcategory3.aspx.cs">
+      <DependentUpon>CatSubcategory3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CatSubcategory3.aspx.designer.cs">
+      <DependentUpon>CatSubcategory3.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CatUM.aspx.cs">
       <DependentUpon>CatUM.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CatUM.aspx.designer.cs">
       <DependentUpon>CatUM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CatUsed.aspx.cs">
+      <DependentUpon>CatUsed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CatUsed.aspx.designer.cs">
+      <DependentUpon>CatUsed.aspx</DependentUpon>
     </Compile>
     <Compile Include="CatUsuarios.aspx.cs">
       <DependentUpon>CatUsuarios.aspx</DependentUpon>
@@ -3631,6 +3687,7 @@
     </Compile>
     <Compile Include="dataAccess\Aplicacion.cs" />
     <Compile Include="dataAccess\Comprador.cs" />
+    <Compile Include="dataAccess\Conteo.cs" />
     <Compile Include="dataAccess\Departamento.cs" />
     <Compile Include="dataAccess\Empleados.cs" />
     <Compile Include="dataAccess\Maquina.cs" />
@@ -3641,13 +3698,20 @@
     <Compile Include="dataAccess\Parametro.cs" />
     <Compile Include="dataAccess\Perfil.cs" />
     <Compile Include="dataAccess\Perfil_Apps.cs" />
+    <Compile Include="dataAccess\Plan.cs" />
+    <Compile Include="dataAccess\Planeador.cs" />
     <Compile Include="dataAccess\Planta.cs" />
     <Compile Include="dataAccess\Posicion.cs" />
     <Compile Include="dataAccess\Proveedor.cs" />
+    <Compile Include="dataAccess\SubCategoria1.cs" />
+    <Compile Include="dataAccess\SubCategoria2.cs" />
+    <Compile Include="dataAccess\SubCategoria3.cs" />
     <Compile Include="dataAccess\UMedida.cs" />
     <Compile Include="dataAccess\Usuario.cs" />
+    <Compile Include="dataAccess\Utilizado.cs" />
     <Compile Include="Entity\Aplicacion.cs" />
     <Compile Include="Entity\Comprador.cs" />
+    <Compile Include="Entity\Conteo.cs" />
     <Compile Include="Entity\Departamento.cs" />
     <Compile Include="Entity\Empleados.cs" />
     <Compile Include="Entity\loggedEmpleado.cs" />
@@ -3659,11 +3723,17 @@
     <Compile Include="Entity\Parametro.cs" />
     <Compile Include="Entity\perfil.cs" />
     <Compile Include="Entity\Perfil_Apps.cs" />
+    <Compile Include="Entity\Plan.cs" />
+    <Compile Include="Entity\Planeador.cs" />
     <Compile Include="Entity\Planta.cs" />
     <Compile Include="Entity\Posicion.cs" />
     <Compile Include="Entity\Proveedor.cs" />
+    <Compile Include="Entity\SubCategoria1.cs" />
+    <Compile Include="Entity\SubCategoria2.cs" />
+    <Compile Include="Entity\SubCategoria3.cs" />
     <Compile Include="Entity\UMedida.cs" />
     <Compile Include="Entity\Usuario.cs" />
+    <Compile Include="Entity\Utilizado.cs" />
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
