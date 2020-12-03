@@ -178,6 +178,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SmartFormas.css" />
+    <Content Include="SmartFormas.js" />
     <Content Include="CatBrands.aspx" />
     <Content Include="CatBuyers.aspx" />
     <Content Include="CatCounts.aspx" />
@@ -190,6 +192,8 @@
     <Content Include="CatSubcategory3.aspx" />
     <Content Include="CatUM.aspx" />
     <Content Include="CatUsed.aspx" />
+    <Content Include="ctrolProds.aspx" />
+    <Content Include="ctrolProds_det.aspx" />
     <Content Include="packages.config" />
     <Content Include="Assets\css\bootstrap-theme.css.map" />
     <Content Include="Assets\css\bootstrap-theme.min.css.map" />
@@ -3685,9 +3689,24 @@
     <Compile Include="CatUsuarios.aspx.designer.cs">
       <DependentUpon>CatUsuarios.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ctrolProds.aspx.cs">
+      <DependentUpon>ctrolProds.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ctrolProds.aspx.designer.cs">
+      <DependentUpon>ctrolProds.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ctrolProds_det.aspx.cs">
+      <DependentUpon>ctrolProds_det.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ctrolProds_det.aspx.designer.cs">
+      <DependentUpon>ctrolProds_det.aspx</DependentUpon>
+    </Compile>
     <Compile Include="dataAccess\Aplicacion.cs" />
     <Compile Include="dataAccess\Comprador.cs" />
     <Compile Include="dataAccess\Conteo.cs" />
+    <Compile Include="dataAccess\ControlProductos.cs" />
     <Compile Include="dataAccess\Departamento.cs" />
     <Compile Include="dataAccess\Empleados.cs" />
     <Compile Include="dataAccess\Maquina.cs" />
@@ -3712,6 +3731,7 @@
     <Compile Include="Entity\Aplicacion.cs" />
     <Compile Include="Entity\Comprador.cs" />
     <Compile Include="Entity\Conteo.cs" />
+    <Compile Include="Entity\ControlProductos.cs" />
     <Compile Include="Entity\Departamento.cs" />
     <Compile Include="Entity\Empleados.cs" />
     <Compile Include="Entity\loggedEmpleado.cs" />
