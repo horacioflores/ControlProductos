@@ -15,6 +15,16 @@ namespace ControlProductos.Entity
         public List<ControlProductos> GetCtrlProductoResult { get; set; }
     }
 
+    public class InsCtrlPResult_
+    {
+        public int InsCtrlPResult { get; set; }
+    }
+
+    public class UpdCtrlPResult_
+    {
+        public int UpdCtrlPResult { get; set; }
+    }
+
     public class ControlProductos
     {
         public int ctrlProdsID { get; set; }
@@ -73,6 +83,8 @@ namespace ControlProductos.Entity
         public string noDocumento { get; set; }
         public string codigoTipoArticulo { get; set; }
         public string tipoArticulo { get; set; }
+        public string M { get; set; }
+        public string N { get; set; }
         public string comentarios { get; set; }
     }
 

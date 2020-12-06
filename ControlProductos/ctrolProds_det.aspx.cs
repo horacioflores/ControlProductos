@@ -31,31 +31,90 @@ namespace ControlProductos
 
         private void init()
         {
+
+            var BMaquina = new MaquinaDa();
+            cmbMaquina.TextField = "Nombre";
+            cmbMaquina.ValueField = "Codigo";
+            cmbMaquina.DataSource = BMaquina.GetCombo();
+            cmbMaquina.DataBind();
+
+            var BSubcategoria1 = new SubCategoria1Da();
+            cmbSubCat1.TextField = "Nombre";
+            cmbSubCat1.ValueField = "Codigo";
+            cmbSubCat1.DataSource = BSubcategoria1.GetCombo();
+            cmbSubCat1.DataBind();
+
+            var BSubcategoria2 = new SubCategoria2Da();
+            cmbSubCat2.TextField = "Nombre";
+            cmbSubCat2.ValueField = "Codigo";
+            cmbSubCat2.DataSource = BSubcategoria2.GetCombo();
+            cmbSubCat2.DataBind();
+
+            var BSubcategoria3 = new SubCategoria3Da();
+            cmbSubCat3.TextField = "Nombre";
+            cmbSubCat3.ValueField = "Codigo";
+            cmbSubCat3.DataSource = BSubcategoria3.GetCombo();
+            cmbSubCat3.DataBind();
+
+            var BUtilizado = new UtilizadoDa();
+            cmbUtilizado.TextField = "Nombre";
+            cmbUtilizado.ValueField = "Codigo";
+            cmbUtilizado.DataSource = BUtilizado.GetCombo();
+            cmbUtilizado.DataBind();
+
+            var BDepartamento = new DepartamentoDa();
+            cmbDepa.TextField = "Descripcion";
+            cmbDepa.ValueField = "Codigo";
+            cmbDepa.DataSource = BDepartamento.GetCombo();
+            cmbDepa.DataBind();
+
+            var BPlan = new PlanDa();
+            cmbPlan.TextField = "Nombre";
+            cmbPlan.ValueField = "Codigo";
+            cmbPlan.DataSource = BPlan.GetCombo();
+            cmbPlan.DataBind();
+
+            var BMarca = new MarcaDa();
+            cmbMarca.TextField = "Nombre";
+            cmbMarca.ValueField = "Codigo";
+            cmbMarca.DataSource = BMarca.GetCombo();
+            cmbMarca.DataBind();
+
+            var BProveedor = new ProveedorDa();
+            cmbProveedor.TextField = "Nombre";
+            cmbProveedor.ValueField = "Codigo";
+            cmbProveedor.DataSource = BProveedor.GetCombo();
+            cmbProveedor.DataBind();
+
+            var BMoneda = new MonedaDa();
+            cmbMoneda.TextField = "Nombre";
+            cmbMoneda.ValueField = "Codigo";
+            cmbMoneda.DataSource = BMoneda.GetCombo();
+            cmbMoneda.DataBind();
+
+            var BUM = new UMedidaDa();
+            cmbCodigoUM.TextField = "Nombre";
+            cmbCodigoUM.ValueField = "Codigo";
+            cmbCodigoUM.DataSource = BUM.GetCombo();
+            cmbCodigoUM.DataBind();
+
+            var BPlaneador = new PlaneadorDa();
+            cmbPlaneador.TextField = "Nombre";
+            cmbPlaneador.ValueField = "Codigo";
+            cmbPlaneador.DataSource = BPlaneador.GetCombo();
+            cmbPlaneador.DataBind();
+
+            var BComprador = new CompradorDa();
+            cmbComprador.TextField = "Nombre";
+            cmbComprador.ValueField = "Codigo";
+            cmbComprador.DataSource = BComprador.GetCombo();
+            cmbComprador.DataBind();
+
             if (!IsPostBack)
             {
                 int ctrlProdsID = Convert.ToInt32(Session["ctrlProdsID"]);
-
-
                 var BctrlProd = new ControlProductosda();
                 List<Entity.ControlProductos> oList = BctrlProd.GetCtrlProducto(ctrlProdsID.ToString());
-
-                //var BEmpleados = new EmpleadosDa();
-                //cmbEmpleadoEdit.TextField = "NombreCompleto";
-                //cmbEmpleadoEdit.ValueField = "Codigo";
-                //cmbEmpleadoEdit.DataSource = BEmpleados.GetCatalog("", "", "", "", true);
-                //cmbEmpleadoEdit.DataBind();
-
-                //var BPlantas = new PlantaDa();
-                //ASPxCmbPlant.TextField = "Descripcion";
-                //ASPxCmbPlant.ValueField = "Codigo";
-                //ASPxCmbPlant.DataSource = BPlantas.GetCatalog("", "", true);
-                //ASPxCmbPlant.DataBind();
-
-                //var BMonedas = new MonedaDa();
-                //cmbMonedaEdit.TextField = "Nombre";
-                //cmbMonedaEdit.ValueField = "Codigo";
-                //cmbMonedaEdit.DataSource = BMonedas.GetCombo();
-                //cmbMonedaEdit.DataBind();
 
                 if (ctrlProdsID > 0)
                 {
@@ -92,108 +151,127 @@ namespace ControlProductos
                             lblnDoc.Text = ctrlP.noDocumento;
                             lblDocSolicitante.Text = ctrlP.usuario;
                             lblDocFechaSol.Text = ctrlP.fechaSolicitud;
+                            remplazaOtro.Text = ctrlP.remplazaOtro;
 
-                            //xtxtFolio.Text = cot.folio_cotizacion;
-                            //ASPxStatus.Text = cot.sstatus;
+                            ListEditItem oItMaquina = cmbMaquina.Items.FindByValue(ctrlP.CodigoMaquina);
+                            if (oItMaquina != null)
+                            {
+                                oItMaquina.Selected = true;
+                            }
 
-                            //Validacion
+                            ListEditItem oItmSubCat1 = cmbSubCat1.Items.FindByValue(ctrlP.CodigoSubcategoria1);
+                            if (oItmSubCat1 != null)
+                            {
+                                oItmSubCat1.Selected = true;
+                            }
 
-                            //if (LoginInfo.CurrentPerfil.Codigo.ToUpper() == "ADMIN")
-                            //{
-                            //    if (cot.codigoStatus == "002")
-                            //    {
-                            //        btnSend.Visible = false;
-                            //        btnSave.Visible = false;
-                            //        btnEnviarProveedor.Visible = false;
-                            //        btnRechazar.Visible = false;
-                            //        btnRegresar.Visible = true;
-                            //        btnCancelar.Visible = false;
-                            //    }
-                            //    else
-                            //    {
-                            //        btnSend.Visible = false;
-                            //        btnSave.Visible = false;
-                            //        btnEnviarProveedor.Visible = false;
-                            //        btnRechazar.Visible = false;
-                            //        btnRegresar.Visible = true;
-                            //        btnCancelar.Visible = false;
-                            //    }
-                            //}
-                            //else if (LoginInfo.CurrentPerfil.Codigo.ToUpper() == "GERENTE")
-                            //{
-                            //    if (cot.codigoStatus == "002")
-                            //    {
-                            //        btnSend.Visible = false;
-                            //        btnSave.Visible = false;
-                            //        btnEnviarProveedor.Visible = true;
-                            //        btnRechazar.Visible = true;
-                            //        btnRegresar.Visible = true;
-                            //        btnCancelar.Visible = true;
-                            //    }
-                            //    else
-                            //    {
-                            //        btnSend.Visible = false;
-                            //        btnSave.Visible = false;
-                            //        btnEnviarProveedor.Visible = false;
-                            //        btnRechazar.Visible = false;
-                            //        btnRegresar.Visible = true;
-                            //        btnCancelar.Visible = false;
-                            //    }
-                            //}
-                            //else
-                            //{
-                            //    btnSend.Visible = false;
-                            //    btnSave.Visible = false;
-                            //    btnEnviarProveedor.Visible = false;
-                            //    btnRechazar.Visible = false;
-                            //    btnRegresar.Visible = true;
-                            //    btnCancelar.Visible = false;
-                            //}
+                            ListEditItem oItmSubCat2 = cmbSubCat2.Items.FindByValue(ctrlP.CodigoSubcategoria2);
+                            if (oItmSubCat2 != null)
+                            {
+                                oItmSubCat2.Selected = true;
+                            }
 
-                            //xtxtProyecto.Text = cot.proyecto;
-                            //ASPxtxtUser.Text = cot.usuario;
-                            //ASPxtxtNotes.Value = cot.notas;
+                            ListEditItem oItmSubCat3 = cmbSubCat3.Items.FindByValue(ctrlP.CodigoSubcategoria3);
+                            if (oItmSubCat3 != null)
+                            {
+                                oItmSubCat3.Selected = true;
+                            }
 
-                            //ListEditItem oItm = cmbEmpleadoEdit.Items.FindByValue(cot.responsableCodigo);
-                            //if (oItm != null)
-                            //{
-                            //    oItm.Selected = true;
-                            //}
+                            ListEditItem oItmUtilizado = cmbUtilizado.Items.FindByValue(ctrlP.CodigoUtilizado);
+                            if (oItmUtilizado != null)
+                            {
+                                oItmUtilizado.Selected = true;
+                            }
 
-                            //ListEditItem oItmPlant = ASPxCmbPlant.Items.FindByValue(cot.codigoPlanta);
-                            //if (oItmPlant != null)
-                            //{
-                            //    oItmPlant.Selected = true;
-                            //}
+                            ListEditItem oItmDepto = cmbDepa.Items.FindByValue(ctrlP.CodigoDepto);
+                            if (oItmDepto != null)
+                            {
+                                oItmDepto.Selected = true;
+                            }
 
-                            //DateTime fechaOrig = new DateTime(Convert.ToInt32(cot.fechaOrig.Substring(6, 4)), Convert.ToInt32(cot.fechaOrig.Substring(3, 2)), Convert.ToInt32(cot.fechaOrig.Substring(0, 2)), Convert.ToInt32(cot.fechaOrig.Substring(11, 2)), Convert.ToInt32(cot.fechaOrig.Substring(14, 2)), Convert.ToInt32(cot.fechaOrig.Substring(17, 2)));
-                            //DateTime fechareq = new DateTime(Convert.ToInt32(cot.fechaReq.Substring(6, 4)), Convert.ToInt32(cot.fechaReq.Substring(3, 2)), Convert.ToInt32(cot.fechaReq.Substring(0, 2)), Convert.ToInt32(cot.fechaOrig.Substring(11, 2)), Convert.ToInt32(cot.fechaOrig.Substring(14, 2)), Convert.ToInt32(cot.fechaOrig.Substring(17, 2)));
-                            //ListEditItem oItmMoneda = cmbMonedaEdit.Items.FindByValue(cot.codigoMoneda);
-                            //if (oItmMoneda != null)
-                            //{
-                            //    oItmMoneda.Selected = true;
-                            //}
+                            tbRepetTipoArticulo.DataSource = ctrlP.tiposArticulo;
+                            tbRepetTipoArticulo.DataBind();
 
-                            //xDateOriginated.Text = fechaOrig.ToString("dd-MM-yyyy HH:mm");
-                            //xDateRequiered.Value = fechareq;
+                            txtDescripcion1.Text = ctrlP.descripcionUno;
+                            txtDescripcion2.Text = ctrlP.descripcionDos;
+                            txtDescripcionLarga.Text = ctrlP.descripcionDos;
 
-                            //productos = cot.productos;
-                            //proveedores = cot.proveedores;
-                            //comentarios = cot.comentarios;
-                            //archivos = cot.archivos;
+                            ListEditItem oItmPlan = cmbPlan.Items.FindByValue(ctrlP.CodigoPlan);
+                            if (oItmPlan != null)
+                            {
+                                oItmPlan.Selected = true;
+                            }
 
-                            //xgrdPartes.DataSource = cot.productos;
-                            //xgrdPartes.DataBind();
-                            //ApplyLayoutParte();
+                            txtcomoAyudarStockCero.Text = ctrlP.comoAyudarStockCero;
+                            txtfuncionMaquina.Text = ctrlP.funcionMaquina;
+                            txtCantidad.Text = ctrlP.cantidadOrden.ToString();
+                            txtStockMin.Text = ctrlP.stockMinimo.ToString();
+                            txtStockMax.Text = ctrlP.stockMaximo.ToString();
 
-                            //xgrdProvedores.DataSource = cot.proveedores;
-                            //xgrdProvedores.DataBind();
-                            //ApplyLayoutProv();
-                            //ApplyLayoutQuotes();
-                            //chat();
-                            //fillIndicadores(cot);
-                            //break;
-                        }
+                            ListEditItem oItmMarca = cmbMarca.Items.FindByValue(ctrlP.CodigoMarca);
+                            if (oItmMarca != null)
+                            {
+                                oItmMarca.Selected = true;
+                            }
+
+                            ListEditItem oItmProveedor = cmbProveedor.Items.FindByValue(ctrlP.CodigoProveedor);
+                            if (oItmProveedor != null)
+                            {
+                                oItmProveedor.Selected = true;
+                            }
+
+                            ListEditItem oItmUnico= cmbUnico.Items.FindByValue(ctrlP.esUnico);
+                            if (oItmUnico != null)
+                            {
+                                oItmUnico.Selected = true;
+                            }
+
+                            xDateFechaCot.Value = ctrlP.fechaCotizacion;
+                            txtPrecioU.Text = ctrlP.precioUnitario.ToString();
+                            txtDiasEntrega.Text = ctrlP.diasEntrega.ToString();
+
+                            ListEditItem oItmMoneda = cmbMoneda.Items.FindByValue(ctrlP.Codigomoneda);
+                            if (oItmMoneda != null)
+                            {
+                                oItmMoneda.Selected = true;
+                            }
+                            lblTotal.Text = ctrlP.total.ToString();
+
+                            tbRepetMtto.DataSource = ctrlP.mantenimientos;
+                            tbRepetMtto.DataBind();
+                            tbRepetAlmacen.DataSource = ctrlP.almacenes;
+                            tbRepetAlmacen.DataBind();
+
+                            txtFichaSeguridad.Text = ctrlP.fichaDatoSeguridad;
+
+                            ListEditItem oItmUM = cmbCodigoUM.Items.FindByValue(ctrlP.CodigoUM);
+                            if (oItmUM != null)
+                            {
+                                oItmUM.Selected = true;
+                            }
+
+                            txtConteoCiclico.Text = ctrlP.conteoCiclico;
+                            txtAlmacenamientoExt.Text = ctrlP.almacenamientoExternoPosible;
+
+                            ListEditItem oItmPlaneador = cmbPlaneador.Items.FindByValue(ctrlP.codigoPlaneador);
+                            if (oItmPlaneador != null)
+                            {
+                                oItmPlaneador.Selected = true;
+                            }
+
+                            ListEditItem oItmComprador = cmbComprador.Items.FindByValue(ctrlP.codigoComprador);
+                            if (oItmComprador != null)
+                            {
+                                oItmComprador.Selected = true;
+                            }
+
+                            txtFichaInv.Text = ctrlP.fichaInventario;
+                            txtMultiplo.Text = ctrlP.multiplo;
+                            txtHojaSeguridad.Text = ctrlP.hojaSeguridad;
+                            txtCodigoArticulo.Text = ctrlP.codigoArticulo;
+
+                            break;
+                        }   
                     }
                 }
                 else
@@ -204,22 +282,32 @@ namespace ControlProductos
                     lblnDoc.Text = "";
                     lblDocSolicitante.Text = LoginInfo.CurrentUsuario.NombreCompleto;
                     lblDocFechaSol.Text = date.ToString("dd/MM/yyyy HH:mm");
+                    remplazaOtro.Text = "";
 
-                    //string newFolio = BCotizacion.GetConsecutivosolicitud();
-                    //xtxtFolio.Text = newFolio;
-                    //ASPxStatus.Text = "Open";
-                    //DateTime fechaActual = DateTime.Now;
-                    //xDateOriginated.Text = fechaActual.ToString("dd-MM-yyyy HH:mm");
-                    //xDateRequiered.Value = fechaActual;
-                    //ASPxtxtUser.Text = LoginInfo.CurrentUsuario.NombreCompleto;
+                    txtDescripcion1.Text = "";
+                    txtDescripcion2.Text = "";
+                    txtDescripcionLarga.Text = "";
 
-                    ////Botones.
-                    //btnSave.Visible = true;
-                    //btnSend.Visible = true;
-                    //btnRegresar.Visible = true;
-                    //btnRechazar.Visible = false;
-                    //btnCancelar.Visible = false;
-                    //btnEnviarProveedor.Visible = false;
+                    txtcomoAyudarStockCero.Text = "";
+                    txtfuncionMaquina.Text = "";
+                    txtCantidad.Text = "0";
+                    txtStockMin.Text = "0";
+                    txtStockMax.Text = "0";
+
+                    txtPrecioU.Text = "0";
+                    txtDiasEntrega.Text = "0";
+
+                    lblTotal.Text = "0";
+
+                    txtFichaSeguridad.Text = "";
+
+                    txtConteoCiclico.Text = "";
+                    txtAlmacenamientoExt.Text = "";
+
+                    txtFichaInv.Text = "";
+                    txtMultiplo.Text = "";
+                    txtHojaSeguridad.Text = "";
+                    txtCodigoArticulo.Text = "";
 
 
                     //productos = new List<cotizacion_prod>();
@@ -228,20 +316,6 @@ namespace ControlProductos
                     //archivos = new List<cotizacion_archivos>();
                 }
                 //productosToRel = new List<cotizacion_prodRelProv>();
-            }
-            else
-            {
-                //xgrdPartes.DataSource = productos;
-                //xgrdPartes.DataBind();
-                //ApplyLayoutParte();
-
-                //xgrdProvedores.DataSource = proveedores;
-                //xgrdProvedores.DataBind();
-                //ApplyLayoutProv();
-                //ApplyLayoutQuotes();
-
-                //ApplyLayoutProdToRel();
-                //chat();
             }
             //ParteDa BParte = new ParteDa();
             //if (cmbParteEdit != null)

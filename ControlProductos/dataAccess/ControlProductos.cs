@@ -23,5 +23,17 @@ namespace ControlProductos.dataAccess
             Entity.GetCtrlProductoResult_ regreso = JsonConvert.DeserializeObject<Entity.GetCtrlProductoResult_>(json);
             return regreso.GetCtrlProductoResult;
         }
+
+        public int InsCtrlP(Entity.ControlProductos ctrlProds, string UsuarioId)
+        {
+            Entity.InsCtrlPResult_ regreso = JsonConvert.DeserializeObject<Entity.InsCtrlPResult_>(methodPost("InsCtrlP/" + UsuarioId, JsonConvert.SerializeObject(ctrlProds)));
+            return regreso.InsCtrlPResult;
+        }
+
+        public int UpdCtrlP(Entity.ControlProductos ctrlProds, string UsuarioId)
+        {
+            Entity.UpdCtrlPResult_ regreso = JsonConvert.DeserializeObject<Entity.UpdCtrlPResult_>(methodPost("UpdCtrlP/" + UsuarioId, JsonConvert.SerializeObject(ctrlProds)));
+            return regreso.UpdCtrlPResult;
+        }
     }
 }

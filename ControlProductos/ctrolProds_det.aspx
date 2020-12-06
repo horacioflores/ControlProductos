@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Principal.Master" AutoEventWireup="true" CodeBehind="ctrolProds_det.aspx.cs" Inherits="ControlProductos.ctrolProds_det" %>
 <%@ Register Assembly="DevExpress.Web.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server" Visible="false">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">--%>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </asp:Content>
@@ -702,7 +702,7 @@
                         <div class="row form-group RowsControl">
                             <label class="text-form col-xs-4" style="padding: 1px;margin: 0px;">No. Documento</label>
                             <div class="col-xs-4 " style="color:red; font-weight:800;">
-                                <asp:Label ID="lblnDoc" runat="server"></asp:Label>
+                                <asp:TextBox ID="lblnDoc" runat="server"></asp:TextBox>
                             </div>
                         </div>
                         <div class="row form-group RowsControl">
@@ -734,46 +734,103 @@
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-2">Reemplaza a otro</label>
                                 <div class="col-sm-2">
-                                    <input type="text" id="remplazaOtro" class="form-control input-sm Campos">
+                                    <asp:TextBox ID="remplazaOtro" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                                 <label class="text-form col-sm-2">Cuál artículo</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <asp:TextBox ID="cualArticulo" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                             </div>
                             <fieldset style="padding:10px;border: 1px solid #B5D2EA;border-radius:5px;">
                                 <legend style="font-size:12px;font-weight:600;border:none;width: auto;padding:2px;color:#8CBADF;margin-bottom:0px;">Máquina asociada</legend>
                                 <div class="row form-group CeroPM">
-                                    <label class="text-form col-sm-2">Máquina</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control input-sm Campos">
+                                    <label class="text-form col-sm-1">Máquina</label>
+                                    <div class="col-sm-11">
+                                        <input type="hidden" id="hdnCodigoMaquina" value='<%# Eval("CodigoMaquina")%>' runat="server"/>
+                                        <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMaquina" runat="server" IncrementalFilteringMode="Contains" 
+                                            FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                            PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                            <ValidationSettings>
+                                                <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                            </ValidationSettings>
+                                            <ClientSideEvents/>
+                                            <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        </dx:ASPxComboBox>
                                     </div>
                                 </div>
                                 <div class="row form-group CeroPM">
                                     <label class="text-form col-sm-1">Subcategoría 1</label>
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control input-sm Campos">
+                                        <input type="hidden" id="hdnCodigoSubCat1" value='<%# Eval("CodigoSubcategoria1")%>' runat="server"/>
+                                        <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbSubCat1" runat="server" IncrementalFilteringMode="Contains" 
+                                            FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                            PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                            <ValidationSettings>
+                                                <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                            </ValidationSettings>
+                                            <ClientSideEvents/>
+                                            <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        </dx:ASPxComboBox>
                                     </div>
                                     <label class="text-form col-sm-1">Subcategoría 2</label>
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control input-sm Campos">
+                                        <input type="hidden" id="hdnCodigoSubCat2" value='<%# Eval("CodigoSubcategoria2")%>' runat="server"/>
+                                        <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbSubCat2" runat="server" IncrementalFilteringMode="Contains" 
+                                            FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                            PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                            <ValidationSettings>
+                                                <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                            </ValidationSettings>
+                                            <ClientSideEvents/>
+                                            <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        </dx:ASPxComboBox>
                                     </div>
                                     <label class="text-form col-sm-1">Subcategoría 3</label>
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control input-sm Campos">
+                                        <input type="hidden" id="hdnCodigoSubCat3" value='<%# Eval("CodigoSubcategoria3")%>' runat="server"/>
+                                        <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbSubCat3" runat="server" IncrementalFilteringMode="Contains" 
+                                            FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                            PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                            <ValidationSettings>
+                                                <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                            </ValidationSettings>
+                                            <ClientSideEvents/>
+                                            <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        </dx:ASPxComboBox>
                                     </div>
                                 </div>
                             </fieldset>
                             <div class="row form-group CeroPM" style="padding-top:10px;">
                                 <label class="text-form col-sm-2">Utilizado en </label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control input-sm Campos">
+                                        <input type="hidden" id="hdnCodigoUtilizado" value='<%# Eval("CodigoUtilizado")%>' runat="server"/>
+                                        <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbUtilizado" runat="server" IncrementalFilteringMode="Contains" 
+                                            FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                            PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                            <ValidationSettings>
+                                                <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                            </ValidationSettings>
+                                            <ClientSideEvents/>
+                                            <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-2">Departamento</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control input-sm Campos">
+                                        <input type="hidden" id="hdnCodigoDepto" value='<%# Eval("CodigoDepto")%>' runat="server"/>
+                                        <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbDepa" runat="server" IncrementalFilteringMode="Contains" 
+                                            FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                            PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                            <ValidationSettings>
+                                                <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                            </ValidationSettings>
+                                            <ClientSideEvents/>
+                                            <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        </dx:ASPxComboBox>
                                 </div>
                             </div>
+
+
+                            <!--***************************TIPOS ARTICULO*********************************************************-->
                             <div class="row form-group CeroPM">
                                 <div class="col-xs-12">
                                     <table id="table1"
@@ -799,13 +856,17 @@
                                             </tr>
                                         </thead>
                                         <tbody style="background-color:white;">
-                                            <tr>
-                                                <td>Seguimiento del desgaste a través del mantenimiento condicional o predictivo</td>
-                                                <td>No</td>
-                                                <td>Si</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
+                                            <asp:Repeater id="tbRepetTipoArticulo" runat="server">
+                                                <ItemTemplate>
+                                                    <tr>
+                                                        <td><%# Eval("tipo") %></td>
+                                                        <td><%# Eval("M") %></td>
+                                                        <td><%# Eval("N") %></td>
+                                                        <td><%# Eval("commentarios") %></td>
+                                                    </tr>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+<%--                                            <tr>
                                                 <td>Impacto en la productividad a causa de la escasez de una refacción</td>
                                                 <td>Fuerte</td>
                                                 <td>Medio/Bajo</td>
@@ -816,19 +877,20 @@
                                                 <td>>2 días</td>
                                                 <td><2 días</td>
                                                 <td>Solución en la hoja de preparación</td>
-                                            </tr>
+                                            </tr>--%>
                                         </tbody>
                                         <tfoot>
                                             <tr>
                                                 <td>TOTALES</td>
-                                                <td>6</td>
-                                                <td>5</td>
+                                                <td></td>
+                                                <td></td>
                                                 <td></td>
                                             </tr>
                                         </tfoot>
                                     </table>
                                 </div>
                             </div>
+                            <!--**************************************************************************************************-->
                             <br/>
                             <div class="alert alert-success center-block" style="text-align:center;padding:5px; width:50%;margin:auto;">
                                 <strong>Importante!</strong> Artículo con referencia <a href="#" class="alert-link">M</a>: Con Stock.
@@ -837,87 +899,141 @@
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-2">Descripción 1</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <asp:TextBox ID="txtDescripcion1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
-                                <label class="text-form col-sm-2">Descripción 1</label>
+                                <label class="text-form col-sm-2">Descripción 2</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <asp:TextBox ID="txtDescripcion2" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-2">Descripción Larga</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <asp:TextBox ID="txtDescripcionLarga" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                             </div>
                             <hr style="border-color: #B5D2EA;"/>
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-2">No. plan </label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <input type="hidden" id="hfnCodigoPlan" value='<%# Eval("CodigoPlan")%>' runat="server"/>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPlan" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-2">Cómo ayudar si el stock es 0?</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <asp:TextBox ID="txtcomoAyudarStockCero" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-2">Función de la máquina</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <asp:TextBox ID="txtfuncionMaquina" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                             </div>
                             <hr style="border-color: #B5D2EA;" />
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-1">Cantidad Orden</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <asp:TextBox ID="txtCantidad" TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                                 <label class="text-form col-sm-1">Stock Mínimo</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <asp:TextBox ID="txtStockMin" TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                                 <label class="text-form col-sm-1">Stock Máximo</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <asp:TextBox ID="txtStockMax" TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-1">Marca</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <input type="hidden" id="hdnCodigoMarca" value='<%# Eval("CodigoMarca")%>' runat="server"/>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMarca" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-1">Proveedor</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <input type="hidden" id="hdnCodigoProveedor" value='<%# Eval("CodigoProveedor")%>' runat="server"/>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbProveedor" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-1">¿Es único?</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbUnico" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <Items>
+                                            <dx:ListEditItem Value="true" Text="Si" />
+                                            <dx:ListEditItem Value="false" Text="No" />
+                                        </Items>
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
                                 </div>
                             </div>
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-1">Fecha Cotización</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <dx:ASPxDateEdit ID="xDateFechaCot" runat="server" Width="200px"  CssClass="form-control input-sm Campos"
+                                        DisplayFormatString="yyyy-MM-dd" EditFormatString="yyyy-MM-dd">                                                             
+                                        <TimeSectionProperties>
+                                            <TimeEditProperties EditFormatString="hh:mm tt" />
+                                        </TimeSectionProperties>
+                                    </dx:ASPxDateEdit> 
                                 </div>
                                 <label class="text-form col-sm-1">Precio Unitario</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <asp:TextBox ID="txtPrecioU" TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                                 <label class="text-form col-sm-1">Días de Entrega</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <asp:TextBox ID="txtDiasEntrega" TextMode="Number" step="1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                                 <label class="text-form col-sm-1">Moneda</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <input type="hidden" id="hdnCodigomoneda" value='<%# Eval("Codigomoneda")%>' runat="server"/>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMoneda" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
                                 </div>
                             </div>
                             <div class="row form-group CeroPM">
                                 <h3>
                                     <label class="text-form col-sm-offset-4 col-sm-2" style="text-align:right">Total</label>
-                                    <label class="text-form col-sm-2" style="color:green;">$12,500</label>
+                                    <label class="text-form col-sm-2" style="color:green;;width:15px">$ </label>
+                                    <asp:Label ID="lblTotal" runat="server" CssClass="text-form col-sm-2" style="color:green;"></asp:Label>
                                 </h3>
                             </div>
                         </div>
@@ -958,7 +1074,17 @@
                                             </tr>
                                         </thead>
                                         <tbody style="background-color:white;">
-                                            <tr>
+                                            <asp:Repeater id="tbRepetMtto" runat="server">
+                                                <ItemTemplate>
+                                                    <tr>
+                                                        <td><%# Eval("especificacion") %></td>
+                                                        <td><%# Eval("notas") %></td>
+                                                        <td><%# Eval("clasificacion") %></td>
+                                                        <td><%# Eval("responsable") %></td>
+                                                    </tr>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+<%--                                            <tr>
                                                 <td>1</td>
                                                 <td>Estratégico  (60)</td>
                                                 <td>A: No se que</td>
@@ -978,7 +1104,7 @@
                                                 <td></td>
                                                 <td>S100</td>
                                                 <td>RESP. DE ALMACÉN</td>
-                                            </tr>
+                                            </tr>--%>
                                         </tbody>
                                     </table>
                                 </div>
@@ -1022,7 +1148,17 @@
                                             </tr>
                                         </thead>
                                         <tbody style="background-color:white;">
-                                            <tr>
+                                            <asp:Repeater id="tbRepetAlmacen" runat="server">
+                                                <ItemTemplate>
+                                                    <tr>
+                                                        <td><%# Eval("especificacion") %></td>
+                                                        <td><%# Eval("notas") %></td>
+                                                        <td><%# Eval("clasificacion") %></td>
+                                                        <td><%# Eval("responsable") %></td>
+                                                    </tr>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+<%--                                            <tr>
                                                 <td>1</td>
                                                 <td>Refractario (35)</td>
                                                 <td>A: No se que</td>
@@ -1042,7 +1178,7 @@
                                                 <td></td>
                                                 <td>S700</td>
                                                 <td>RESP. DE ALMACÉN</td>
-                                            </tr>
+                                            </tr>--%>
                                         </tbody>
                                     </table>
                                 </div>
@@ -1063,47 +1199,74 @@
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-3">Ficha de datos de seguridad</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <asp:TextBox ID="txtFichaSeguridad" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                                 <label class="text-form col-sm-3">Unidad de Medida</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <input type="hidden" id="hdnCodigoUM" value='<%# Eval("CodigoUM")%>' runat="server"/>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbCodigoUM" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
                                 </div>
                             </div>
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-3">Conteo Cíclico</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <asp:TextBox ID="txtConteoCiclico" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                                 <label class="text-form col-sm-3">Alacenamiento externo posbible</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <asp:TextBox ID="txtAlmacenamientoExt" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row form-group CeroPM">
-                                <label class="text-form col-sm-3">Planador</label>
+                                <label class="text-form col-sm-3">Planeador</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <input type="hidden" id="hdnPlaneador" value='<%# Eval("codigoPlaneador")%>' runat="server"/>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPlaneador" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-3">Comprador</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <input type="hidden" id="hdnComprador" value='<%# Eval("codigoComprador")%>' runat="server"/>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbComprador" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
                                 </div>
                             </div>
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-3">Ficha de inventario</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <asp:TextBox ID="txtFichaInv" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                                 <label class="text-form col-sm-3">Múltiplo</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <asp:TextBox ID="txtMultiplo" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row form-group CeroPM">
                                <label class="text-form col-sm-3">Hoja de seguridad</label>
                                <div class="col-sm-3">
-                                   <input type="text" class="form-control input-sm Campos">
+                                   <asp:TextBox ID="txtHojaSeguridad" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                </div>
                             </div>
                         </div>
@@ -1122,7 +1285,7 @@
                                 <label class="text-form col-sm-2">Código de artículo</label>
                                 <label class="text-form col-sm-1"><span class="label label-success pull-right" style="padding:6px;">M</span></label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control input-sm Campos">
+                                    <asp:TextBox ID="txtCodigoArticulo" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -1167,7 +1330,21 @@
                             </tr>
                         </thead>
                         <tbody style="background-color:white;">
-                            <tr>
+                            <asp:Repeater id="tbRepetAprobaciones" runat="server">
+                                <ItemTemplate>
+                                    <tr>
+                                        <td><%# Eval("paso") %></td>
+                                        <td><%# Eval("titulo") %></td>
+                                        <td><%# Eval("codigoEmpleado") %></td>
+                                        <td><%# Eval("codigoEmpleado") %></td>
+                                        <td><%# Eval("fechaNotificacion") %></td>
+                                        <td><%# Eval("fechaAccion") %></td>
+                                        <td><%# Eval("accion") %></td>
+                                        <td><%# Eval("comentario") %></td>
+                                    </tr>
+                                </ItemTemplate>
+                            </asp:Repeater>
+<%--                            <tr>
                                 <td>1</td>
                                 <td>Autor</td>
                                 <td>Alejandro Gonzalez</td>
@@ -1206,13 +1383,13 @@
                                 <td>10/11/2020 1:30PM</td>
                                 <td>Recibió</td>
                                 <td>Comenta el transportista que hubo problemas con la documentación, por lo tanto esta es una descripción nmuy larga apra ver co</td>
-                            </tr>
+                            </tr>--%>
                         </tbody>
                     </table>
                 </div>
                 <div id="menu1" class="tab-pane fade">
                     <h3>Comentarios Adicionales</h3>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                    <p><asp:TextBox ID="txtComentarios" TextMode="MultiLine" Rows="3" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox></p>
                 </div>
             </div>
         </div>
