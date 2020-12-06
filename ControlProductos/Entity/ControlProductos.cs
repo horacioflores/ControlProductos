@@ -53,7 +53,7 @@ namespace ControlProductos.Entity
         public bool esUnico { get; set; }
         public string fechaCotizacion { get; set; }
         public decimal precioUnitario { get; set; }
-        public decimal diasEntrega { get; set; }
+        public int diasEntrega { get; set; }
         public string Codigomoneda { get; set; }
         public decimal total { get; set; }
         public string fichaDatoSeguridad { get; set; }
@@ -122,5 +122,12 @@ namespace ControlProductos.Entity
         public string fechaAccion { get; set; }
         public string accion { get; set; }
         public string comentario { get; set; }
+    }
+
+
+    public class Unico
+    {
+        public bool value { get; set; }
+        public string text { get; set; }
     }
 }

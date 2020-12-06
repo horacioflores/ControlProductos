@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Principal.Master" AutoEventWireup="true" CodeBehind="ctrolProds_det.aspx.cs" Inherits="ControlProductos.ctrolProds_det" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Principal.Master" EnableEventValidation="false" AutoEventWireup="true" CodeBehind="ctrolProds_det.aspx.cs" Inherits="ControlProductos.ctrolProds_det" %>
 <%@ Register Assembly="DevExpress.Web.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server" Visible="false">
     <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">--%>
@@ -13,6 +13,9 @@
     <script src="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.min.js"></script>
     <link href="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.css" rel="stylesheet">
     <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/extensions/resizable/bootstrap-table-resizable.min.js"></script>
+        <!-- jQuery  -->
+        <script src="Assets/plugins/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="Assets/pages/jquery.sweet-alert.init.js"></script>
     <script type="text/jscript">
         function OnEndCallback(s, e) {
             
@@ -673,11 +676,14 @@
             transform: translate(5px, -8px);
             padding:2px 2px;
         }
+        .hidden{
+            display:none;
+        }
     </style>
     <div class="CeroPM" id="Inicio">
     <div class="container-fluid CeroPM">
         <div id="divBotones" class="col-xs-12 btn-group CeroPM" data-spy="affix" data-offset-top="100" style="color:white;width:100%;z-index:1 !important;background-color:#EFEFEF;">
-            <asp:ImageButton ID="btnSave" class="btn" Style="margin: 0px; padding: 0px;" runat="server" ImageUrl="~/Assets/images/BtnGuardar.png"  /> <!--OnClick="btnSave_Click" -->
+            <asp:ImageButton ID="btnSave" class="btn" Style="margin: 0px; padding: 0px;" runat="server" OnClick="btnSave_Click" ImageUrl="~/Assets/images/BtnGuardar.png"  />
             <asp:ImageButton ID="btnRegresar" class="btn" Style="margin: 0px; padding: 0px;" runat="server" ImageUrl="~/Assets/images/BtnSalir.png" OnClick="btnRegresar_Click" />
             <div class="BtnGpoIniFin">
                 <a class="BtnIniFin" id="BtnInicio" href="#Inicio" title="Inicio" onmouseover="rotate('imgaRotarI');" onmouseout="rotate('imgaRotarI');"><i id="imgaRotarI" class="glyphicon glyphicon glyphicon-circle-arrow-up"></i><span class="badge badge-xs badge-danger">Alt+9</span></a>
@@ -689,6 +695,7 @@
                 <div class="col-xs-12">
                     <div class="col-xs-12 col-sm-8 form-group BGFormularioTitulo">
                         <h2 class="HeaderSpanNombreFormulario">ALTA DE ARTÍCULO</h2>
+                        <asp:Label ID="lblcodigoSts" runat="server" CssClass="hidden"></asp:Label>
                         <asp:Literal ID="ltlSts" runat="server"></asp:Literal>
 <%--                        <span id="spanStatus" class="alert btn-info docEstatus" hidden><i class="glyphicon glyphicon-edit" style="padding-right:5px;"></i>Abierto</span><span style="position: absolute;left: 250px;color:#FBFBFB;padding:2px 0px;" hidden>:Pendiente por el autor para terminar la captura</span>
                         <span id="spanStatus" class="alert btn-info docEstatus" hidden><i class="glyphicon glyphicon-eye-open" style="padding-right:5px;"></i>Revisado</span><span style="position: absolute;left: 250px;color:#FBFBFB;padding:2px 0px;" hidden>:Revisado para su proceso</span>
@@ -942,7 +949,7 @@
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-1">Cantidad Orden</label>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txtCantidad" TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <asp:TextBox ID="txtCantidad" OnTextChanged="recalculaTotal" AutoPostBack="true" TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                                 <label class="text-form col-sm-1">Stock Mínimo</label>
                                 <div class="col-sm-3">
@@ -985,10 +992,6 @@
                                     <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbUnico" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
-                                        <Items>
-                                            <dx:ListEditItem Value="true" Text="Si" />
-                                            <dx:ListEditItem Value="false" Text="No" />
-                                        </Items>
                                         <ValidationSettings>
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
@@ -1009,7 +1012,7 @@
                                 </div>
                                 <label class="text-form col-sm-1">Precio Unitario</label>
                                 <div class="col-sm-2">
-                                    <asp:TextBox ID="txtPrecioU" TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <asp:TextBox ID="txtPrecioU" OnTextChanged="recalculaTotal" AutoPostBack="true"  TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                                 <label class="text-form col-sm-1">Días de Entrega</label>
                                 <div class="col-sm-2">
