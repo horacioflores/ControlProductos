@@ -195,24 +195,203 @@
                 });
             }
 
-            function OnPartesEndCallback(s, e) {
-                if (s.cpAlertMessage != '') {
-                    if (s.cpAlertMessage == 'SelectOne') {
-                        swal("Information", "Select a part to add to the list!", "info");
-                    }else if (s.cpAlertMessage == 'SelectCant') {
-                            swal("Information", "Enter the Quantity!", "info");
-                    } else if (s.cpAlertMessage == 'Exist') {
-                        swal({
-                            title: "Information",
-                            text: "The part is already added to the list",
-                            type: "info",
-                            timer: 2000,
-                            showConfirmButton: false
-                        });                    
-                    }               
+
+       function OnTipoArticuloEndCallback(s, e) {
+           document.getElementById("MainContent_txtCodigoArticuloAdd").value = "";
+           document.getElementById("MainContent_txtTipoArticuloAdd").value = "";
+           document.getElementById("MainContent_txtMAdd").value = "";
+           document.getElementById("MainContent_txtNAdd").value = "";
+           document.getElementById("MainContent_txtComentariosAdd").value = "";
+            if (s.cpAlertMessage != '') {
+                if (s.cpAlertMessage == 'SelectOne') {
+                    swal("Information", "Type and code cannot be empty!", "info");
+                } else if (s.cpAlertMessage == 'Exist') {
+                    swal({
+                        title: "Information",
+                        text: "Type and code already exist",
+                        type: "info",
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
                 }
-                s.cpAlertMessage = "";
             }
+            s.cpAlertMessage = "";
+       }
+
+       function DisableSelectedTipoArt() {
+
+           var Valores = "";
+           $(".chkArt").each(function () {
+               if (this.checked) {
+                   if (Valores == "") {
+                       Valores = this.id.substr(3);
+                   } else {
+                       Valores += "," + this.id.substr(3);
+                   }
+               }
+           });
+
+           if (Valores == "") {
+
+               swal({
+                   title: "Information",
+                   text: "No records selected!",
+                   type: "info"
+               });
+               return;
+           }
+
+           xgrdTipoArticulo.PerformCallback(Valores);
+       }
+
+       function OnMttoEndCallback(s, e) {
+           document.getElementById("MainContent_txtCodigoMttoAdd").value = "";
+           document.getElementById("MainContent_txtEspecificacionAdd").value = "";
+           document.getElementById("MainContent_txtResponsableAdd").value = "";
+           document.getElementById("MainContent_txtCasificacionAdd").value = "";
+           document.getElementById("MainContent_txtNotasAdd").value = "";
+           if (s.cpAlertMessage != '') {
+               if (s.cpAlertMessage == 'SelectOne') {
+                   swal("Information", "Specification and code are empty!", "info");
+               } else if (s.cpAlertMessage == 'Exist') {
+                   swal({
+                       title: "Information",
+                       text: "Specification and code already exist",
+                       type: "info",
+                       timer: 2000,
+                       showConfirmButton: false
+                   });
+               }
+           }
+           s.cpAlertMessage = "";
+       }
+
+       function DisableSelectedMtto() {
+
+           var Valores = "";
+           $(".chkMtto").each(function () {
+               if (this.checked) {
+                   if (Valores == "") {
+                       Valores = this.id.substr(3);
+                   } else {
+                       Valores += "," + this.id.substr(3);
+                   }
+               }
+           });
+
+           if (Valores == "") {
+
+               swal({
+                   title: "Information",
+                   text: "No records selected!",
+                   type: "info"
+               });
+               return;
+           }
+
+           xgrdMtto.PerformCallback(Valores);
+       }
+
+       function OnAlmacenEndCallback(s, e) {
+           document.getElementById("MainContent_txtCodigoAlmacenAdd").value = "";
+           document.getElementById("MainContent_txtEspecificacionAlMAdd").value = "";
+           document.getElementById("MainContent_txtResponsableALMAdd").value = "";
+           document.getElementById("MainContent_txtCasificacionALMAdd").value = "";
+           document.getElementById("MainContent_txtNotasALMAdd").value = "";
+           if (s.cpAlertMessage != '') {
+               if (s.cpAlertMessage == 'SelectOne') {
+                   swal("Information", "Specification and code are empty!", "info");
+               } else if (s.cpAlertMessage == 'Exist') {
+                   swal({
+                       title: "Information",
+                       text: "Specification and code already exist",
+                       type: "info",
+                       timer: 2000,
+                       showConfirmButton: false
+                   });
+               }
+           }
+           s.cpAlertMessage = "";
+       }
+
+       function DisableSelectedAlmacen() {
+
+           var Valores = "";
+           $(".chkAlmn").each(function () {
+               if (this.checked) {
+                   if (Valores == "") {
+                       Valores = this.id.substr(3);
+                   } else {
+                       Valores += "," + this.id.substr(3);
+                   }
+               }
+           });
+
+           if (Valores == "") {
+
+               swal({
+                   title: "Information",
+                   text: "No records selected!",
+                   type: "info"
+               });
+               return;
+           }
+
+           xgrdAlmacen.PerformCallback(Valores);
+       }
+
+       function OnAprobacionesEndCallback(s, e) {
+           CallbackPanel.PerformCallback("Limpiar");
+           if (s.cpAlertMessage != '') {
+               if (s.cpAlertMessage == 'SelectOne') {
+                   swal("Information", "The title is empty!", "info");
+               } else if (s.cpAlertMessage == 'Exist') {
+                   swal({
+                       title: "Information",
+                       text: "Specification and code already exist",
+                       type: "info",
+                       timer: 2000,
+                       showConfirmButton: false
+                   });
+               }
+           }
+           s.cpAlertMessage = "";
+       }
+
+       function DisableSelectedAprobacion() {
+
+           var Valores = "";
+           $(".chkAprb").each(function () {
+               if (this.checked) {
+                   if (Valores == "") {
+                       Valores = this.id.substr(3);
+                   } else {
+                       Valores += "," + this.id.substr(3);
+                   }
+               }
+           });
+
+           if (Valores == "") {
+
+               swal({
+                   title: "Information",
+                   text: "No records selected!",
+                   type: "info"
+               });
+               return;
+           }
+
+           xgrdAprobaciones.PerformCallback(Valores);
+       }
+
+       function recalcular() {
+           cantidad = parseFloat(document.getElementById("MainContent_txtCantidad").value);
+           precio = parseFloat(document.getElementById("MainContent_txtPrecioU").value);
+           total = cantidad * precio;
+           document.getElementById("MainContent_lblTotal").innerHTML = (Math.round(total*100)/100).toString();
+       }
+
+
 
             function UpdPart(inx) {
                 var cantNew = cantPartEdit.lastChangedValue;
@@ -274,10 +453,7 @@
 
             function OnPanel1EndCallback(s, e) {
                 if (s.cpAlertMessage != '') {
-                    if (s.cpAlertMessage == 'notFolio') {
-                        swal("Information", "Comments cannot be added to an unstored request", "info");
-                    }
-                    else if (s.cpAlertMessage == 'errror') {
+                    if (s.cpAlertMessage == 'errror') {
                         swal("Information", "There was an error", "info");
                     }
                 }
@@ -518,6 +694,23 @@
                 }
                 return value
             };
+
+            function openModal(opcion) {
+                switch (opcion) {
+                    case 'TipoArticulo':
+                         $('#mdlTipoArticulo').modal('show');
+                         break;
+                    case 'Mantenimiento':
+                        $('#mdlMtto').modal('show');
+                        break;
+                    case 'Almacen':
+                        $('#mdlAlmacen').modal('show');
+                        break;
+                    case 'Aprobaciones':
+                        $('#mdlAprobaciones').modal('show');
+                        break;
+                }
+            }
     </script>
     <style>
         html {
@@ -836,9 +1029,38 @@
                                 </div>
                             </div>
 
-
+                            <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('TipoArticulo');" />
+                            <img class="img" src="Assets/Images/trash_can.png" alt="Remove Selected" style="cursor: pointer" onclick="return DisableSelectedTipoArt();" />
+                            <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdTipoArticulo.PerformCallback('Delete');" />
                             <!--***************************TIPOS ARTICULO*********************************************************-->
-                            <div class="row form-group CeroPM">
+                            <dx:ASPxGridView ID="xgrdTipoArticulo" runat="server" AutoGenerateColumns="true"
+                                Width="100%" Font-Names="Segoe UI"
+                                OnCustomCallback="xgrdTipoArticulo_CustomCallback"
+                                OnHtmlDataCellPrepared="xgrdTipoArticulo_HtmlDataCellPrepared"
+                                ClientInstanceName="xgrdTipoArticulo" Theme="Metropolis">
+                                <Columns>
+                                    <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="0" Width="10px">
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn FieldName="tipoArticulo" Caption="Tipo de Artículo" VisibleIndex="1" Width="35%">
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn FieldName="M" Caption="M" VisibleIndex="2" Width="10%">
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn FieldName="N" Caption="N" VisibleIndex="3" Width="10%">
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn FieldName="comentarios" Caption="Comentarios / Justificaciones" VisibleIndex="4" Width="35%">
+                                    </dx:GridViewDataTextColumn>
+                                </Columns>
+                                <Styles>
+                                    <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
+                                    <RowHotTrack BackColor="#CEECF5"></RowHotTrack>
+                                    <Header BackColor="#F2F2F2"></Header>
+                                </Styles>
+                                <SettingsPager Mode="ShowPager" PageSize="20" />
+                                <Settings ShowFilterRow="True" />
+                                <ClientSideEvents EndCallback="OnTipoArticuloEndCallback" />
+                            </dx:ASPxGridView>
+
+<%--                            <div class="row form-group CeroPM">
                                 <div class="col-xs-12">
                                     <table id="table1"
                                            data-toggle="table"
@@ -884,7 +1106,7 @@
                                                 <td>>2 días</td>
                                                 <td><2 días</td>
                                                 <td>Solución en la hoja de preparación</td>
-                                            </tr>--%>
+                                            </tr>
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -896,7 +1118,51 @@
                                         </tfoot>
                                     </table>
                                 </div>
+                            </div>--%>
+
+                            <div id="mdlTipoArticulo" class="modal fade" role="dialog">
+                                <div class="modal-dialog" runat="server">
+                                    <div class="modal-content" runat="server">
+                                        <div class="modal-header" runat="server">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4>Tipo Articulo</h4>
+                                        </div>
+                                        <div class="modal-body" runat="server">
+                                            <div class="row form-group CeroPM">
+                                                <label class="text-form col-sm-2">Código</label>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txtCodigoArticuloAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                                </div>
+                                                <label class="text-form col-sm-2">Tipo Artículo</label>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txtTipoArticuloAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group CeroPM">
+                                                <label class="text-form col-sm-2">M</label>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txtMAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                                </div>
+                                                <label class="text-form col-sm-2">N</label>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txtNAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group CeroPM">
+                                                <label class="text-form col-sm-2">Comentarios</label>
+                                                <div class="col-sm-10">
+                                                    <asp:TextBox ID="txtComentariosAdd" TextMode="MultiLine" Columns="3" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div>
+                                                <button type="button" class="btn btn-primary" onclick="xgrdTipoArticulo.PerformCallback('Save');" data-dismiss="modal">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
                             <!--**************************************************************************************************-->
                             <br/>
                             <div class="alert alert-success center-block" style="text-align:center;padding:5px; width:50%;margin:auto;">
@@ -949,7 +1215,7 @@
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-1">Cantidad Orden</label>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txtCantidad" OnTextChanged="recalculaTotal" AutoPostBack="true" TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <asp:TextBox ID="txtCantidad" onChange="recalcular()"  TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                                 <label class="text-form col-sm-1">Stock Mínimo</label>
                                 <div class="col-sm-3">
@@ -1012,7 +1278,7 @@
                                 </div>
                                 <label class="text-form col-sm-1">Precio Unitario</label>
                                 <div class="col-sm-2">
-                                    <asp:TextBox ID="txtPrecioU" OnTextChanged="recalculaTotal" AutoPostBack="true"  TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <asp:TextBox ID="txtPrecioU" onChange="recalcular()" TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                                 <label class="text-form col-sm-1">Días de Entrega</label>
                                 <div class="col-sm-2">
@@ -1050,7 +1316,36 @@
                             <h3 class="panel-title">Información de Mantenimiento</h3>
                             <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
                         </div>
-                        <div class="panel-body">
+                            <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('Mantenimiento');" />
+                            <img class="img" src="Assets/Images/trash_can.png" alt="Remove Selected" style="cursor: pointer" onclick="return DisableSelectedMtto();" />
+                            <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdMtto.PerformCallback('Delete');" />
+                            <dx:ASPxGridView ID="xgrdMtto" runat="server" AutoGenerateColumns="true"
+                                Width="100%" Font-Names="Segoe UI"
+                                OnCustomCallback="xgrdMtto_CustomCallback"
+                                OnHtmlDataCellPrepared="xgrdMtto_HtmlDataCellPrepared"
+                                ClientInstanceName="xgrdMtto" Theme="Metropolis">
+                                <Columns>
+                                    <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="0" Width="10px">
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn FieldName="especificacion" Caption="Especificación" VisibleIndex="1" Width="23%">
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn FieldName="notas" Caption="Notas" VisibleIndex="2" Width="22%">
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn FieldName="clasificacion" Caption="Clasificación" VisibleIndex="3" Width="22%">
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn FieldName="responsable" Caption="Responsable" VisibleIndex="4" Width="23%">
+                                    </dx:GridViewDataTextColumn>
+                                </Columns>
+                                <Styles>
+                                    <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
+                                    <RowHotTrack BackColor="#CEECF5"></RowHotTrack>
+                                    <Header BackColor="#F2F2F2"></Header>
+                                </Styles>
+                                <SettingsPager Mode="ShowPager" PageSize="20" />
+                                <Settings ShowFilterRow="True" />
+                                <ClientSideEvents EndCallback="OnMttoEndCallback" />
+                            </dx:ASPxGridView>
+<%--                        <div class="panel-body">
                             <div class="row form-group CeroPM">
                                 <div class="col-xs-12">
                                     <table id="table1"
@@ -1107,13 +1402,56 @@
                                                 <td></td>
                                                 <td>S100</td>
                                                 <td>RESP. DE ALMACÉN</td>
-                                            </tr>--%>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <br />
-                        </div>
+                        </div>--%>
+
+                            <div id="mdlMtto" class="modal fade" role="dialog">
+                                <div class="modal-dialog" runat="server">
+                                    <div class="modal-content" runat="server">
+                                        <div class="modal-header" runat="server">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4>Mantenimiento</h4>
+                                        </div>
+                                        <div class="modal-body" runat="server">
+                                            <div class="row form-group CeroPM">
+                                                <label class="text-form col-sm-2">Código</label>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txtCodigoMttoAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                                </div>
+                                                <label class="text-form col-sm-2">Especificación</label>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txtEspecificacionAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group CeroPM">
+                                                <label class="text-form col-sm-2">Responsable</label>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txtResponsableAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                                </div>
+                                                <label class="text-form col-sm-2">Clasificación</label>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txtCasificacionAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group CeroPM">
+                                                <label class="text-form col-sm-2">Notas</label>
+                                                <div class="col-sm-10">
+                                                    <asp:TextBox ID="txtNotasAdd" TextMode="MultiLine" Columns="3" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div>
+                                                <button type="button" class="btn btn-primary" onclick="xgrdMtto.PerformCallback('Save');" data-dismiss="modal">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </section>
@@ -1124,7 +1462,36 @@
                             <h3 class="panel-title">Información de Almacén</h3>
                             <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
                         </div>
-                        <div class="panel-body">
+                            <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('Almacen');" />
+                            <img class="img" src="Assets/Images/trash_can.png" alt="Remove Selected" style="cursor: pointer" onclick="return DisableSelectedAlmacen();" />
+                            <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdAlmacen.PerformCallback('Delete');" />
+                            <dx:ASPxGridView ID="xgrdAlmacen" runat="server" AutoGenerateColumns="true"
+                                Width="100%" Font-Names="Segoe UI"
+                                OnCustomCallback="xgrdAlmacen_CustomCallback"
+                                OnHtmlDataCellPrepared="xgrdAlmacen_HtmlDataCellPrepared"
+                                ClientInstanceName="xgrdAlmacen" Theme="Metropolis">
+                                <Columns>
+                                    <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="0" Width="10px">
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn FieldName="especificacion" Caption="Especificación" VisibleIndex="1" Width="23%">
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn FieldName="notas" Caption="Notas" VisibleIndex="2" Width="22%">
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn FieldName="clasificacion" Caption="Clasificación" VisibleIndex="3" Width="22%">
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn FieldName="responsable" Caption="Responsable" VisibleIndex="4" Width="23%">
+                                    </dx:GridViewDataTextColumn>
+                                </Columns>
+                                <Styles>
+                                    <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
+                                    <RowHotTrack BackColor="#CEECF5"></RowHotTrack>
+                                    <Header BackColor="#F2F2F2"></Header>
+                                </Styles>
+                                <SettingsPager Mode="ShowPager" PageSize="20" />
+                                <Settings ShowFilterRow="True" />
+                                <ClientSideEvents EndCallback="OnAlmacenEndCallback" />
+                            </dx:ASPxGridView>
+<%--                        <div class="panel-body">
                             <div class="row form-group CeroPM">
                                 <div class="col-xs-12">
                                     <table id="table1"
@@ -1181,13 +1548,55 @@
                                                 <td></td>
                                                 <td>S700</td>
                                                 <td>RESP. DE ALMACÉN</td>
-                                            </tr>--%>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <br />
-                        </div>
+                        </div>--%>
+                            <div id="mdlAlmacen" class="modal fade" role="dialog">
+                                <div class="modal-dialog" runat="server">
+                                    <div class="modal-content" runat="server">
+                                        <div class="modal-header" runat="server">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4>Almacén</h4>
+                                        </div>
+                                        <div class="modal-body" runat="server">
+                                            <div class="row form-group CeroPM">
+                                                <label class="text-form col-sm-2">Código</label>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txtCodigoAlmacenAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                                </div>
+                                                <label class="text-form col-sm-2">Especificación</label>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txtEspecificacionAlMAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group CeroPM">
+                                                <label class="text-form col-sm-2">Responsable</label>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txtResponsableALMAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                                </div>
+                                                <label class="text-form col-sm-2">Clasificación</label>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txtCasificacionALMAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group CeroPM">
+                                                <label class="text-form col-sm-2">Notas</label>
+                                                <div class="col-sm-10">
+                                                    <asp:TextBox ID="txtNotasALMAdd" TextMode="MultiLine" Columns="3" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div>
+                                                <button type="button" class="btn btn-primary" onclick="xgrdAlmacen.PerformCallback('Save');" data-dismiss="modal">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </section>
@@ -1306,7 +1715,44 @@
             </ul>
             <div class="tab-content" style="padding:15px;">
                 <div id="home" class="tab-pane fade in active">
-                    <table id="table"
+                    <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('Aprobaciones');" />
+                    <img class="img" src="Assets/Images/trash_can.png" alt="Remove Selected" style="cursor: pointer" onclick="return DisableSelectedAprobacion();" />
+                    <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdAprobaciones.PerformCallback('Delete');" />
+                    <dx:ASPxGridView ID="xgrdAprobaciones" runat="server" AutoGenerateColumns="true"
+                        Width="100%" Font-Names="Segoe UI"
+                        OnCustomCallback="xgrdAprobaciones_CustomCallback"
+                        OnHtmlDataCellPrepared="xgrdAprobaciones_HtmlDataCellPrepared"
+                        ClientInstanceName="xgrdAprobaciones" Theme="Metropolis">
+                        <Columns>
+                            <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="0" Width="10px">
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn FieldName="paso" Caption="Paso" VisibleIndex="1" Width="12%">
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn FieldName="titulo" Caption="Título" VisibleIndex="2" Width="12%">
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn FieldName="usuario" Caption="Usuario" VisibleIndex="3" Width="11%">
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn FieldName="puesto" Caption="Puesto" VisibleIndex="4" Width="11%">
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn FieldName="fechaNotificacion" Caption="Fecha de notificación" VisibleIndex="5" Width="11%">
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn FieldName="fechaAccion" Caption="Fecha de acción" VisibleIndex="6" Width="11%">
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn FieldName="accion" Caption="Acción" VisibleIndex="7" Width="11%">
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn FieldName="comentario" Caption="Comentario" VisibleIndex="8" Width="11%">
+                            </dx:GridViewDataTextColumn>
+                        </Columns>
+                        <Styles>
+                            <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
+                            <RowHotTrack BackColor="#CEECF5"></RowHotTrack>
+                            <Header BackColor="#F2F2F2"></Header>
+                        </Styles>
+                        <SettingsPager Mode="ShowPager" PageSize="20" />
+                        <Settings ShowFilterRow="True" />
+                        <ClientSideEvents EndCallback="OnAprobacionesEndCallback" />
+                    </dx:ASPxGridView>
+<%--                    <table id="table"
                            data-toggle="table"
                            data-sort-class="table-active"
                            data-sortable="true"
@@ -1386,9 +1832,108 @@
                                 <td>10/11/2020 1:30PM</td>
                                 <td>Recibió</td>
                                 <td>Comenta el transportista que hubo problemas con la documentación, por lo tanto esta es una descripción nmuy larga apra ver co</td>
-                            </tr>--%>
+                            </tr>
                         </tbody>
-                    </table>
+                    </table>--%>
+
+                            <div id="mdlAprobaciones" class="modal fade" role="dialog">
+                                <div class="modal-dialog" runat="server">
+                                    <div class="modal-content" runat="server">
+                                        <div class="modal-header" runat="server">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4>Aprobación</h4>
+                                        </div>
+                                        <div class="modal-body" runat="server">
+                                            <dx:ASPxCallbackPanel runat="server" ID="ASPxCallbackPanel1" Width="100%"
+                                                ClientInstanceName="CallbackPanel" RenderMode="Table"
+                                                OnCallback="ASPxCallbackPanel1_Callback">
+                                                <ClientSideEvents EndCallback="OnPanel1EndCallback" />
+                                                <PanelCollection>
+                                                    <dx:PanelContent ID="PanelContent3" runat="server">
+                                                        <div class="row form-group CeroPM">
+                                                            <label class="text-form col-sm-2">Codigo</label>
+                                                            <div class="col-sm-4">
+                                                                <asp:TextBox ID="txtCodigoAprobacionAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group CeroPM">
+                                                            <label class="text-form col-sm-2">Paso</label>
+                                                            <div class="col-sm-4">
+                                                                <asp:TextBox ID="txtPasoAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                                            </div>
+                                                            <label class="text-form col-sm-2">Título</label>
+                                                            <div class="col-sm-4">
+                                                                <asp:TextBox ID="txtTituloAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group CeroPM">
+                                                            <label class="text-form col-sm-2">Puesto</label>
+                                                            <div class="col-sm-4">
+                                                                <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPuestoAdd" runat="server" IncrementalFilteringMode="Contains" 
+                                                                    FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" 
+                                                                    PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                                                    <ValidationSettings>
+                                                                        <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                                                    </ValidationSettings>
+                                                                    <ClientSideEvents SelectedIndexChanged="function(s, e) { 
+                                                                                CallbackPanel.PerformCallback('filterPuesto,'+s.lastSuccessValue.toString());}" />
+                                                                    <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                                                </dx:ASPxComboBox>
+                                                            </div>
+                                                            <label class="text-form col-sm-2">Empleado</label>
+                                                            <div class="col-sm-4">
+                                                                <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbEmpleadoAdd" runat="server" IncrementalFilteringMode="Contains" 
+                                                                    FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                                                    PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                                                    <ValidationSettings>
+                                                                        <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                                                    </ValidationSettings>
+                                                                    <ClientSideEvents/>
+                                                                    <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                                                </dx:ASPxComboBox>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group CeroPM">
+                                                            <label class="text-form col-sm-2">Fecha Notificación</label>
+                                                            <div class="col-sm-4">
+                                                                <dx:ASPxDateEdit ID="xDateFechaNotAdd" runat="server" CssClass="form-control input-sm Campos"
+                                                                    DisplayFormatString="yyyy-MM-dd" EditFormatString="yyyy-MM-dd">                                                             
+                                                                    <TimeSectionProperties>
+                                                                        <TimeEditProperties EditFormatString="hh:mm tt" />
+                                                                    </TimeSectionProperties>
+                                                                </dx:ASPxDateEdit>                                                     
+                                                            </div>
+                                                            <label class="text-form col-sm-2">Fecha Acción</label>
+                                                            <div class="col-sm-4">
+                                                                <dx:ASPxDateEdit ID="xDateFechaAccionAdd" runat="server" CssClass="form-control input-sm Campos"
+                                                                    DisplayFormatString="yyyy-MM-dd" EditFormatString="yyyy-MM-dd">                                                             
+                                                                    <TimeSectionProperties>
+                                                                        <TimeEditProperties EditFormatString="hh:mm tt" />
+                                                                    </TimeSectionProperties>
+                                                                </dx:ASPxDateEdit>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group CeroPM">
+                                                            <label class="text-form col-sm-2">Acción</label>
+                                                            <div class="col-sm-4">
+                                                                 <asp:TextBox ID="txtAccionAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>                                                 
+                                                            </div>
+                                                            <label class="text-form col-sm-2">Comentario</label>
+                                                            <div class="col-sm-4">
+                                                                <asp:TextBox ID="txtComentarioAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>  
+                                                            </div>
+                                                        </div>
+                                                        </dx:PanelContent>
+                                                    </PanelCollection>
+                                                </dx:ASPxCallbackPanel>
+                                            <br />
+                                            <div>
+                                                <button type="button" class="btn btn-primary" onclick="xgrdAprobaciones.PerformCallback('Save');" data-dismiss="modal">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                 </div>
                 <div id="menu1" class="tab-pane fade">
                     <h3>Comentarios Adicionales</h3>

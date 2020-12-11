@@ -118,6 +118,8 @@ namespace ControlProductos.Entity
         public string paso { get; set; }
         public string titulo { get; set; }
         public string codigoEmpleado { get; set; }
+        public string usuario { get; set; }
+        public string puesto { get; set; }
         public string fechaNotificacion { get; set; }
         public string fechaAccion { get; set; }
         public string accion { get; set; }
