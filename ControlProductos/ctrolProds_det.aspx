@@ -15,7 +15,7 @@
     <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/extensions/resizable/bootstrap-table-resizable.min.js"></script>
         <!-- jQuery  -->
         <script src="Assets/plugins/sweetalert/dist/sweetalert.min.js"></script>
-        <script src="Assets/pages/jquery.sweet-alert.init.js"></script>
+        <script src="Assets/pages/jquery.sweet-alert.init.js"></script> <!--prueba github-->
     <script type="text/jscript">
         function OnEndCallback(s, e) {
             
