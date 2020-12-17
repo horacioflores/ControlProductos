@@ -72,14 +72,14 @@ namespace ControlProductos.Entity
         public string usuario { get; set; }
         public string ModFecha { get; set; }
         public List<_tipoArticulo> tiposArticulo { get; set; }
-        public List<Mantenimiento> mantenimientos { get; set; }
-        public List<Almacen> almacenes { get; set; }
+        public List<Mtto_Almn> mantenimientos { get; set; }
+        public List<Mtto_Almn> almacenes { get; set; }
         public List<Aprobacion> aprobaciones { get; set; }
     }
 
     public class _tipoArticulo
     {
-        public int tipoArticuloID { get; set; }
+        public int ctrlPTipoArticuloID { get; set; }
         public string noDocumento { get; set; }
         public string codigoTipoArticulo { get; set; }
         public string tipoArticulo { get; set; }
@@ -88,26 +88,16 @@ namespace ControlProductos.Entity
         public string comentarios { get; set; }
     }
 
-    public class Mantenimiento
+    public class Mtto_Almn
     {
-        public int MantenimientoID { get; set; }
+        public int ctrlPMantenimientoID { get; set; }
         public string noDocumento { get; set; }
-        public string codigoMantenimiento { get; set; }
+        public string codigoMttoAlmn { get; set; }
         public string especificacion { get; set; }
         public string notas { get; set; }
         public string clasificacion { get; set; }
         public string responsable { get; set; }
-    }
-
-    public class Almacen
-    {
-        public int AlmacenID { get; set; }
-        public string noDocumento { get; set; }
-        public string codigoAlmacen { get; set; }
-        public string especificacion { get; set; }
-        public string notas { get; set; }
-        public string clasificacion { get; set; }
-        public string responsable { get; set; }
+        public string tipo { get; set; }
     }
 
     public class Aprobacion

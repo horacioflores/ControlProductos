@@ -211,49 +211,13 @@ namespace ControlProductos {
         protected global::DevExpress.Web.ASPxGridView xgrdTipoArticulo;
         
         /// <summary>
-        /// Control txtCodigoArticuloAdd.
+        /// Control xgrdTipoArticuloMDL.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodigoArticuloAdd;
-        
-        /// <summary>
-        /// Control txtTipoArticuloAdd.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTipoArticuloAdd;
-        
-        /// <summary>
-        /// Control txtMAdd.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMAdd;
-        
-        /// <summary>
-        /// Control txtNAdd.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNAdd;
-        
-        /// <summary>
-        /// Control txtComentariosAdd.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtComentariosAdd;
+        protected global::DevExpress.Web.ASPxGridView xgrdTipoArticuloMDL;
         
         /// <summary>
         /// Control txtDescripcion1.
@@ -454,49 +418,13 @@ namespace ControlProductos {
         protected global::DevExpress.Web.ASPxGridView xgrdMtto;
         
         /// <summary>
-        /// Control txtCodigoMttoAdd.
+        /// Control xgrdMttoMDL.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodigoMttoAdd;
-        
-        /// <summary>
-        /// Control txtEspecificacionAdd.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEspecificacionAdd;
-        
-        /// <summary>
-        /// Control txtResponsableAdd.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtResponsableAdd;
-        
-        /// <summary>
-        /// Control txtCasificacionAdd.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCasificacionAdd;
-        
-        /// <summary>
-        /// Control txtNotasAdd.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNotasAdd;
+        protected global::DevExpress.Web.ASPxGridView xgrdMttoMDL;
         
         /// <summary>
         /// Control xgrdAlmacen.
@@ -508,49 +436,13 @@ namespace ControlProductos {
         protected global::DevExpress.Web.ASPxGridView xgrdAlmacen;
         
         /// <summary>
-        /// Control txtCodigoAlmacenAdd.
+        /// Control xgrdAlmacenMDL.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodigoAlmacenAdd;
-        
-        /// <summary>
-        /// Control txtEspecificacionAlMAdd.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEspecificacionAlMAdd;
-        
-        /// <summary>
-        /// Control txtResponsableALMAdd.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtResponsableALMAdd;
-        
-        /// <summary>
-        /// Control txtCasificacionALMAdd.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCasificacionALMAdd;
-        
-        /// <summary>
-        /// Control txtNotasALMAdd.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNotasALMAdd;
+        protected global::DevExpress.Web.ASPxGridView xgrdAlmacenMDL;
         
         /// <summary>
         /// Control txtFichaSeguridad.

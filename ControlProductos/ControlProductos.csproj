@@ -178,6 +178,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CatMttoAlmn.aspx" />
+    <Content Include="CatTypeArticle.aspx" />
     <Content Include="SmartFormas.css" />
     <Content Include="SmartFormas.js" />
     <Content Include="CatBrands.aspx" />
@@ -3591,6 +3593,13 @@
     <Compile Include="CatMonedas.aspx.designer.cs">
       <DependentUpon>CatMonedas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CatMttoAlmn.aspx.cs">
+      <DependentUpon>CatMttoAlmn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CatMttoAlmn.aspx.designer.cs">
+      <DependentUpon>CatMttoAlmn.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CatParametros.aspx.cs">
       <DependentUpon>CatParametros.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3668,6 +3677,13 @@
     <Compile Include="CatSubcategory3.aspx.designer.cs">
       <DependentUpon>CatSubcategory3.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CatTypeArticle.aspx.cs">
+      <DependentUpon>CatTypeArticle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CatTypeArticle.aspx.designer.cs">
+      <DependentUpon>CatTypeArticle.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CatUM.aspx.cs">
       <DependentUpon>CatUM.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3714,6 +3730,7 @@
     <Compile Include="dataAccess\Menu.cs" />
     <Compile Include="dataAccess\MenuPerfil.cs" />
     <Compile Include="dataAccess\Moneda.cs" />
+    <Compile Include="dataAccess\MttoAlmn.cs" />
     <Compile Include="dataAccess\Parametro.cs" />
     <Compile Include="dataAccess\Perfil.cs" />
     <Compile Include="dataAccess\Perfil_Apps.cs" />
@@ -3725,6 +3742,7 @@
     <Compile Include="dataAccess\SubCategoria1.cs" />
     <Compile Include="dataAccess\SubCategoria2.cs" />
     <Compile Include="dataAccess\SubCategoria3.cs" />
+    <Compile Include="dataAccess\TipoArticulo.cs" />
     <Compile Include="dataAccess\UMedida.cs" />
     <Compile Include="dataAccess\Usuario.cs" />
     <Compile Include="dataAccess\Utilizado.cs" />
@@ -3740,6 +3758,7 @@
     <Compile Include="Entity\Menu.cs" />
     <Compile Include="Entity\MenuPerfil.cs" />
     <Compile Include="Entity\Moneda.cs" />
+    <Compile Include="Entity\MttoAlmn.cs" />
     <Compile Include="Entity\Parametro.cs" />
     <Compile Include="Entity\perfil.cs" />
     <Compile Include="Entity\Perfil_Apps.cs" />
@@ -3751,6 +3770,7 @@
     <Compile Include="Entity\SubCategoria1.cs" />
     <Compile Include="Entity\SubCategoria2.cs" />
     <Compile Include="Entity\SubCategoria3.cs" />
+    <Compile Include="Entity\TipoArticulo.cs" />
     <Compile Include="Entity\UMedida.cs" />
     <Compile Include="Entity\Usuario.cs" />
     <Compile Include="Entity\Utilizado.cs" />

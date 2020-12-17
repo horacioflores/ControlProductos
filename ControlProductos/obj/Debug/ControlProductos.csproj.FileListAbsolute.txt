@@ -15,7 +15,7 @@ D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bi
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\ControlProductos.pdb
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll.licenses
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.pdb
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.csprojResolveAssemblyReference.cache
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll.licenses
