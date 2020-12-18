@@ -208,7 +208,7 @@
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataTextColumn FieldName="codigoTipoArticulo" VisibleIndex="2" Caption="Code" Width="10%">
                         </dx:GridViewDataTextColumn>                     
-                        <dx:GridViewDataTextColumn FieldName="tipoArticulo" VisibleIndex="3" Caption="Tipo" Width="30%">
+                        <dx:GridViewDataTextColumn FieldName="tipoArticulo" VisibleIndex="3" Caption="Tipo" Width="20%">
                         </dx:GridViewDataTextColumn>   
                         <dx:GridViewDataTextColumn FieldName="M" VisibleIndex="4" Caption="M" Width="15%">
                         </dx:GridViewDataTextColumn> 
@@ -263,12 +263,11 @@
                                                 <tr>
                                                     <td style="width:50%;">
                                                         <table style="width:100%; padding-left:0px; padding-right:0px; padding-bottom:0px; padding-top:0px">
-                                                            <tr style="height:5px">
-                                                                  <td style="padding-left: 10px;">
+                                                            <tr style="height:5px"></tr>
+                                                            <tr>
+                                                                <td style="padding-left: 10px;">
                                                                     <dx:ASPxLabel runat="server" ID="lblCodigo" Text="Code" Font-Names="Segoe UI"></dx:ASPxLabel>
                                                                 </td>
-                                                            </tr>
-                                                            <tr>                                                              
                                                                 <td style="padding-left: 10px;">
                                                                     <dx:ASPxTextBox runat="server" ID="txtCodigoArticulo" theme="SoftOrange" Width="100%" MaxLength="15" Text='<%# Eval("codigoTipoArticulo")%>' 
                                                                          Font-Names="Segoe UI" FocusedStyle-Border-BorderColor="#3399ff">
@@ -279,15 +278,13 @@
                                                                     </dx:ASPxTextBox>
                                                                 </td>
                                                             </tr>
-                                                            
-                                                             <tr style="height:5px">
-                                                                   <td style="padding-left: 10px;">
-                                                                    <dx:ASPxLabel runat="server" ID="ASPxLabel1" Text="Type" Font-Names="Segoe UI"></dx:ASPxLabel>
-                                                                </td>
-                                                             </tr>
+                                                            <tr style="height:5px"></tr>
                                                             <tr>
                                                                 <td style="padding-left: 10px;">
-                                                                     <dx:ASPxTextBox runat="server" ID="txtTipoArticulo" theme="SoftOrange" Width="100%" Height="35px" MaxLength="500" Text='<%# Eval("tipoArticulo")%>' 
+                                                                    <dx:ASPxLabel runat="server" ID="lblTipo" Text="Type" Font-Names="Segoe UI"></dx:ASPxLabel>
+                                                                </td>
+                                                                <td style="padding-left: 10px;">
+                                                                    <dx:ASPxTextBox runat="server" ID="txtTipoArticulo" theme="SoftOrange" Width="100%" MaxLength="500" Text='<%# Eval("tipoArticulo")%>' 
                                                                          Font-Names="Segoe UI" FocusedStyle-Border-BorderColor="#3399ff">
                                                                         <ValidationSettings SetFocusOnError="true" Display="Static" CausesValidation="true">
                                                                             <RegularExpression ValidationExpression="[A-Za-záéíóúñÑ,;:\.\/\_\-\s\d\(\)]+" ErrorText="Please enter just valid characters" />
@@ -296,14 +293,13 @@
                                                                     </dx:ASPxTextBox>
                                                                 </td>
                                                             </tr>
-                                                            <tr style="height:5px">
-                                                                 <td style="padding-left: 10px;">
-                                                                    <dx:ASPxLabel runat="server" ID="lblComments" Text="Comments" Font-Names="Segoe UI"></dx:ASPxLabel>
-                                                                </td>
-                                                            </tr>
+                                                            <tr style="height:5px"></tr>
                                                             <tr>
                                                                 <td style="padding-left: 10px;">
-                                                                    <dx:ASPxTextBox runat="server" ID="txtComentarios" theme="SoftOrange" Width="100%" Height="35px" MaxLength="250" Text='<%# Eval("comentarios")%>' 
+                                                                    <dx:ASPxLabel runat="server" ID="lblComments" Text="Comments" Font-Names="Segoe UI"></dx:ASPxLabel>
+                                                                </td>
+                                                                <td style="padding-left: 10px;">
+                                                                    <dx:ASPxTextBox runat="server" ID="txtComentarios" theme="SoftOrange" Width="250%" Height="35px" MaxLength="250" Text='<%# Eval("comentarios")%>' 
                                                                             Font-Names="Segoe UI" FocusedStyle-Border-BorderColor="#3399ff" >
                                                                         <ValidationSettings SetFocusOnError="true" Display="Static" CausesValidation="true">
                                                                             <RegularExpression ValidationExpression="[A-Za-záéíóúñÑ,;:\.\/\_\-\s\d\(\)]+" ErrorText="Please enter just valid characters" />
@@ -311,10 +307,10 @@
                                                                     </dx:ASPxTextBox>
                                                                 </td>
                                                             </tr>
-                                                            <tr style="height:5px"></tr>
-                                                            <tr>
-                                                                <td>
-                                                                       <table style="width:100%; padding-left:0px; padding-right:0px; padding-bottom:0px; padding-top:0px">
+                                                        </table>
+                                                    </td>
+                                                    <td style="width:50%; vertical-align:top">
+                                                        <table style="width:100%; padding-left:0px; padding-right:0px; padding-bottom:0px; padding-top:0px">
                                                             <tr style="height:5px"></tr>
                                                             <tr>
                                                                 <td style="padding-left: 10px">
@@ -324,7 +320,7 @@
                                                                     <dx:ASPxTextBox runat="server" ID="txtM" theme="SoftOrange" MaxLength="20" Text='<%# Eval("M")%>' Font-Names="Segoe UI"
                                                                         FocusedStyle-Border-BorderColor="#3399ff">
                                                                         <ValidationSettings SetFocusOnError="true" Display="Static" CausesValidation="true">
-                                                                            <%--<RegularExpression ValidationExpression="[A-Za-záéíóúñÑ,;:\.\/\_\-\s\d\(\)]+" ErrorText="Please enter just valid characters" />--%>
+                                                                            <RegularExpression ValidationExpression="[A-Za-záéíóúñÑ,;:\.\/\_\-\s\d\(\)]+" ErrorText="Please enter just valid characters" />
                                                                         </ValidationSettings>                                                            
                                                                     </dx:ASPxTextBox>
                                                                 </td>
@@ -338,17 +334,13 @@
                                                                     <dx:ASPxTextBox runat="server" ID="txtN" theme="SoftOrange" MaxLength="20" Text='<%# Eval("N")%>' Font-Names="Segoe UI"
                                                                         FocusedStyle-Border-BorderColor="#3399ff">
                                                                         <ValidationSettings SetFocusOnError="true" Display="Static" CausesValidation="true">
-                                                                            <%--<RegularExpression ValidationExpression="[A-Za-záéíóúñÑ,;:\.\/\_\-\s\d\(\)]+" ErrorText="Please enter just valid characters" />--%>
+                                                                            <RegularExpression ValidationExpression="[A-Za-záéíóúñÑ,;:\.\/\_\-\s\d\(\)]+" ErrorText="Please enter just valid characters" />
                                                                         </ValidationSettings>                                                            
                                                                     </dx:ASPxTextBox>
                                                                 </td>
                                                             </tr>
                                                         </table>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
                                                     </td>
-                                                   
                                                 </tr>
                                             </table> 
                                         </td>

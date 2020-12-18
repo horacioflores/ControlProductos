@@ -428,6 +428,74 @@
                     break;
             }
         }
+
+        function ASPxCallbackPanel2_EndCallback(s, e) {
+            if (s.cpAlertMessage != '') {
+                if (s.cpAlertMessage == 'InputNoDoc') {
+                    swal("Information", "Add the document number", "info");
+                }
+                if (s.cpAlertMessage == 'SelectMachine') {
+                    swal("Information", "Select a machine", "info");
+                }
+                if (s.cpAlertMessage == 'SelectSubcategory1') {
+                    swal("Information", "Select a subcategory 1", "info");
+                }
+                if (s.cpAlertMessage == 'SelectSubcategory2') {
+                    swal("Information", "Select a subcategory 3", "info");
+                }
+                if (s.cpAlertMessage == 'SelectSubcategory3') {
+                    swal("Information", "Select a subcategory 3", "info");
+                }
+                if (s.cpAlertMessage == 'SelectUsed') {
+                    swal("Information", "Select a used", "info");
+                }
+                if (s.cpAlertMessage == 'SelectDepartment') {
+                    swal("Information", "Select a department", "info");
+                }
+                if (s.cpAlertMessage == 'SelectPlan') {
+                    swal("Information", "Select a plan", "info");
+                }
+                if (s.cpAlertMessage == 'SelectBrand') {
+                    swal("Information", "Select a brand", "info");
+                }
+                if (s.cpAlertMessage == 'SelectProvider') {
+                    swal("Information", "Select a provider", "info");
+                }
+                if (s.cpAlertMessage == 'SelectUnique') {
+                    swal("Information", "Select Unique", "info");
+                }
+                if (s.cpAlertMessage == 'SelectQuoteDate') {
+                    swal("Information", "Select Quote Date", "info");
+                }
+                if (s.cpAlertMessage == 'SelectCurrency') {
+                    swal("Information", "Select Currency", "info");
+                }
+                if (s.cpAlertMessage == 'SelectUM') {
+                    swal("Information", "Select UM", "info");
+                }
+                if (s.cpAlertMessage == 'SelectGlider') {
+                    swal("Information", "Select Glider", "info");
+                }
+                if (s.cpAlertMessage == 'SelectBuyer') {
+                    swal("Information", "Select Buyer", "info");
+                }
+
+                if (s.cpAlertMessage == 'successSave') {
+                    swal("Information", "The product has been success registered!", "success");
+                }
+                if (s.cpAlertMessage == 'successUpdate') {
+                    swal("Information", "The product has been success updated!", "success");
+                }
+
+                if (s.cpAlertMessage == 'errorSave') {
+                    swal("Information", "There was an error registering the product!", "error");
+                }
+                if (s.cpAlertMessage == 'errorUpdate') {
+                    swal("Information", "There was an error updating the product!", "error");
+                }
+            }
+            s.cpAlertMessage = "";
+        }
     </script>
     <style>
         html {
@@ -592,8 +660,14 @@
     </style>
     <div class="CeroPM" id="Inicio">
     <div class="container-fluid CeroPM">
+      <dx:ASPxCallbackPanel runat="server" ID="ASPxCallbackPanel2" Width="100%"
+        ClientInstanceName="ASPxCallbackPanel2" RenderMode="Table" 
+        OnCallback="ASPxCallbackPanel2_Callback">
+          <ClientSideEvents EndCallback="ASPxCallbackPanel2_EndCallback"/>
+          <PanelCollection>
+              <dx:PanelContent>
         <div id="divBotones" class="col-xs-12 btn-group CeroPM" data-spy="affix" data-offset-top="100" style="color:white;width:100%;z-index:1 !important;background-color:#EFEFEF;">
-            <asp:ImageButton ID="btnSave" class="btn" Style="margin: 0px; padding: 0px;" runat="server" OnClick="btnSave_Click" ImageUrl="~/Assets/images/BtnGuardar.png"  />
+            <img ID="btnSave" class="btn" Style="margin: 0px; padding: 0px;" onclick="ASPxCallbackPanel2.PerformCallback('Save');" src="Assets/images/BtnGuardar.png" /><%--OnClick="btnSave_Click"--%>
             <asp:ImageButton ID="btnRegresar" class="btn" Style="margin: 0px; padding: 0px;" runat="server" ImageUrl="~/Assets/images/BtnSalir.png" OnClick="btnRegresar_Click" />
             <div class="BtnGpoIniFin">
                 <a class="BtnIniFin" id="BtnInicio" href="#Inicio" title="Inicio" onmouseover="rotate('imgaRotarI');" onmouseout="rotate('imgaRotarI');"><i id="imgaRotarI" class="glyphicon glyphicon glyphicon-circle-arrow-up"></i><span class="badge badge-xs badge-danger">Alt+9</span></a>
@@ -1658,6 +1732,9 @@
                 </div>
             </div>
         </div>
+              </dx:PanelContent>
+          </PanelCollection>
+      </dx:ASPxCallbackPanel>
     </div>
     </div>
 </asp:Content>

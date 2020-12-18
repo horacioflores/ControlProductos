@@ -235,8 +235,8 @@ namespace ControlProductos
             item.value = true;
             item.text = "Si";
             Unico item2 = new Unico();
-            item2.value = true;
-            item2.text = "Si";
+            item2.value = false;
+            item2.text = "No";
             lUnico.Add(item);
             lUnico.Add(item2);
 
@@ -245,11 +245,23 @@ namespace ControlProductos
             cmbUnico.DataSource = lUnico;
             cmbUnico.DataBind();
 
+            if (cmbUnico.Items.Count > 0)
+            {
+                ListEditItem li = cmbUnico.Items[0];
+                li.Selected = true;
+            }
+
             var BMoneda = new MonedaDa();
             cmbMoneda.TextField = "Nombre";
             cmbMoneda.ValueField = "Codigo";
             cmbMoneda.DataSource = BMoneda.GetCombo();
             cmbMoneda.DataBind();
+
+            if (cmbMoneda.Items.Count > 0)
+            {
+                ListEditItem li = cmbMoneda.Items[0];
+                li.Selected = true;
+            }
 
             var BUM = new UMedidaDa();
             cmbCodigoUM.TextField = "Nombre";
@@ -257,17 +269,35 @@ namespace ControlProductos
             cmbCodigoUM.DataSource = BUM.GetCombo();
             cmbCodigoUM.DataBind();
 
+            if (cmbCodigoUM.Items.Count > 0)
+            {
+                ListEditItem li = cmbCodigoUM.Items[0];
+                li.Selected = true;
+            }
+
             var BPlaneador = new PlaneadorDa();
             cmbPlaneador.TextField = "Nombre";
             cmbPlaneador.ValueField = "Codigo";
             cmbPlaneador.DataSource = BPlaneador.GetCombo();
             cmbPlaneador.DataBind();
 
+            if (cmbPlaneador.Items.Count > 0)
+            {
+                ListEditItem li = cmbPlaneador.Items[0];
+                li.Selected = true;
+            }
+
             var BComprador = new CompradorDa();
             cmbComprador.TextField = "Nombre";
             cmbComprador.ValueField = "Codigo";
             cmbComprador.DataSource = BComprador.GetCombo();
             cmbComprador.DataBind();
+
+            if (cmbComprador.Items.Count > 0)
+            {
+                ListEditItem li = cmbComprador.Items[0];
+                li.Selected = true;
+            }
 
             var tArtc = new TipoArticuloDa();
             var tMttoD = new MttoAlmnDa();
@@ -610,7 +640,7 @@ namespace ControlProductos
             Response.Redirect("ctrolProds.aspx");
         }
 
-        protected void btnSave_Click(object sender, ImageClickEventArgs e)
+        protected string Save()
         {
             int ctrlProdsID = Convert.ToInt32(Session["ctrlProdsID"]);
             Entity.ControlProductos ctrlProd = new Entity.ControlProductos();
@@ -687,34 +717,35 @@ namespace ControlProductos
             ctrlProd.aprobaciones = aprbInsert;
 
             var BctrlProd = new ControlProductosda();
-            string strScript;
+            //string strScript;
             if (ctrlProd.ctrlProdsID == 0)
             {
                 var regreso = BctrlProd.InsCtrlP(ctrlProd, LoginInfo.CurrentUsuario.UsuarioId.ToString());
                 if (regreso > 0)
                 {
-                    strScript = "swal('Information', 'The product has been success registered!', 'success');";
+                    Session["ctrlProdsID"] = regreso;
+                    return "successSave";
+                   // strScript = "swal('Information', 'The product has been success registered!', 'success');";
                 }
                 else
                 {
-                    strScript = "swal('Information', 'There was an error registering the product!', 'error');";
+                    return "errorSave";
+                    //strScript = "swal('Information', 'There was an error registering the product!', 'error');";
                 }
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "InsertSucces", strScript, true);
-                return;
             }
             else
             {
                 var regreso = BctrlProd.UpdCtrlP(ctrlProd, LoginInfo.CurrentUsuario.UsuarioId.ToString());
                 if (regreso > 0)
                 {
-                    strScript = "swal('Information', 'The product has been success updated!', 'success');";
+                    return "successUpdate";
+                    //strScript = "swal('Information', 'The product has been success updated!', 'success');";
                 }
                 else
                 {
-                    strScript = "swal('Information', 'There was an error updating the product!', 'error');";
+                    return "errorUpdate";
+                    //strScript = "swal('Information', 'There was an error updating the product!', 'error');";
                 }
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSucces", strScript, true);
-                return;
             }
         }
 
@@ -1166,6 +1197,103 @@ namespace ControlProductos
                 else
                 {
                     e.Cell.Text = string.Format("<input type='checkbox' class='chkAlmnMDL' id='chk{0}'>", id);
+                }
+            }
+        }
+
+        protected void ASPxCallbackPanel2_Callback(object sender, CallbackEventArgsBase e)
+        {
+            ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = string.Empty;
+            var param = e.Parameter;
+            var pS = param.Split(',');
+
+            if (pS.Length > 0)
+            {
+                if (pS[0] == "Save")
+                {
+                    if(lblnDoc.Text == "")
+                    {
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "InputNoDoc";
+                        return;
+                    }
+                    if(cmbMaquina.SelectedItem == null)
+                    {
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectMachine";
+                        return;
+                    }
+                    if (cmbSubCat1.SelectedItem == null)
+                    {
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectSubcategory1";
+                        return;
+                    }
+                    if (cmbSubCat2.SelectedItem == null)
+                    {
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectSubcategory2";
+                        return;
+                    }
+                    if (cmbSubCat3.SelectedItem == null)
+                    {
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectSubcategory3";
+                        return;
+                    }
+                    if (cmbUtilizado.SelectedItem == null)
+                    {
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectUsed";
+                        return;
+                    }
+                    if (cmbDepa.SelectedItem == null)
+                    {
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectDepartment";
+                        return;
+                    }
+                    if (cmbPlan.SelectedItem == null)
+                    {
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectPlan";
+                        return;
+                    }
+                    if (cmbMarca.SelectedItem == null)
+                    {
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectBrand";
+                        return;
+                    }
+                    if (cmbProveedor.SelectedItem == null)
+                    {
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectProvider";
+                        return;
+                    }
+                    if (cmbUnico.SelectedItem == null)
+                    {
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectUnique";
+                        return;
+                    }
+                    if(xDateFechaCot.Date == new DateTime(1,1,1))
+                    {
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectQuoteDate";
+                        return;
+                    }
+                    if (cmbMoneda.SelectedItem == null)
+                    {
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectCurrency";
+                        return;
+                    }
+                    if (cmbCodigoUM.SelectedItem == null)
+                    {
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectUM";
+                        return;
+                    }
+                    if (cmbPlaneador.SelectedItem == null)
+                    {
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectGlider";
+                        return;
+                    }
+                    if (cmbComprador.SelectedItem == null)
+                    {
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectBuyer";
+                        return;
+                    }
+
+                    ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = Save();
+                    return;
                 }
             }
         }
