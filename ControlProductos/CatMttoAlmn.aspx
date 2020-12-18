@@ -292,7 +292,7 @@
                                                                     <dx:ASPxLabel runat="server" ID="lblespecificacion" Text="Specification" Font-Names="Segoe UI"></dx:ASPxLabel>
                                                                 </td>
                                                                 <td style="padding-left: 10px;">
-                                                                    <dx:ASPxTextBox runat="server" ID="txtEspecificacion" theme="SoftOrange" Width="100%" MaxLength="20" Text='<%# Eval("especificacion")%>' 
+                                                                    <dx:ASPxTextBox runat="server" ID="txtEspecificacion" theme="SoftOrange" Width="100%" MaxLength="100" Text='<%# Eval("especificacion")%>' 
                                                                          Font-Names="Segoe UI" FocusedStyle-Border-BorderColor="#3399ff">
                                                                         <ValidationSettings SetFocusOnError="true" Display="Static" CausesValidation="true">
                                                                             <RegularExpression ValidationExpression="[A-Za-záéíóúñÑ,;:\.\/\_\-\s\d\(\)]+" ErrorText="Please enter just valid characters" />
