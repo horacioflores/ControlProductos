@@ -17,84 +17,6 @@
         <script src="Assets/plugins/sweetalert/dist/sweetalert.min.js"></script>
         <script src="Assets/pages/jquery.sweet-alert.init.js"></script> <!--prueba github-->
     <script type="text/jscript">
-        function OnEndCallback(s, e) {
-            
-            if (s.cpAlertMessage != '') {
-                if (s.cpAlertMessage == 'Update') {
-                    swal("Information", "The record was successfully updated!", "success");
-                } else if (s.cpAlertMessage == 'Insert') {
-                    swal("Information", "Registration was successfully registered!", "success");
-                } else if (s.cpAlertMessage == 'Delete') {
-                    swal("Information", "Registration was successfully enabled / disabled!", "success");
-                } else if (s.cpAlertMessage == 'Error') {
-                    swal("Information", "An error has occurred from the database");
-                }
-                grid.PerformCallback('Search');
-            }
-        }
-
-        function OnCallback() {
-            grid.PerformCallback('Search');
-        }
-
-        function raiseValidation() {
-            if (ASPxClientEdit.ValidateEditorsInContainer(null))
-                grid.UpdateEdit();
-        }
-
-        function OnCmbAppEditChanged(cmbAppEdit) {
-            cmbPerfileEdit.PerformCallback(cmbAppEdit.GetValue().toString());
-        }
-
-        function OnCmbPerfileEditChanged(cmbPerfileEdit) {
-            cbCombos.PerformCallback("IdPerfile " + cmbPerfileEdit.GetSelectedItem().value);
-        }
-
-        function OnAccessEndCallback(s, e) {
-            if (s.cpAlertMessage != '') {
-                alert(s.cpAlertMessage);
-            }
-        }
-
-        function GetSelectedFieldValuesCallback(values) {
-            var Valores = "";
-            for (var i = 0; i < values.length; i++) {
-                if (Valores == "") {
-                    Valores = Valores + values[i];
-                } else {
-                    Valores = Valores + ", " + values[i];
-                }
-            }
-        }
-
-        function UploadFile() {
-            var x = document.getElementById("myDIV");
-
-            var codigoParte = cmbParteEdit.GetText();
-            var cantidad = ASPxspnCant.GetText();            
-
-            if (codigoParte == "" || cantidad == "") {             
-
-                 swal({
-                     title: "Information!",
-                     text: "Select a product and enter the quantity",
-                     type: "info",
-                     timer: 2000,
-                     showConfirmButton: false
-                 });
-
-                 if (codigoParte == "") {
-                     window.setTimeout("cmbParteEdit.Focus()", 100);
-                 } else {
-                     window.setTimeout("ASPxspnCant.Focus()", 100);
-                 }
-                 
-                 return;               
-            }
-
-            HabilitaCambio();
-
-        }
 
         function HabilitaCambio() {
             var btn = document.getElementById("BtnUploadFile");
@@ -120,88 +42,7 @@
             }
         }
 
-        function DisableSelected() {
-
-            var Valores = "";
-            $(".chk").each(function () {
-                if (this.checked) {
-                    if (Valores == "") {
-                        Valores = this.id.substr(3);
-                    } else {
-                        Valores += "," + this.id.substr(3);
-                    }
-                }
-            });
-
-            if (Valores == "") {
-
-                swal({
-                    title: "Information",
-                    text: "No records selected!",
-                    type: "info"
-                });
-                return;
-            }
-
-            xgrdPartes.PerformCallback(Valores);
-        }
-
-            function DisableProvsSelected() {
-                var Valores = "";
-                $(".chkProv").each(function () {
-                    if (this.checked) {
-                        if (Valores == "") {
-                            Valores = this.id.substr(3);
-                        } else {
-                            Valores += "," + this.id.substr(3);
-                        }
-                    }
-                });
-
-                if (Valores == "") {
-
-                    swal({
-                        title: "Information",
-                        text: "No records selected!",
-                        type: "info"
-                    });
-                    return;
-                }
-
-                xgrdProvedores.PerformCallback(Valores);
-            }
-
-            function DisableAll() {
-
-                swal({
-                    title: "Information",
-                    text: "Are you sure you want to enable / disable all registers?",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonClass: "btn-danger",
-                    confirmButtonText: "Si!",
-                    cancelButtonText: "No!",
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                },
-                function (isConfirm) {
-                    if (isConfirm) {
-                        CallbackPanelDisableAll.PerformCallback();
-                        grid.PerformCallback('Search');
-                        swal("Delete!", "All registrations were enabled / disabled successfully", "success");
-                    } else {
-                        swal("Cancel", "You canceled the operation!", "error");
-                    }
-                });
-            }
-
-
        function OnTipoArticuloEndCallback(s, e) {
-           document.getElementById("MainContent_txtCodigoArticuloAdd").value = "";
-           document.getElementById("MainContent_txtTipoArticuloAdd").value = "";
-           document.getElementById("MainContent_txtMAdd").value = "";
-           document.getElementById("MainContent_txtNAdd").value = "";
-           document.getElementById("MainContent_txtComentariosAdd").value = "";
             if (s.cpAlertMessage != '') {
                 if (s.cpAlertMessage == 'SelectOne') {
                     swal("Information", "Type and code cannot be empty!", "info");
@@ -216,6 +57,39 @@
                 }
             }
             s.cpAlertMessage = "";
+       }
+
+       function AddedTiposArticulos() {
+           var Valores = "";
+           $(".chkArtMDL").each(function () {
+               if (this.checked) {
+                   if (Valores == "") {
+                       Valores = this.id.substr(3);
+                   } else {
+                       Valores += "," + this.id.substr(3);
+                   }
+               }
+           });
+
+           if (Valores == "") {
+
+               swal({
+                   title: "Information",
+                   text: "No records selected!",
+                   type: "info"
+               });
+               return;
+           }
+           xgrdTipoArticuloMDL.PerformCallback(Valores);
+       }
+
+       function OnTipoArticuloMDLEndCallback(s, e) {
+           if (s.cpAlertMessage != '') {
+               if (s.cpAlertMessage == 'Add') {
+                   xgrdTipoArticulo.PerformCallback('Save');
+               }
+           }
+           s.cpAlertMessage = "";
        }
 
        function DisableSelectedTipoArt() {
@@ -245,11 +119,6 @@
        }
 
        function OnMttoEndCallback(s, e) {
-           document.getElementById("MainContent_txtCodigoMttoAdd").value = "";
-           document.getElementById("MainContent_txtEspecificacionAdd").value = "";
-           document.getElementById("MainContent_txtResponsableAdd").value = "";
-           document.getElementById("MainContent_txtCasificacionAdd").value = "";
-           document.getElementById("MainContent_txtNotasAdd").value = "";
            if (s.cpAlertMessage != '') {
                if (s.cpAlertMessage == 'SelectOne') {
                    swal("Information", "Specification and code are empty!", "info");
@@ -292,6 +161,39 @@
            xgrdMtto.PerformCallback(Valores);
        }
 
+       function AddedMttos() {
+           var Valores = "";
+           $(".chkMttoMDL").each(function () {
+               if (this.checked) {
+                   if (Valores == "") {
+                       Valores = this.id.substr(3);
+                   } else {
+                       Valores += "," + this.id.substr(3);
+                   }
+               }
+           });
+
+           if (Valores == "") {
+
+               swal({
+                   title: "Information",
+                   text: "No records selected!",
+                   type: "info"
+               });
+               return;
+           }
+           xgrdMttoMDL.PerformCallback(Valores);
+       }
+
+       function OnMttoxgrdMttoMDLEndCallback(s, e) {
+           if (s.cpAlertMessage != '') {
+               if (s.cpAlertMessage == 'Add') {
+                   xgrdMtto.PerformCallback('Save');
+               }
+           }
+           s.cpAlertMessage = "";
+       }
+
        function OnAlmacenEndCallback(s, e) {
            document.getElementById("MainContent_txtCodigoAlmacenAdd").value = "";
            document.getElementById("MainContent_txtEspecificacionAlMAdd").value = "";
@@ -309,6 +211,39 @@
                        timer: 2000,
                        showConfirmButton: false
                    });
+               }
+           }
+           s.cpAlertMessage = "";
+       }
+
+       function AddedAlmnes() {
+           var Valores = "";
+           $(".chkAlmnMDL").each(function () {
+               if (this.checked) {
+                   if (Valores == "") {
+                       Valores = this.id.substr(3);
+                   } else {
+                       Valores += "," + this.id.substr(3);
+                   }
+               }
+           });
+
+           if (Valores == "") {
+
+               swal({
+                   title: "Information",
+                   text: "No records selected!",
+                   type: "info"
+               });
+               return;
+           }
+           xgrdAlmacenMDL.PerformCallback(Valores);
+       }
+
+       function OnAlmacenMDLEndCallback(s, e) {
+           if (s.cpAlertMessage != '') {
+               if (s.cpAlertMessage == 'Add') {
+                   xgrdAlmacen.PerformCallback('Save');
                }
            }
            s.cpAlertMessage = "";
@@ -391,326 +326,108 @@
            document.getElementById("MainContent_lblTotal").innerHTML = (Math.round(total*100)/100).toString();
        }
 
-
-
-            function UpdPart(inx) {
-                var cantNew = cantPartEdit.lastChangedValue;
-                var params = "Updated," + inx.toString() + "," + cantNew.toString();
-                xgrdPartes.PerformCallback(params);
-                xgrdPartes.CancelEdit();
-            }
-
-            function OnProveedoresEndCallback(s, e) {
-                if (s.cpAlertMessage != '') {
-                    if (s.cpAlertMessage == 'SelectOne') {
-                        swal("Information", "Select a provider to add to the list!", "info");
-                    }
-                    //alert(s.cpAlertMessage);
+       function OnPanel1EndCallback(s, e) {
+            if (s.cpAlertMessage != '') {
+                if (s.cpAlertMessage == 'errror') {
+                    swal("Information", "There was an error", "info");
                 }
             }
+       }
 
-            function OnProductsToRelEndCallback(s, e) {
-                if (s.cpAlertMessage != '') {
-                    if (s.cpAlertMessage == 'SelectOne') {
-                        swal("Information", "Select a provider to add to the list!", "info");
-                    }
-                    else if (s.cpAlertMessage == "Add") {
-                        var proveedor = ASPxCmbProv.lastSuccessText;
-                        var spnProveedor = document.getElementById("spnProveedor");
-                        spnProveedor.innerText = proveedor;
-                        $('#mdlProveedores').modal('show');
-                    }
-                    else if (s.cpAlertMessage == 'NoProducts') {
-                        swal("Information", "The request has no products!", "info");
-                    }
-                    //alert(s.cpAlertMessage);
+
+        $(document).ready(function () {
+            // Muestra las teclas rápidas
+            $("span.badge").hide(); //Se puso aquí para que no cambara de lugar los botones
+            $("body").keydown(function (e) {
+                if (e.which == 17) {
+                    $("span.badge").toggle();
                 }
-            }
-
-
-            function relacionShip() {
-                var Valores = "Save";
-                $(".chkRel").each(function () {
-                    if (this.checked) {
-                        if (Valores == "") {
-                            Valores = this.id.substr(3);
-                        } else {
-                            Valores += "," + this.id.substr(3);
-                        }
+                if (e.altKey) {
+                    if (e.altKey && e.which == 49) { //1
+                        alert('boton 1');
                     }
-                });
-
-                xgrdProvedores.PerformCallback(Valores);
-            }
-
-            function sendMessage() {
-                var codProv = ASPcmbFilterProv.lastSuccessValue;
-                var inp = document.getElementById("inpMessage");
-                var valor = codProv + "," + inp.value;
-                inp.value = "";
-                CallbackPanel.PerformCallback(valor);
-            }
-
-            function OnPanel1EndCallback(s, e) {
-                if (s.cpAlertMessage != '') {
-                    if (s.cpAlertMessage == 'errror') {
-                        swal("Information", "There was an error", "info");
+                    if (e.altKey && e.which == 50) {//2
+                        alert('boton 2');
                     }
-                }
-            }
-
-            function CIuplGraphicsFile_OnFileUploadComplete(s, e) {
-                if (e.isValid) {
-                    //swal("Information", "The record was successfully updated", "success");
-
-                    var codigoParte = cmbParteEdit.GetSelectedItem().value;
-                    var cantidad = ASPxspnCant.GetValue();
-                    cbSaveVars.PerformCallback(codigoParte + ',' + + ',' + e.callbackData);              
-             
-                    var params = "SaveWithFile";
-                    xgrdPartes.PerformCallback(params);
-
-                    HabilitaCambio();
-
-                    //cmbParteEdit.setAttribute('text', '');
-                    
-                    //ASPxspnCant.value = "";
-                }
-                else {
-                    swal("Warning", "An error has occurred from the database");
-                }
-            }
-
-            function CIuplGraphicsFile_OnFilesUploadComplete(args) {
-                UpdateUploadGraphicsFileButton();
-            }
-
-            function CIuplGraphicsFile_OnUploadStart() {
-                btnUploadGraphicsFile.SetEnabled(false);
-            }            
-
-            function UpdateUploadGraphicsFileButton() {
-                btnUploadGraphicsFile.SetEnabled(CIuplGraphicsFile.GetText(0) != "");
-            }
-
-            function ValidarValorParte(s, e) {
-                
-                var codigoParte = cmbParteEdit.GetText();
-                var cant = ASPxspnCant.GetText();
-                if (codigoParte == "" || cant == "")
-                {
-                    var x = document.getElementById("myDIV");
-                    var y = document.getElementById("divBotonesPart");
-                    if (x.style.display === "block") {
-                        x.style.display = "none";
-                        y.style.display = "block";
+                    if (e.altKey && e.which == 51) {//3
+                        alert('boton 3');
                     }
-
-                    var btn = document.getElementById("BtnUploadFile");
-                    var srcdesc = btn.src;
-                    var expresionRegular = "/";
-                    var listaNombres = srcdesc.split(expresionRegular);
-                    var namebtn = listaNombres[6].toString();
-
-                    //if (namebtn == "BtnUploadFile.png") {
-                    //    btn.setAttribute('src', 'Assets/Images/BtnUploadFileCancel.png');
-                    //} else {
-                    //    btn.setAttribute('src', 'Assets/Images/BtnUploadFile.png');
-                    //}
-
-                    if (namebtn == "BtnUploadFileCancel.png") {
-                        btn.setAttribute('src', 'Assets/Images/BtnUploadFile.png');                    
+                    if (e.altKey && e.which == 52) {//4
+                        alert('boton 4');
                     }
-                }
-            }
-
-            function ValidarValorCant() {
-                var cant = ASPxspnCant.GetText();
-                if (cant == "") {
-                    var x = document.getElementById("myDIV");
-                    var y = document.getElementById("divBotonesPart");
-                    if (x.style.display === "block") {
-                        x.style.display = "none";
-                        y.style.display = "block";
+                    if (e.altKey && e.which == 53) {//5
+                        alert('boton 5');
                     }
-
-                    var btn = document.getElementById("BtnUploadFile");
-                    var srcdesc = btn.src;
-                    var expresionRegular = "/";
-                    var listaNombres = srcdesc.split(expresionRegular);
-                    var namebtn = listaNombres[6].toString();
-
-                    if (namebtn == "BtnUploadFile.png") {
-                        btn.setAttribute('src', 'Assets/Images/BtnUploadFileCancel.png');
-                    } else {
-                        btn.setAttribute('src', 'Assets/Images/BtnUploadFile.png');
+                    if (e.altKey && e.which == 54) {//6
+                        alert('boton 6');
                     }
-                }              
-
-            }
-
-            function cbSaveVars_Complete(s,e){
-                if (s.cpAlertMessage != '') {
-                    if (s.cpAlertMessage == 'Exist') {
-                        swal({
-                            title: "Information",
-                            text: "The part is already added to the list",
-                            type: "info",
-                            timer: 2000,
-                            showConfirmButton: false
-                        });
+                    if (e.altKey && e.which == 55) {//7
+                        alert('boton 7');
+                        $(".clickable").click();
                     }
-                }
-            }
-
-            function Cancelar(){
-                $('#myModal').modal('show'); // abrir
-                //$('#myModal').modal('hide'); // cerrar
-            }
-
-            function Rechazar() {
-                $('#myModal').modal('show'); // abrir
-                //$('#myModal').modal('hide'); // cerrar
-            }
-
-
-        //CloseModal
-            function SendModalCancelar() {
-                btnCancelar_Click();
-            }
-
-
-            function SendModalRechazar() {
-                btnRechazar_Click();
-            }
-
-            function ShowModal(value) {
-                if (value == "SendSupplier") {
-                    document.getElementById('titleModal').innerHTML = "Send to Suppliers";
-                } else if(value == "Cancel") {
-                    document.getElementById('titleModal').innerHTML = "Cancel Quote";
-                }else if(value == "Rejected"){
-                    document.getElementById('titleModal').innerHTML = "Rejected Quote";
-                }
-                
-                
-                document.getElementById('DescriptionModal').value = '';
-                $('#myModal').modal('show');
-            }
-
-            
-            function EnviarProveedor() {
-
-                var description = document.getElementById('DescriptionModal').value;
-                var title = document.getElementById('titleModal').innerHTML;
-                if (description != "") {
-                    cbEnviarModal.PerformCallback(description + "," + title);
-                    //window.location.href = "cotizaciones.aspx";
-                } else {
-                    swal('Información', 'Add Reason', 'info')
-                    return false;
-                }
-            }
-
-            function selectedAllparts(selected) {
-                $(".chkRel").each(function () {
-                    this.checked = selected;
-                });
-            }
-
-            $(document).ready(function () {
-                // Muestra las teclas rápidas
-                $("span.badge").hide(); //Se puso aquí para que no cambara de lugar los botones
-                $("body").keydown(function (e) {
-                    if (e.which == 17) {
-                        $("span.badge").toggle();
+                    if (e.altKey && e.which == 56) {//8
+                        $(".clickable").click();
                     }
-                    if (e.altKey) {
-                        if (e.altKey && e.which == 49) { //1
-                            alert('boton 1');
-                        }
-                        if (e.altKey && e.which == 50) {//2
-                            alert('boton 2');
-                        }
-                        if (e.altKey && e.which == 51) {//3
-                            alert('boton 3');
-                        }
-                        if (e.altKey && e.which == 52) {//4
-                            alert('boton 4');
-                        }
-                        if (e.altKey && e.which == 53) {//5
-                            alert('boton 5');
-                        }
-                        if (e.altKey && e.which == 54) {//6
-                            alert('boton 6');
-                        }
-                        if (e.altKey && e.which == 55) {//7
-                            alert('boton 7');
-                            $(".clickable").click();
-                        }
-                        if (e.altKey && e.which == 56) {//8
-                            $(".clickable").click();
-                        }
-                        if (e.altKey && e.which == 57) {//9
-                            $("#BtnInicio").get(0).click();
-                        }
-                        if (e.altKey && e.which == 48) {//0
-                            $("#BtnFinal").get(0).click();
-                        }
-                    };
-                });
-                // Funcionalidad de los paneles colapsables
-                $(document).on('click', '.panel-heading span.clickable', function (e) {
-                    var $this = $(this);
-                    if (!$this.hasClass('panel-collapsed')) {
-                        $this.parents('.panel').find('.panel-body').slideUp();
-                        $this.addClass('panel-collapsed');
-                        $this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
-                    } else {
-                        $this.parents('.panel').find('.panel-body').slideDown();
-                        $this.removeClass('panel-collapsed');
-                        $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+                    if (e.altKey && e.which == 57) {//9
+                        $("#BtnInicio").get(0).click();
                     }
-                });
-                // Colapsa y expande todos a la vez
-                $("#btnColapsable").click(function () {
-                    $(".clickable").click();
-                });
-            });
-            //Rota los iconos de inicio y fin, va fuera del ready
-            function rotate(imgName) {
-                var elm = document.getElementById(imgName);
-                var className = elm.className;
-                if (className.indexOf('BtnRotar') === -1) {
-                    elm.className = elm.className + ' BtnRotar';
-                } else {
-                    elm.className = elm.className.replace(' BtnRotar', '');
+                    if (e.altKey && e.which == 48) {//0
+                        $("#BtnFinal").get(0).click();
+                    }
                 };
-            };
-            //Quita los checked de default de las tablas de bootstrap
-            function quitaChecked(value) {
-                return {
-                    checked: false
+            });
+            // Funcionalidad de los paneles colapsables
+            $(document).on('click', '.panel-heading span.clickable', function (e) {
+                var $this = $(this);
+                if (!$this.hasClass('panel-collapsed')) {
+                    $this.parents('.panel').find('.panel-body').slideUp();
+                    $this.addClass('panel-collapsed');
+                    $this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+                } else {
+                    $this.parents('.panel').find('.panel-body').slideDown();
+                    $this.removeClass('panel-collapsed');
+                    $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
                 }
-                return value
+            });
+            // Colapsa y expande todos a la vez
+            $("#btnColapsable").click(function () {
+                $(".clickable").click();
+            });
+        });
+        //Rota los iconos de inicio y fin, va fuera del ready
+        function rotate(imgName) {
+            var elm = document.getElementById(imgName);
+            var className = elm.className;
+            if (className.indexOf('BtnRotar') === -1) {
+                elm.className = elm.className + ' BtnRotar';
+            } else {
+                elm.className = elm.className.replace(' BtnRotar', '');
             };
-
-            function openModal(opcion) {
-                switch (opcion) {
-                    case 'TipoArticulo':
-                         $('#mdlTipoArticulo').modal('show');
-                         break;
-                    case 'Mantenimiento':
-                        $('#mdlMtto').modal('show');
-                        break;
-                    case 'Almacen':
-                        $('#mdlAlmacen').modal('show');
-                        break;
-                    case 'Aprobaciones':
-                        $('#mdlAprobaciones').modal('show');
-                        break;
-                }
+        };
+        //Quita los checked de default de las tablas de bootstrap
+        function quitaChecked(value) {
+            return {
+                checked: false
             }
+            return value
+        };
+
+        function openModal(opcion) {
+            switch (opcion) {
+                case 'TipoArticulo':
+                        $('#mdlTipoArticulo').modal('show');
+                        break;
+                case 'Mantenimiento':
+                    $('#mdlMtto').modal('show');
+                    break;
+                case 'Almacen':
+                    $('#mdlAlmacen').modal('show');
+                    break;
+                case 'Aprobaciones':
+                    $('#mdlAprobaciones').modal('show');
+                    break;
+            }
+        }
     </script>
     <style>
         html {
@@ -1128,35 +845,35 @@
                                             <h4>Tipo Articulo</h4>
                                         </div>
                                         <div class="modal-body" runat="server">
-                                            <div class="row form-group CeroPM">
-                                                <label class="text-form col-sm-2">Código</label>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txtCodigoArticuloAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                                </div>
-                                                <label class="text-form col-sm-2">Tipo Artículo</label>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txtTipoArticuloAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group CeroPM">
-                                                <label class="text-form col-sm-2">M</label>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txtMAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                                </div>
-                                                <label class="text-form col-sm-2">N</label>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txtNAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group CeroPM">
-                                                <label class="text-form col-sm-2">Comentarios</label>
-                                                <div class="col-sm-10">
-                                                    <asp:TextBox ID="txtComentariosAdd" TextMode="MultiLine" Columns="3" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                                </div>
-                                            </div>
+                                            <dx:ASPxGridView ID="xgrdTipoArticuloMDL" runat="server" AutoGenerateColumns="true"
+                                                Width="100%" Font-Names="Segoe UI"
+                                                OnCustomCallback="xgrdTipoArticuloMDL_CustomCallback"
+                                                OnHtmlDataCellPrepared="xgrdTipoArticuloMDL_HtmlDataCellPrepared"
+                                                ClientInstanceName="xgrdTipoArticuloMDL" Theme="Metropolis">
+                                                <Columns>
+                                                    <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="0" Width="10px">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="tipoArticulo" Caption="Tipo de Artículo" VisibleIndex="1" Width="35%">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="M" Caption="M" VisibleIndex="2" Width="10%">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="N" Caption="N" VisibleIndex="3" Width="10%">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="comentarios" Caption="Comentarios / Justificaciones" VisibleIndex="4" Width="35%">
+                                                    </dx:GridViewDataTextColumn>
+                                                </Columns>
+                                                <Styles>
+                                                    <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
+                                                    <RowHotTrack BackColor="#CEECF5"></RowHotTrack>
+                                                    <Header BackColor="#F2F2F2"></Header>
+                                                </Styles>
+                                                <SettingsPager Mode="ShowPager" PageSize="20" />
+                                                <Settings ShowFilterRow="True" />
+                                                <ClientSideEvents EndCallback="OnTipoArticuloMDLEndCallback" />
+                                            </dx:ASPxGridView>
                                             <br />
                                             <div>
-                                                <button type="button" class="btn btn-primary" onclick="xgrdTipoArticulo.PerformCallback('Save');" data-dismiss="modal">Add</button>
+                                                <button type="button" class="btn btn-primary" onclick="AddedTiposArticulos();" data-dismiss="modal">Add</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1418,35 +1135,35 @@
                                             <h4>Mantenimiento</h4>
                                         </div>
                                         <div class="modal-body" runat="server">
-                                            <div class="row form-group CeroPM">
-                                                <label class="text-form col-sm-2">Código</label>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txtCodigoMttoAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                                </div>
-                                                <label class="text-form col-sm-2">Especificación</label>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txtEspecificacionAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group CeroPM">
-                                                <label class="text-form col-sm-2">Responsable</label>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txtResponsableAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                                </div>
-                                                <label class="text-form col-sm-2">Clasificación</label>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txtCasificacionAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group CeroPM">
-                                                <label class="text-form col-sm-2">Notas</label>
-                                                <div class="col-sm-10">
-                                                    <asp:TextBox ID="txtNotasAdd" TextMode="MultiLine" Columns="3" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                                </div>
-                                            </div>
+                                            <dx:ASPxGridView ID="xgrdMttoMDL" runat="server" AutoGenerateColumns="true"
+                                                Width="100%" Font-Names="Segoe UI"
+                                                OnCustomCallback="xgrdMttoMDL_CustomCallback"
+                                                OnHtmlDataCellPrepared="xgrdMttoMDL_HtmlDataCellPrepared"
+                                                ClientInstanceName="xgrdMttoMDL" Theme="Metropolis">
+                                                <Columns>
+                                                    <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="0" Width="10px">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="especificacion" Caption="Especificación" VisibleIndex="1" Width="23%">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="notas" Caption="Notas" VisibleIndex="2" Width="22%">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="clasificacion" Caption="Clasificación" VisibleIndex="3" Width="22%">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="responsable" Caption="Responsable" VisibleIndex="4" Width="23%">
+                                                    </dx:GridViewDataTextColumn>
+                                                </Columns>
+                                                <Styles>
+                                                    <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
+                                                    <RowHotTrack BackColor="#CEECF5"></RowHotTrack>
+                                                    <Header BackColor="#F2F2F2"></Header>
+                                                </Styles>
+                                                <SettingsPager Mode="ShowPager" PageSize="20" />
+                                                <Settings ShowFilterRow="True" />
+                                                <ClientSideEvents EndCallback="OnMttoxgrdMttoMDLEndCallback" />
+                                            </dx:ASPxGridView>
                                             <br />
                                             <div>
-                                                <button type="button" class="btn btn-primary" onclick="xgrdMtto.PerformCallback('Save');" data-dismiss="modal">Add</button>
+                                                <button type="button" class="btn btn-primary" onclick="AddedMttos();" data-dismiss="modal">Add</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1563,35 +1280,35 @@
                                             <h4>Almacén</h4>
                                         </div>
                                         <div class="modal-body" runat="server">
-                                            <div class="row form-group CeroPM">
-                                                <label class="text-form col-sm-2">Código</label>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txtCodigoAlmacenAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                                </div>
-                                                <label class="text-form col-sm-2">Especificación</label>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txtEspecificacionAlMAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group CeroPM">
-                                                <label class="text-form col-sm-2">Responsable</label>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txtResponsableALMAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                                </div>
-                                                <label class="text-form col-sm-2">Clasificación</label>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txtCasificacionALMAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group CeroPM">
-                                                <label class="text-form col-sm-2">Notas</label>
-                                                <div class="col-sm-10">
-                                                    <asp:TextBox ID="txtNotasALMAdd" TextMode="MultiLine" Columns="3" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                                </div>
-                                            </div>
+                                            <dx:ASPxGridView ID="xgrdAlmacenMDL" runat="server" AutoGenerateColumns="true"
+                                                Width="100%" Font-Names="Segoe UI"
+                                                OnCustomCallback="xgrdAlmacenMDL_CustomCallback"
+                                                OnHtmlDataCellPrepared="xgrdAlmacenMDL_HtmlDataCellPrepared"
+                                                ClientInstanceName="xgrdAlmacenMDL" Theme="Metropolis">
+                                                <Columns>
+                                                    <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="0" Width="10px">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="especificacion" Caption="Especificación" VisibleIndex="1" Width="23%">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="notas" Caption="Notas" VisibleIndex="2" Width="22%">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="clasificacion" Caption="Clasificación" VisibleIndex="3" Width="22%">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="responsable" Caption="Responsable" VisibleIndex="4" Width="23%">
+                                                    </dx:GridViewDataTextColumn>
+                                                </Columns>
+                                                <Styles>
+                                                    <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
+                                                    <RowHotTrack BackColor="#CEECF5"></RowHotTrack>
+                                                    <Header BackColor="#F2F2F2"></Header>
+                                                </Styles>
+                                                <SettingsPager Mode="ShowPager" PageSize="20" />
+                                                <Settings ShowFilterRow="True" />
+                                                <ClientSideEvents EndCallback="OnAlmacenMDLEndCallback" />
+                                            </dx:ASPxGridView>
                                             <br />
                                             <div>
-                                                <button type="button" class="btn btn-primary" onclick="xgrdAlmacen.PerformCallback('Save');" data-dismiss="modal">Add</button>
+                                                <button type="button" class="btn btn-primary" onclick="AddedAlmnes();" data-dismiss="modal">Add</button>
                                             </div>
                                         </div>
                                     </div>

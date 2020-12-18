@@ -29,11 +29,11 @@ namespace ControlProductos
             }
         }
 
-        public List<Mantenimiento> mttos
+        public List<Mtto_Almn> mttos
         {
             get
             {
-                return (List<Mantenimiento>)Session["CurrentMttos"];
+                return (List<Mtto_Almn>)Session["CurrentMttos"];
             }
             set
             {
@@ -41,11 +41,11 @@ namespace ControlProductos
             }
         }
 
-        public List<Almacen> almnes
+        public List<Mtto_Almn> almnes
         {
             get
             {
-                return (List<Almacen>)Session["CurrentAlmnes"];
+                return (List<Mtto_Almn>)Session["CurrentAlmnes"];
             }
             set
             {
@@ -63,6 +63,48 @@ namespace ControlProductos
             {
                 Session["Currentaprbnes"] = value;
             }
+        }
+
+        public List<TipoArticulo> tArticulos
+        {
+            get
+            {
+                return (List<TipoArticulo>)Session["CurrentTArticulo"];
+            }
+            set
+            {
+                Session["CurrentTArticulo"] = value;
+            }
+        }
+
+        public List<MttoAlmn> tMttoAlmn
+        {
+            get
+            {
+                return (List<MttoAlmn>)Session["CurrentTMttoAlmn"];
+            }
+            set
+            {
+                Session["CurrentTMttoAlmn"] = value;
+            }
+        }
+
+        public void ApplyLayoutTipoArticulo()
+        {
+            xgrdTipoArticuloMDL.DataSource = tArticulos;
+            xgrdTipoArticuloMDL.DataBind();
+        }
+
+        public void ApplyLayoutMtto()
+        {
+            xgrdMttoMDL.DataSource = tMttoAlmn.FindAll(item => item.tipo == "M");
+            xgrdMttoMDL.DataBind();
+        }
+
+        public void ApplyLayoutAlmnes()
+        {
+            xgrdAlmacenMDL.DataSource = tMttoAlmn.FindAll(item => item.tipo == "A");
+            xgrdAlmacenMDL.DataBind();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -86,11 +128,23 @@ namespace ControlProductos
             cmbMaquina.DataSource = BMaquina.GetCombo();
             cmbMaquina.DataBind();
 
+            if(cmbMaquina.Items.Count > 0)
+            {
+                ListEditItem li = cmbMaquina.Items[0];
+                li.Selected = true;
+            }
+
             var BSubcategoria1 = new SubCategoria1Da();
             cmbSubCat1.TextField = "Nombre";
             cmbSubCat1.ValueField = "Codigo";
             cmbSubCat1.DataSource = BSubcategoria1.GetCombo();
             cmbSubCat1.DataBind();
+
+            if (cmbSubCat1.Items.Count > 0)
+            {
+                ListEditItem li = cmbSubCat1.Items[0];
+                li.Selected = true;
+            }
 
             var BSubcategoria2 = new SubCategoria2Da();
             cmbSubCat2.TextField = "Nombre";
@@ -98,11 +152,23 @@ namespace ControlProductos
             cmbSubCat2.DataSource = BSubcategoria2.GetCombo();
             cmbSubCat2.DataBind();
 
+            if (cmbSubCat2.Items.Count > 0)
+            {
+                ListEditItem li = cmbSubCat2.Items[0];
+                li.Selected = true;
+            }
+
             var BSubcategoria3 = new SubCategoria3Da();
             cmbSubCat3.TextField = "Nombre";
             cmbSubCat3.ValueField = "Codigo";
             cmbSubCat3.DataSource = BSubcategoria3.GetCombo();
             cmbSubCat3.DataBind();
+
+            if (cmbSubCat3.Items.Count > 0)
+            {
+                ListEditItem li = cmbSubCat3.Items[0];
+                li.Selected = true;
+            }
 
             var BUtilizado = new UtilizadoDa();
             cmbUtilizado.TextField = "Nombre";
@@ -110,11 +176,23 @@ namespace ControlProductos
             cmbUtilizado.DataSource = BUtilizado.GetCombo();
             cmbUtilizado.DataBind();
 
+            if (cmbUtilizado.Items.Count > 0)
+            {
+                ListEditItem li = cmbUtilizado.Items[0];
+                li.Selected = true;
+            }
+
             var BDepartamento = new DepartamentoDa();
             cmbDepa.TextField = "Descripcion";
             cmbDepa.ValueField = "Codigo";
             cmbDepa.DataSource = BDepartamento.GetCombo();
             cmbDepa.DataBind();
+
+            if (cmbDepa.Items.Count > 0)
+            {
+                ListEditItem li = cmbDepa.Items[0];
+                li.Selected = true;
+            }
 
             var BPlan = new PlanDa();
             cmbPlan.TextField = "Nombre";
@@ -122,17 +200,35 @@ namespace ControlProductos
             cmbPlan.DataSource = BPlan.GetCombo();
             cmbPlan.DataBind();
 
+            if (cmbPlan.Items.Count > 0)
+            {
+                ListEditItem li = cmbPlan.Items[0];
+                li.Selected = true;
+            }
+
             var BMarca = new MarcaDa();
             cmbMarca.TextField = "Nombre";
             cmbMarca.ValueField = "Codigo";
             cmbMarca.DataSource = BMarca.GetCombo();
             cmbMarca.DataBind();
 
+            if (cmbMarca.Items.Count > 0)
+            {
+                ListEditItem li = cmbMarca.Items[0];
+                li.Selected = true;
+            }
+
             var BProveedor = new ProveedorDa();
             cmbProveedor.TextField = "Nombre";
             cmbProveedor.ValueField = "Codigo";
             cmbProveedor.DataSource = BProveedor.GetCombo();
             cmbProveedor.DataBind();
+
+            if (cmbProveedor.Items.Count > 0)
+            {
+                ListEditItem li = cmbProveedor.Items[0];
+                li.Selected = true;
+            }
 
             List<Unico> lUnico = new List<Unico>();
             Unico item = new Unico();
@@ -173,13 +269,21 @@ namespace ControlProductos
             cmbComprador.DataSource = BComprador.GetCombo();
             cmbComprador.DataBind();
 
+            var tArtc = new TipoArticuloDa();
+            var tMttoD = new MttoAlmnDa();
+            List<TipoArticulo> lTipoArt = tArtc.GetCatalog("", "", true);
+            List<MttoAlmn> lmtto = tMttoD.GetCatalog("", "", true);
+            tArticulos = lTipoArt;
+            tMttoAlmn = lmtto;
+            ApplyLayoutTipoArticulo();
+            ApplyLayoutMtto();
+            ApplyLayoutAlmnes();
             if (!IsPostBack)
             {
                 limpiarModalAprnes();
                 int ctrlProdsID = Convert.ToInt32(Session["ctrlProdsID"]);
                 var BctrlProd = new ControlProductosda();
                 List<Entity.ControlProductos> oList = BctrlProd.GetCtrlProducto(ctrlProdsID.ToString());
-
                 if (ctrlProdsID > 0)
                 {
                     foreach (Entity.ControlProductos ctrlP in oList)
@@ -302,12 +406,12 @@ namespace ControlProductos
                             }
                             lblTotal.Text = ctrlP.total.ToString("0.##");
 
-                            mttos = new List<Mantenimiento>();
+                            mttos = new List<Mtto_Almn>();
                             mttos = ctrlP.mantenimientos;
                             xgrdMtto.DataSource = ctrlP.mantenimientos;
                             xgrdMtto.DataBind();
 
-                            almnes = new List<Almacen>();
+                            almnes = new List<Mtto_Almn>();
                             almnes = ctrlP.almacenes;
                             xgrdAlmacen.DataSource = ctrlP.almacenes;
                             xgrdAlmacen.DataBind();
@@ -360,8 +464,52 @@ namespace ControlProductos
                     lblDocFechaSol.Text = date.ToString("dd/MM/yyyy HH:mm");
                     remplazaOtro.Text = "";
                     tiposArticulo = new List<_tipoArticulo>();
-                    mttos = new List<Mantenimiento>();
-                    almnes = new List<Almacen>();
+                    mttos = new List<Mtto_Almn>();
+                    almnes = new List<Mtto_Almn>();
+
+
+                    foreach (TipoArticulo TipoArt in lTipoArt)
+                    {
+                        _tipoArticulo n = new _tipoArticulo();
+                        n.ctrlPTipoArticuloID = 0;
+                        n.noDocumento = "";
+                        n.codigoTipoArticulo = TipoArt.codigoTipoArticulo;
+                        n.tipoArticulo = TipoArt.tipoArticulo;
+                        n.M = TipoArt.M;
+                        n.N = TipoArt.N;
+                        n.comentarios = TipoArt.comentarios;
+                        tiposArticulo.Add(n);
+                    }
+                    xgrdTipoArticulo.DataSource = tiposArticulo;
+                    xgrdTipoArticulo.DataBind();
+
+                    var tMtto = new MttoAlmnDa();
+                    List<MttoAlmn> ltMtto = tMtto.GetCatalog("", "", true);
+                    foreach (MttoAlmn mtto in ltMtto)
+                    {
+                        Mtto_Almn n = new Mtto_Almn();
+                        n.ctrlPMantenimientoID = 0;
+                        n.noDocumento = "";
+                        n.codigoMttoAlmn = mtto.codigoMttoAlmn;
+                        n.especificacion = mtto.especificacion;
+                        n.notas = mtto.notas;
+                        n.clasificacion = mtto.clasificacion;
+                        n.responsable = mtto.responsable;
+                        n.tipo = mtto.tipo;
+                        if(mtto.tipo == "M")
+                        {
+                            mttos.Add(n);
+                        }
+                        else
+                        {
+                            almnes.Add(n);
+                        }
+                    }
+                    xgrdMtto.DataSource = mttos;
+                    xgrdMtto.DataBind();
+                    xgrdAlmacen.DataSource = almnes;
+                    xgrdAlmacen.DataBind();
+
 
                     txtDescripcion1.Text = "";
                     txtDescripcion2.Text = "";
@@ -408,6 +556,9 @@ namespace ControlProductos
                 xgrdAlmacen.DataBind();
                 xgrdAprobaciones.DataSource = aprbnes;
                 xgrdAprobaciones.DataBind();
+                ApplyLayoutTipoArticulo();
+                ApplyLayoutMtto();
+                ApplyLayoutAlmnes();
             }
         }
 
@@ -488,7 +639,7 @@ namespace ControlProductos
             ctrlProd.CodigoMarca = cmbMarca.SelectedItem.Value.ToString();
             ctrlProd.CodigoProveedor = cmbProveedor.SelectedItem.Value.ToString();
             ctrlProd.esUnico = Convert.ToBoolean(cmbUnico.SelectedItem.Value);
-            ctrlProd.fechaCotizacion = (xDateFechaCot.Value.ToString() == "")?DateTime.Now.ToString("yyyyMMdd"): xDateFechaCot.Value.ToString();
+            ctrlProd.fechaCotizacion = (xDateFechaCot.Value.ToString() == "")?DateTime.Now.ToString("yyyyMMdd"): xDateFechaCot.Date.ToString("yyyyMMdd");
             ctrlProd.precioUnitario = (txtPrecioU.Text == "") ? 0 : Convert.ToDecimal(txtPrecioU.Text);
             ctrlProd.diasEntrega = (txtDiasEntrega.Text == "") ? 0 : Convert.ToInt32(txtDiasEntrega.Text);
             ctrlProd.Codigomoneda = cmbMoneda.SelectedItem.Value.ToString();
@@ -506,6 +657,18 @@ namespace ControlProductos
             ctrlProd.comentarios = txtComentarios.Text;
             ctrlProd.codigo_sts_Prods = lblcodigoSts.Text;
 
+            foreach (_tipoArticulo item in tiposArticulo)
+            {
+                item.noDocumento = lblnDoc.Text;
+            }
+            foreach (Mtto_Almn item in mttos)
+            {
+                item.noDocumento = lblnDoc.Text;
+            }
+            foreach (Mtto_Almn item in almnes)
+            {
+                item.noDocumento = lblnDoc.Text;
+            }
             ctrlProd.tiposArticulo = tiposArticulo;
             ctrlProd.mantenimientos = mttos;
             ctrlProd.almacenes = almnes;
@@ -560,50 +723,6 @@ namespace ControlProductos
             xgrdTipoArticulo.JSProperties["cpAlertMessage"] = string.Empty;
             var pars = e.Parameters;
 
-            string noDocumento = lblnDoc.Text;
-            string codigo = txtCodigoArticuloAdd.Text;
-            string tipo = txtTipoArticuloAdd.Text;
-            string m = txtMAdd.Text;
-            string n = txtNAdd.Text;
-            string comentarios = txtComentariosAdd.Text;
-
-
-            if (pars == "Save" && (tipo != "" && codigo != ""))
-            {
-                bool bFound = false;
-                _tipoArticulo tipoArt = new _tipoArticulo();
-
-                foreach (_tipoArticulo item in tiposArticulo)
-                {
-                    if (item.codigoTipoArticulo == codigo)
-                    {
-                        bFound = true;
-                        break;
-                    }
-                }
-
-                if (bFound == true)
-                {
-                    xgrdTipoArticulo.JSProperties["cpAlertMessage"] = "Exist";
-                }
-                else
-                {
-
-                    tipoArt.tipoArticuloID = 0;
-                    tipoArt.noDocumento = noDocumento;
-                    tipoArt.codigoTipoArticulo = codigo;
-                    tipoArt.tipoArticulo = tipo;
-                    tipoArt.M = m;
-                    tipoArt.N = n;
-                    tipoArt.comentarios = comentarios;
-                    tiposArticulo.Add(tipoArt);
-                }
-            }
-            else if (pars == "Save" && (tipo == "" && codigo == ""))
-            {
-                xgrdTipoArticulo.JSProperties["cpAlertMessage"] = "SelectOne";
-            }
-
             if (pars == "Delete")
             {
                 xgrdTipoArticulo.DataSource = null;
@@ -629,12 +748,6 @@ namespace ControlProductos
                 xgrdTipoArticulo.DataSource = tiposArticulo;
             }
 
-            txtCodigoArticuloAdd.Text = "";
-            txtTipoArticuloAdd.Text = "";
-            txtMAdd.Text = "";
-            txtNAdd.Text = "";
-            txtComentariosAdd.Text = "";
-
             xgrdTipoArticulo.DataBind();
         }
 
@@ -642,7 +755,7 @@ namespace ControlProductos
         {
             if (e.DataColumn.Name == "CheckID")
             {
-                var id = e.GetValue("tipoArticuloID").ToString() + "-" + e.GetValue("codigoTipoArticulo").ToString();
+                var id = e.GetValue("ctrlPTipoArticuloID").ToString() + "-" + e.GetValue("codigoTipoArticulo").ToString();
 
                 e.Cell.Text = string.Format("<input type='checkbox' class='chkArt' id='chk{0}'>", id);
             }
@@ -652,49 +765,6 @@ namespace ControlProductos
         {
             xgrdMtto.JSProperties["cpAlertMessage"] = string.Empty;
             var pars = e.Parameters;
-
-            string noDocumento = lblnDoc.Text;
-            string codigo = txtCodigoMttoAdd.Text;
-            string especificacion = txtEspecificacionAdd.Text;
-            string responsable = txtResponsableAdd.Text;
-            string clasif = txtCasificacionAdd.Text;
-            string notas = txtNotasAdd.Text;
-
-            if (pars == "Save" && (especificacion != "" && codigo != ""))
-            {
-                bool bFound = false;
-                Mantenimiento mtto = new Mantenimiento();
-
-                foreach (Mantenimiento item in mttos)
-                {
-                    if (item.codigoMantenimiento == codigo)
-                    {
-                        bFound = true;
-                        break;
-                    }
-                }
-
-                if (bFound == true)
-                {
-                    xgrdMtto.JSProperties["cpAlertMessage"] = "Exist";
-                }
-                else
-                {
-
-                    mtto.MantenimientoID = 0;
-                    mtto.noDocumento = noDocumento;
-                    mtto.codigoMantenimiento = codigo;
-                    mtto.especificacion = especificacion;
-                    mtto.notas = notas;
-                    mtto.clasificacion = clasif;
-                    mtto.responsable = responsable;
-                    mttos.Add(mtto);
-                }
-            }
-            else if (pars == "Save" && (especificacion == "" && codigo == ""))
-            {
-                xgrdMtto.JSProperties["cpAlertMessage"] = "SelectOne";
-            }
 
             if (pars == "Delete")
             {
@@ -714,7 +784,7 @@ namespace ControlProductos
                         string[] datos = valor.Split('-');
                         string idmtto = datos[0];
                         string folio = datos[1];
-                        mttos = mttos.FindAll(p => p.codigoMantenimiento != folio);
+                        mttos = mttos.FindAll(p => p.codigoMttoAlmn != folio);
                     }
                 }
 
@@ -728,7 +798,7 @@ namespace ControlProductos
         {
             if (e.DataColumn.Name == "CheckID")
             {
-                var id = e.GetValue("MantenimientoID").ToString() + "-" + e.GetValue("codigoMantenimiento").ToString();
+                var id = e.GetValue("ctrlPMantenimientoID").ToString() + "-" + e.GetValue("codigoMttoAlmn").ToString();
 
                 e.Cell.Text = string.Format("<input type='checkbox' class='chkMtto' id='chk{0}'>", id);
             }
@@ -738,49 +808,6 @@ namespace ControlProductos
         {
             xgrdAlmacen.JSProperties["cpAlertMessage"] = string.Empty;
             var pars = e.Parameters;
-
-            string noDocumento = lblnDoc.Text;
-            string codigo = txtCodigoAlmacenAdd.Text;
-            string especificacion = txtEspecificacionAlMAdd.Text;
-            string responsable = txtResponsableALMAdd.Text;
-            string clasif = txtCasificacionALMAdd.Text;
-            string notas = txtNotasALMAdd.Text;
-
-            if (pars == "Save" && (especificacion != "" && codigo != ""))
-            {
-                bool bFound = false;
-                Almacen almn = new Almacen();
-
-                foreach (Almacen item in almnes)
-                {
-                    if (item.codigoAlmacen == codigo)
-                    {
-                        bFound = true;
-                        break;
-                    }
-                }
-
-                if (bFound == true)
-                {
-                    xgrdAlmacen.JSProperties["cpAlertMessage"] = "Exist";
-                }
-                else
-                {
-
-                    almn.AlmacenID = 0;
-                    almn.noDocumento = noDocumento;
-                    almn.codigoAlmacen = codigo;
-                    almn.especificacion = especificacion;
-                    almn.notas = notas;
-                    almn.clasificacion = clasif;
-                    almn.responsable = responsable;
-                    almnes.Add(almn);
-                }
-            }
-            else if (pars == "Save" && (especificacion == "" && codigo == ""))
-            {
-                xgrdAlmacen.JSProperties["cpAlertMessage"] = "SelectOne";
-            }
 
             if (pars == "Delete")
             {
@@ -798,9 +825,9 @@ namespace ControlProductos
                     {
                         string valor = d.Replace("chk", "");
                         string[] datos = valor.Split('-');
-                        string idalmn = datos[0];
+                        string idmtto = datos[0];
                         string folio = datos[1];
-                        almnes = almnes.FindAll(p => p.codigoAlmacen != folio);
+                        almnes = almnes.FindAll(p => p.codigoMttoAlmn != folio);
                     }
                 }
 
@@ -814,7 +841,7 @@ namespace ControlProductos
         {
             if (e.DataColumn.Name == "CheckID")
             {
-                var id = e.GetValue("AlmacenID").ToString() + "-" + e.GetValue("codigoAlmacen").ToString();
+                var id = e.GetValue("ctrlPMantenimientoID").ToString() + "-" + e.GetValue("codigoMttoAlmn").ToString();
 
                 e.Cell.Text = string.Format("<input type='checkbox' class='chkAlmn' id='chk{0}'>", id);
             }
@@ -956,6 +983,190 @@ namespace ControlProductos
             else
             {
                 ASPxCallbackPanel1.JSProperties["cpAlertMessage"] = "errror";
+            }
+        }
+
+        protected void xgrdTipoArticuloMDL_CustomCallback(object sender, ASPxGridViewCustomCallbackEventArgs e)
+        {
+            xgrdTipoArticuloMDL.JSProperties["cpAlertMessage"] = string.Empty;
+            var pars = e.Parameters;
+
+            var Valores = e.Parameters;
+            string[] data = Valores.Split(',');
+
+            tiposArticulo.Clear();
+            foreach (string d in data)
+            {
+                string valor = d.Replace("chk", "");
+                string[] datos = valor.Split('-');
+                string codigo = datos[0];
+                List<TipoArticulo> t = tArticulos.FindAll(p => p.codigoTipoArticulo == codigo);
+                foreach (TipoArticulo item in t)
+                {
+                    List<_tipoArticulo> t2 = tiposArticulo.FindAll(p => p.codigoTipoArticulo == item.codigoTipoArticulo);
+                    if (t2.Count == 0)
+                    {
+                        _tipoArticulo n = new _tipoArticulo();
+                        n.ctrlPTipoArticuloID = 0;
+                        n.noDocumento = "";
+                        n.codigoTipoArticulo = item.codigoTipoArticulo;
+                        n.tipoArticulo = item.tipoArticulo;
+                        n.M = item.M;
+                        n.N = item.N;
+                        n.comentarios = item.comentarios;
+                        tiposArticulo.Add(n);
+                    }
+                }
+            }
+
+            xgrdTipoArticuloMDL.JSProperties["cpAlertMessage"] = "Add";
+        }
+
+        protected void xgrdTipoArticuloMDL_HtmlDataCellPrepared(object sender, ASPxGridViewTableDataCellEventArgs e)
+        {
+            if (e.DataColumn.Name == "CheckID")
+            {
+                var id = e.GetValue("codigoTipoArticulo").ToString();
+                bool rel = false;
+                List<_tipoArticulo> tipos = tiposArticulo.FindAll(item => item.codigoTipoArticulo == id);
+                if(tipos.Count > 0)
+                {
+                    rel = true;
+                }
+                if (rel)
+                {
+                    e.Cell.Text = string.Format("<input type='checkbox' class='chkArtMDL' id='chk{0}' checked>", id);
+                }
+                else
+                {
+                    e.Cell.Text = string.Format("<input type='checkbox' class='chkArtMDL' id='chk{0}'>", id);
+                }
+            }
+        }
+
+        protected void xgrdMttoMDL_CustomCallback(object sender, ASPxGridViewCustomCallbackEventArgs e)
+        {
+            xgrdMttoMDL.JSProperties["cpAlertMessage"] = string.Empty;
+            var pars = e.Parameters;
+
+            var Valores = e.Parameters;
+            string[] data = Valores.Split(',');
+
+            mttos.Clear();
+            foreach (string d in data)
+            {
+                string valor = d.Replace("chk", "");
+                string[] datos = valor.Split('-');
+                string codigo = datos[0];
+                string tipo = datos[1];
+                if (tipo == "M")
+                {
+                    List<MttoAlmn> t = tMttoAlmn.FindAll(p => p.codigoMttoAlmn == codigo && p.tipo == tipo);
+                    foreach (MttoAlmn item in t)
+                    {
+                        List<Mtto_Almn> t2 = mttos.FindAll(p => p.codigoMttoAlmn == item.codigoMttoAlmn);
+                        if (t2.Count == 0)
+                        {
+                            Mtto_Almn n = new Mtto_Almn();
+                            n.ctrlPMantenimientoID = 0;
+                            n.noDocumento = "";
+                            n.codigoMttoAlmn = item.codigoMttoAlmn;
+                            n.especificacion = item.especificacion;
+                            n.notas = item.notas;
+                            n.clasificacion = item.clasificacion;
+                            n.responsable = item.responsable;
+                            n.tipo = item.tipo;
+                            mttos.Add(n);
+                        }
+                    }
+                }
+            }
+
+            xgrdMttoMDL.JSProperties["cpAlertMessage"] = "Add";
+        }
+
+        protected void xgrdMttoMDL_HtmlDataCellPrepared(object sender, ASPxGridViewTableDataCellEventArgs e)
+        {
+            if (e.DataColumn.Name == "CheckID")
+            {
+                var id = e.GetValue("codigoMttoAlmn").ToString() + "-" + e.GetValue("tipo").ToString();
+                bool rel = false;
+                List<Mtto_Almn> _mttos = mttos.FindAll(item => item.codigoMttoAlmn == e.GetValue("codigoMttoAlmn").ToString());
+                if (_mttos.Count > 0)
+                {
+                    rel = true;
+                }
+                if (rel)
+                {
+                    e.Cell.Text = string.Format("<input type='checkbox' class='chkMttoMDL' id='chk{0}' checked>", id);
+                }
+                else
+                {
+                    e.Cell.Text = string.Format("<input type='checkbox' class='chkMttoMDL' id='chk{0}'>", id);
+                }
+            }
+        }
+
+        protected void xgrdAlmacenMDL_CustomCallback(object sender, ASPxGridViewCustomCallbackEventArgs e)
+        {
+            xgrdAlmacenMDL.JSProperties["cpAlertMessage"] = string.Empty;
+            var pars = e.Parameters;
+
+            var Valores = e.Parameters;
+            string[] data = Valores.Split(',');
+
+            almnes.Clear();
+            foreach (string d in data)
+            {
+                string valor = d.Replace("chk", "");
+                string[] datos = valor.Split('-');
+                string codigo = datos[0];
+                string tipo = datos[1];
+                if (tipo == "A")
+                {
+                    List<MttoAlmn> t = tMttoAlmn.FindAll(p => p.codigoMttoAlmn == codigo && p.tipo == tipo);
+                    foreach (MttoAlmn item in t)
+                    {
+                        List<Mtto_Almn> t2 = almnes.FindAll(p => p.codigoMttoAlmn == item.codigoMttoAlmn);
+                        if (t2.Count == 0)
+                        {
+                            Mtto_Almn n = new Mtto_Almn();
+                            n.ctrlPMantenimientoID = 0;
+                            n.noDocumento = "";
+                            n.codigoMttoAlmn = item.codigoMttoAlmn;
+                            n.especificacion = item.especificacion;
+                            n.notas = item.notas;
+                            n.clasificacion = item.clasificacion;
+                            n.responsable = item.responsable;
+                            n.tipo = item.tipo;
+                            almnes.Add(n);
+                        }
+                    }
+                }
+            }
+
+            xgrdAlmacenMDL.JSProperties["cpAlertMessage"] = "Add";
+        }
+
+        protected void xgrdAlmacenMDL_HtmlDataCellPrepared(object sender, ASPxGridViewTableDataCellEventArgs e)
+        {
+            if (e.DataColumn.Name == "CheckID")
+            {
+                var id = e.GetValue("codigoMttoAlmn").ToString() + "-" + e.GetValue("tipo").ToString();
+                bool rel = false;
+                List<Mtto_Almn> _almnes = almnes.FindAll(item => item.codigoMttoAlmn == e.GetValue("codigoMttoAlmn").ToString());
+                if (_almnes.Count > 0)
+                {
+                    rel = true;
+                }
+                if (rel)
+                {
+                    e.Cell.Text = string.Format("<input type='checkbox' class='chkAlmnMDL' id='chk{0}' checked>", id);
+                }
+                else
+                {
+                    e.Cell.Text = string.Format("<input type='checkbox' class='chkAlmnMDL' id='chk{0}'>", id);
+                }
             }
         }
     }
