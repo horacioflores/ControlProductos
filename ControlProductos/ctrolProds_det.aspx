@@ -678,7 +678,7 @@
             <div class="row CeroPM">
                 <div class="col-xs-12">
                     <div class="col-xs-12 col-sm-8 form-group BGFormularioTitulo">
-                        <h2 class="HeaderSpanNombreFormulario">ALTA DE ARTÍCULO</h2>
+                        <h2 class="HeaderSpanNombreFormulario">SOLICITUD DE PROCESO MRO</h2>
                         <asp:Label ID="lblcodigoSts" runat="server" CssClass="hidden"></asp:Label>
                         <asp:Literal ID="ltlSts" runat="server"></asp:Literal>
 <%--                        <span id="spanStatus" class="alert btn-info docEstatus" hidden><i class="glyphicon glyphicon-edit" style="padding-right:5px;"></i>Abierto</span><span style="position: absolute;left: 250px;color:#FBFBFB;padding:2px 0px;" hidden>:Pendiente por el autor para terminar la captura</span>
@@ -723,13 +723,42 @@
                         </div>
                         <div class="panel-body">
                             <div class="row form-group CeroPM">
+                                <label class="text-form col-sm-2">Operación</label>
+                                <div class="col-sm-3">
+                                    <asp:RadioButton ID="rbAlta" runat="server" GroupName="operacion" Text="&nbsp;Alta" onchange="ASPxCallbackPanel2.PerformCallback('rbAlta');" />&nbsp;
+                                    <asp:RadioButton ID="rbModificacion" runat="server" GroupName="operacion" Text="&nbsp;Modificación" onchange="ASPxCallbackPanel2.PerformCallback('rbModificacion');" />&nbsp;
+                                    <asp:RadioButton ID="rbBaja" runat="server" GroupName="operacion" Text="&nbsp;Baja" onchange="ASPxCallbackPanel2.PerformCallback('rbBaja');" />
+                                </div>
+                                <label id="lblProd" runat="server" class="text-form col-sm-2">Selecciona Producto</label>
+                                <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbProducto" runat="server" IncrementalFilteringMode="Contains" 
+                                    FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                    PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                    <ValidationSettings>
+                                        <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                    </ValidationSettings>
+                                    <ClientSideEvents/>
+                                    <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                </dx:ASPxComboBox>
+                            </div>
+                            <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-2">Reemplaza a otro</label>
                                 <div class="col-sm-2">
-                                    <asp:TextBox ID="remplazaOtro" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <asp:RadioButton ID="rbSi" runat="server" GroupName="Reemplaza" Text="&nbsp;Si" onchange="ASPxCallbackPanel2.PerformCallback('rbSi');"/>&nbsp;
+                                    <asp:RadioButton ID="rbNo" runat="server" GroupName="Reemplaza" Text="&nbsp;No"  onchange="ASPxCallbackPanel2.PerformCallback('rbNo');"/>&nbsp;
+                                    <%--<asp:TextBox ID="remplazaOtro" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>--%>
                                 </div>
-                                <label class="text-form col-sm-2">Cuál artículo</label>
+                                <label id="lblcual" runat="server" class="text-form col-sm-2">Cuál artículo</label>
                                 <div class="col-sm-6">
-                                    <asp:TextBox ID="cualArticulo" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbCualArticulo" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
+                                    <%--<asp:TextBox ID="cualArticulo" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>--%>
                                 </div>
                             </div>
                             <fieldset style="padding:10px;border: 1px solid #B5D2EA;border-radius:5px;">

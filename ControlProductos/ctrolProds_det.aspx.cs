@@ -122,6 +122,17 @@ namespace ControlProductos
         private void init()
         {
 
+            var BCtrlProd = new ControlProductosda();
+            cmbProducto.TextField = "codigoYNombre";
+            cmbProducto.ValueField = "codigoArticulo";
+            cmbProducto.DataSource = BCtrlProd.GetCombo();
+            cmbProducto.DataBind();
+
+            cmbCualArticulo.TextField = "codigoYNombre";
+            cmbCualArticulo.ValueField = "codigoArticulo";
+            cmbCualArticulo.DataSource = BCtrlProd.GetCombo();
+            cmbCualArticulo.DataBind();
+
             var BMaquina = new MaquinaDa();
             cmbMaquina.TextField = "Nombre";
             cmbMaquina.ValueField = "Codigo";
@@ -349,7 +360,56 @@ namespace ControlProductos
                             lblnDoc.Text = ctrlP.noDocumento;
                             lblDocSolicitante.Text = ctrlP.usuario;
                             lblDocFechaSol.Text = ctrlP.fechaSolicitud;
-                            remplazaOtro.Text = ctrlP.remplazaOtro;
+                            rbAlta.Enabled = false;
+                            rbModificacion.Enabled = false;
+                            rbBaja.Enabled = false;
+                            cmbProducto.Enabled = false;
+                            switch (ctrlP.operacion)
+                            {
+                                case "ALTA":
+                                    rbAlta.Checked = true;
+                                    lblProd.Visible = false;
+                                    cmbProducto.Visible = false;
+                                    break;
+                                case "MODIFICACIÓN":
+                                    rbModificacion.Checked = true;
+                                    lblProd.Visible = true;
+                                    cmbProducto.Visible = true;
+                                    break;
+                                case "BAJA":
+                                    rbBaja.Checked = true;
+                                    lblProd.Visible = true;
+                                    cmbProducto.Visible = true;
+                                    break;
+                            }
+                            ListEditItem oItProd = cmbProducto.Items.FindByValue(ctrlP.producto);
+                            if (oItProd != null)
+                            {
+                                oItProd.Selected = true;
+                            }
+
+                            rbSi.Enabled = false;
+                            rbNo.Enabled = false;
+                            cmbCualArticulo.Enabled = false;
+                            switch (ctrlP.remplazaOtro)
+                            {
+                                case "Si":
+                                    rbSi.Checked = true;
+                                    lblcual.Visible = true;
+                                    cmbCualArticulo.Visible = true;
+                                    break;
+                                case "No":
+                                    rbNo.Checked = true;
+                                    lblcual.Visible = false;
+                                    cmbCualArticulo.Visible = false;
+                                    break;
+                            }
+
+                            ListEditItem oItcual= cmbCualArticulo.Items.FindByValue(ctrlP.cualArticulo);
+                            if (oItcual != null)
+                            {
+                                oItcual.Selected = true;
+                            }
 
                             ListEditItem oItMaquina = cmbMaquina.Items.FindByValue(ctrlP.CodigoMaquina);
                             if (oItMaquina != null)
@@ -492,7 +552,12 @@ namespace ControlProductos
                     lblnDoc.Text = "";
                     lblDocSolicitante.Text = LoginInfo.CurrentUsuario.NombreCompleto;
                     lblDocFechaSol.Text = date.ToString("dd/MM/yyyy HH:mm");
-                    remplazaOtro.Text = "";
+                    rbAlta.Checked = true;
+                    lblProd.Visible = false;
+                    cmbProducto.Visible = false;
+                    rbNo.Checked = true;
+                    lblcual.Visible = false;
+                    cmbCualArticulo.Visible = false;
                     tiposArticulo = new List<_tipoArticulo>();
                     mttos = new List<Mtto_Almn>();
                     almnes = new List<Mtto_Almn>();
@@ -642,6 +707,21 @@ namespace ControlProductos
 
         protected string Save()
         {
+            string remplazaOtro = (rbSi.Checked) ? "Si" : "No";
+            string operacion;
+            if (rbAlta.Checked)
+            {
+                operacion = "ALTA";
+            }
+            else if (rbModificacion.Checked)
+            {
+                operacion = "MODIFICACIÓN";
+            }
+            else
+            {
+                operacion = "BAJA";
+            }
+
             int ctrlProdsID = Convert.ToInt32(Session["ctrlProdsID"]);
             Entity.ControlProductos ctrlProd = new Entity.ControlProductos();
 
@@ -649,8 +729,8 @@ namespace ControlProductos
             ctrlProd.noDocumento = lblnDoc.Text;
             ctrlProd.codigoSolicitante = LoginInfo.CurrentUsuario.Codigo;
             ctrlProd.fechaSolicitud = lblDocFechaSol.Text.Substring(6, 4) + lblDocFechaSol.Text.Substring(3, 2) + lblDocFechaSol.Text.Substring(0, 2) + " " + lblDocFechaSol.Text.Substring(11, 5);
-            ctrlProd.remplazaOtro = remplazaOtro.Text;
-            ctrlProd.cualArticulo = cualArticulo.Text;
+            ctrlProd.remplazaOtro = remplazaOtro;
+            ctrlProd.cualArticulo = (remplazaOtro == "Si")?cmbCualArticulo.SelectedItem.Value.ToString():"";
             ctrlProd.CodigoMaquina = cmbMaquina.SelectedItem.Value.ToString();
             ctrlProd.CodigoSubcategoria1 = cmbSubCat1.SelectedItem.Value.ToString();
             ctrlProd.CodigoSubcategoria2 = cmbSubCat2.SelectedItem.Value.ToString();
@@ -686,6 +766,8 @@ namespace ControlProductos
             ctrlProd.codigoArticulo = txtCodigoArticulo.Text;
             ctrlProd.comentarios = txtComentarios.Text;
             ctrlProd.codigo_sts_Prods = lblcodigoSts.Text;
+            ctrlProd.operacion = operacion;
+            ctrlProd.producto = cmbProducto.SelectedItem.Value.ToString();
 
             foreach (_tipoArticulo item in tiposArticulo)
             {
@@ -1211,12 +1293,12 @@ namespace ControlProductos
             {
                 if (pS[0] == "Save")
                 {
-                    if(lblnDoc.Text == "")
+                    if (lblnDoc.Text == "")
                     {
                         ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "InputNoDoc";
                         return;
                     }
-                    if(cmbMaquina.SelectedItem == null)
+                    if (cmbMaquina.SelectedItem == null)
                     {
                         ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectMachine";
                         return;
@@ -1266,7 +1348,7 @@ namespace ControlProductos
                         ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectUnique";
                         return;
                     }
-                    if(xDateFechaCot.Date == new DateTime(1,1,1))
+                    if (xDateFechaCot.Date == new DateTime(1, 1, 1))
                     {
                         ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectQuoteDate";
                         return;
@@ -1295,7 +1377,68 @@ namespace ControlProductos
                     ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = Save();
                     return;
                 }
+                else if (pS[0] == "rbAlta" || pS[0] == "rbModificacion" || pS[0] == "rbBaja")
+                {
+                    switch (pS[0])
+                    {
+                        case "rbAlta":
+                            lblProd.Visible = false;
+                            cmbProducto.Visible = false;
+                            break;
+                        default:
+                            lblProd.Visible = true;
+                            cmbProducto.Visible = true;
+                            break;
+                    }
+                }
+                else if (pS[0] == "rbSi" || pS[0] == "rbNo")
+                {
+                    switch (pS[0])
+                    {
+                        case "rbSi":
+                            lblcual.Visible = true;
+                            cmbCualArticulo.Visible = true;
+                            break;
+                        default:
+                            lblcual.Visible = false;
+                            cmbCualArticulo.Visible = false;
+                            break;
+                    }
+                }
             }
         }
+
+        //protected void rbOperacion_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    RadioButton rb = (RadioButton)sender;
+        //    if (rb.Checked)
+        //    {
+        //        switch (rb.ID)
+        //        {
+        //            case "rbAlta":
+        //                lblProd.Visible = false;
+        //                cmbProducto.Visible = false;
+        //                break;
+        //            default:
+        //                lblProd.Visible = true;
+        //                cmbProducto.Visible = true;
+        //                break;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        switch (rb.ID)
+        //        {
+        //            case "rbAlta":
+        //                lblProd.Visible = true;
+        //                cmbProducto.Visible = true;
+        //                break;
+        //            default:
+        //                lblProd.Visible = false;
+        //                cmbProducto.Visible = false;
+        //                break;
+        //        }
+        //    }
+        //}
     }
 }

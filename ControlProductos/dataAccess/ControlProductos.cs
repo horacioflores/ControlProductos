@@ -17,6 +17,13 @@ namespace ControlProductos.dataAccess
             return regreso.GetCtrlProdResult;
         }
 
+        public List<Entity.ControlProductos> GetCombo()
+        {
+            string json = methodGet("GetCtrlProdCombo");
+            Entity.GetCtrlProdComboResult_ regreso = JsonConvert.DeserializeObject<Entity.GetCtrlProdComboResult_>(json);
+            return regreso.GetCtrlProdComboResult;
+        }
+
         public List<Entity.ControlProductos> GetCtrlProducto(string ctrlProdsID)
         {
             string json = methodGet("GetCtrlProducto/" + ctrlProdsID);

@@ -10,6 +10,11 @@ namespace ControlProductos.Entity
         public List<ControlProductos> GetCtrlProdResult { get; set; }
     }
 
+    public class GetCtrlProdComboResult_
+    {
+        public List<ControlProductos> GetCtrlProdComboResult { get; set; }
+    }
+
     public class GetCtrlProductoResult_
     {
         public List<ControlProductos> GetCtrlProductoResult { get; set; }
@@ -71,6 +76,11 @@ namespace ControlProductos.Entity
         public string sts_Prods { get; set; }
         public string usuario { get; set; }
         public string ModFecha { get; set; }
+        public string operacion { get; set; }
+        public int version { get; set; }
+        public bool vigente { get; set; }
+        public string producto { get; set; }
+        public string codigoYNombre { get; set; }
         public List<_tipoArticulo> tiposArticulo { get; set; }
         public List<Mtto_Almn> mantenimientos { get; set; }
         public List<Mtto_Almn> almacenes { get; set; }
