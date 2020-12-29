@@ -290,22 +290,63 @@
             OnDetailRowExpandedChanged="xgrdProds_DetailRowExpandedChanged"
             ClientInstanceName="grid"
             Theme="Metropolis">
+            <Settings HorizontalScrollBarMode="Auto"/>
             <Columns>
                 <dx:GridViewDataTextColumn FieldName="ctrlProdsID" Visible="false" Caption="Identifier" VisibleIndex="0">
                 </dx:GridViewDataTextColumn>
                 <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="1" Width="1%">
                 </dx:GridViewDataTextColumn>
-                <dx:GridViewDataTextColumn FieldName="noDocumento" VisibleIndex="3" Caption="Document Number">
-                </dx:GridViewDataTextColumn>     
-                <dx:GridViewDataTextColumn FieldName="codigoSolicitante" VisibleIndex="4" Caption="Applicant">
-                </dx:GridViewDataTextColumn>    
-                <dx:GridViewDataTextColumn FieldName="fechaSolicitud" VisibleIndex="6" Caption="Request Date">
-                </dx:GridViewDataTextColumn>                                   
-                <dx:GridViewDataColumn FieldName="ctrlProdsID" VisibleIndex="10"  Caption="Actions" CellStyle-HorizontalAlign="Left">
+                <dx:GridViewDataColumn FieldName="ctrlProdsID" VisibleIndex="2"  Caption="Actions" CellStyle-HorizontalAlign="Left">
                       <DataItemTemplate>
                           <asp:ImageButton ID="imgEditar" runat="server" ImageUrl="~/Assets/images/layout_edit.png"  OnClick="imgEditar_Click" CommandArgument='<%# Eval("ctrlProdsID") %>' />
                       </DataItemTemplate>
                 </dx:GridViewDataColumn>
+                <dx:GridViewDataTextColumn FieldName="noDocumento" VisibleIndex="3" Caption="Document Number">
+                </dx:GridViewDataTextColumn>     
+                <dx:GridViewDataTextColumn FieldName="codigoArticulo" VisibleIndex="4" Caption="Item code">
+                </dx:GridViewDataTextColumn>  
+                <dx:GridViewDataTextColumn FieldName="codigoSolicitante" VisibleIndex="5" Caption="Applicant">
+                </dx:GridViewDataTextColumn>    
+                <dx:GridViewDataTextColumn FieldName="fechaSolicitud" VisibleIndex="6" Caption="Request Date">
+                </dx:GridViewDataTextColumn> 
+                <dx:GridViewDataTextColumn FieldName="cualArticulo" VisibleIndex="7" Caption="Request">
+                </dx:GridViewDataTextColumn> 
+                <dx:GridViewDataTextColumn FieldName="sts_Prods" VisibleIndex="8" Caption="Status">
+                </dx:GridViewDataTextColumn>  
+                <dx:GridViewDataTextColumn FieldName="CodigoMaquina" VisibleIndex="9" Caption="Associated Machine">
+                </dx:GridViewDataTextColumn>     
+                <dx:GridViewDataTextColumn FieldName="CodigoUtilizado" VisibleIndex="10" Caption="Used">
+                </dx:GridViewDataTextColumn> 
+                <dx:GridViewDataTextColumn FieldName="descripcionUno" VisibleIndex="11" Caption="Description1">
+                </dx:GridViewDataTextColumn> 
+                <dx:GridViewDataTextColumn FieldName="descripcionDos" VisibleIndex="12" Caption="Description2">
+                </dx:GridViewDataTextColumn>
+                <dx:GridViewDataTextColumn FieldName="CodigoDepto" VisibleIndex="13" Caption="Department">
+                </dx:GridViewDataTextColumn>  
+                <dx:GridViewDataTextColumn FieldName="CodigoPlan" VisibleIndex="14" Caption="Plan">
+                </dx:GridViewDataTextColumn>
+                <dx:GridViewDataTextColumn FieldName="codigoPlaneador" VisibleIndex="15" Caption="Glider">
+                </dx:GridViewDataTextColumn>  
+                <dx:GridViewDataTextColumn FieldName="codigoComprador" VisibleIndex="16" Caption="Buyer">
+                </dx:GridViewDataTextColumn>  
+                <dx:GridViewDataTextColumn FieldName="CodigoUM" VisibleIndex="17" Caption="UM">
+                </dx:GridViewDataTextColumn> 
+                <dx:GridViewDataTextColumn FieldName="cantidadOrden" VisibleIndex="18" Caption="Quantity">
+                </dx:GridViewDataTextColumn> 
+                <dx:GridViewDataTextColumn FieldName="stockMinimo" VisibleIndex="19" Caption="Minimum Stock">
+                </dx:GridViewDataTextColumn>
+                <dx:GridViewDataTextColumn FieldName="stockMaximo" VisibleIndex="20" Caption="Maximum Stock">
+                </dx:GridViewDataTextColumn>
+                <dx:GridViewDataTextColumn FieldName="precioUnitario" VisibleIndex="21" Caption="Unit price">
+                </dx:GridViewDataTextColumn> 
+                <dx:GridViewDataTextColumn FieldName="Codigomoneda" VisibleIndex="22" Caption="Coin">
+                </dx:GridViewDataTextColumn>
+                <dx:GridViewDataTextColumn FieldName="diasEntrega" VisibleIndex="23" Caption="Days Delivery">
+                </dx:GridViewDataTextColumn> 
+                <dx:GridViewDataTextColumn FieldName="fechaCotizacion" VisibleIndex="24" Caption="Quote Date">
+                </dx:GridViewDataTextColumn> 
+                <dx:GridViewDataTextColumn FieldName="CodigoMarca" VisibleIndex="25" Caption="Supplier Brand">
+                </dx:GridViewDataTextColumn>                                                                                                                                                                                                                                                                                                                      
             </Columns>
             <SettingsBehavior ConfirmDelete="true"/>
             <SettingsPager Mode="ShowPager" PageSize="13"/>
