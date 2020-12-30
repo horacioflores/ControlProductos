@@ -451,6 +451,25 @@ namespace ControlProductos
                             xgrdTipoArticulo.DataSource = ctrlP.tiposArticulo;
                             xgrdTipoArticulo.DataBind();
 
+                            int M = 0;
+                            foreach (_tipoArticulo art in ctrlP.tiposArticulo)
+                            {
+                                if(art.valor == "M")
+                                {
+                                    M++;
+                                }
+                            }
+                            if (M > 5)
+                            {
+                                lblstock.Text = "M";
+                                lblstock2.Text = "M";
+                            }
+                            else
+                            {
+                                lblstock.Text = "N";
+                                lblstock2.Text = "N";
+                            }
+
                             txtDescripcion1.Text = ctrlP.descripcionUno;
                             txtDescripcion2.Text = ctrlP.descripcionDos;
                             txtDescripcionLarga.Text = ctrlP.descripcionDos;
@@ -506,7 +525,14 @@ namespace ControlProductos
                             xgrdAlmacen.DataSource = ctrlP.almacenes;
                             xgrdAlmacen.DataBind();
 
-                            txtFichaSeguridad.Text = ctrlP.fichaDatoSeguridad;
+                            if(ctrlP.fichaDatoSeguridad == "Si")
+                            {
+                                rbFichaSi.Checked = true;
+                            }
+                            else
+                            {
+                                rbFichaSi.Checked = false;
+                            }
 
                             ListEditItem oItmUM = cmbCodigoUM.Items.FindByValue(ctrlP.CodigoUM);
                             if (oItmUM != null)
@@ -515,7 +541,14 @@ namespace ControlProductos
                             }
 
                             txtConteoCiclico.Text = ctrlP.conteoCiclico;
-                            txtAlmacenamientoExt.Text = ctrlP.almacenamientoExternoPosible;
+                            if (ctrlP.almacenamientoExternoPosible == "Si")
+                            {
+                                rbAlmExtSi.Checked = true;
+                            }
+                            else
+                            {
+                                rbAlmExtNo.Checked = false;
+                            }
 
                             ListEditItem oItmPlaneador = cmbPlaneador.Items.FindByValue(ctrlP.codigoPlaneador);
                             if (oItmPlaneador != null)
@@ -549,7 +582,7 @@ namespace ControlProductos
                     date = DateTime.Now;
                     lblcodigoSts.Text = "0001";
                     ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-edit' style='padding-right:5px;'></i>Abierto</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Pendiente por el autor para terminar la captura</span>";
-                    lblnDoc.Text = "";
+                    lblnDoc.Text = BctrlProd.newDoc();
                     lblDocSolicitante.Text = LoginInfo.CurrentUsuario.NombreCompleto;
                     lblDocFechaSol.Text = date.ToString("dd/MM/yyyy HH:mm");
                     rbAlta.Checked = true;
@@ -573,6 +606,7 @@ namespace ControlProductos
                         n.M = TipoArt.M;
                         n.N = TipoArt.N;
                         n.comentarios = TipoArt.comentarios;
+                        n.valor = "M";
                         tiposArticulo.Add(n);
                     }
                     xgrdTipoArticulo.DataSource = tiposArticulo;
@@ -621,10 +655,10 @@ namespace ControlProductos
 
                     lblTotal.Text = "0";
 
-                    txtFichaSeguridad.Text = "";
+                    rbFichaSi.Checked = true;
 
                     txtConteoCiclico.Text = "";
-                    txtAlmacenamientoExt.Text = "";
+                    rbAlmExtSi.Checked = true;
 
                     txtFichaInv.Text = "";
                     txtMultiplo.Text = "";
@@ -754,10 +788,10 @@ namespace ControlProductos
             ctrlProd.diasEntrega = (txtDiasEntrega.Text == "") ? 0 : Convert.ToInt32(txtDiasEntrega.Text);
             ctrlProd.Codigomoneda = cmbMoneda.SelectedItem.Value.ToString();
             ctrlProd.total = (lblTotal.Text == "") ? 0 : Convert.ToDecimal(lblTotal.Text);
-            ctrlProd.fichaDatoSeguridad = txtFichaSeguridad.Text;
+            ctrlProd.fichaDatoSeguridad = (rbFichaSi.Checked)?"Si":"No";
             ctrlProd.CodigoUM = cmbCodigoUM.SelectedItem.Value.ToString();
             ctrlProd.conteoCiclico = txtConteoCiclico.Text;
-            ctrlProd.almacenamientoExternoPosible = txtAlmacenamientoExt.Text;
+            ctrlProd.almacenamientoExternoPosible = (rbAlmExtSi.Checked) ? "Si" : "No";
             ctrlProd.codigoPlaneador = cmbPlaneador.SelectedItem.Value.ToString();
             ctrlProd.codigoComprador = cmbComprador.SelectedItem.Value.ToString();
             ctrlProd.fichaInventario = txtFichaInv.Text;
@@ -767,7 +801,14 @@ namespace ControlProductos
             ctrlProd.comentarios = txtComentarios.Text;
             ctrlProd.codigo_sts_Prods = lblcodigoSts.Text;
             ctrlProd.operacion = operacion;
-            ctrlProd.producto = cmbProducto.SelectedItem.Value.ToString();
+            if (operacion != "ALTA")
+            {
+                ctrlProd.producto = cmbProducto.SelectedItem.Value.ToString();
+            }
+            else
+            {
+                ctrlProd.producto = "";
+            }
 
             foreach (_tipoArticulo item in tiposArticulo)
             {
@@ -871,6 +912,34 @@ namespace ControlProductos
                 var id = e.GetValue("ctrlPTipoArticuloID").ToString() + "-" + e.GetValue("codigoTipoArticulo").ToString();
 
                 e.Cell.Text = string.Format("<input type='checkbox' class='chkArt' id='chk{0}'>", id);
+            }
+            if (e.DataColumn.Name == "M")
+            {
+                var id = e.GetValue("ctrlPTipoArticuloID").ToString() + "-" + e.GetValue("codigoTipoArticulo").ToString();
+                var value = e.GetValue("M");
+                string valor = e.GetValue("valor").ToString();
+                if (valor == "M")
+                {
+                    e.Cell.Text = string.Format("<table style='width:100%'><tr><td>" + value + "</td><td style='width:10%'><input type='radio' class='rbMN' name='rbMN{0}' value='M' checked='checked' onclick='SelMN()'/></td></tr></table>", id);
+                }
+                else
+                {
+                    e.Cell.Text = string.Format("<table style='width:100%'><tr><td>" + value + "</td><td style='width:10%'><input type='radio' class='rbMN' name='rbMN{0}' value='M' onclick='SelMN()'/></td></tr></table>", id);
+                }
+            }
+            if (e.DataColumn.Name == "N")
+            {
+                var id = e.GetValue("ctrlPTipoArticuloID").ToString() + "-" + e.GetValue("codigoTipoArticulo").ToString();
+                var value = e.GetValue("N");
+                string valor = e.GetValue("valor").ToString();
+                if (valor == "N")
+                {
+                    e.Cell.Text = string.Format("<table style='width:100%'><tr><td>" + value + "</td><td style='width:10%'><input type='radio' class='rbMN' name='rbMN{0}' value='N' checked='checked' onclick='SelMN()' /></td></tr></table>", id);
+                }
+                else
+                {
+                    e.Cell.Text = string.Format("<table style='width:100%'><tr><td>" + value + "</td><td style='width:10%'><input type='radio' class='rbMN' name='rbMN{0}' value='N' onclick='SelMN()' /></td></tr></table>", id);
+                }
             }
         }
 
@@ -1390,6 +1459,17 @@ namespace ControlProductos
                             cmbProducto.Visible = true;
                             break;
                     }
+
+                    if (rbSi.Checked)
+                    {
+                        lblcual.Visible = true;
+                        cmbCualArticulo.Visible = true;
+                    }
+                    else
+                    {
+                        lblcual.Visible = false;
+                        cmbCualArticulo.Visible = false;
+                    }
                 }
                 else if (pS[0] == "rbSi" || pS[0] == "rbNo")
                 {
@@ -1403,6 +1483,76 @@ namespace ControlProductos
                             lblcual.Visible = false;
                             cmbCualArticulo.Visible = false;
                             break;
+                    }
+
+                    if (rbAlta.Checked)
+                    {
+                        lblProd.Visible = false;
+                        cmbProducto.Visible = false;
+                    }
+                    else
+                    {
+                        lblProd.Visible = true;
+                        cmbProducto.Visible = true;
+                    }
+                }
+                else
+                {
+                    if (rbAlta.Checked)
+                    {
+                        lblProd.Visible = false;
+                        cmbProducto.Visible = false;
+                    }
+                    else
+                    {
+                        lblProd.Visible = true;
+                        cmbProducto.Visible = true;
+                    }
+                    if (rbSi.Checked)
+                    {
+                        lblcual.Visible = true;
+                        cmbCualArticulo.Visible = true;
+                    }
+                    else
+                    {
+                        lblcual.Visible = false;
+                        cmbCualArticulo.Visible = false;
+                    }
+                    string[] values = pS;
+                    foreach (string valor in values)
+                    {
+                        string[] identificadores = valor.Split('-');
+                        string[] datos = identificadores[1].Split(':');
+                        string codigoTipoArticulo = datos[0];
+                        string value = datos[1];
+                        foreach (_tipoArticulo item in tiposArticulo)
+                        {
+                            if(item.codigoTipoArticulo == codigoTipoArticulo)
+                            {
+                                item.valor = value;
+                            }
+                        }
+
+                        int M = 0;
+                        foreach (_tipoArticulo art in tiposArticulo)
+                        {
+                            if (art.valor == "M")
+                            {
+                                M++;
+                            }
+                        }
+                        if (M > 5)
+                        {
+                            lblstock.Text = "M";
+                            lblstock2.Text = "M";
+                        }
+                        else
+                        {
+                            lblstock.Text = "N";
+                            lblstock2.Text = "N";
+                        }
+                        xgrdTipoArticulo.DataSource = tiposArticulo;
+                        xgrdTipoArticulo.DataBind();
                     }
                 }
             }

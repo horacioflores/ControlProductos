@@ -30,6 +30,12 @@ namespace ControlProductos.Entity
         public int UpdCtrlPResult { get; set; }
     }
 
+
+    public class newDocResult_
+    {
+        public string newDocResult { get; set; }
+    }
+
     public class ControlProductos
     {
         public int ctrlProdsID { get; set; }
@@ -96,6 +102,7 @@ namespace ControlProductos.Entity
         public string M { get; set; }
         public string N { get; set; }
         public string comentarios { get; set; }
+        public string valor { get; set; }
     }
 
     public class Mtto_Almn

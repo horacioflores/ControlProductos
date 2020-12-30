@@ -496,6 +496,31 @@
             }
             s.cpAlertMessage = "";
         }
+
+        function SelMN() {
+            var Valores = "";
+            $(".rbMN").each(function () {
+                if (this.checked) {
+                    if (Valores == "") {
+                        Valores = this.name.substr(5)+":"+this.value;
+                    } else {
+                        Valores += "," + this.name.substr(5) + ":" + this.value;
+                    }
+                }
+            });
+
+            if (Valores == "") {
+
+                swal({
+                    title: "Information",
+                    text: "No records selected!",
+                    type: "info"
+                });
+                return;
+            }
+
+            ASPxCallbackPanel2.PerformCallback(Valores);
+        }
     </script>
     <style>
         html {
@@ -693,7 +718,7 @@
                         <div class="row form-group RowsControl">
                             <label class="text-form col-xs-4" style="padding: 1px;margin: 0px;">No. Documento</label>
                             <div class="col-xs-4 " style="color:red; font-weight:800;">
-                                <asp:TextBox ID="lblnDoc" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="lblnDoc" runat="server" Enabled="false"></asp:TextBox>
                             </div>
                         </div>
                         <div class="row form-group RowsControl">
@@ -849,9 +874,9 @@
                                 </div>
                             </div>
 
-                            <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('TipoArticulo');" />
+<%--                            <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('TipoArticulo');" />
                             <img class="img" src="Assets/Images/trash_can.png" alt="Remove Selected" style="cursor: pointer" onclick="return DisableSelectedTipoArt();" />
-                            <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdTipoArticulo.PerformCallback('Delete');" />
+                            <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdTipoArticulo.PerformCallback('Delete');" />--%>
                             <!--***************************TIPOS ARTICULO*********************************************************-->
                             <dx:ASPxGridView ID="xgrdTipoArticulo" runat="server" AutoGenerateColumns="true"
                                 Width="100%" Font-Names="Segoe UI"
@@ -859,13 +884,25 @@
                                 OnHtmlDataCellPrepared="xgrdTipoArticulo_HtmlDataCellPrepared"
                                 ClientInstanceName="xgrdTipoArticulo" Theme="Metropolis">
                                 <Columns>
-                                    <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="0" Width="10px">
+                                    <dx:GridViewDataTextColumn Name="CheckID" Visible="false" VisibleIndex="0" Width="10px">
                                     </dx:GridViewDataTextColumn>
                                     <dx:GridViewDataTextColumn FieldName="tipoArticulo" Caption="Tipo de Artículo" VisibleIndex="1" Width="35%">
                                     </dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn FieldName="M" Caption="M" VisibleIndex="2" Width="10%">
+                                    <dx:GridViewDataTextColumn Name="M" Caption="M" VisibleIndex="2" Width="10%">
                                     </dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn FieldName="N" Caption="N" VisibleIndex="3" Width="10%">
+                                    <dx:GridViewDataTextColumn Name="N" Caption="N" VisibleIndex="3" Width="10%">
+                                        <DataItemTemplate>
+                                            <table style="width:100%">
+                                                <tr>
+                                                    <td>
+                                                        <%# Eval("N") %> 
+                                                    </td>
+                                                    <td style="width:10%">
+                                                        <input type="radio" name='rbMN<%# Eval("ctrlPTipoArticuloID") %>'  />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </DataItemTemplate>
                                     </dx:GridViewDataTextColumn>
                                     <dx:GridViewDataTextColumn FieldName="comentarios" Caption="Comentarios / Justificaciones" VisibleIndex="4" Width="35%">
                                     </dx:GridViewDataTextColumn>
@@ -986,7 +1023,7 @@
                             <!--**************************************************************************************************-->
                             <br/>
                             <div class="alert alert-success center-block" style="text-align:center;padding:5px; width:50%;margin:auto;">
-                                <strong>Importante!</strong> Artículo con referencia <a href="#" class="alert-link">M</a>: Con Stock.
+                                <strong>Importante!</strong> Artículo con referencia <a href="#" class="alert-link"><asp:label id="lblstock" runat="server" Text="M"></asp:label></a>: Con Stock.
                             </div>
                             <hr style="border-color: #B5D2EA;"/>
                             <div class="row form-group CeroPM">
@@ -1136,16 +1173,16 @@
                             <h3 class="panel-title">Información de Mantenimiento</h3>
                             <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
                         </div>
-                            <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('Mantenimiento');" />
+<%--                            <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('Mantenimiento');" />
                             <img class="img" src="Assets/Images/trash_can.png" alt="Remove Selected" style="cursor: pointer" onclick="return DisableSelectedMtto();" />
-                            <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdMtto.PerformCallback('Delete');" />
+                            <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdMtto.PerformCallback('Delete');" />--%>
                             <dx:ASPxGridView ID="xgrdMtto" runat="server" AutoGenerateColumns="true"
                                 Width="100%" Font-Names="Segoe UI"
                                 OnCustomCallback="xgrdMtto_CustomCallback"
                                 OnHtmlDataCellPrepared="xgrdMtto_HtmlDataCellPrepared"
                                 ClientInstanceName="xgrdMtto" Theme="Metropolis">
                                 <Columns>
-                                    <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="0" Width="10px">
+                                    <dx:GridViewDataTextColumn Name="CheckID" Visible="false" VisibleIndex="0" Width="10px">
                                     </dx:GridViewDataTextColumn>
                                     <dx:GridViewDataTextColumn FieldName="especificacion" Caption="Especificación" VisibleIndex="1" Width="23%">
                                     </dx:GridViewDataTextColumn>
@@ -1282,16 +1319,16 @@
                             <h3 class="panel-title">Información de Almacén</h3>
                             <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
                         </div>
-                            <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('Almacen');" />
+<%--                            <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('Almacen');" />
                             <img class="img" src="Assets/Images/trash_can.png" alt="Remove Selected" style="cursor: pointer" onclick="return DisableSelectedAlmacen();" />
-                            <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdAlmacen.PerformCallback('Delete');" />
+                            <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdAlmacen.PerformCallback('Delete');" />--%>
                             <dx:ASPxGridView ID="xgrdAlmacen" runat="server" AutoGenerateColumns="true"
                                 Width="100%" Font-Names="Segoe UI"
                                 OnCustomCallback="xgrdAlmacen_CustomCallback"
                                 OnHtmlDataCellPrepared="xgrdAlmacen_HtmlDataCellPrepared"
                                 ClientInstanceName="xgrdAlmacen" Theme="Metropolis">
                                 <Columns>
-                                    <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="0" Width="10px">
+                                    <dx:GridViewDataTextColumn Name="CheckID" Visible="false" VisibleIndex="0" Width="10px">
                                     </dx:GridViewDataTextColumn>
                                     <dx:GridViewDataTextColumn FieldName="especificacion" Caption="Especificación" VisibleIndex="1" Width="23%">
                                     </dx:GridViewDataTextColumn>
@@ -1431,7 +1468,9 @@
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-3">Ficha de datos de seguridad</label>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txtFichaSeguridad" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <asp:RadioButton ID="rbFichaSi" runat="server" GroupName="FichaSeguridad" Text="&nbsp;Si"/>&nbsp;
+                                    <asp:RadioButton ID="rbFichaNo" runat="server" GroupName="FichaSeguridad" Text="&nbsp;No"/>&nbsp;
+                                    <%--<asp:TextBox ID="txtFichaSeguridad" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>--%>
                                 </div>
                                 <label class="text-form col-sm-3">Unidad de Medida</label>
                                 <div class="col-sm-3">
@@ -1454,7 +1493,9 @@
                                 </div>
                                 <label class="text-form col-sm-3">Alacenamiento externo posbible</label>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txtAlmacenamientoExt" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <asp:RadioButton ID="rbAlmExtSi" runat="server" GroupName="AlmaExt" Text="&nbsp;Si"/>&nbsp;
+                                    <asp:RadioButton ID="rbAlmExtNo" runat="server" GroupName="AlmaExt" Text="&nbsp;No"/>&nbsp;
+                                    <%--<asp:TextBox ID="txtAlmacenamientoExt" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>--%>
                                 </div>
                             </div>
                             <div class="row form-group CeroPM">
@@ -1515,7 +1556,7 @@
                         <div class="panel-body">
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-2">Código de artículo</label>
-                                <label class="text-form col-sm-1"><span class="label label-success pull-right" style="padding:6px;">M</span></label>
+                                <label class="text-form col-sm-1"><span class="label label-success pull-right" style="padding:6px;"><asp:label id="lblstock2" runat="server" Text="M"></asp:label></span></label>
                                 <div class="col-sm-3">
                                     <asp:TextBox ID="txtCodigoArticulo" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
