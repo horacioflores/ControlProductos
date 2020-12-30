@@ -1173,16 +1173,16 @@
                             <h3 class="panel-title">Información de Mantenimiento</h3>
                             <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
                         </div>
-<%--                            <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('Mantenimiento');" />
+                            <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('Mantenimiento');" />
                             <img class="img" src="Assets/Images/trash_can.png" alt="Remove Selected" style="cursor: pointer" onclick="return DisableSelectedMtto();" />
-                            <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdMtto.PerformCallback('Delete');" />--%>
+                            <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdMtto.PerformCallback('Delete');" />
                             <dx:ASPxGridView ID="xgrdMtto" runat="server" AutoGenerateColumns="true"
                                 Width="100%" Font-Names="Segoe UI"
                                 OnCustomCallback="xgrdMtto_CustomCallback"
                                 OnHtmlDataCellPrepared="xgrdMtto_HtmlDataCellPrepared"
                                 ClientInstanceName="xgrdMtto" Theme="Metropolis">
                                 <Columns>
-                                    <dx:GridViewDataTextColumn Name="CheckID" Visible="false" VisibleIndex="0" Width="10px">
+                                    <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="0" Width="10px">
                                     </dx:GridViewDataTextColumn>
                                     <dx:GridViewDataTextColumn FieldName="especificacion" Caption="Especificación" VisibleIndex="1" Width="23%">
                                     </dx:GridViewDataTextColumn>
@@ -1319,16 +1319,16 @@
                             <h3 class="panel-title">Información de Almacén</h3>
                             <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
                         </div>
-<%--                            <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('Almacen');" />
+                            <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('Almacen');" />
                             <img class="img" src="Assets/Images/trash_can.png" alt="Remove Selected" style="cursor: pointer" onclick="return DisableSelectedAlmacen();" />
-                            <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdAlmacen.PerformCallback('Delete');" />--%>
+                            <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdAlmacen.PerformCallback('Delete');" />
                             <dx:ASPxGridView ID="xgrdAlmacen" runat="server" AutoGenerateColumns="true"
                                 Width="100%" Font-Names="Segoe UI"
                                 OnCustomCallback="xgrdAlmacen_CustomCallback"
                                 OnHtmlDataCellPrepared="xgrdAlmacen_HtmlDataCellPrepared"
                                 ClientInstanceName="xgrdAlmacen" Theme="Metropolis">
                                 <Columns>
-                                    <dx:GridViewDataTextColumn Name="CheckID" Visible="false" VisibleIndex="0" Width="10px">
+                                    <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="0" Width="10px">
                                     </dx:GridViewDataTextColumn>
                                     <dx:GridViewDataTextColumn FieldName="especificacion" Caption="Especificación" VisibleIndex="1" Width="23%">
                                     </dx:GridViewDataTextColumn>
