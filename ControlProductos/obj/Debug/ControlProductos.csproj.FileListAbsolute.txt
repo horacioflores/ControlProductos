@@ -36,7 +36,6 @@ C:\Users\Ramiro Garcia\Desktop\ControlProductosH\ControlProductos\ControlProduct
 C:\Users\Ramiro Garcia\Desktop\ControlProductosH\ControlProductos\ControlProductos\bin\ControlProductos.pdb
 C:\Users\Ramiro Garcia\Desktop\ControlProductosH\ControlProductos\ControlProductos\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\Ramiro Garcia\Desktop\ControlProductosH\ControlProductos\ControlProductos\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Ramiro Garcia\Desktop\ControlProductosH\ControlProductos\ControlProductos\obj\Debug\ControlProductos.csprojResolveAssemblyReference.cache
 C:\Users\Ramiro Garcia\Desktop\ControlProductosH\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll.licenses
 C:\Users\Ramiro Garcia\Desktop\ControlProductosH\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll
 C:\Users\Ramiro Garcia\Desktop\ControlProductosH\ControlProductos\ControlProductos\obj\Debug\ControlProductos.pdb
