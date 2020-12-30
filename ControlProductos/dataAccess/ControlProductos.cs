@@ -42,5 +42,12 @@ namespace ControlProductos.dataAccess
             int regreso = Convert.ToInt32(methodPost("UpdCtrlP/" + UsuarioId, JsonConvert.SerializeObject(ctrlProds)));
             return regreso;
         }
+
+        public string newDoc()
+        {
+            string json = methodGet("newDocCtrlProd");
+            Entity.newDocResult_ regreso = JsonConvert.DeserializeObject<Entity.newDocResult_>(json);
+            return regreso.newDocResult;
+        }
     }
 }

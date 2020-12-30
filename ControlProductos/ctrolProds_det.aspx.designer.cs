@@ -283,6 +283,15 @@ namespace ControlProductos {
         protected global::DevExpress.Web.ASPxGridView xgrdTipoArticuloMDL;
         
         /// <summary>
+        /// Control lblstock.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblstock;
+        
+        /// <summary>
         /// Control txtDescripcion1.
         /// </summary>
         /// <remarks>
@@ -508,13 +517,22 @@ namespace ControlProductos {
         protected global::DevExpress.Web.ASPxGridView xgrdAlmacenMDL;
         
         /// <summary>
-        /// Control txtFichaSeguridad.
+        /// Control rbFichaSi.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFichaSeguridad;
+        protected global::System.Web.UI.WebControls.RadioButton rbFichaSi;
+        
+        /// <summary>
+        /// Control rbFichaNo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbFichaNo;
         
         /// <summary>
         /// Control hdnCodigoUM.
@@ -544,13 +562,22 @@ namespace ControlProductos {
         protected global::System.Web.UI.WebControls.TextBox txtConteoCiclico;
         
         /// <summary>
-        /// Control txtAlmacenamientoExt.
+        /// Control rbAlmExtSi.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAlmacenamientoExt;
+        protected global::System.Web.UI.WebControls.RadioButton rbAlmExtSi;
+        
+        /// <summary>
+        /// Control rbAlmExtNo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbAlmExtNo;
         
         /// <summary>
         /// Control hdnPlaneador.
@@ -614,6 +641,15 @@ namespace ControlProductos {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtHojaSeguridad;
+        
+        /// <summary>
+        /// Control lblstock2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblstock2;
         
         /// <summary>
         /// Control txtCodigoArticulo.
