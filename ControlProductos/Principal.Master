@@ -19,7 +19,7 @@
         <link href="Assets/css/card.css" rel="stylesheet" />
         <link href="Assets/css/core.css" rel="stylesheet" type="text/css">
         <link href="Assets/css/icons.css" rel="stylesheet" type="text/css">
-        <link href="Assets/css/components.css" rel="stylesheet" type="text/css">
+<%--        <link href="Assets/css/components.css" rel="stylesheet" type="text/css">--%>
         <link href="Assets/css/pages.css" rel="stylesheet" type="text/css">
         <link href="Assets/css/menu.css" rel="stylesheet" type="text/css">
         <link href="Assets/css/responsive.css" rel="stylesheet" type="text/css">

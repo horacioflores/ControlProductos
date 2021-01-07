@@ -521,6 +521,68 @@
 
             ASPxCallbackPanel2.PerformCallback(Valores);
         }
+
+        function bs_input_file() {
+            $(".input-file").before(
+                function () {
+                    if (!$(this).prev().hasClass('input-ghost')) {
+                        var element = $("<input type='file' class='input-ghost' style='visibility:hidden; height:0'>");
+                        element.attr("name", $(this).attr("name"));
+                        element.change(function () {
+                            element.next(element).find('input').val((element.val()).split('\\').pop());
+                        });
+                        $(this).find("button.btn-choose").click(function () {
+                            element.click();
+                        });
+                        $(this).find("button.btn-reset").click(function () {
+                            element.val(null);
+                            $(this).parents(".input-file").find('input').val('');
+                        });
+                        $(this).find('input').css("cursor", "pointer");
+                        $(this).find('input').mousedown(function () {
+                            $(this).parents('.input-file').prev().click();
+                            return false;
+                        });
+                        return element;
+                    }
+                }
+            );
+        }
+        $(function () {
+            bs_input_file();
+        });
+
+        function CIuplGraphicsFile_OnFileUploadComplete(s, e) {
+            if (e.isValid) {
+                console.log(e.callbackData);
+
+                MainContent_ASPxCallbackPanel2_txtFile.value = e.callbackData;
+
+                //cbSaveVars.PerformCallback(e.callbackData);
+
+                //var params = "SaveWithFile";
+                //xgrdPartes.PerformCallback(params);
+
+                //HabilitaCambio();
+
+            }
+            else {
+                swal("Warning", "An error has occurred from the database");
+            }
+        }
+
+        function CIuplGraphicsFile_OnFilesUploadComplete(args) {
+            UpdateUploadGraphicsFileButton();
+        }
+
+        function CIuplGraphicsFile_OnUploadStart() {
+            btnUploadGraphicsFile.SetEnabled(false);
+        }
+
+        function UpdateUploadGraphicsFileButton() {
+            btnUploadGraphicsFile.SetEnabled(CIuplGraphicsFile.GetText(0) != "");
+        }
+
     </script>
     <style>
         html {
@@ -682,6 +744,10 @@
         .hidden{
             display:none;
         }
+        h3 {
+            line-height: 15px;
+           }
+
     </style>
     <div class="CeroPM" id="Inicio">
     <div class="container-fluid CeroPM">
@@ -765,7 +831,7 @@
                                     <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
                                 </dx:ASPxComboBox>
                             </div>
-                            <div class="row form-group CeroPM">
+                            <div id="dvReemplazaOtro" runat="server" class="row form-group CeroPM">
                                 <label class="text-form col-sm-2">Reemplaza a otro</label>
                                 <div class="col-sm-2">
                                     <asp:RadioButton ID="rbSi" runat="server" GroupName="Reemplaza" Text="&nbsp;Si" onchange="ASPxCallbackPanel2.PerformCallback('rbSi');"/>&nbsp;
@@ -1489,7 +1555,16 @@
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-3">Conteo Cíclico</label>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txtConteoCiclico" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <%--<asp:TextBox ID="txtConteoCiclico" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>--%>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbConteoCiclico" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-3">Alacenamiento externo posbible</label>
                                 <div class="col-sm-3">
@@ -1539,8 +1614,34 @@
                             <div class="row form-group CeroPM">
                                <label class="text-form col-sm-3">Hoja de seguridad</label>
                                <div class="col-sm-3">
-                                   <asp:TextBox ID="txtHojaSeguridad" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <dx:ASPxUploadControl ID="uplGraphicsFile" runat="server" Theme="SoftOrange" 
+                                        ClientInstanceName="CIuplGraphicsFile" ShowProgressPanel="True"
+                                        NullText="Click here to browse files..." Size="35"
+                                        OnFileUploadComplete="CIuplGraphicsFile_FileUploadComplete" CssClass="labelGral"
+                                        Width="100%">
+                                        <ClientSideEvents 
+                                            FileUploadComplete="function(s, e) { CIuplGraphicsFile_OnFileUploadComplete(s,e); }"
+                                                FilesUploadComplete="function(s, e) { CIuplGraphicsFile_OnFilesUploadComplete(e); }"
+                                            FileUploadStart="function(s, e) { CIuplGraphicsFile_OnUploadStart(); }"
+                                            TextChanged="function(s, e) { UpdateUploadGraphicsFileButton(); }">                                                                            
+                                        </ClientSideEvents>
+                                        <ValidationSettings MaxFileSize="4194304" AllowedFileExtensions=".pdf, .doc, .png, .jpg, .xlsx">                                                                            
+                                        </ValidationSettings>
+                                        <ButtonStyle CssClass="labelGral" Font-Size="10pt"></ButtonStyle>
+                                    </dx:ASPxUploadControl>
+                                </div>
+                                <div class="col-sm-3">
+                                    <dx:ASPxButton ID="btnUploadGraphicsFile" runat="server" AutoPostBack="False" Theme="SoftOrange" 
+                                        Text="Upload File" ClientInstanceName="btnUploadGraphicsFile"
+                                        Width="100px" ClientEnabled="False">
+                                        <ClientSideEvents Click="function(s, e) { CIuplGraphicsFile.Upload(); }" />
+                                    </dx:ASPxButton>
                                </div>
+                            </div>
+                            <div class="row form-group CeroPM">
+                                <div class="col-sm-6">
+                                    <asp:TextBox ID="txtFile" Width="100%" Enabled="false" runat="server"></asp:TextBox>
+                                </div>
                             </div>
                         </div>
                     </div>

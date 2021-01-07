@@ -121,6 +121,15 @@ namespace ControlProductos {
         protected global::DevExpress.Web.ASPxComboBox cmbProducto;
         
         /// <summary>
+        /// Control dvReemplazaOtro.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvReemplazaOtro;
+        
+        /// <summary>
         /// Control rbSi.
         /// </summary>
         /// <remarks>
@@ -553,13 +562,13 @@ namespace ControlProductos {
         protected global::DevExpress.Web.ASPxComboBox cmbCodigoUM;
         
         /// <summary>
-        /// Control txtConteoCiclico.
+        /// Control cmbConteoCiclico.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtConteoCiclico;
+        protected global::DevExpress.Web.ASPxComboBox cmbConteoCiclico;
         
         /// <summary>
         /// Control rbAlmExtSi.
@@ -634,13 +643,31 @@ namespace ControlProductos {
         protected global::System.Web.UI.WebControls.TextBox txtMultiplo;
         
         /// <summary>
-        /// Control txtHojaSeguridad.
+        /// Control uplGraphicsFile.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtHojaSeguridad;
+        protected global::DevExpress.Web.ASPxUploadControl uplGraphicsFile;
+        
+        /// <summary>
+        /// Control btnUploadGraphicsFile.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxButton btnUploadGraphicsFile;
+        
+        /// <summary>
+        /// Control txtFile.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFile;
         
         /// <summary>
         /// Control lblstock2.

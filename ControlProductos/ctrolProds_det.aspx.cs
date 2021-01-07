@@ -17,6 +17,20 @@ namespace ControlProductos
 {
     public partial class ctrolProds_det : BasePage
     {
+        string UploadDirectory = "~/Upload/";
+
+        public string SelectedFile
+        {
+            get { return (string)Session["SelectedFile"]; }
+            set { Session["SelectedFile"] = value; }
+        }
+
+        public string SelectedFileName
+        {
+            get { return (string)Session["SelectedFileName"]; }
+            set { Session["SelectedFileName"] = value; }
+        }
+
         public List<_tipoArticulo> tiposArticulo
         {
             get
@@ -139,23 +153,11 @@ namespace ControlProductos
             cmbMaquina.DataSource = BMaquina.GetCombo();
             cmbMaquina.DataBind();
 
-            if(cmbMaquina.Items.Count > 0)
-            {
-                ListEditItem li = cmbMaquina.Items[0];
-                li.Selected = true;
-            }
-
             var BSubcategoria1 = new SubCategoria1Da();
             cmbSubCat1.TextField = "Nombre";
             cmbSubCat1.ValueField = "Codigo";
             cmbSubCat1.DataSource = BSubcategoria1.GetCombo();
             cmbSubCat1.DataBind();
-
-            if (cmbSubCat1.Items.Count > 0)
-            {
-                ListEditItem li = cmbSubCat1.Items[0];
-                li.Selected = true;
-            }
 
             var BSubcategoria2 = new SubCategoria2Da();
             cmbSubCat2.TextField = "Nombre";
@@ -163,23 +165,11 @@ namespace ControlProductos
             cmbSubCat2.DataSource = BSubcategoria2.GetCombo();
             cmbSubCat2.DataBind();
 
-            if (cmbSubCat2.Items.Count > 0)
-            {
-                ListEditItem li = cmbSubCat2.Items[0];
-                li.Selected = true;
-            }
-
             var BSubcategoria3 = new SubCategoria3Da();
             cmbSubCat3.TextField = "Nombre";
             cmbSubCat3.ValueField = "Codigo";
             cmbSubCat3.DataSource = BSubcategoria3.GetCombo();
             cmbSubCat3.DataBind();
-
-            if (cmbSubCat3.Items.Count > 0)
-            {
-                ListEditItem li = cmbSubCat3.Items[0];
-                li.Selected = true;
-            }
 
             var BUtilizado = new UtilizadoDa();
             cmbUtilizado.TextField = "Nombre";
@@ -187,23 +177,11 @@ namespace ControlProductos
             cmbUtilizado.DataSource = BUtilizado.GetCombo();
             cmbUtilizado.DataBind();
 
-            if (cmbUtilizado.Items.Count > 0)
-            {
-                ListEditItem li = cmbUtilizado.Items[0];
-                li.Selected = true;
-            }
-
             var BDepartamento = new DepartamentoDa();
             cmbDepa.TextField = "Descripcion";
             cmbDepa.ValueField = "Codigo";
             cmbDepa.DataSource = BDepartamento.GetCombo();
             cmbDepa.DataBind();
-
-            if (cmbDepa.Items.Count > 0)
-            {
-                ListEditItem li = cmbDepa.Items[0];
-                li.Selected = true;
-            }
 
             var BPlan = new PlanDa();
             cmbPlan.TextField = "Nombre";
@@ -211,35 +189,17 @@ namespace ControlProductos
             cmbPlan.DataSource = BPlan.GetCombo();
             cmbPlan.DataBind();
 
-            if (cmbPlan.Items.Count > 0)
-            {
-                ListEditItem li = cmbPlan.Items[0];
-                li.Selected = true;
-            }
-
             var BMarca = new MarcaDa();
             cmbMarca.TextField = "Nombre";
             cmbMarca.ValueField = "Codigo";
             cmbMarca.DataSource = BMarca.GetCombo();
             cmbMarca.DataBind();
 
-            if (cmbMarca.Items.Count > 0)
-            {
-                ListEditItem li = cmbMarca.Items[0];
-                li.Selected = true;
-            }
-
             var BProveedor = new ProveedorDa();
             cmbProveedor.TextField = "Nombre";
             cmbProveedor.ValueField = "Codigo";
             cmbProveedor.DataSource = BProveedor.GetCombo();
             cmbProveedor.DataBind();
-
-            if (cmbProveedor.Items.Count > 0)
-            {
-                ListEditItem li = cmbProveedor.Items[0];
-                li.Selected = true;
-            }
 
             List<Unico> lUnico = new List<Unico>();
             Unico item = new Unico();
@@ -256,23 +216,11 @@ namespace ControlProductos
             cmbUnico.DataSource = lUnico;
             cmbUnico.DataBind();
 
-            if (cmbUnico.Items.Count > 0)
-            {
-                ListEditItem li = cmbUnico.Items[0];
-                li.Selected = true;
-            }
-
             var BMoneda = new MonedaDa();
             cmbMoneda.TextField = "Nombre";
             cmbMoneda.ValueField = "Codigo";
             cmbMoneda.DataSource = BMoneda.GetCombo();
             cmbMoneda.DataBind();
-
-            if (cmbMoneda.Items.Count > 0)
-            {
-                ListEditItem li = cmbMoneda.Items[0];
-                li.Selected = true;
-            }
 
             var BUM = new UMedidaDa();
             cmbCodigoUM.TextField = "Nombre";
@@ -280,23 +228,11 @@ namespace ControlProductos
             cmbCodigoUM.DataSource = BUM.GetCombo();
             cmbCodigoUM.DataBind();
 
-            if (cmbCodigoUM.Items.Count > 0)
-            {
-                ListEditItem li = cmbCodigoUM.Items[0];
-                li.Selected = true;
-            }
-
             var BPlaneador = new PlaneadorDa();
             cmbPlaneador.TextField = "Nombre";
             cmbPlaneador.ValueField = "Codigo";
             cmbPlaneador.DataSource = BPlaneador.GetCombo();
             cmbPlaneador.DataBind();
-
-            if (cmbPlaneador.Items.Count > 0)
-            {
-                ListEditItem li = cmbPlaneador.Items[0];
-                li.Selected = true;
-            }
 
             var BComprador = new CompradorDa();
             cmbComprador.TextField = "Nombre";
@@ -304,11 +240,11 @@ namespace ControlProductos
             cmbComprador.DataSource = BComprador.GetCombo();
             cmbComprador.DataBind();
 
-            if (cmbComprador.Items.Count > 0)
-            {
-                ListEditItem li = cmbComprador.Items[0];
-                li.Selected = true;
-            }
+            var BConteo = new ConteoDa();
+            cmbConteoCiclico.TextField = "Nombre";
+            cmbConteoCiclico.ValueField = "Codigo";
+            cmbConteoCiclico.DataSource = BConteo.GetCombo();
+            cmbConteoCiclico.DataBind();
 
             var tArtc = new TipoArticuloDa();
             var tMttoD = new MttoAlmnDa();
@@ -321,6 +257,82 @@ namespace ControlProductos
             ApplyLayoutAlmnes();
             if (!IsPostBack)
             {
+                if (cmbMaquina.Items.Count > 0)
+                {
+                    ListEditItem li = cmbMaquina.Items[0];
+                    li.Selected = true;
+                }
+                if (cmbSubCat1.Items.Count > 0)
+                {
+                    ListEditItem li = cmbSubCat1.Items[0];
+                    li.Selected = true;
+                }
+                if (cmbSubCat2.Items.Count > 0)
+                {
+                    ListEditItem li = cmbSubCat2.Items[0];
+                    li.Selected = true;
+                }
+                if (cmbSubCat3.Items.Count > 0)
+                {
+                    ListEditItem li = cmbSubCat3.Items[0];
+                    li.Selected = true;
+                }
+                if (cmbUtilizado.Items.Count > 0)
+                {
+                    ListEditItem li = cmbUtilizado.Items[0];
+                    li.Selected = true;
+                }
+                if (cmbDepa.Items.Count > 0)
+                {
+                    ListEditItem li = cmbDepa.Items[0];
+                    li.Selected = true;
+                }
+                if (cmbPlan.Items.Count > 0)
+                {
+                    ListEditItem li = cmbPlan.Items[0];
+                    li.Selected = true;
+                }
+                if (cmbMarca.Items.Count > 0)
+                {
+                    ListEditItem li = cmbMarca.Items[0];
+                    li.Selected = true;
+                }
+                if (cmbProveedor.Items.Count > 0)
+                {
+                    ListEditItem li = cmbProveedor.Items[0];
+                    li.Selected = true;
+                }
+                if (cmbUnico.Items.Count > 0)
+                {
+                    ListEditItem li = cmbUnico.Items[0];
+                    li.Selected = true;
+                }
+                if (cmbMoneda.Items.Count > 0)
+                {
+                    ListEditItem li = cmbMoneda.Items[0];
+                    li.Selected = true;
+                }
+                if (cmbCodigoUM.Items.Count > 0)
+                {
+                    ListEditItem li = cmbCodigoUM.Items[0];
+                    li.Selected = true;
+                }
+                if (cmbPlaneador.Items.Count > 0)
+                {
+                    ListEditItem li = cmbPlaneador.Items[0];
+                    li.Selected = true;
+                }
+                if (cmbComprador.Items.Count > 0)
+                {
+                    ListEditItem li = cmbComprador.Items[0];
+                    li.Selected = true;
+                }
+                if (cmbConteoCiclico.Items.Count > 0)
+                {
+                    ListEditItem li = cmbConteoCiclico.Items[0];
+                    li.Selected = true;
+                }
+
                 limpiarModalAprnes();
                 int ctrlProdsID = Convert.ToInt32(Session["ctrlProdsID"]);
                 var BctrlProd = new ControlProductosda();
@@ -370,16 +382,19 @@ namespace ControlProductos
                                     rbAlta.Checked = true;
                                     lblProd.Visible = false;
                                     cmbProducto.Visible = false;
+                                    dvReemplazaOtro.Visible = true;
                                     break;
                                 case "MODIFICACIÓN":
                                     rbModificacion.Checked = true;
                                     lblProd.Visible = true;
                                     cmbProducto.Visible = true;
+                                    dvReemplazaOtro.Visible = false;
                                     break;
                                 case "BAJA":
                                     rbBaja.Checked = true;
                                     lblProd.Visible = true;
                                     cmbProducto.Visible = true;
+                                    dvReemplazaOtro.Visible = false;
                                     break;
                             }
                             ListEditItem oItProd = cmbProducto.Items.FindByValue(ctrlP.producto);
@@ -540,7 +555,13 @@ namespace ControlProductos
                                 oItmUM.Selected = true;
                             }
 
-                            txtConteoCiclico.Text = ctrlP.conteoCiclico;
+                            //txtConteoCiclico.Text = ctrlP.conteoCiclico;
+                            ListEditItem oItmCC = cmbConteoCiclico.Items.FindByValue(ctrlP.conteoCiclico);
+                            if (oItmCC != null)
+                            {
+                                oItmCC.Selected = true;
+                            }
+
                             if (ctrlP.almacenamientoExternoPosible == "Si")
                             {
                                 rbAlmExtSi.Checked = true;
@@ -564,7 +585,7 @@ namespace ControlProductos
 
                             txtFichaInv.Text = ctrlP.fichaInventario;
                             txtMultiplo.Text = ctrlP.multiplo;
-                            txtHojaSeguridad.Text = ctrlP.hojaSeguridad;
+                            txtFile.Text = ctrlP.hojaSeguridad;
                             txtCodigoArticulo.Text = ctrlP.codigoArticulo;
 
                             aprbnes = new List<Aprobacion>();
@@ -586,6 +607,7 @@ namespace ControlProductos
                     lblDocSolicitante.Text = LoginInfo.CurrentUsuario.NombreCompleto;
                     lblDocFechaSol.Text = date.ToString("dd/MM/yyyy HH:mm");
                     rbAlta.Checked = true;
+                    dvReemplazaOtro.Visible = true;
                     lblProd.Visible = false;
                     cmbProducto.Visible = false;
                     rbNo.Checked = true;
@@ -657,12 +679,16 @@ namespace ControlProductos
 
                     rbFichaSi.Checked = true;
 
-                    txtConteoCiclico.Text = "";
+                    ListEditItem oItmCC = cmbConteoCiclico.Items[0];
+                    if (oItmCC != null)
+                    {
+                        oItmCC.Selected = true;
+                    }
                     rbAlmExtSi.Checked = true;
 
                     txtFichaInv.Text = "";
                     txtMultiplo.Text = "";
-                    txtHojaSeguridad.Text = "";
+                    txtFile.Text = "";
                     txtCodigoArticulo.Text = "";
 
                     aprbnes = new List<Aprobacion>();
@@ -790,13 +816,13 @@ namespace ControlProductos
             ctrlProd.total = (lblTotal.Text == "") ? 0 : Convert.ToDecimal(lblTotal.Text);
             ctrlProd.fichaDatoSeguridad = (rbFichaSi.Checked)?"Si":"No";
             ctrlProd.CodigoUM = cmbCodigoUM.SelectedItem.Value.ToString();
-            ctrlProd.conteoCiclico = txtConteoCiclico.Text;
+            ctrlProd.conteoCiclico = cmbConteoCiclico.SelectedItem.Value.ToString();
             ctrlProd.almacenamientoExternoPosible = (rbAlmExtSi.Checked) ? "Si" : "No";
             ctrlProd.codigoPlaneador = cmbPlaneador.SelectedItem.Value.ToString();
             ctrlProd.codigoComprador = cmbComprador.SelectedItem.Value.ToString();
             ctrlProd.fichaInventario = txtFichaInv.Text;
             ctrlProd.multiplo = txtMultiplo.Text;
-            ctrlProd.hojaSeguridad = txtHojaSeguridad.Text;
+            ctrlProd.hojaSeguridad = txtFile.Text;
             ctrlProd.codigoArticulo = txtCodigoArticulo.Text;
             ctrlProd.comentarios = txtComentarios.Text;
             ctrlProd.codigo_sts_Prods = lblcodigoSts.Text;
@@ -1453,10 +1479,12 @@ namespace ControlProductos
                         case "rbAlta":
                             lblProd.Visible = false;
                             cmbProducto.Visible = false;
+                            dvReemplazaOtro.Visible = true;
                             break;
                         default:
                             lblProd.Visible = true;
                             cmbProducto.Visible = true;
+                            dvReemplazaOtro.Visible = false;
                             break;
                     }
 
@@ -1556,6 +1584,56 @@ namespace ControlProductos
                     }
                 }
             }
+        }
+
+        protected void CIuplGraphicsFile_FileUploadComplete(object sender, FileUploadCompleteEventArgs e)
+        {
+            if (e.IsValid)
+            {
+                e.CallbackData = SavePostedGraphicsFile(e.UploadedFile);
+                e.IsValid = true;
+            }
+            else
+            {
+                e.IsValid = false;
+                e.ErrorText = "Unexpected error";
+            }
+        }
+
+        private bool ExistsFile(string sFile)
+        {
+            bool bExists = false;
+
+            bExists = System.IO.File.Exists(sFile);
+
+            return bExists;
+        }
+
+        string SavePostedGraphicsFile(UploadedFile uploadedFile)
+        {
+            if (!uploadedFile.IsValid)
+                return string.Empty;
+
+            //string dateshort = DateTime.Now.ToLongTimeString().Replace(".", "").Replace("-", "").Replace(":", "").Replace(" ", "");
+
+            //int ctrlProdsID = Convert.ToInt32(Session["ctrlProdsID"]);
+
+            //var Names = uploadedFile.FileName.Split('.');
+
+            //string codigoArchivo = ctrlProdsID + "_" + dateshort.ToUpper() + "." + Names[1];
+
+            string sPath = Path.Combine(Server.MapPath(UploadDirectory), uploadedFile.FileName);
+
+            if (ExistsFile(sPath))
+                File.Delete(sPath);
+
+            uploadedFile.SaveAs(sPath);
+
+            SelectedFile = uploadedFile.FileName;
+            SelectedFileName = uploadedFile.FileName;
+
+
+            return SelectedFileName;
         }
 
         //protected void rbOperacion_CheckedChanged(object sender, EventArgs e)
