@@ -73,7 +73,7 @@ namespace ControlProductos.Entity
         public string almacenamientoExternoPosible { get; set; }
         public string codigoPlaneador { get; set; }
         public string codigoComprador { get; set; }
-        public string fichaInventario { get; set; }
+        public string fechaInventario { get; set; }
         public string multiplo { get; set; }
         public string hojaSeguridad { get; set; }
         public string codigoArticulo { get; set; }
@@ -115,6 +115,7 @@ namespace ControlProductos.Entity
         public string clasificacion { get; set; }
         public string responsable { get; set; }
         public string tipo { get; set; }
+        public bool selected { get; set; }
     }
 
     public class Aprobacion

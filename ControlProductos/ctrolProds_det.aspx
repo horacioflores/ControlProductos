@@ -135,6 +135,16 @@
            s.cpAlertMessage = "";
        }
 
+       function SelMtto(obj) {
+           valores = "SelMtto;" + obj.id.toString() + ";" + obj.checked;
+           xgrdMtto.PerformCallback(valores);
+       }
+
+       function SelAlmn(obj) {
+           valores = "SelAlmn;" + obj.id.toString() + ";" + obj.checked;
+           xgrdAlmacen.PerformCallback(valores);
+       }
+
        function DisableSelectedMtto() {
 
            var Valores = "";
@@ -343,35 +353,34 @@
                     $("span.badge").toggle();
                 }
                 if (e.altKey) {
-                    if (e.altKey && e.which == 49) { //1
+                    if (e.altKey && ((e.which == 49) || (e.which == 97))) { //1
                         alert('boton 1');
                     }
-                    if (e.altKey && e.which == 50) {//2
+                    if (e.altKey && ((e.which == 50) || (e.which == 98))) {//2
                         alert('boton 2');
                     }
-                    if (e.altKey && e.which == 51) {//3
+                    if (e.altKey && ((e.which == 51) || (e.which == 99))) {//3
                         alert('boton 3');
                     }
-                    if (e.altKey && e.which == 52) {//4
+                    if (e.altKey && ((e.which == 52) || (e.which == 100))) {//4
                         alert('boton 4');
                     }
-                    if (e.altKey && e.which == 53) {//5
+                    if (e.altKey && ((e.which == 53) || (e.which == 101))) {//5
                         alert('boton 5');
                     }
-                    if (e.altKey && e.which == 54) {//6
+                    if (e.altKey && ((e.which == 54) || (e.which == 102))) {//6
                         alert('boton 6');
                     }
-                    if (e.altKey && e.which == 55) {//7
-                        alert('boton 7');
+                    if (e.altKey && ((e.which == 55) || (e.which == 103))) {//7
                         $(".clickable").click();
                     }
-                    if (e.altKey && e.which == 56) {//8
+                    if (e.altKey && ((e.which == 56) || (e.which == 104))) {//8
                         $(".clickable").click();
                     }
-                    if (e.altKey && e.which == 57) {//9
+                    if (e.altKey && ((e.which == 57) || (e.which == 105))) {//9
                         $("#BtnInicio").get(0).click();
                     }
-                    if (e.altKey && e.which == 48) {//0
+                    if (e.altKey && ((e.which == 48) || (e.which == 96))) {//0
                         $("#BtnFinal").get(0).click();
                     }
                 };
@@ -479,6 +488,9 @@
                 if (s.cpAlertMessage == 'SelectBuyer') {
                     swal("Information", "Select Buyer", "info");
                 }
+                if (s.cpAlertMessage == 'SelectFile') {
+                    swal("Information", "Please upload the security file", "info");
+                }
 
                 if (s.cpAlertMessage == 'successSave') {
                     swal("Information", "The product has been success registered!", "success");
@@ -521,6 +533,68 @@
 
             ASPxCallbackPanel2.PerformCallback(Valores);
         }
+
+        function bs_input_file() {
+            $(".input-file").before(
+                function () {
+                    if (!$(this).prev().hasClass('input-ghost')) {
+                        var element = $("<input type='file' class='input-ghost' style='visibility:hidden; height:0'>");
+                        element.attr("name", $(this).attr("name"));
+                        element.change(function () {
+                            element.next(element).find('input').val((element.val()).split('\\').pop());
+                        });
+                        $(this).find("button.btn-choose").click(function () {
+                            element.click();
+                        });
+                        $(this).find("button.btn-reset").click(function () {
+                            element.val(null);
+                            $(this).parents(".input-file").find('input').val('');
+                        });
+                        $(this).find('input').css("cursor", "pointer");
+                        $(this).find('input').mousedown(function () {
+                            $(this).parents('.input-file').prev().click();
+                            return false;
+                        });
+                        return element;
+                    }
+                }
+            );
+        }
+        $(function () {
+            bs_input_file();
+        });
+
+        function CIuplGraphicsFile_OnFileUploadComplete(s, e) {
+            if (e.isValid) {
+                console.log(e.callbackData);
+
+                MainContent_ASPxCallbackPanel2_txtFile.value = e.callbackData;
+
+                //cbSaveVars.PerformCallback(e.callbackData);
+
+                //var params = "SaveWithFile";
+                //xgrdPartes.PerformCallback(params);
+
+                //HabilitaCambio();
+
+            }
+            else {
+                swal("Warning", "An error has occurred from the database");
+            }
+        }
+
+        function CIuplGraphicsFile_OnFilesUploadComplete(args) {
+            UpdateUploadGraphicsFileButton();
+        }
+
+        function CIuplGraphicsFile_OnUploadStart() {
+            btnUploadGraphicsFile.SetEnabled(false);
+        }
+
+        function UpdateUploadGraphicsFileButton() {
+            btnUploadGraphicsFile.SetEnabled(CIuplGraphicsFile.GetText(0) != "");
+        }
+
     </script>
     <style>
         html {
@@ -682,6 +756,10 @@
         .hidden{
             display:none;
         }
+        h3 {
+            line-height: 15px;
+           }
+
     </style>
     <div class="CeroPM" id="Inicio">
     <div class="container-fluid CeroPM">
@@ -718,7 +796,7 @@
                         <div class="row form-group RowsControl">
                             <label class="text-form col-xs-4" style="padding: 1px;margin: 0px;">No. Documento</label>
                             <div class="col-xs-4 " style="color:red; font-weight:800;">
-                                <asp:TextBox ID="lblnDoc" runat="server" Enabled="false"></asp:TextBox>
+                                <asp:TextBox ID="lblnDoc" runat="server" style="background-color: transparent !important;" Enabled="false"></asp:TextBox>
                             </div>
                         </div>
                         <div class="row form-group RowsControl">
@@ -765,7 +843,7 @@
                                     <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
                                 </dx:ASPxComboBox>
                             </div>
-                            <div class="row form-group CeroPM">
+                            <div id="dvReemplazaOtro" runat="server" class="row form-group CeroPM">
                                 <label class="text-form col-sm-2">Reemplaza a otro</label>
                                 <div class="col-sm-2">
                                     <asp:RadioButton ID="rbSi" runat="server" GroupName="Reemplaza" Text="&nbsp;Si" onchange="ASPxCallbackPanel2.PerformCallback('rbSi');"/>&nbsp;
@@ -1173,9 +1251,9 @@
                             <h3 class="panel-title">Información de Mantenimiento</h3>
                             <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
                         </div>
-                            <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('Mantenimiento');" />
+<%--                            <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('Mantenimiento');" />
                             <img class="img" src="Assets/Images/trash_can.png" alt="Remove Selected" style="cursor: pointer" onclick="return DisableSelectedMtto();" />
-                            <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdMtto.PerformCallback('Delete');" />
+                            <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdMtto.PerformCallback('Delete');" />--%>
                             <dx:ASPxGridView ID="xgrdMtto" runat="server" AutoGenerateColumns="true"
                                 Width="100%" Font-Names="Segoe UI"
                                 OnCustomCallback="xgrdMtto_CustomCallback"
@@ -1319,9 +1397,9 @@
                             <h3 class="panel-title">Información de Almacén</h3>
                             <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
                         </div>
-                            <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('Almacen');" />
+<%--                            <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('Almacen');" />
                             <img class="img" src="Assets/Images/trash_can.png" alt="Remove Selected" style="cursor: pointer" onclick="return DisableSelectedAlmacen();" />
-                            <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdAlmacen.PerformCallback('Delete');" />
+                            <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdAlmacen.PerformCallback('Delete');" />--%>
                             <dx:ASPxGridView ID="xgrdAlmacen" runat="server" AutoGenerateColumns="true"
                                 Width="100%" Font-Names="Segoe UI"
                                 OnCustomCallback="xgrdAlmacen_CustomCallback"
@@ -1468,8 +1546,8 @@
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-3">Ficha de datos de seguridad</label>
                                 <div class="col-sm-3">
-                                    <asp:RadioButton ID="rbFichaSi" runat="server" GroupName="FichaSeguridad" Text="&nbsp;Si"/>&nbsp;
-                                    <asp:RadioButton ID="rbFichaNo" runat="server" GroupName="FichaSeguridad" Text="&nbsp;No"/>&nbsp;
+                                    <asp:RadioButton ID="rbFichaSi" runat="server" GroupName="FichaSeguridad" Text="&nbsp;Si" onchange="ASPxCallbackPanel2.PerformCallback('rbFichaSegSi');"/>&nbsp;
+                                    <asp:RadioButton ID="rbFichaNo" runat="server" GroupName="FichaSeguridad" Text="&nbsp;No" onchange="ASPxCallbackPanel2.PerformCallback('rbFichaSegNo');"/>&nbsp;
                                     <%--<asp:TextBox ID="txtFichaSeguridad" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>--%>
                                 </div>
                                 <label class="text-form col-sm-3">Unidad de Medida</label>
@@ -1489,11 +1567,20 @@
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-3">Conteo Cíclico</label>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txtConteoCiclico" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <%--<asp:TextBox ID="txtConteoCiclico" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>--%>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbConteoCiclico" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-3">Alacenamiento externo posbible</label>
                                 <div class="col-sm-3">
-                                    <asp:RadioButton ID="rbAlmExtSi" runat="server" GroupName="AlmaExt" Text="&nbsp;Si"/>&nbsp;
+                                    <asp:RadioButton ID="rbAlmExtSi" runat="server" GroupName="AlmaExt" Text="&nbsp;Si" />&nbsp;
                                     <asp:RadioButton ID="rbAlmExtNo" runat="server" GroupName="AlmaExt" Text="&nbsp;No"/>&nbsp;
                                     <%--<asp:TextBox ID="txtAlmacenamientoExt" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>--%>
                                 </div>
@@ -1527,20 +1614,51 @@
                                 </div>
                             </div>
                             <div class="row form-group CeroPM">
-                                <label class="text-form col-sm-3">Ficha de inventario</label>
+                                <label class="text-form col-sm-3">Fecha de inventario</label>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txtFichaInv" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <dx:ASPxDateEdit ID="xDateFechaInv" runat="server" Width="200px"  CssClass="form-control input-sm Campos"
+                                        DisplayFormatString="yyyy-MM-dd" EditFormatString="yyyy-MM-dd">                                                             
+                                        <TimeSectionProperties>
+                                            <TimeEditProperties EditFormatString="hh:mm tt" />
+                                        </TimeSectionProperties>
+                                    </dx:ASPxDateEdit> 
                                 </div>
                                 <label class="text-form col-sm-3">Múltiplo</label>
                                 <div class="col-sm-3">
                                     <asp:TextBox ID="txtMultiplo" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                             </div>
-                            <div class="row form-group CeroPM">
+                            <div id="dvHojaSeg1" runat="server" class="row form-group CeroPM">
                                <label class="text-form col-sm-3">Hoja de seguridad</label>
                                <div class="col-sm-3">
-                                   <asp:TextBox ID="txtHojaSeguridad" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <dx:ASPxUploadControl ID="uplGraphicsFile" runat="server" Theme="SoftOrange" 
+                                        ClientInstanceName="CIuplGraphicsFile" ShowProgressPanel="True"
+                                        NullText="Click here to browse files..." Size="35"
+                                        OnFileUploadComplete="CIuplGraphicsFile_FileUploadComplete" CssClass="labelGral"
+                                        Width="100%">
+                                        <ClientSideEvents 
+                                            FileUploadComplete="function(s, e) { CIuplGraphicsFile_OnFileUploadComplete(s,e); }"
+                                                FilesUploadComplete="function(s, e) { CIuplGraphicsFile_OnFilesUploadComplete(e); }"
+                                            FileUploadStart="function(s, e) { CIuplGraphicsFile_OnUploadStart(); }"
+                                            TextChanged="function(s, e) { UpdateUploadGraphicsFileButton(); }">                                                                            
+                                        </ClientSideEvents>
+                                        <ValidationSettings MaxFileSize="4194304" AllowedFileExtensions=".pdf, .doc, .png, .jpg, .xlsx">                                                                            
+                                        </ValidationSettings>
+                                        <ButtonStyle CssClass="labelGral" Font-Size="10pt"></ButtonStyle>
+                                    </dx:ASPxUploadControl>
+                                </div>
+                                <div class="col-sm-3">
+                                    <dx:ASPxButton ID="btnUploadGraphicsFile" runat="server" AutoPostBack="False" Theme="SoftOrange" 
+                                        Text="Upload File" ClientInstanceName="btnUploadGraphicsFile"
+                                        Width="100px" ClientEnabled="False">
+                                        <ClientSideEvents Click="function(s, e) { CIuplGraphicsFile.Upload(); }" />
+                                    </dx:ASPxButton>
                                </div>
+                            </div>
+                            <div id="dvHojaSeg2" runat="server" class="row form-group CeroPM">
+                                <div class="col-sm-6">
+                                    <asp:TextBox ID="txtFile" Width="100%" Enabled="false" runat="server"></asp:TextBox>
+                                </div>
                             </div>
                         </div>
                     </div>
