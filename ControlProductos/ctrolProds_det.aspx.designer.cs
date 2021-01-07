@@ -625,13 +625,13 @@ namespace ControlProductos {
         protected global::DevExpress.Web.ASPxComboBox cmbComprador;
         
         /// <summary>
-        /// Control txtFichaInv.
+        /// Control xDateFechaInv.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFichaInv;
+        protected global::DevExpress.Web.ASPxDateEdit xDateFechaInv;
         
         /// <summary>
         /// Control txtMultiplo.
@@ -641,6 +641,15 @@ namespace ControlProductos {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtMultiplo;
+        
+        /// <summary>
+        /// Control dvHojaSeg1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvHojaSeg1;
         
         /// <summary>
         /// Control uplGraphicsFile.
@@ -659,6 +668,15 @@ namespace ControlProductos {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::DevExpress.Web.ASPxButton btnUploadGraphicsFile;
+        
+        /// <summary>
+        /// Control dvHojaSeg2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvHojaSeg2;
         
         /// <summary>
         /// Control txtFile.

@@ -543,10 +543,16 @@ namespace ControlProductos
                             if(ctrlP.fichaDatoSeguridad == "Si")
                             {
                                 rbFichaSi.Checked = true;
+                                rbFichaNo.Checked = false;
+                                dvHojaSeg1.Visible = true;
+                                dvHojaSeg2.Visible = true;
                             }
                             else
                             {
                                 rbFichaSi.Checked = false;
+                                rbFichaNo.Checked = true;
+                                dvHojaSeg1.Visible = false;
+                                dvHojaSeg2.Visible = false;
                             }
 
                             ListEditItem oItmUM = cmbCodigoUM.Items.FindByValue(ctrlP.CodigoUM);
@@ -583,7 +589,12 @@ namespace ControlProductos
                                 oItmComprador.Selected = true;
                             }
 
-                            txtFichaInv.Text = ctrlP.fichaInventario;
+                            if(ctrlP.fechaInventario != "")
+                            {
+                                DateTime fInv = new DateTime(Convert.ToInt32(ctrlP.fechaInventario.Substring(6,4)), Convert.ToInt32(ctrlP.fechaInventario.Substring(3, 2)), Convert.ToInt32(ctrlP.fechaInventario.Substring(0, 2)));
+                                xDateFechaInv.Date = fInv;
+                            }
+
                             txtMultiplo.Text = ctrlP.multiplo;
                             txtFile.Text = ctrlP.hojaSeguridad;
                             txtCodigoArticulo.Text = ctrlP.codigoArticulo;
@@ -686,7 +697,7 @@ namespace ControlProductos
                     }
                     rbAlmExtSi.Checked = true;
 
-                    txtFichaInv.Text = "";
+                    
                     txtMultiplo.Text = "";
                     txtFile.Text = "";
                     txtCodigoArticulo.Text = "";
@@ -820,7 +831,7 @@ namespace ControlProductos
             ctrlProd.almacenamientoExternoPosible = (rbAlmExtSi.Checked) ? "Si" : "No";
             ctrlProd.codigoPlaneador = cmbPlaneador.SelectedItem.Value.ToString();
             ctrlProd.codigoComprador = cmbComprador.SelectedItem.Value.ToString();
-            ctrlProd.fichaInventario = txtFichaInv.Text;
+            ctrlProd.fechaInventario = (xDateFechaInv.Value == null) ? null : xDateFechaInv.Date.ToString("yyyyMMdd");
             ctrlProd.multiplo = txtMultiplo.Text;
             ctrlProd.hojaSeguridad = txtFile.Text;
             ctrlProd.codigoArticulo = txtCodigoArticulo.Text;
@@ -979,6 +990,26 @@ namespace ControlProductos
                 xgrdMtto.DataSource = null;
                 mttos.Clear();
             }
+            if (pars.Contains("SelMtto"))
+            {
+                var Valores = e.Parameters;
+                string[] data = Valores.Split(';');
+                string idChk = data[1];
+                string[] ids = idChk.Split('-');
+                string id = ids[0];
+                bool select = Convert.ToBoolean(data[2]);
+                foreach (Mtto_Almn item in mttos)
+                {
+                    if (item.ctrlPMantenimientoID == Convert.ToInt32(id.Substring(3)))
+                    {
+                        item.selected = select;
+                        break;
+                    }
+                }
+
+                xgrdMtto.DataSource = mttos;
+                xgrdMtto.DataBind();
+            }
             else
             {
                 if (pars != "Save")
@@ -1007,8 +1038,15 @@ namespace ControlProductos
             if (e.DataColumn.Name == "CheckID")
             {
                 var id = e.GetValue("ctrlPMantenimientoID").ToString() + "-" + e.GetValue("codigoMttoAlmn").ToString();
-
-                e.Cell.Text = string.Format("<input type='checkbox' class='chkMtto' id='chk{0}'>", id);
+                bool selected = Convert.ToBoolean(e.GetValue("selected"));
+                if (selected)
+                {
+                    e.Cell.Text = string.Format("<input type='checkbox' class='chkMtto' id='chk{0}' onchange='SelMtto(this);' checked='checked'>", id);
+                }
+                else
+                {
+                    e.Cell.Text = string.Format("<input type='checkbox' class='chkMtto' id='chk{0}' onchange='SelMtto(this);'>", id);
+                }
             }
         }
 
@@ -1021,6 +1059,26 @@ namespace ControlProductos
             {
                 xgrdAlmacen.DataSource = null;
                 almnes.Clear();
+            }
+            if (pars.Contains("SelAlmn"))
+            {
+                var Valores = e.Parameters;
+                string[] data = Valores.Split(';');
+                string idChk = data[1];
+                string[] ids = idChk.Split('-');
+                string id = ids[0];
+                bool select = Convert.ToBoolean(data[2]);
+                foreach (Mtto_Almn item in almnes)
+                {
+                    if (item.ctrlPMantenimientoID == Convert.ToInt32(id.Substring(3)))
+                    {
+                        item.selected = select;
+                        break;
+                    }
+                }
+
+                xgrdAlmacen.DataSource = almnes;
+                xgrdAlmacen.DataBind();
             }
             else
             {
@@ -1050,8 +1108,15 @@ namespace ControlProductos
             if (e.DataColumn.Name == "CheckID")
             {
                 var id = e.GetValue("ctrlPMantenimientoID").ToString() + "-" + e.GetValue("codigoMttoAlmn").ToString();
-
-                e.Cell.Text = string.Format("<input type='checkbox' class='chkAlmn' id='chk{0}'>", id);
+                bool selected = Convert.ToBoolean(e.GetValue("selected"));
+                if (selected)
+                {
+                    e.Cell.Text = string.Format("<input type='checkbox' class='chkAlmn' id='chk{0}' onchange='SelAlmn(this);' checked='checked'>", id);
+                }
+                else
+                {
+                    e.Cell.Text = string.Format("<input type='checkbox' class='chkAlmn' id='chk{0}' onchange='SelAlmn(this);'>", id);
+                }
             }
         }
 
@@ -1468,6 +1533,14 @@ namespace ControlProductos
                         ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectBuyer";
                         return;
                     }
+                    if (rbFichaSi.Checked)
+                    {
+                        if(txtFile.Text == "")
+                        {
+                            ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectFile";
+                            return;
+                        }
+                    }
 
                     ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = Save();
                     return;
@@ -1524,6 +1597,20 @@ namespace ControlProductos
                         cmbProducto.Visible = true;
                     }
                 }
+                else if (pS[0] == "rbFichaSegSi" || pS[0] == "rbFichaSegNo")
+                {
+                    switch (pS[0])
+                    {
+                        case "rbFichaSegSi":
+                            dvHojaSeg1.Visible = true;
+                            dvHojaSeg2.Visible = true;
+                            break;
+                        default:
+                            dvHojaSeg1.Visible = false;
+                            dvHojaSeg2.Visible = false;
+                            break;
+                    }
+                }
                 else
                 {
                     if (rbAlta.Checked)
@@ -1555,7 +1642,7 @@ namespace ControlProductos
                         string value = datos[1];
                         foreach (_tipoArticulo item in tiposArticulo)
                         {
-                            if(item.codigoTipoArticulo == codigoTipoArticulo)
+                            if (item.codigoTipoArticulo == codigoTipoArticulo)
                             {
                                 item.valor = value;
                             }
