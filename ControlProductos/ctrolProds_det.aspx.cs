@@ -476,13 +476,13 @@ namespace ControlProductos
                             }
                             if (M > 5)
                             {
-                                lblstock.Text = "M";
-                                lblstock2.Text = "M";
+                                lblstock.Text = "M: Con Stock";
+                                lblstock2.Text = "M: Con Stock";
                             }
                             else
                             {
-                                lblstock.Text = "N";
-                                lblstock2.Text = "N";
+                                lblstock.Text = "N: Sin Stock";
+                                lblstock2.Text = "N: Sin Stock";
                             }
 
                             txtDescripcion1.Text = ctrlP.descripcionUno;
@@ -1658,13 +1658,13 @@ namespace ControlProductos
                         }
                         if (M > 5)
                         {
-                            lblstock.Text = "M";
-                            lblstock2.Text = "M";
+                            lblstock.Text = "M: Con Stock";
+                            lblstock2.Text = "M: Con Stock";
                         }
                         else
                         {
-                            lblstock.Text = "N";
-                            lblstock2.Text = "N";
+                            lblstock.Text = "N: Sin Stock";
+                            lblstock2.Text = "N: Sin Stock";
                         }
                         xgrdTipoArticulo.DataSource = tiposArticulo;
                         xgrdTipoArticulo.DataBind();

@@ -40,3 +40,24 @@ C:\Users\Ramiro Garcia\Desktop\ControlProductosH\ControlProductos\ControlProduct
 C:\Users\Ramiro Garcia\Desktop\ControlProductosH\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll.licenses
 C:\Users\Ramiro Garcia\Desktop\ControlProductosH\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll
 C:\Users\Ramiro Garcia\Desktop\ControlProductosH\ControlProductos\ControlProductos\obj\Debug\ControlProductos.pdb
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\bin\roslyn\csc.exe
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\bin\roslyn\vbc.exe
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\bin\roslyn\VBCSCompiler.exe
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\bin\ControlProductos.dll.config
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\bin\ControlProductos.dll
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\bin\ControlProductos.pdb
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll.licenses
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.pdb
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.csprojResolveAssemblyReference.cache
