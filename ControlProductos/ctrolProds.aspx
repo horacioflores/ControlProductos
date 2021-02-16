@@ -315,8 +315,8 @@
                 </dx:GridViewDataTextColumn>  
                 <dx:GridViewDataTextColumn FieldName="CodigoMaquina" VisibleIndex="9" Caption="Associated Machine">
                 </dx:GridViewDataTextColumn>     
-                <dx:GridViewDataTextColumn FieldName="CodigoUtilizado" VisibleIndex="10" Caption="Used">
-                </dx:GridViewDataTextColumn> 
+<%--                <dx:GridViewDataTextColumn FieldName="CodigoUtilizado" VisibleIndex="10" Caption="Used">
+                </dx:GridViewDataTextColumn> --%>
                 <dx:GridViewDataTextColumn FieldName="descripcionUno" VisibleIndex="11" Caption="Description1">
                 </dx:GridViewDataTextColumn> 
                 <dx:GridViewDataTextColumn FieldName="descripcionDos" VisibleIndex="12" Caption="Description2">
@@ -343,8 +343,8 @@
                 </dx:GridViewDataTextColumn>
                 <dx:GridViewDataTextColumn FieldName="diasEntrega" VisibleIndex="23" Caption="Days Delivery">
                 </dx:GridViewDataTextColumn> 
-                <dx:GridViewDataTextColumn FieldName="fechaCotizacion" VisibleIndex="24" Caption="Quote Date">
-                </dx:GridViewDataTextColumn> 
+<%--                <dx:GridViewDataTextColumn FieldName="fechaCotizacion" VisibleIndex="24" Caption="Quote Date">
+                </dx:GridViewDataTextColumn> --%>
                 <dx:GridViewDataTextColumn FieldName="CodigoMarca" VisibleIndex="25" Caption="Supplier Brand">
                 </dx:GridViewDataTextColumn>                                                                                                                                                                                                                                                                                                                      
             </Columns>

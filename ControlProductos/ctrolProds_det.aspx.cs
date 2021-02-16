@@ -31,6 +31,18 @@ namespace ControlProductos
             set { Session["SelectedFileName"] = value; }
         }
 
+        public List<archivos> archivos
+        {
+            get
+            {
+                return (List<archivos>)Session["Currentarchivos"];
+            }
+            set
+            {
+                Session["Currentarchivos"] = value;
+            }
+        }
+
         public List<_tipoArticulo> tiposArticulo
         {
             get
@@ -43,29 +55,29 @@ namespace ControlProductos
             }
         }
 
-        public List<Mtto_Almn> mttos
-        {
-            get
-            {
-                return (List<Mtto_Almn>)Session["CurrentMttos"];
-            }
-            set
-            {
-                Session["CurrentMttos"] = value;
-            }
-        }
+        //public List<Mtto_Almn> mttos
+        //{
+        //    get
+        //    {
+        //        return (List<Mtto_Almn>)Session["CurrentMttos"];
+        //    }
+        //    set
+        //    {
+        //        Session["CurrentMttos"] = value;
+        //    }
+        //}
 
-        public List<Mtto_Almn> almnes
-        {
-            get
-            {
-                return (List<Mtto_Almn>)Session["CurrentAlmnes"];
-            }
-            set
-            {
-                Session["CurrentAlmnes"] = value;
-            }
-        }
+        //public List<Mtto_Almn> almnes
+        //{
+        //    get
+        //    {
+        //        return (List<Mtto_Almn>)Session["CurrentAlmnes"];
+        //    }
+        //    set
+        //    {
+        //        Session["CurrentAlmnes"] = value;
+        //    }
+        //}
 
         public List<Aprobacion> aprbnes
         {
@@ -109,17 +121,17 @@ namespace ControlProductos
             xgrdTipoArticuloMDL.DataBind();
         }
 
-        public void ApplyLayoutMtto()
-        {
-            xgrdMttoMDL.DataSource = tMttoAlmn.FindAll(item => item.tipo == "M");
-            xgrdMttoMDL.DataBind();
-        }
+        //public void ApplyLayoutMtto()
+        //{
+        //    xgrdMttoMDL.DataSource = tMttoAlmn.FindAll(item => item.tipo == "M");
+        //    xgrdMttoMDL.DataBind();
+        //}
 
-        public void ApplyLayoutAlmnes()
-        {
-            xgrdAlmacenMDL.DataSource = tMttoAlmn.FindAll(item => item.tipo == "A");
-            xgrdAlmacenMDL.DataBind();
-        }
+        //public void ApplyLayoutAlmnes()
+        //{
+        //    xgrdAlmacenMDL.DataSource = tMttoAlmn.FindAll(item => item.tipo == "A");
+        //    xgrdAlmacenMDL.DataBind();
+        //}
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -135,6 +147,33 @@ namespace ControlProductos
 
         private void init()
         {
+            var BJDE = new JDEda();
+            cmbSubcuenta.TextField = "descripcion";
+            cmbSubcuenta.ValueField = "codigo";
+            cmbSubcuenta.DataSource = BJDE.GetCombo();
+            cmbSubcuenta.DataBind();
+
+            cmbUM.TextField = "descripcion";
+            cmbUM.ValueField = "codigo";
+            cmbUM.DataSource = BJDE.GetCombo();
+            cmbUM.DataBind();
+
+            cmbOQ.TextField = "descripcion";
+            cmbOQ.ValueField = "codigo";
+            cmbOQ.DataSource = BJDE.GetCombo();
+            cmbOQ.DataBind();
+
+            var BActFijo = new ActFijoda();
+            cmbActFijo.TextField = "descripcion";
+            cmbActFijo.ValueField = "codigo";
+            cmbActFijo.DataSource = BActFijo.GetCombo();
+            cmbActFijo.DataBind();
+
+            var BtipoDoc = new tipoDocumentoda();
+            cmbTipoDoc.TextField = "descripcion";
+            cmbTipoDoc.ValueField = "codigo";
+            cmbTipoDoc.DataSource = BtipoDoc.GetTiposDocumentos();
+            cmbTipoDoc.DataBind();
 
             var BCtrlProd = new ControlProductosda();
             cmbProducto.TextField = "codigoYNombre";
@@ -171,11 +210,11 @@ namespace ControlProductos
             cmbSubCat3.DataSource = BSubcategoria3.GetCombo();
             cmbSubCat3.DataBind();
 
-            var BUtilizado = new UtilizadoDa();
-            cmbUtilizado.TextField = "Nombre";
-            cmbUtilizado.ValueField = "Codigo";
-            cmbUtilizado.DataSource = BUtilizado.GetCombo();
-            cmbUtilizado.DataBind();
+            //var BUtilizado = new UtilizadoDa();
+            //cmbUtilizado.TextField = "Nombre";
+            //cmbUtilizado.ValueField = "Codigo";
+            //cmbUtilizado.DataSource = BUtilizado.GetCombo();
+            //cmbUtilizado.DataBind();
 
             var BDepartamento = new DepartamentoDa();
             cmbDepa.TextField = "Descripcion";
@@ -201,20 +240,20 @@ namespace ControlProductos
             cmbProveedor.DataSource = BProveedor.GetCombo();
             cmbProveedor.DataBind();
 
-            List<Unico> lUnico = new List<Unico>();
-            Unico item = new Unico();
-            item.value = true;
-            item.text = "Si";
-            Unico item2 = new Unico();
-            item2.value = false;
-            item2.text = "No";
-            lUnico.Add(item);
-            lUnico.Add(item2);
+            //List<Unico> lUnico = new List<Unico>();
+            //Unico item = new Unico();
+            //item.value = true;
+            //item.text = "Si";
+            //Unico item2 = new Unico();
+            //item2.value = false;
+            //item2.text = "No";
+            //lUnico.Add(item);
+            //lUnico.Add(item2);
 
-            cmbUnico.TextField = "text";
-            cmbUnico.ValueField = "value";
-            cmbUnico.DataSource = lUnico;
-            cmbUnico.DataBind();
+            //cmbUnico.TextField = "text";
+            //cmbUnico.ValueField = "value";
+            //cmbUnico.DataSource = lUnico;
+            //cmbUnico.DataBind();
 
             var BMoneda = new MonedaDa();
             cmbMoneda.TextField = "Nombre";
@@ -253,10 +292,35 @@ namespace ControlProductos
             tArticulos = lTipoArt;
             tMttoAlmn = lmtto;
             ApplyLayoutTipoArticulo();
-            ApplyLayoutMtto();
-            ApplyLayoutAlmnes();
+            //ApplyLayoutMtto();
+            //ApplyLayoutAlmnes();
             if (!IsPostBack)
             {
+                if (cmbSubcuenta.Items.Count > 0)
+                {
+                    ListEditItem li = cmbSubcuenta.Items[0];
+                    li.Selected = true;
+                }
+
+                if (cmbUM.Items.Count > 0)
+                {
+                    ListEditItem li = cmbUM.Items[0];
+                    li.Selected = true;
+                }
+
+                if (cmbOQ.Items.Count > 0)
+                {
+                    ListEditItem li = cmbOQ.Items[0];
+                    li.Selected = true;
+                }
+
+                if (cmbActFijo.Items.Count > 0)
+                {
+                    ListEditItem li = cmbActFijo.Items[0];
+                    li.Selected = true;
+                }
+
+
                 if (cmbMaquina.Items.Count > 0)
                 {
                     ListEditItem li = cmbMaquina.Items[0];
@@ -277,11 +341,11 @@ namespace ControlProductos
                     ListEditItem li = cmbSubCat3.Items[0];
                     li.Selected = true;
                 }
-                if (cmbUtilizado.Items.Count > 0)
-                {
-                    ListEditItem li = cmbUtilizado.Items[0];
-                    li.Selected = true;
-                }
+                //if (cmbUtilizado.Items.Count > 0)
+                //{
+                //    ListEditItem li = cmbUtilizado.Items[0];
+                //    li.Selected = true;
+                //}
                 if (cmbDepa.Items.Count > 0)
                 {
                     ListEditItem li = cmbDepa.Items[0];
@@ -302,11 +366,11 @@ namespace ControlProductos
                     ListEditItem li = cmbProveedor.Items[0];
                     li.Selected = true;
                 }
-                if (cmbUnico.Items.Count > 0)
-                {
-                    ListEditItem li = cmbUnico.Items[0];
-                    li.Selected = true;
-                }
+                //if (cmbUnico.Items.Count > 0)
+                //{
+                //    ListEditItem li = cmbUnico.Items[0];
+                //    li.Selected = true;
+                //}
                 if (cmbMoneda.Items.Count > 0)
                 {
                     ListEditItem li = cmbMoneda.Items[0];
@@ -425,6 +489,25 @@ namespace ControlProductos
                             {
                                 oItcual.Selected = true;
                             }
+                            txtdescripcion.Text = ctrlP.descripcion;
+                            txtModelo.Text = ctrlP.modelo;
+
+                            ListEditItem oItsubc = cmbSubcuenta.Items.FindByValue(ctrlP.subcuenta);
+                            if (oItsubc != null)
+                            {
+                                oItsubc.Selected = true;
+                            }
+                            ListEditItem oItcodActFijo = cmbActFijo.Items.FindByValue(ctrlP.codActFijo);
+                            if (oItcodActFijo != null)
+                            {
+                                oItcodActFijo.Selected = true;
+                            }
+
+
+                            archivos = new List<archivos>();
+                            archivos = ctrlP.archivos;
+                            xgrdArchivos.DataSource = archivos;
+                            xgrdArchivos.DataBind();
 
                             ListEditItem oItMaquina = cmbMaquina.Items.FindByValue(ctrlP.CodigoMaquina);
                             if (oItMaquina != null)
@@ -450,11 +533,11 @@ namespace ControlProductos
                                 oItmSubCat3.Selected = true;
                             }
 
-                            ListEditItem oItmUtilizado = cmbUtilizado.Items.FindByValue(ctrlP.CodigoUtilizado);
-                            if (oItmUtilizado != null)
-                            {
-                                oItmUtilizado.Selected = true;
-                            }
+                            //ListEditItem oItmUtilizado = cmbUtilizado.Items.FindByValue(ctrlP.CodigoUtilizado);
+                            //if (oItmUtilizado != null)
+                            //{
+                            //    oItmUtilizado.Selected = true;
+                            //}
 
                             ListEditItem oItmDepto = cmbDepa.Items.FindByValue(ctrlP.CodigoDepto);
                             if (oItmDepto != null)
@@ -477,12 +560,12 @@ namespace ControlProductos
                             if (M > 5)
                             {
                                 lblstock.Text = "M";
-                                lblstock2.Text = "M";
+                                lblstock2.Text = "M: Con Stock";
                             }
                             else
                             {
                                 lblstock.Text = "N";
-                                lblstock2.Text = "N";
+                                lblstock2.Text = "N: Con Stock";
                             }
 
                             txtDescripcion1.Text = ctrlP.descripcionUno;
@@ -513,13 +596,13 @@ namespace ControlProductos
                                 oItmProveedor.Selected = true;
                             }
 
-                            ListEditItem oItmUnico= cmbUnico.Items.FindByValue(ctrlP.esUnico.ToString());
-                            if (oItmUnico != null)
-                            {
-                                oItmUnico.Selected = true;
-                            }
-                            DateTime fechaCot = new DateTime(Convert.ToInt32(ctrlP.fechaCotizacion.Substring(6, 4)), Convert.ToInt32(ctrlP.fechaCotizacion.Substring(3, 2)), Convert.ToInt32(ctrlP.fechaCotizacion.Substring(0, 2)));
-                            xDateFechaCot.Date = fechaCot;
+                            //ListEditItem oItmUnico= cmbUnico.Items.FindByValue(ctrlP.esUnico.ToString());
+                            //if (oItmUnico != null)
+                            //{
+                            //    oItmUnico.Selected = true;
+                            //}
+                            //DateTime fechaCot = new DateTime(Convert.ToInt32(ctrlP.fechaCotizacion.Substring(6, 4)), Convert.ToInt32(ctrlP.fechaCotizacion.Substring(3, 2)), Convert.ToInt32(ctrlP.fechaCotizacion.Substring(0, 2)));
+                            //xDateFechaCot.Date = fechaCot;
                             txtPrecioU.Text = ctrlP.precioUnitario.ToString("0.##");
                             txtDiasEntrega.Text = ctrlP.diasEntrega.ToString();
 
@@ -528,32 +611,32 @@ namespace ControlProductos
                             {
                                 oItmMoneda.Selected = true;
                             }
-                            lblTotal.Text = ctrlP.total.ToString("0.##");
+                            //lblTotal.Text = ctrlP.total.ToString("0.##");
 
-                            mttos = new List<Mtto_Almn>();
-                            mttos = ctrlP.mantenimientos;
-                            xgrdMtto.DataSource = ctrlP.mantenimientos;
-                            xgrdMtto.DataBind();
+                            //mttos = new List<Mtto_Almn>();
+                            //mttos = ctrlP.mantenimientos;
+                            //xgrdMtto.DataSource = ctrlP.mantenimientos;
+                            //xgrdMtto.DataBind();
 
-                            almnes = new List<Mtto_Almn>();
-                            almnes = ctrlP.almacenes;
-                            xgrdAlmacen.DataSource = ctrlP.almacenes;
-                            xgrdAlmacen.DataBind();
+                            //almnes = new List<Mtto_Almn>();
+                            //almnes = ctrlP.almacenes;
+                            //xgrdAlmacen.DataSource = ctrlP.almacenes;
+                            //xgrdAlmacen.DataBind();
 
-                            if(ctrlP.fichaDatoSeguridad == "Si")
-                            {
-                                rbFichaSi.Checked = true;
-                                rbFichaNo.Checked = false;
-                                dvHojaSeg1.Visible = true;
-                                dvHojaSeg2.Visible = true;
-                            }
-                            else
-                            {
-                                rbFichaSi.Checked = false;
-                                rbFichaNo.Checked = true;
-                                dvHojaSeg1.Visible = false;
-                                dvHojaSeg2.Visible = false;
-                            }
+                            //if(ctrlP.fichaDatoSeguridad == "Si")
+                            //{
+                            //    rbFichaSi.Checked = true;
+                            //    rbFichaNo.Checked = false;
+                            //    dvHojaSeg1.Visible = true;
+                            //    dvHojaSeg2.Visible = true;
+                            //}
+                            //else
+                            //{
+                            //    rbFichaSi.Checked = false;
+                            //    rbFichaNo.Checked = true;
+                            //    dvHojaSeg1.Visible = false;
+                            //    dvHojaSeg2.Visible = false;
+                            //}
 
                             ListEditItem oItmUM = cmbCodigoUM.Items.FindByValue(ctrlP.CodigoUM);
                             if (oItmUM != null)
@@ -568,14 +651,14 @@ namespace ControlProductos
                                 oItmCC.Selected = true;
                             }
 
-                            if (ctrlP.almacenamientoExternoPosible == "Si")
-                            {
-                                rbAlmExtSi.Checked = true;
-                            }
-                            else
-                            {
-                                rbAlmExtNo.Checked = false;
-                            }
+                            //if (ctrlP.almacenamientoExternoPosible == "Si")
+                            //{
+                            //    rbAlmExtSi.Checked = true;
+                            //}
+                            //else
+                            //{
+                            //    rbAlmExtNo.Checked = false;
+                            //}
 
                             ListEditItem oItmPlaneador = cmbPlaneador.Items.FindByValue(ctrlP.codigoPlaneador);
                             if (oItmPlaneador != null)
@@ -589,20 +672,47 @@ namespace ControlProductos
                                 oItmComprador.Selected = true;
                             }
 
-                            if(ctrlP.fechaInventario != "")
-                            {
-                                DateTime fInv = new DateTime(Convert.ToInt32(ctrlP.fechaInventario.Substring(6,4)), Convert.ToInt32(ctrlP.fechaInventario.Substring(3, 2)), Convert.ToInt32(ctrlP.fechaInventario.Substring(0, 2)));
-                                xDateFechaInv.Date = fInv;
-                            }
+                            //if(ctrlP.fechaInventario != "")
+                            //{
+                            //    DateTime fInv = new DateTime(Convert.ToInt32(ctrlP.fechaInventario.Substring(6,4)), Convert.ToInt32(ctrlP.fechaInventario.Substring(3, 2)), Convert.ToInt32(ctrlP.fechaInventario.Substring(0, 2)));
+                            //    xDateFechaInv.Date = fInv;
+                            //}
 
                             txtMultiplo.Text = ctrlP.multiplo;
-                            txtFile.Text = ctrlP.hojaSeguridad;
+                            //txtFile.Text = ctrlP.hojaSeguridad;
                             txtCodigoArticulo.Text = ctrlP.codigoArticulo;
 
                             aprbnes = new List<Aprobacion>();
                             aprbnes = ctrlP.aprobaciones;
                             xgrdAprobaciones.DataSource = ctrlP.aprobaciones;
                             xgrdAprobaciones.DataBind();
+
+                            txtConsEstimado.Text = ctrlP.consEstimado.ToString();
+                            ListEditItem oItmUM2 = cmbUM.Items.FindByValue(ctrlP.unidadMedida);
+                            if (oItmUM2 != null)
+                            {
+                                oItmUM2.Selected = true;
+                            }
+                            txtCantMinima.Text = ctrlP.cantMinima.ToString();
+                            DateTime fechaReq = new DateTime(Convert.ToInt32(ctrlP.FechaRequerida.Substring(6, 4)), Convert.ToInt32(ctrlP.FechaRequerida.Substring(3, 2)), Convert.ToInt32(ctrlP.FechaRequerida.Substring(0, 2)));
+                            xDateFechaReq.Date = fechaReq;
+
+                            ListEditItem oItmNOQ= cmbOQ.Items.FindByValue(ctrlP.numOQ);
+                            if (oItmNOQ != null)
+                            {
+                                oItmNOQ.Selected = true;
+                            }
+                            txtPrecio.Text = ctrlP.precio.ToString();
+                            txtContrato.Text = ctrlP.numOrden;
+                            switch (ctrlP.reparar)
+                            {
+                                case "Si":
+                                    rbReparaSi.Checked = true;
+                                    break;
+                                case "No":
+                                    rbReparaNo.Checked = true;
+                                    break;
+                            }
 
                             break;
                         }   
@@ -624,9 +734,15 @@ namespace ControlProductos
                     rbNo.Checked = true;
                     lblcual.Visible = false;
                     cmbCualArticulo.Visible = false;
+                    txtdescripcion.Text = "";
+                    txtModelo.Text = "";
+                    archivos = new List<archivos>();
+                    xgrdArchivos.DataSource = archivos;
+                    xgrdArchivos.DataBind();
+
                     tiposArticulo = new List<_tipoArticulo>();
-                    mttos = new List<Mtto_Almn>();
-                    almnes = new List<Mtto_Almn>();
+                    //mttos = new List<Mtto_Almn>();
+                    //almnes = new List<Mtto_Almn>();
 
 
                     foreach (TipoArticulo TipoArt in lTipoArt)
@@ -658,19 +774,19 @@ namespace ControlProductos
                         n.clasificacion = mtto.clasificacion;
                         n.responsable = mtto.responsable;
                         n.tipo = mtto.tipo;
-                        if(mtto.tipo == "M")
-                        {
-                            mttos.Add(n);
-                        }
-                        else
-                        {
-                            almnes.Add(n);
-                        }
+                        //if(mtto.tipo == "M")
+                        //{
+                        //    mttos.Add(n);
+                        //}
+                        //else
+                        //{
+                        //    almnes.Add(n);
+                        //}
                     }
-                    xgrdMtto.DataSource = mttos;
-                    xgrdMtto.DataBind();
-                    xgrdAlmacen.DataSource = almnes;
-                    xgrdAlmacen.DataBind();
+                    //xgrdMtto.DataSource = mttos;
+                    //xgrdMtto.DataBind();
+                    //xgrdAlmacen.DataSource = almnes;
+                    //xgrdAlmacen.DataBind();
 
 
                     txtDescripcion1.Text = "";
@@ -686,24 +802,25 @@ namespace ControlProductos
                     txtPrecioU.Text = "0";
                     txtDiasEntrega.Text = "0";
 
-                    lblTotal.Text = "0";
+                    //lblTotal.Text = "0";
 
-                    rbFichaSi.Checked = true;
+                    //rbFichaSi.Checked = true;
 
                     ListEditItem oItmCC = cmbConteoCiclico.Items[0];
                     if (oItmCC != null)
                     {
                         oItmCC.Selected = true;
                     }
-                    rbAlmExtSi.Checked = true;
+                    //rbAlmExtSi.Checked = true;
 
                     
                     txtMultiplo.Text = "";
-                    txtFile.Text = "";
+                    //txtFile.Text = "";
                     txtCodigoArticulo.Text = "";
 
                     aprbnes = new List<Aprobacion>();
 
+                    rbReparaNo.Checked = true;
 
                     //productos = new List<cotizacion_prod>();
                     //proveedores = new List<cotizacion_proveedor>();
@@ -716,15 +833,15 @@ namespace ControlProductos
             {
                 xgrdTipoArticulo.DataSource = tiposArticulo;
                 xgrdTipoArticulo.DataBind();
-                xgrdMtto.DataSource = mttos;
-                xgrdMtto.DataBind();
-                xgrdAlmacen.DataSource = almnes;
-                xgrdAlmacen.DataBind();
+                //xgrdMtto.DataSource = mttos;
+                //xgrdMtto.DataBind();
+                //xgrdAlmacen.DataSource = almnes;
+                //xgrdAlmacen.DataBind();
                 xgrdAprobaciones.DataSource = aprbnes;
                 xgrdAprobaciones.DataBind();
                 ApplyLayoutTipoArticulo();
-                ApplyLayoutMtto();
-                ApplyLayoutAlmnes();
+                //ApplyLayoutMtto();
+                //ApplyLayoutAlmnes();
             }
         }
 
@@ -767,6 +884,7 @@ namespace ControlProductos
             }
 
             DateTime fechaActual = DateTime.Now;
+            xDateFechaReq.Date = fechaActual;
             xDateFechaNotAdd.Date = fechaActual;
             xDateFechaAccionAdd.Date = fechaActual;
         }
@@ -806,7 +924,7 @@ namespace ControlProductos
             ctrlProd.CodigoSubcategoria1 = cmbSubCat1.SelectedItem.Value.ToString();
             ctrlProd.CodigoSubcategoria2 = cmbSubCat2.SelectedItem.Value.ToString();
             ctrlProd.CodigoSubcategoria3 = cmbSubCat2.SelectedItem.Value.ToString();
-            ctrlProd.CodigoUtilizado = cmbUtilizado.SelectedItem.Value.ToString();
+            //ctrlProd.CodigoUtilizado = cmbUtilizado.SelectedItem.Value.ToString();
             ctrlProd.CodigoDepto = cmbDepa.SelectedItem.Value.ToString();
             ctrlProd.descripcionUno = txtDescripcion1.Text;
             ctrlProd.descripcionDos = txtDescripcion2.Text;
@@ -819,21 +937,21 @@ namespace ControlProductos
             ctrlProd.stockMaximo = (txtStockMax.Text == "") ? 0 : Convert.ToDecimal(txtStockMax.Text);
             ctrlProd.CodigoMarca = cmbMarca.SelectedItem.Value.ToString();
             ctrlProd.CodigoProveedor = cmbProveedor.SelectedItem.Value.ToString();
-            ctrlProd.esUnico = Convert.ToBoolean(cmbUnico.SelectedItem.Value);
-            ctrlProd.fechaCotizacion = (xDateFechaCot.Value.ToString() == "")?DateTime.Now.ToString("yyyyMMdd"): xDateFechaCot.Date.ToString("yyyyMMdd");
+            //ctrlProd.esUnico = Convert.ToBoolean(cmbUnico.SelectedItem.Value);
+            //ctrlProd.fechaCotizacion = (xDateFechaCot.Value.ToString() == "")?DateTime.Now.ToString("yyyyMMdd"): xDateFechaCot.Date.ToString("yyyyMMdd");
             ctrlProd.precioUnitario = (txtPrecioU.Text == "") ? 0 : Convert.ToDecimal(txtPrecioU.Text);
             ctrlProd.diasEntrega = (txtDiasEntrega.Text == "") ? 0 : Convert.ToInt32(txtDiasEntrega.Text);
             ctrlProd.Codigomoneda = cmbMoneda.SelectedItem.Value.ToString();
-            ctrlProd.total = (lblTotal.Text == "") ? 0 : Convert.ToDecimal(lblTotal.Text);
-            ctrlProd.fichaDatoSeguridad = (rbFichaSi.Checked)?"Si":"No";
+            //ctrlProd.total = (lblTotal.Text == "") ? 0 : Convert.ToDecimal(lblTotal.Text);
+            //ctrlProd.fichaDatoSeguridad = (rbFichaSi.Checked)?"Si":"No";
             ctrlProd.CodigoUM = cmbCodigoUM.SelectedItem.Value.ToString();
             ctrlProd.conteoCiclico = cmbConteoCiclico.SelectedItem.Value.ToString();
-            ctrlProd.almacenamientoExternoPosible = (rbAlmExtSi.Checked) ? "Si" : "No";
+            //ctrlProd.almacenamientoExternoPosible = (rbAlmExtSi.Checked) ? "Si" : "No";
             ctrlProd.codigoPlaneador = cmbPlaneador.SelectedItem.Value.ToString();
             ctrlProd.codigoComprador = cmbComprador.SelectedItem.Value.ToString();
-            ctrlProd.fechaInventario = (xDateFechaInv.Value == null) ? null : xDateFechaInv.Date.ToString("yyyyMMdd");
+            //ctrlProd.fechaInventario = (xDateFechaInv.Value == null) ? null : xDateFechaInv.Date.ToString("yyyyMMdd");
             ctrlProd.multiplo = txtMultiplo.Text;
-            ctrlProd.hojaSeguridad = txtFile.Text;
+            //ctrlProd.hojaSeguridad = txtFile.Text;
             ctrlProd.codigoArticulo = txtCodigoArticulo.Text;
             ctrlProd.comentarios = txtComentarios.Text;
             ctrlProd.codigo_sts_Prods = lblcodigoSts.Text;
@@ -846,22 +964,34 @@ namespace ControlProductos
             {
                 ctrlProd.producto = "";
             }
+            ctrlProd.descripcion = txtdescripcion.Text;
+            ctrlProd.modelo = txtModelo.Text;
+            ctrlProd.subcuenta = cmbSubcuenta.SelectedItem.Value.ToString();
+            ctrlProd.codActFijo = cmbActFijo.SelectedItem.Value.ToString();
+            ctrlProd.consEstimado = (txtConsEstimado.Text == "") ? 0 : Convert.ToDecimal(txtConsEstimado.Text);
+            ctrlProd.subcuenta = cmbUM.SelectedItem.Value.ToString();
+            ctrlProd.cantMinima = (txtCantMinima.Text == "") ? 0 : Convert.ToDecimal(txtCantMinima.Text);
+            ctrlProd.FechaRequerida = (xDateFechaReq.Value == null) ? null : xDateFechaReq.Date.ToString("yyyyMMdd");
+            ctrlProd.numOQ = cmbOQ.SelectedItem.Value.ToString();
+            ctrlProd.precio = (txtPrecio.Text == "") ? 0 : Convert.ToDecimal(txtPrecio.Text);
+            ctrlProd.numOrden = txtContrato.Text;
 
             foreach (_tipoArticulo item in tiposArticulo)
             {
                 item.noDocumento = lblnDoc.Text;
             }
-            foreach (Mtto_Almn item in mttos)
-            {
-                item.noDocumento = lblnDoc.Text;
-            }
-            foreach (Mtto_Almn item in almnes)
-            {
-                item.noDocumento = lblnDoc.Text;
-            }
+            //foreach (Mtto_Almn item in mttos)
+            //{
+            //    item.noDocumento = lblnDoc.Text;
+            //}
+            //foreach (Mtto_Almn item in almnes)
+            //{
+            //    item.noDocumento = lblnDoc.Text;
+            //}
+            ctrlProd.archivos = archivos;
             ctrlProd.tiposArticulo = tiposArticulo;
-            ctrlProd.mantenimientos = mttos;
-            ctrlProd.almacenes = almnes;
+            //ctrlProd.mantenimientos = mttos;
+            //ctrlProd.almacenes = almnes;
 
             List<Aprobacion> aprbInsert = new List<Aprobacion>();
 
@@ -980,143 +1110,225 @@ namespace ControlProductos
             }
         }
 
-        protected void xgrdMtto_CustomCallback(object sender, ASPxGridViewCustomCallbackEventArgs e)
+        //protected void xgrdMtto_CustomCallback(object sender, ASPxGridViewCustomCallbackEventArgs e)
+        //{
+        //    xgrdMtto.JSProperties["cpAlertMessage"] = string.Empty;
+        //    var pars = e.Parameters;
+
+        //    if (pars == "Delete")
+        //    {
+        //        xgrdMtto.DataSource = null;
+        //        mttos.Clear();
+        //    }
+        //    if (pars.Contains("SelMtto"))
+        //    {
+        //        var Valores = e.Parameters;
+        //        string[] data = Valores.Split(';');
+        //        string idChk = data[1];
+        //        string[] ids = idChk.Split('-');
+        //        string id = ids[0];
+        //        bool select = Convert.ToBoolean(data[2]);
+        //        foreach (Mtto_Almn item in mttos)
+        //        {
+        //            if (item.ctrlPMantenimientoID == Convert.ToInt32(id.Substring(3)))
+        //            {
+        //                item.selected = select;
+        //                break;
+        //            }
+        //        }
+
+        //        xgrdMtto.DataSource = mttos;
+        //        xgrdMtto.DataBind();
+        //    }
+        //    else
+        //    {
+        //        if (pars != "Save")
+        //        {
+        //            var Valores = e.Parameters;
+        //            string[] data = Valores.Split(',');
+
+        //            foreach (string d in data)
+        //            {
+        //                string valor = d.Replace("chk", "");
+        //                string[] datos = valor.Split('-');
+        //                string idmtto = datos[0];
+        //                string folio = datos[1];
+        //                mttos = mttos.FindAll(p => p.codigoMttoAlmn != folio);
+        //            }
+        //        }
+
+        //        xgrdMtto.DataSource = mttos;
+        //    }
+
+        //    xgrdMtto.DataBind();
+        //}
+
+        //protected void xgrdMtto_HtmlDataCellPrepared(object sender, ASPxGridViewTableDataCellEventArgs e)
+        //{
+        //    if (e.DataColumn.Name == "CheckID")
+        //    {
+        //        var id = e.GetValue("ctrlPMantenimientoID").ToString() + "-" + e.GetValue("codigoMttoAlmn").ToString();
+        //        bool selected = Convert.ToBoolean(e.GetValue("selected"));
+        //        if (selected)
+        //        {
+        //            e.Cell.Text = string.Format("<input type='checkbox' class='chkMtto' id='chk{0}' onchange='SelMtto(this);' checked='checked'>", id);
+        //        }
+        //        else
+        //        {
+        //            e.Cell.Text = string.Format("<input type='checkbox' class='chkMtto' id='chk{0}' onchange='SelMtto(this);'>", id);
+        //        }
+        //    }
+        //}
+
+        //protected void xgrdAlmacen_CustomCallback(object sender, ASPxGridViewCustomCallbackEventArgs e)
+        //{
+        //    xgrdAlmacen.JSProperties["cpAlertMessage"] = string.Empty;
+        //    var pars = e.Parameters;
+
+        //    if (pars == "Delete")
+        //    {
+        //        xgrdAlmacen.DataSource = null;
+        //        almnes.Clear();
+        //    }
+        //    if (pars.Contains("SelAlmn"))
+        //    {
+        //        var Valores = e.Parameters;
+        //        string[] data = Valores.Split(';');
+        //        string idChk = data[1];
+        //        string[] ids = idChk.Split('-');
+        //        string id = ids[0];
+        //        bool select = Convert.ToBoolean(data[2]);
+        //        foreach (Mtto_Almn item in almnes)
+        //        {
+        //            if (item.ctrlPMantenimientoID == Convert.ToInt32(id.Substring(3)))
+        //            {
+        //                item.selected = select;
+        //                break;
+        //            }
+        //        }
+
+        //        xgrdAlmacen.DataSource = almnes;
+        //        xgrdAlmacen.DataBind();
+        //    }
+        //    else
+        //    {
+        //        if (pars != "Save")
+        //        {
+        //            var Valores = e.Parameters;
+        //            string[] data = Valores.Split(',');
+
+        //            foreach (string d in data)
+        //            {
+        //                string valor = d.Replace("chk", "");
+        //                string[] datos = valor.Split('-');
+        //                string idmtto = datos[0];
+        //                string folio = datos[1];
+        //                almnes = almnes.FindAll(p => p.codigoMttoAlmn != folio);
+        //            }
+        //        }
+
+        //        xgrdAlmacen.DataSource = almnes;
+        //    }
+
+        //    xgrdAlmacen.DataBind();
+        //}
+
+        //protected void xgrdAlmacen_HtmlDataCellPrepared(object sender, ASPxGridViewTableDataCellEventArgs e)
+        //{
+        //    if (e.DataColumn.Name == "CheckID")
+        //    {
+        //        var id = e.GetValue("ctrlPMantenimientoID").ToString() + "-" + e.GetValue("codigoMttoAlmn").ToString();
+        //        bool selected = Convert.ToBoolean(e.GetValue("selected"));
+        //        if (selected)
+        //        {
+        //            e.Cell.Text = string.Format("<input type='checkbox' class='chkAlmn' id='chk{0}' onchange='SelAlmn(this);' checked='checked'>", id);
+        //        }
+        //        else
+        //        {
+        //            e.Cell.Text = string.Format("<input type='checkbox' class='chkAlmn' id='chk{0}' onchange='SelAlmn(this);'>", id);
+        //        }
+        //    }
+        //}
+
+
+        protected void xgrdArchivos_CustomCallback(object sender, ASPxGridViewCustomCallbackEventArgs e)
         {
-            xgrdMtto.JSProperties["cpAlertMessage"] = string.Empty;
+            xgrdArchivos.JSProperties["cpAlertMessage"] = string.Empty;
             var pars = e.Parameters;
 
-            if (pars == "Delete")
+            string CodtDoc = cmbTipoDoc.SelectedItem.Value.ToString();
+            string tDoc = cmbTipoDoc.SelectedItem.Text.ToString();
+
+            if (pars == "Add")
             {
-                xgrdMtto.DataSource = null;
-                mttos.Clear();
-            }
-            if (pars.Contains("SelMtto"))
-            {
-                var Valores = e.Parameters;
-                string[] data = Valores.Split(';');
-                string idChk = data[1];
-                string[] ids = idChk.Split('-');
-                string id = ids[0];
-                bool select = Convert.ToBoolean(data[2]);
-                foreach (Mtto_Almn item in mttos)
+                if (txtdescripcionArchivo.Text == "")
                 {
-                    if (item.ctrlPMantenimientoID == Convert.ToInt32(id.Substring(3)))
-                    {
-                        item.selected = select;
-                        break;
-                    }
+                    xgrdArchivos.JSProperties["cpAlertMessage"] = "NotDescripcion";
+                    return;
+                }
+                if (txtFileArchivo.Text == "")
+                {
+                    xgrdArchivos.JSProperties["cpAlertMessage"] = "UploadFile";
+                    return;
                 }
 
-                xgrdMtto.DataSource = mttos;
-                xgrdMtto.DataBind();
+                archivos a = new archivos();
+                a.ctrlPArchivosID = 0;
+                a.noDocumento = lblnDoc.Text;
+                a.codigoTipoDocumento = CodtDoc;
+                a.descripcion = txtdescripcionArchivo.Text;
+                a.archivo = txtFileArchivo.Text;
+                a.TipoDocumento = tDoc;
+
+
+                List<archivos> exists = archivos.FindAll(ex => ex.archivo == a.archivo);
+                if(exists.Count > 0)
+                {
+                    xgrdArchivos.JSProperties["cpAlertMessage"] = "Exist";
+                    return;
+                }
+
+                archivos.Add(a);
+                xgrdArchivos.DataSource = archivos;
+                xgrdArchivos.DataBind();
+
+                txtdescripcionArchivo.Text = "";
+                txtFileArchivo.Text = "";
+                xgrdArchivos.JSProperties["cpAlertMessage"] = "SussAdd";
+            }
+            else if (pars == "Delete")
+            {
+                archivos.Clear();
+                xgrdArchivos.DataSource = archivos;
+                xgrdArchivos.DataBind();
+
+                xgrdArchivos.JSProperties["cpAlertMessage"] = "succDeleteAll";
             }
             else
             {
-                if (pars != "Save")
-                {
-                    var Valores = e.Parameters;
-                    string[] data = Valores.Split(',');
-
-                    foreach (string d in data)
-                    {
-                        string valor = d.Replace("chk", "");
-                        string[] datos = valor.Split('-');
-                        string idmtto = datos[0];
-                        string folio = datos[1];
-                        mttos = mttos.FindAll(p => p.codigoMttoAlmn != folio);
-                    }
-                }
-
-                xgrdMtto.DataSource = mttos;
-            }
-
-            xgrdMtto.DataBind();
-        }
-
-        protected void xgrdMtto_HtmlDataCellPrepared(object sender, ASPxGridViewTableDataCellEventArgs e)
-        {
-            if (e.DataColumn.Name == "CheckID")
-            {
-                var id = e.GetValue("ctrlPMantenimientoID").ToString() + "-" + e.GetValue("codigoMttoAlmn").ToString();
-                bool selected = Convert.ToBoolean(e.GetValue("selected"));
-                if (selected)
-                {
-                    e.Cell.Text = string.Format("<input type='checkbox' class='chkMtto' id='chk{0}' onchange='SelMtto(this);' checked='checked'>", id);
-                }
-                else
-                {
-                    e.Cell.Text = string.Format("<input type='checkbox' class='chkMtto' id='chk{0}' onchange='SelMtto(this);'>", id);
-                }
-            }
-        }
-
-        protected void xgrdAlmacen_CustomCallback(object sender, ASPxGridViewCustomCallbackEventArgs e)
-        {
-            xgrdAlmacen.JSProperties["cpAlertMessage"] = string.Empty;
-            var pars = e.Parameters;
-
-            if (pars == "Delete")
-            {
-                xgrdAlmacen.DataSource = null;
-                almnes.Clear();
-            }
-            if (pars.Contains("SelAlmn"))
-            {
                 var Valores = e.Parameters;
-                string[] data = Valores.Split(';');
-                string idChk = data[1];
-                string[] ids = idChk.Split('-');
-                string id = ids[0];
-                bool select = Convert.ToBoolean(data[2]);
-                foreach (Mtto_Almn item in almnes)
+                string[] data = Valores.Split(',');
+                foreach(string d in data)
                 {
-                    if (item.ctrlPMantenimientoID == Convert.ToInt32(id.Substring(3)))
-                    {
-                        item.selected = select;
-                        break;
-                    }
+                    string[] datos = d.Split('-');
+                    string codigoTipoDocumento = datos[1];
+                    string archivo = datos[2];
+                    archivos = archivos.FindAll(p => p.archivo != archivo);
+                    xgrdArchivos.DataSource = archivos;
+                    xgrdArchivos.DataBind();
+
+                    xgrdArchivos.JSProperties["cpAlertMessage"] = "succDeleteSel";
                 }
-
-                xgrdAlmacen.DataSource = almnes;
-                xgrdAlmacen.DataBind();
             }
-            else
-            {
-                if (pars != "Save")
-                {
-                    var Valores = e.Parameters;
-                    string[] data = Valores.Split(',');
-
-                    foreach (string d in data)
-                    {
-                        string valor = d.Replace("chk", "");
-                        string[] datos = valor.Split('-');
-                        string idmtto = datos[0];
-                        string folio = datos[1];
-                        almnes = almnes.FindAll(p => p.codigoMttoAlmn != folio);
-                    }
-                }
-
-                xgrdAlmacen.DataSource = almnes;
-            }
-
-            xgrdAlmacen.DataBind();
         }
 
-        protected void xgrdAlmacen_HtmlDataCellPrepared(object sender, ASPxGridViewTableDataCellEventArgs e)
+        protected void xgrdArchivos_HtmlDataCellPrepared(object sender, ASPxGridViewTableDataCellEventArgs e)
         {
-            if (e.DataColumn.Name == "CheckID")
+            if (e.DataColumn.Name == "ctrlPArchivosID")
             {
-                var id = e.GetValue("ctrlPMantenimientoID").ToString() + "-" + e.GetValue("codigoMttoAlmn").ToString();
-                bool selected = Convert.ToBoolean(e.GetValue("selected"));
-                if (selected)
-                {
-                    e.Cell.Text = string.Format("<input type='checkbox' class='chkAlmn' id='chk{0}' onchange='SelAlmn(this);' checked='checked'>", id);
-                }
-                else
-                {
-                    e.Cell.Text = string.Format("<input type='checkbox' class='chkAlmn' id='chk{0}' onchange='SelAlmn(this);'>", id);
-                }
+                var id = e.GetValue("ctrlPArchivosID").ToString() + "-" + e.GetValue("codigoTipoDocumento").ToString() + "-" + e.GetValue("archivo").ToString();
+
+                e.Cell.Text = string.Format("<input type='checkbox' class='chkArchivo' id='chk{0}'>", id);
             }
         }
 
@@ -1317,131 +1529,131 @@ namespace ControlProductos
             }
         }
 
-        protected void xgrdMttoMDL_CustomCallback(object sender, ASPxGridViewCustomCallbackEventArgs e)
-        {
-            xgrdMttoMDL.JSProperties["cpAlertMessage"] = string.Empty;
-            var pars = e.Parameters;
+        //protected void xgrdMttoMDL_CustomCallback(object sender, ASPxGridViewCustomCallbackEventArgs e)
+        //{
+        //    xgrdMttoMDL.JSProperties["cpAlertMessage"] = string.Empty;
+        //    var pars = e.Parameters;
 
-            var Valores = e.Parameters;
-            string[] data = Valores.Split(',');
+        //    var Valores = e.Parameters;
+        //    string[] data = Valores.Split(',');
 
-            mttos.Clear();
-            foreach (string d in data)
-            {
-                string valor = d.Replace("chk", "");
-                string[] datos = valor.Split('-');
-                string codigo = datos[0];
-                string tipo = datos[1];
-                if (tipo == "M")
-                {
-                    List<MttoAlmn> t = tMttoAlmn.FindAll(p => p.codigoMttoAlmn == codigo && p.tipo == tipo);
-                    foreach (MttoAlmn item in t)
-                    {
-                        List<Mtto_Almn> t2 = mttos.FindAll(p => p.codigoMttoAlmn == item.codigoMttoAlmn);
-                        if (t2.Count == 0)
-                        {
-                            Mtto_Almn n = new Mtto_Almn();
-                            n.ctrlPMantenimientoID = 0;
-                            n.noDocumento = "";
-                            n.codigoMttoAlmn = item.codigoMttoAlmn;
-                            n.especificacion = item.especificacion;
-                            n.notas = item.notas;
-                            n.clasificacion = item.clasificacion;
-                            n.responsable = item.responsable;
-                            n.tipo = item.tipo;
-                            mttos.Add(n);
-                        }
-                    }
-                }
-            }
+        //    mttos.Clear();
+        //    foreach (string d in data)
+        //    {
+        //        string valor = d.Replace("chk", "");
+        //        string[] datos = valor.Split('-');
+        //        string codigo = datos[0];
+        //        string tipo = datos[1];
+        //        if (tipo == "M")
+        //        {
+        //            List<MttoAlmn> t = tMttoAlmn.FindAll(p => p.codigoMttoAlmn == codigo && p.tipo == tipo);
+        //            foreach (MttoAlmn item in t)
+        //            {
+        //                List<Mtto_Almn> t2 = mttos.FindAll(p => p.codigoMttoAlmn == item.codigoMttoAlmn);
+        //                if (t2.Count == 0)
+        //                {
+        //                    Mtto_Almn n = new Mtto_Almn();
+        //                    n.ctrlPMantenimientoID = 0;
+        //                    n.noDocumento = "";
+        //                    n.codigoMttoAlmn = item.codigoMttoAlmn;
+        //                    n.especificacion = item.especificacion;
+        //                    n.notas = item.notas;
+        //                    n.clasificacion = item.clasificacion;
+        //                    n.responsable = item.responsable;
+        //                    n.tipo = item.tipo;
+        //                    mttos.Add(n);
+        //                }
+        //            }
+        //        }
+        //    }
 
-            xgrdMttoMDL.JSProperties["cpAlertMessage"] = "Add";
-        }
+        //    xgrdMttoMDL.JSProperties["cpAlertMessage"] = "Add";
+        //}
 
-        protected void xgrdMttoMDL_HtmlDataCellPrepared(object sender, ASPxGridViewTableDataCellEventArgs e)
-        {
-            if (e.DataColumn.Name == "CheckID")
-            {
-                var id = e.GetValue("codigoMttoAlmn").ToString() + "-" + e.GetValue("tipo").ToString();
-                bool rel = false;
-                List<Mtto_Almn> _mttos = mttos.FindAll(item => item.codigoMttoAlmn == e.GetValue("codigoMttoAlmn").ToString());
-                if (_mttos.Count > 0)
-                {
-                    rel = true;
-                }
-                if (rel)
-                {
-                    e.Cell.Text = string.Format("<input type='checkbox' class='chkMttoMDL' id='chk{0}' checked>", id);
-                }
-                else
-                {
-                    e.Cell.Text = string.Format("<input type='checkbox' class='chkMttoMDL' id='chk{0}'>", id);
-                }
-            }
-        }
+        //protected void xgrdMttoMDL_HtmlDataCellPrepared(object sender, ASPxGridViewTableDataCellEventArgs e)
+        //{
+        //    if (e.DataColumn.Name == "CheckID")
+        //    {
+        //        var id = e.GetValue("codigoMttoAlmn").ToString() + "-" + e.GetValue("tipo").ToString();
+        //        bool rel = false;
+        //        List<Mtto_Almn> _mttos = mttos.FindAll(item => item.codigoMttoAlmn == e.GetValue("codigoMttoAlmn").ToString());
+        //        if (_mttos.Count > 0)
+        //        {
+        //            rel = true;
+        //        }
+        //        if (rel)
+        //        {
+        //            e.Cell.Text = string.Format("<input type='checkbox' class='chkMttoMDL' id='chk{0}' checked>", id);
+        //        }
+        //        else
+        //        {
+        //            e.Cell.Text = string.Format("<input type='checkbox' class='chkMttoMDL' id='chk{0}'>", id);
+        //        }
+        //    }
+        //}
 
-        protected void xgrdAlmacenMDL_CustomCallback(object sender, ASPxGridViewCustomCallbackEventArgs e)
-        {
-            xgrdAlmacenMDL.JSProperties["cpAlertMessage"] = string.Empty;
-            var pars = e.Parameters;
+        //protected void xgrdAlmacenMDL_CustomCallback(object sender, ASPxGridViewCustomCallbackEventArgs e)
+        //{
+        //    xgrdAlmacenMDL.JSProperties["cpAlertMessage"] = string.Empty;
+        //    var pars = e.Parameters;
 
-            var Valores = e.Parameters;
-            string[] data = Valores.Split(',');
+        //    var Valores = e.Parameters;
+        //    string[] data = Valores.Split(',');
 
-            almnes.Clear();
-            foreach (string d in data)
-            {
-                string valor = d.Replace("chk", "");
-                string[] datos = valor.Split('-');
-                string codigo = datos[0];
-                string tipo = datos[1];
-                if (tipo == "A")
-                {
-                    List<MttoAlmn> t = tMttoAlmn.FindAll(p => p.codigoMttoAlmn == codigo && p.tipo == tipo);
-                    foreach (MttoAlmn item in t)
-                    {
-                        List<Mtto_Almn> t2 = almnes.FindAll(p => p.codigoMttoAlmn == item.codigoMttoAlmn);
-                        if (t2.Count == 0)
-                        {
-                            Mtto_Almn n = new Mtto_Almn();
-                            n.ctrlPMantenimientoID = 0;
-                            n.noDocumento = "";
-                            n.codigoMttoAlmn = item.codigoMttoAlmn;
-                            n.especificacion = item.especificacion;
-                            n.notas = item.notas;
-                            n.clasificacion = item.clasificacion;
-                            n.responsable = item.responsable;
-                            n.tipo = item.tipo;
-                            almnes.Add(n);
-                        }
-                    }
-                }
-            }
+        //    almnes.Clear();
+        //    foreach (string d in data)
+        //    {
+        //        string valor = d.Replace("chk", "");
+        //        string[] datos = valor.Split('-');
+        //        string codigo = datos[0];
+        //        string tipo = datos[1];
+        //        if (tipo == "A")
+        //        {
+        //            List<MttoAlmn> t = tMttoAlmn.FindAll(p => p.codigoMttoAlmn == codigo && p.tipo == tipo);
+        //            foreach (MttoAlmn item in t)
+        //            {
+        //                List<Mtto_Almn> t2 = almnes.FindAll(p => p.codigoMttoAlmn == item.codigoMttoAlmn);
+        //                if (t2.Count == 0)
+        //                {
+        //                    Mtto_Almn n = new Mtto_Almn();
+        //                    n.ctrlPMantenimientoID = 0;
+        //                    n.noDocumento = "";
+        //                    n.codigoMttoAlmn = item.codigoMttoAlmn;
+        //                    n.especificacion = item.especificacion;
+        //                    n.notas = item.notas;
+        //                    n.clasificacion = item.clasificacion;
+        //                    n.responsable = item.responsable;
+        //                    n.tipo = item.tipo;
+        //                    almnes.Add(n);
+        //                }
+        //            }
+        //        }
+        //    }
 
-            xgrdAlmacenMDL.JSProperties["cpAlertMessage"] = "Add";
-        }
+        //    xgrdAlmacenMDL.JSProperties["cpAlertMessage"] = "Add";
+        //}
 
-        protected void xgrdAlmacenMDL_HtmlDataCellPrepared(object sender, ASPxGridViewTableDataCellEventArgs e)
-        {
-            if (e.DataColumn.Name == "CheckID")
-            {
-                var id = e.GetValue("codigoMttoAlmn").ToString() + "-" + e.GetValue("tipo").ToString();
-                bool rel = false;
-                List<Mtto_Almn> _almnes = almnes.FindAll(item => item.codigoMttoAlmn == e.GetValue("codigoMttoAlmn").ToString());
-                if (_almnes.Count > 0)
-                {
-                    rel = true;
-                }
-                if (rel)
-                {
-                    e.Cell.Text = string.Format("<input type='checkbox' class='chkAlmnMDL' id='chk{0}' checked>", id);
-                }
-                else
-                {
-                    e.Cell.Text = string.Format("<input type='checkbox' class='chkAlmnMDL' id='chk{0}'>", id);
-                }
-            }
-        }
+        //protected void xgrdAlmacenMDL_HtmlDataCellPrepared(object sender, ASPxGridViewTableDataCellEventArgs e)
+        //{
+        //    if (e.DataColumn.Name == "CheckID")
+        //    {
+        //        var id = e.GetValue("codigoMttoAlmn").ToString() + "-" + e.GetValue("tipo").ToString();
+        //        bool rel = false;
+        //        List<Mtto_Almn> _almnes = almnes.FindAll(item => item.codigoMttoAlmn == e.GetValue("codigoMttoAlmn").ToString());
+        //        if (_almnes.Count > 0)
+        //        {
+        //            rel = true;
+        //        }
+        //        if (rel)
+        //        {
+        //            e.Cell.Text = string.Format("<input type='checkbox' class='chkAlmnMDL' id='chk{0}' checked>", id);
+        //        }
+        //        else
+        //        {
+        //            e.Cell.Text = string.Format("<input type='checkbox' class='chkAlmnMDL' id='chk{0}'>", id);
+        //        }
+        //    }
+        //}
 
         protected void ASPxCallbackPanel2_Callback(object sender, CallbackEventArgsBase e)
         {
@@ -1478,11 +1690,11 @@ namespace ControlProductos
                         ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectSubcategory3";
                         return;
                     }
-                    if (cmbUtilizado.SelectedItem == null)
-                    {
-                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectUsed";
-                        return;
-                    }
+                    //if (cmbUtilizado.SelectedItem == null)
+                    //{
+                    //    ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectUsed";
+                    //    return;
+                    //}
                     if (cmbDepa.SelectedItem == null)
                     {
                         ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectDepartment";
@@ -1503,16 +1715,16 @@ namespace ControlProductos
                         ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectProvider";
                         return;
                     }
-                    if (cmbUnico.SelectedItem == null)
-                    {
-                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectUnique";
-                        return;
-                    }
-                    if (xDateFechaCot.Date == new DateTime(1, 1, 1))
-                    {
-                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectQuoteDate";
-                        return;
-                    }
+                    //if (cmbUnico.SelectedItem == null)
+                    //{
+                    //    ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectUnique";
+                    //    return;
+                    //}
+                    //if (xDateFechaCot.Date == new DateTime(1, 1, 1))
+                    //{
+                    //    ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectQuoteDate";
+                    //    return;
+                    //}
                     if (cmbMoneda.SelectedItem == null)
                     {
                         ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectCurrency";
@@ -1533,14 +1745,14 @@ namespace ControlProductos
                         ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectBuyer";
                         return;
                     }
-                    if (rbFichaSi.Checked)
-                    {
-                        if(txtFile.Text == "")
-                        {
-                            ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectFile";
-                            return;
-                        }
-                    }
+                    //if (rbFichaSi.Checked)
+                    //{
+                    //    if(txtFile.Text == "")
+                    //    {
+                    //        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectFile";
+                    //        return;
+                    //    }
+                    //}
 
                     ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = Save();
                     return;
@@ -1597,20 +1809,20 @@ namespace ControlProductos
                         cmbProducto.Visible = true;
                     }
                 }
-                else if (pS[0] == "rbFichaSegSi" || pS[0] == "rbFichaSegNo")
-                {
-                    switch (pS[0])
-                    {
-                        case "rbFichaSegSi":
-                            dvHojaSeg1.Visible = true;
-                            dvHojaSeg2.Visible = true;
-                            break;
-                        default:
-                            dvHojaSeg1.Visible = false;
-                            dvHojaSeg2.Visible = false;
-                            break;
-                    }
-                }
+                //else if (pS[0] == "rbFichaSegSi" || pS[0] == "rbFichaSegNo")
+                //{
+                //    switch (pS[0])
+                //    {
+                //        case "rbFichaSegSi":
+                //            dvHojaSeg1.Visible = true;
+                //            dvHojaSeg2.Visible = true;
+                //            break;
+                //        default:
+                //            dvHojaSeg1.Visible = false;
+                //            dvHojaSeg2.Visible = false;
+                //            break;
+                //    }
+                //}
                 else
                 {
                     if (rbAlta.Checked)
@@ -1659,17 +1871,31 @@ namespace ControlProductos
                         if (M > 5)
                         {
                             lblstock.Text = "M";
-                            lblstock2.Text = "M";
+                            lblstock2.Text = "M: Con Stock";
                         }
                         else
                         {
                             lblstock.Text = "N";
-                            lblstock2.Text = "N";
+                            lblstock2.Text = "N: Con Stock";
                         }
                         xgrdTipoArticulo.DataSource = tiposArticulo;
                         xgrdTipoArticulo.DataBind();
                     }
                 }
+            }
+        }
+
+        protected void CIuplGFileArchivo_FileUploadComplete(object sender, FileUploadCompleteEventArgs e)
+        {
+            if (e.IsValid)
+            {
+                e.CallbackData = SavePostedGraphicsFile(e.UploadedFile);
+                e.IsValid = true;
+            }
+            else
+            {
+                e.IsValid = false;
+                e.ErrorText = "Unexpected error";
             }
         }
 

@@ -3725,6 +3725,8 @@
     <Compile Include="dataAccess\ControlProductos.cs" />
     <Compile Include="dataAccess\Departamento.cs" />
     <Compile Include="dataAccess\Empleados.cs" />
+    <Compile Include="dataAccess\ActFijo.cs" />
+    <Compile Include="dataAccess\JDE.cs" />
     <Compile Include="dataAccess\Maquina.cs" />
     <Compile Include="dataAccess\Marca.cs" />
     <Compile Include="dataAccess\Menu.cs" />
@@ -3743,6 +3745,7 @@
     <Compile Include="dataAccess\SubCategoria2.cs" />
     <Compile Include="dataAccess\SubCategoria3.cs" />
     <Compile Include="dataAccess\TipoArticulo.cs" />
+    <Compile Include="dataAccess\tipoDocumento.cs" />
     <Compile Include="dataAccess\UMedida.cs" />
     <Compile Include="dataAccess\Usuario.cs" />
     <Compile Include="dataAccess\Utilizado.cs" />
@@ -3752,6 +3755,8 @@
     <Compile Include="Entity\ControlProductos.cs" />
     <Compile Include="Entity\Departamento.cs" />
     <Compile Include="Entity\Empleados.cs" />
+    <Compile Include="Entity\ActFijos.cs" />
+    <Compile Include="Entity\JDE.cs" />
     <Compile Include="Entity\loggedEmpleado.cs" />
     <Compile Include="Entity\Maquina.cs" />
     <Compile Include="Entity\Marca.cs" />
@@ -3771,6 +3776,7 @@
     <Compile Include="Entity\SubCategoria2.cs" />
     <Compile Include="Entity\SubCategoria3.cs" />
     <Compile Include="Entity\TipoArticulo.cs" />
+    <Compile Include="Entity\tipoDocumento.cs" />
     <Compile Include="Entity\UMedida.cs" />
     <Compile Include="Entity\Usuario.cs" />
     <Compile Include="Entity\Utilizado.cs" />

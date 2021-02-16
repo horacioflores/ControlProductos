@@ -48,7 +48,7 @@ namespace ControlProductos.Entity
         public string CodigoSubcategoria1 { get; set; }
         public string CodigoSubcategoria2 { get; set; }
         public string CodigoSubcategoria3 { get; set; }
-        public string CodigoUtilizado { get; set; }
+        //public string CodigoUtilizado { get; set; }
         public string CodigoDepto { get; set; }
         public string descripcionUno { get; set; }
         public string descripcionDos { get; set; }
@@ -61,21 +61,21 @@ namespace ControlProductos.Entity
         public decimal stockMaximo { get; set; }
         public string CodigoMarca { get; set; }
         public string CodigoProveedor { get; set; }
-        public bool esUnico { get; set; }
-        public string fechaCotizacion { get; set; }
+        //public bool esUnico { get; set; }
+        //public string fechaCotizacion { get; set; }
         public decimal precioUnitario { get; set; }
         public int diasEntrega { get; set; }
         public string Codigomoneda { get; set; }
-        public decimal total { get; set; }
-        public string fichaDatoSeguridad { get; set; }
+        //public decimal total { get; set; }
+        //public string fichaDatoSeguridad { get; set; }
         public string CodigoUM { get; set; }
         public string conteoCiclico { get; set; }
-        public string almacenamientoExternoPosible { get; set; }
+        //public string almacenamientoExternoPosible { get; set; }
         public string codigoPlaneador { get; set; }
         public string codigoComprador { get; set; }
-        public string fechaInventario { get; set; }
+        //public string fechaInventario { get; set; }
         public string multiplo { get; set; }
-        public string hojaSeguridad { get; set; }
+        //public string hojaSeguridad { get; set; }
         public string codigoArticulo { get; set; }
         public string comentarios { get; set; }
         public string codigo_sts_Prods { get; set; }
@@ -87,10 +87,37 @@ namespace ControlProductos.Entity
         public bool vigente { get; set; }
         public string producto { get; set; }
         public string codigoYNombre { get; set; }
+
+        
+        public string descripcion { get; set; }
+        public string modelo { get; set; }
+        public string codActFijo { get; set; }
+        public string subcuenta { get; set; }
+        public decimal consEstimado { get; set; }
+        public string unidadMedida { get; set; }
+        public decimal cantMinima { get; set; }
+        public string FechaRequerida { get; set; }
+        public string numOQ { get; set; }
+        public decimal precio { get; set; }
+        public string numOrden { get; set; }
+        public string reparar { get; set; }
+
+        public List<archivos> archivos { get; set; }
+
         public List<_tipoArticulo> tiposArticulo { get; set; }
         public List<Mtto_Almn> mantenimientos { get; set; }
         public List<Mtto_Almn> almacenes { get; set; }
         public List<Aprobacion> aprobaciones { get; set; }
+    }
+
+    public class archivos
+    {
+        public int ctrlPArchivosID { get; set; }
+        public string noDocumento { get; set; }
+        public string codigoTipoDocumento { get; set; }
+        public string descripcion { get; set; }
+        public string archivo { get; set; }
+        public string TipoDocumento { get; set; }
     }
 
     public class _tipoArticulo
