@@ -178,6 +178,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\images\BtnEnviarSolicitante.png" />
     <Content Include="CatMttoAlmn.aspx" />
     <Content Include="CatTypeArticle.aspx" />
     <Content Include="SmartFormas.css" />
@@ -3512,7 +3513,9 @@
     <Content Include="Upload\4_120844PM.jpg" />
     <Content Include="Upload\4_121340PM.jpg" />
     <Content Include="Upload\4_122530PM.jpg" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="wellcome.aspx" />
   </ItemGroup>
   <ItemGroup>
