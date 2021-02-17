@@ -352,10 +352,10 @@
        }
 
        function recalcular() {
-           cantidad = parseFloat(document.getElementById("MainContent_txtCantidad").value);
+           cantidad = parseFloat(document.getElementById("MainContent_ASPxCallbackPanel2_txtConsEstimado").value);
            precio = parseFloat(document.getElementById("MainContent_txtPrecioU").value);
-           total = cantidad * precio;
-           document.getElementById("MainContent_lblTotal").innerHTML = (Math.round(total*100)/100).toString();
+
+           document.getElementById("MainContent_txtCantidad").value = cantidad * precio;
        }
 
        function OnPanel1EndCallback(s, e) {
@@ -1383,7 +1383,7 @@
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-2">Consumo estimado anual</label>
                                 <div class="col-sm-4">
-                                   <asp:TextBox ID="txtConsEstimado" runat="server" TextMode="Number" step="0.01"></asp:TextBox>
+                                   <asp:TextBox ID="txtConsEstimado" onChange="recalcular()" runat="server" TextMode="Number" step="0.01"></asp:TextBox>
                                 </div>
                                 <label class="text-form col-sm-2">Unidad de medida</label>
                                 <div class="col-sm-4">
@@ -1522,21 +1522,48 @@
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-2">GL Class</label>
                                 <div class="col-sm-4">
-                                    <input type="text" style="width:100%" placeholder="Nuevo Combo JDE">
+                                    <input type="hidden" id="hdnGLClass" value='<%# Eval("GlClass")%>' runat="server"/>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbGlClass" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Width="100%" Paddings-Padding="0px" Theme="Aqua"  
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-2">Texto de búsqueda</label>
                                 <div class="col-sm-4">
-                                    <input type="text" style="width:100%" placeholder="Nuevo texto libre">
+                                    <asp:TextBox ID="txtTextBusq" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-2">Proveedor</label>
                                 <div class="col-sm-4">
-                                    <input type="text" style="width:100%" placeholder="Nuevo mismo combo arriba">
+                                    <input type="hidden" id="hdnCodProvComp" value='<%# Eval("CodigoProveedor_comp")%>' runat="server"/>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbProveedorComp" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-2">País de origen proveedor</label>
                                 <div class="col-sm-4">
-                                    <input type="text" style="width:100%" placeholder="Nuevo Combo JDE">
+                                    <input type="hidden" id="hdnPaisOrigen" value='<%# Eval("PaisOrigen")%>' runat="server"/>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPaisOrigen" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Width="100%" Paddings-Padding="0px" Theme="Aqua"  
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
                                 </div>
                             </div>
                             <div class="row form-group CeroPM">
@@ -1599,11 +1626,29 @@
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-2">Método de Coste Sales/Inventory</label>
                                 <div class="col-sm-4">
-                                   <input type="text" style="width:100%" placeholder="Nuevo Combo JDE">
+                                    <input type="hidden" id="hdnMtdoCosteInv" value='<%# Eval("MTDOCoste_Inv")%>' runat="server"/>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMtdoCosteInv" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Width="100%" Paddings-Padding="0px" Theme="Aqua"  
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-2">Método de Coste Sales/Purchasing</label>
                                 <div class="col-sm-4">
-                                   <input type="text" style="width:100%" placeholder="Nuevo Combo JDE">
+                                    <input type="hidden" id="hdnMtdoCostePursh" value='<%# Eval("MTDOCoste_Pursh")%>' runat="server"/>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMtdoCostePursh" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Width="100%" Paddings-Padding="0px" Theme="Aqua"  
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
                                 </div>
                             </div>
                             <fieldset style="padding:10px;border: 1px solid #B5D2EA;border-radius:5px;">
@@ -1611,29 +1656,47 @@
                                 <div class="row form-group CeroPM">
                                     <label class="text-form col-sm-1">Tipo de Empaque</label>
                                     <div class="col-sm-3">
-                                       <input type="text" style="width:100%" placeholder="Nuevo Combo Interno">
+                                    <input type="hidden" id="hdnTipoEmpaque" value='<%# Eval("codigo_tipoEmpaque")%>' runat="server"/>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbTipoEmaque" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Width="100%" Paddings-Padding="0px" Theme="Aqua"  
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
                                     </div>
                                     <label class="text-form col-sm-1">Piezas por Empaque</label>
                                     <div class="col-sm-3">
-                                        <input type="text" style="width:100%" placeholder="Nuevo Numerico Libre">
+                                        <asp:TextBox ID="txtPiezaEmp" runat="server" TextMode="Number" step="1"></asp:TextBox>
                                     </div>
                                     <label class="text-form col-sm-1">Unidad de Medida</label>
                                     <div class="col-sm-3">
-                                       <input type="text" style="width:100%" placeholder="Nuevo Combo mismo Arriba">
+                                        <input type="hidden" id="hdnUMEmpq" value='<%# Eval("UMEmpaque")%>' runat="server"/>
+                                        <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbUmEmpaque" runat="server" IncrementalFilteringMode="Contains" 
+                                            FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Width="100%" Paddings-Padding="0px" Theme="Aqua"  
+                                            PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                            <ValidationSettings>
+                                                <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                            </ValidationSettings>
+                                            <ClientSideEvents/>
+                                            <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        </dx:ASPxComboBox>
                                     </div>
                                 </div>
                                 <div class="row form-group CeroPM">
                                     <label class="text-form col-sm-1">Alto</label>
                                     <div class="col-sm-3">
-                                       <input type="text" style="width:100%" placeholder="Nuevo numérico libre">
+                                       <asp:TextBox ID="txtAlto" runat="server" TextMode="Number" step="1"></asp:TextBox>
                                     </div>
                                     <label class="text-form col-sm-1">Ancho</label>
                                     <div class="col-sm-3">
-                                        <input type="text" style="width:100%" placeholder="Nuevo numérico libre">
+                                        <asp:TextBox ID="txtAncho" runat="server" TextMode="Number" step="1"></asp:TextBox>
                                     </div>
                                     <label class="text-form col-sm-1">Largo</label>
                                     <div class="col-sm-3">
-                                        <input type="text" style="width:100%" placeholder="Nuevo numérico libre">
+                                        <asp:TextBox ID="txtLargo" runat="server" TextMode="Number" step="1"></asp:TextBox>
                                     </div>
                                 </div>
                             </fieldset>
@@ -1641,17 +1704,44 @@
                             <div class="row form-group CeroPM">  
                                 <label class="text-form col-sm-2">Purch 1/Categoría</label>
                                 <div class="col-sm-4">
-                                    <input type="text" style="width:100%" placeholder="Nuevo combo JDE">
+                                    <input type="hidden" id="hdnPursh1" value='<%# Eval("pursh1")%>' runat="server"/>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPursh1" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Width="100%" Paddings-Padding="0px" Theme="Aqua"  
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-2">Purch 2/Categoría</label>
                                 <div class="col-sm-4">
-                                    <input type="text" style="width:100%" placeholder="Nuevo combo JDE">
+                                    <input type="hidden" id="hdnPursh2" value='<%# Eval("pursh2")%>' runat="server"/>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPursh2" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Width="100%" Paddings-Padding="0px" Theme="Aqua"  
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
                                 </div>
                             </div>
                             <div class="row form-group CeroPM">  
                                 <label class="text-form col-sm-2">Familia</label>
                                 <div class="col-sm-4">
-                                    <input type="text" style="width:100%" placeholder="Nuevo combo Interno">
+                                    <input type="hidden" id="hdnFamilia" value='<%# Eval("codigoFamilia")%>' runat="server"/>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbfamilia" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Width="100%" Paddings-Padding="0px" Theme="Aqua"  
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
                                 </div>
                             </div>
                         </div>
@@ -1669,7 +1759,18 @@
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-2">Branch Plant</label>
                                 <div class="col-sm-4">
-                                    <input type="text" style="width:100%" placeholder="Nuevo combo JDE">
+
+                                    <input type="hidden" id="hdnbranch" value='<%# Eval("branch")%>' runat="server"/>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbbranch" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Width="100%" Paddings-Padding="0px" Theme="Aqua"  
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
+
                                 </div>
                                 <label class="text-form col-sm-2">Cantidad de Punto de Reorden (Stock Mínimo)</label>
                                 <div class="col-sm-4">
@@ -1683,7 +1784,18 @@
                                 </div> 
                                 <label class="text-form col-sm-2">Días de Stock de Seguridad</label>
                                 <div class="col-sm-4">
-                                    <input type="text" style="width:100%" placeholder="Nuevo combo Interno">
+                                    
+                                    <input type="hidden" id="hndDias" value='<%# Eval("diasStok")%>' runat="server"/>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbDias" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Width="100%" Paddings-Padding="0px" Theme="Aqua"  
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
+
                                 </div>
 
                             </div>
@@ -1866,29 +1978,56 @@
                                 <div class="row form-group CeroPM">
                                     <label class="text-form col-sm-1">Ubicación Primaria</label>
                                     <div class="col-sm-3">
-                                       <input type="text" style="width:100%" placeholder="Nuevo Combo JDE">
+                                        <input type="hidden" id="hndubicacionPrim" value='<%# Eval("ubicacionPrim")%>' runat="server"/>
+                                        <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbUbicacionPrim" runat="server" IncrementalFilteringMode="Contains" 
+                                            FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                            PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                            <ValidationSettings>
+                                                <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                            </ValidationSettings>
+                                            <ClientSideEvents/>
+                                            <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        </dx:ASPxComboBox>
                                     </div>
                                     <label class="text-form col-sm-1">Ubicación Secundaria</label>
                                     <div class="col-sm-3">
-                                        <input type="text" style="width:100%" placeholder="Nuevo Combo JDE">
+                                        <input type="hidden" id="hndubicacionSec" value='<%# Eval("ubicacionSec")%>' runat="server"/>
+                                        <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbUbicacionSec" runat="server" IncrementalFilteringMode="Contains" 
+                                            FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                            PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                            <ValidationSettings>
+                                                <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                            </ValidationSettings>
+                                            <ClientSideEvents/>
+                                            <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        </dx:ASPxComboBox>
                                     </div>
                                     <label class="text-form col-sm-1">Unidad de Medida</label>
                                     <div class="col-sm-3">
-                                       <input type="text" style="width:100%" placeholder="Nuevo Combo mismo Arriba">
+                                        <input type="hidden" id="hdnumAlmacen" value='<%# Eval("umAlmacen")%>' runat="server"/>
+                                        <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbUMAlmacen" runat="server" IncrementalFilteringMode="Contains" 
+                                            FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Width="100%" Paddings-Padding="0px" Theme="Aqua"  
+                                            PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                            <ValidationSettings>
+                                                <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                            </ValidationSettings>
+                                            <ClientSideEvents/>
+                                            <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        </dx:ASPxComboBox>
                                     </div>
                                 </div>
                                 <div class="row form-group CeroPM">
                                     <label class="text-form col-sm-1">Alto</label>
                                     <div class="col-sm-3">
-                                       <input type="text" style="width:100%" placeholder="Nuevo numérico libre">
+                                       <asp:TextBox ID="txtAltoAlm" runat="server"></asp:TextBox>
                                     </div>
                                     <label class="text-form col-sm-1">Ancho</label>
                                     <div class="col-sm-3">
-                                        <input type="text" style="width:100%" placeholder="Nuevo numérico libre">
+                                        <asp:TextBox ID="txtAnchoAlm" runat="server"></asp:TextBox>
                                     </div>
                                     <label class="text-form col-sm-1">Largo</label>
                                     <div class="col-sm-3">
-                                        <input type="text" style="width:100%" placeholder="Nuevo numérico libre">
+                                        <asp:TextBox ID="txtLargoAlm" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
                             </fieldset>
@@ -2043,15 +2182,24 @@
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-1">Monto Total en la primera compra</label>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txtCantidad" onChange="recalcular()" placeholder="AUTOMATICO=RESULTADO (CONSUMO ESTIMADO*PRECIO UNITARIO)"  TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <asp:TextBox ID="txtCantidad"  TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                                 <label class="text-form col-sm-1">Monto Mensual Inv Promedio</label>
                                 <div class="col-sm-3">
-                                    <input type="text" style="width:100%" placeholder="Nuevo AUTOMATICO=RESULTADO (PRECIO UNIT X CANTIDAD DEL PUNTO DE REORDEN)">
+                                    <asp:TextBox ID="txtTotal"  TextMode="Number" step="0.1" disabled="disabled" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                                 <label class="text-form col-sm-1">Moneda</label>
                                 <div class="col-sm-3">
-                                   <input type="text" style="width:100%" placeholder="Nuevo combo mismo arriba">
+                                    <input type="hidden" id="hdnMoneda" value='<%# Eval("monedaMtto")%>' runat="server"/>
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMonedaMtoo" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        <ValidationSettings>
+                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                        </ValidationSettings>
+                                        <ClientSideEvents/>
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                    </dx:ASPxComboBox>
                                 </div>
                             </div>
                         </div>

@@ -102,6 +102,33 @@ namespace ControlProductos.Entity
         public string numOrden { get; set; }
         public string reparar { get; set; }
 
+        public string GlClass { get; set; }
+        public string textBusq { get; set; }
+        public string CodigoProveedor_comp { get; set; }
+        public string PaisOrigen { get; set; }
+        public string MTDOCoste_Inv { get; set; }
+        public string MTDOCoste_Pursh { get; set; }
+
+        public string codigo_tipoEmpaque { get; set; }
+        public int piezasEmpaque { get; set; }
+        public string UMEmpaque { get; set; }
+        public int alto { get; set; }
+        public int ancho { get; set; }
+        public int largo { get; set; }
+        public string pursh1 { get; set; }
+        public string pursh2 { get; set; }
+        public string codigoFamilia { get; set; }
+        public string branch { get; set; }
+        public string diasStok { get; set; }
+
+        public string ubicacionPrim { get; set; }
+        public string ubicacionSec { get; set; }
+        public string umAlmacen { get; set; }
+        public int alto_alm { get; set; }
+        public int ancho_alm { get; set; }
+        public int largo_alm { get; set; }
+        public string monedaMtto { get; set; }
+
         public List<archivos> archivos { get; set; }
 
         public List<_tipoArticulo> tiposArticulo { get; set; }

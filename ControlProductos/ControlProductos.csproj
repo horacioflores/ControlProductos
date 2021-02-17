@@ -178,7 +178,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\images\BtnEnviarSolicitante.png" />
     <Content Include="CatMttoAlmn.aspx" />
     <Content Include="CatTypeArticle.aspx" />
     <Content Include="SmartFormas.css" />
@@ -3513,9 +3512,7 @@
     <Content Include="Upload\4_120844PM.jpg" />
     <Content Include="Upload\4_121340PM.jpg" />
     <Content Include="Upload\4_122530PM.jpg" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
     <Content Include="wellcome.aspx" />
   </ItemGroup>
   <ItemGroup>
@@ -3727,8 +3724,10 @@
     <Compile Include="dataAccess\Conteo.cs" />
     <Compile Include="dataAccess\ControlProductos.cs" />
     <Compile Include="dataAccess\Departamento.cs" />
+    <Compile Include="dataAccess\dias.cs" />
     <Compile Include="dataAccess\Empleados.cs" />
     <Compile Include="dataAccess\ActFijo.cs" />
+    <Compile Include="dataAccess\familia.cs" />
     <Compile Include="dataAccess\JDE.cs" />
     <Compile Include="dataAccess\Maquina.cs" />
     <Compile Include="dataAccess\Marca.cs" />
@@ -3749,16 +3748,19 @@
     <Compile Include="dataAccess\SubCategoria3.cs" />
     <Compile Include="dataAccess\TipoArticulo.cs" />
     <Compile Include="dataAccess\tipoDocumento.cs" />
+    <Compile Include="dataAccess\tipoEmpaque.cs" />
     <Compile Include="dataAccess\UMedida.cs" />
     <Compile Include="dataAccess\Usuario.cs" />
     <Compile Include="dataAccess\Utilizado.cs" />
     <Compile Include="Entity\Aplicacion.cs" />
+    <Compile Include="Entity\dias.cs" />
     <Compile Include="Entity\Comprador.cs" />
     <Compile Include="Entity\Conteo.cs" />
     <Compile Include="Entity\ControlProductos.cs" />
     <Compile Include="Entity\Departamento.cs" />
     <Compile Include="Entity\Empleados.cs" />
     <Compile Include="Entity\ActFijos.cs" />
+    <Compile Include="Entity\familia.cs" />
     <Compile Include="Entity\JDE.cs" />
     <Compile Include="Entity\loggedEmpleado.cs" />
     <Compile Include="Entity\Maquina.cs" />
@@ -3780,6 +3782,7 @@
     <Compile Include="Entity\SubCategoria3.cs" />
     <Compile Include="Entity\TipoArticulo.cs" />
     <Compile Include="Entity\tipoDocumento.cs" />
+    <Compile Include="Entity\tipoEmpaque.cs" />
     <Compile Include="Entity\UMedida.cs" />
     <Compile Include="Entity\Usuario.cs" />
     <Compile Include="Entity\Utilizado.cs" />
