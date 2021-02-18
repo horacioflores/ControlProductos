@@ -178,6 +178,11 @@ namespace ControlProductos
             cmbMtdoCosteInv.DataSource = BJDE.GetCombo();
             cmbMtdoCosteInv.DataBind();
 
+            cmbMtdoCostePursh.TextField = "descripcion";
+            cmbMtdoCostePursh.ValueField = "codigo";
+            cmbMtdoCostePursh.DataSource = BJDE.GetCombo();
+            cmbMtdoCostePursh.DataBind();
+
             cmbPursh1.TextField = "descripcion";
             cmbPursh1.ValueField = "codigo";
             cmbPursh1.DataSource = BJDE.GetCombo();
@@ -456,6 +461,12 @@ namespace ControlProductos
                 if (cmbActFijo.Items.Count > 0)
                 {
                     ListEditItem li = cmbActFijo.Items[0];
+                    li.Selected = true;
+                }
+
+                if (cmbUmEmpaque.Items.Count > 0)
+                {
+                    ListEditItem li = cmbUmEmpaque.Items[0];
                     li.Selected = true;
                 }
 
@@ -1157,6 +1168,7 @@ namespace ControlProductos
         protected string Save()
         {
             string remplazaOtro = (rbSi.Checked) ? "Si" : "No";
+            string repara = (rbReparaSi.Checked) ? "Si" : "No";
             string operacion;
             if (rbAlta.Checked)
             {
@@ -1229,7 +1241,7 @@ namespace ControlProductos
             ctrlProd.subcuenta = cmbSubcuenta.SelectedItem.Value.ToString();
             ctrlProd.codActFijo = cmbActFijo.SelectedItem.Value.ToString();
             ctrlProd.consEstimado = (txtConsEstimado.Text == "") ? 0 : Convert.ToDecimal(txtConsEstimado.Text);
-            ctrlProd.subcuenta = cmbUM.SelectedItem.Value.ToString();
+            ctrlProd.UMEmpaque = cmbUM.SelectedItem.Value.ToString();
             ctrlProd.cantMinima = (txtCantMinima.Text == "") ? 0 : Convert.ToDecimal(txtCantMinima.Text);
             ctrlProd.FechaRequerida = (xDateFechaReq.Value == null) ? null : xDateFechaReq.Date.ToString("yyyyMMdd");
             ctrlProd.numOQ = cmbOQ.SelectedItem.Value.ToString();
@@ -1273,6 +1285,8 @@ namespace ControlProductos
             //}
             ctrlProd.archivos = archivos;
             ctrlProd.tiposArticulo = tiposArticulo;
+            ctrlProd.reparar = repara;
+            ctrlProd.monedaMtto = cmbMonedaMtoo.SelectedItem.Value.ToString();
             //ctrlProd.mantenimientos = mttos;
             //ctrlProd.almacenes = almnes;
 
@@ -1327,7 +1341,20 @@ namespace ControlProductos
             xgrdTipoArticulo.JSProperties["cpAlertMessage"] = string.Empty;
             var pars = e.Parameters;
 
-            if (pars == "Delete")
+            if (pars.Contains("saveComment"))
+            {
+                string[] datos = pars.Split(',');
+                foreach (var item in tiposArticulo)
+                {
+                    if(item.codigoTipoArticulo == datos[1])
+                    {
+                        item.comentarios = datos[2];
+                    }
+                }
+                xgrdTipoArticulo.DataSource = tiposArticulo;
+                xgrdTipoArticulo.DataBind();
+            }
+            else if(pars == "Delete")
             {
                 xgrdTipoArticulo.DataSource = null;
                 tiposArticulo.Clear();

@@ -674,6 +674,12 @@
             xgrdArchivos.PerformCallback(Valores);
 
         }
+        function saveComment(tipoArticulo, commentario) {
+            console.log(tipoArticulo);
+            console.log(commentario);
+            var Valores = "saveComment," + tipoArticulo + "," + commentario;
+            xgrdTipoArticulo.PerformCallback(Valores);
+        }
 
     </script>
     <style>
@@ -1259,6 +1265,9 @@
                                         </DataItemTemplate>
                                     </dx:GridViewDataTextColumn>
                                     <dx:GridViewDataTextColumn FieldName="comentarios" Caption="Comentarios / Justificaciones" VisibleIndex="4" Width="35%">
+                                        <DataItemTemplate>
+                                            <input type="text" value='<%# Eval("comentarios") %>' onchange="saveComment('<%# Eval("codigoTipoArticulo") %>',this.value)" />
+                                        </DataItemTemplate>
                                     </dx:GridViewDataTextColumn>
                                 </Columns>
                                 <Styles>
