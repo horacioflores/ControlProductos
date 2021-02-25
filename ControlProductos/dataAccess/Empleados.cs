@@ -31,6 +31,13 @@ namespace ControlProductos.dataAccess
             return regreso.GetCmbEmpleadosResult;
         }
 
+        public List<Entity.Empleados> GetEmpleadoWithPerfil()
+        {
+            string json = methodGet("GetEmpleadoWithPerfil");
+            Entity.GetEmpleadoWithPerfilResult_ regreso = JsonConvert.DeserializeObject<Entity.GetEmpleadoWithPerfilResult_>(json);
+            return regreso.GetEmpleadoWithPerfilResult;
+        }
+
         public System.Data.DataSet GetCatalogEmployees(string CodigoPosicion, string CodigoProveedor, string Codigo, string Descripcion, bool Activo)
         {
             DataSet ds = new DataSet();

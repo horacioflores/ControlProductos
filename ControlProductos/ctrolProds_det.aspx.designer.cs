@@ -22,6 +22,33 @@ namespace ControlProductos {
         protected global::DevExpress.Web.ASPxCallbackPanel ASPxCallbackPanel2;
         
         /// <summary>
+        /// Control btnSave.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage btnSave;
+        
+        /// <summary>
+        /// Control btnEnviarSolicitante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage btnEnviarSolicitante;
+        
+        /// <summary>
+        /// Control btnEnviarDM.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage btnEnviarDM;
+        
+        /// <summary>
         /// Control btnRegresar.
         /// </summary>
         /// <remarks>
@@ -38,6 +65,15 @@ namespace ControlProductos {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblcodigoSts;
+        
+        /// <summary>
+        /// Control lblSigPerf.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSigPerf;
         
         /// <summary>
         /// Control ltlSts.
@@ -1136,105 +1172,6 @@ namespace ControlProductos {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::DevExpress.Web.ASPxGridView xgrdAprobaciones;
-        
-        /// <summary>
-        /// Control ASPxCallbackPanel1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxCallbackPanel ASPxCallbackPanel1;
-        
-        /// <summary>
-        /// Control PanelContent3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.PanelContent PanelContent3;
-        
-        /// <summary>
-        /// Control txtCodigoAprobacionAdd.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodigoAprobacionAdd;
-        
-        /// <summary>
-        /// Control txtPasoAdd.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPasoAdd;
-        
-        /// <summary>
-        /// Control txtTituloAdd.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTituloAdd;
-        
-        /// <summary>
-        /// Control cmbPuestoAdd.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxComboBox cmbPuestoAdd;
-        
-        /// <summary>
-        /// Control cmbEmpleadoAdd.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxComboBox cmbEmpleadoAdd;
-        
-        /// <summary>
-        /// Control xDateFechaNotAdd.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxDateEdit xDateFechaNotAdd;
-        
-        /// <summary>
-        /// Control xDateFechaAccionAdd.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxDateEdit xDateFechaAccionAdd;
-        
-        /// <summary>
-        /// Control txtAccionAdd.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAccionAdd;
-        
-        /// <summary>
-        /// Control txtComentarioAdd.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtComentarioAdd;
         
         /// <summary>
         /// Control txtComentarios.

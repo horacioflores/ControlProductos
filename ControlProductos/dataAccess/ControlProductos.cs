@@ -43,6 +43,12 @@ namespace ControlProductos.dataAccess
             return regreso;
         }
 
+        public int changeSts(string idctrlProds, string UsuarioId, string sigPerfil, string DM)
+        {
+            int regreso = Convert.ToInt32(methodPost("changeSts/"+ idctrlProds + "/" + UsuarioId + "/" + sigPerfil + "/" + DM));
+            return regreso;
+        }
+
         public string newDoc()
         {
             string json = methodGet("newDocCtrlProd");

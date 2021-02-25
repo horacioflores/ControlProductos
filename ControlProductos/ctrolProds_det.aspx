@@ -308,7 +308,6 @@
        }
 
        function OnAprobacionesEndCallback(s, e) {
-           CallbackPanel.PerformCallback("Limpiar");
            if (s.cpAlertMessage != '') {
                if (s.cpAlertMessage == 'SelectOne') {
                    swal("Information", "The title is empty!", "info");
@@ -323,6 +322,12 @@
                }
            }
            s.cpAlertMessage = "";
+       }
+
+
+       function selAprob(perfil, empleado) {
+           var valores = perfil + "," + empleado;
+           xgrdAprobaciones.PerformCallback(valores);
        }
 
        function DisableSelectedAprobacion() {
@@ -522,6 +527,13 @@
                 }
                 if (s.cpAlertMessage == 'successUpdate') {
                     swal("Information", "The product has been success updated!", "success");
+                }
+
+                if (s.cpAlertMessage == 'EnvSucces') {
+                    swal("Information", "The request has been sent successfully!", "success");
+                }
+                if (s.cpAlertMessage == 'EnvFaild') {
+                    swal("Information", "There was an error submitting the request!", "success");
                 }
 
                 if (s.cpAlertMessage == 'errorSave') {
@@ -866,8 +878,9 @@
           <PanelCollection>
               <dx:PanelContent>
         <div id="divBotones" class="col-xs-12 btn-group CeroPM" data-spy="affix" data-offset-top="100" style="padding-top:15px; color:white;width:100%;z-index:1 !important;background-color:#EFEFEF;">
-            <img ID="btnSave" class="btn" Style="margin: 0px; padding: 0px;" onclick="ASPxCallbackPanel2.PerformCallback('Save');" src="Assets/images/BtnGuardar.png" /><%--OnClick="btnSave_Click"--%>
-            <img ID="btnEnviarSolicitante" class="btn" Style="margin: 0px; padding: 0px;" onclick="ASPxCallbackPanel2.PerformCallback('PonerCodigo');" src="Assets/images/BtnEnviarSolicitante.png" />
+            <img ID="btnSave" runat="server" class="btn" Style="margin: 0px; padding: 0px;" onclick="ASPxCallbackPanel2.PerformCallback('Save');" src="Assets/images/BtnGuardar.png" /><%--OnClick="btnSave_Click"--%>
+            <img ID="btnEnviarSolicitante" runat="server" class="btn" Style="margin: 0px; padding: 0px;" onclick="ASPxCallbackPanel2.PerformCallback('Enviar');" src="Assets/images/BtnEnviar.png" />
+            <img ID="btnEnviarDM" runat="server" visible="false" class="btn" Style="margin: 0px; padding: 0px;" onclick="ASPxCallbackPanel2.PerformCallback('EnviarDM');" src="Assets/images/BtnEnviarDM.png" />
             <asp:ImageButton ID="btnRegresar" class="btn" Style="margin: 0px; padding: 0px;" runat="server" ImageUrl="~/Assets/images/BtnSalir.png" OnClick="btnRegresar_Click" />
             <div class="BtnGpoIniFin">
                 <a class="BtnIniFin" id="BtnInicio" href="#Inicio" title="Inicio" onmouseover="rotate('imgaRotarI');" onmouseout="rotate('imgaRotarI');"><i id="imgaRotarI" class="glyphicon glyphicon glyphicon-circle-arrow-up"></i><span class="badge badge-xs badge-danger">Alt+9</span></a>
@@ -880,6 +893,7 @@
                     <div class="col-xs-12 col-sm-8 form-group BGFormularioTitulo">
                         <h2 class="HeaderSpanNombreFormulario">SOLICITUD DE PROCESO MRO</h2>
                         <asp:Label ID="lblcodigoSts" runat="server" CssClass="hidden"></asp:Label>
+                        <asp:Label ID="lblSigPerf" runat="server" CssClass="hidden"></asp:Label>
                         <asp:Literal ID="ltlSts" runat="server"></asp:Literal>
 <%--                        <span id="spanStatus" class="alert btn-info docEstatus" hidden><i class="glyphicon glyphicon-edit" style="padding-right:5px;"></i>Abierto</span><span style="position: absolute;left: 250px;color:#FBFBFB;padding:2px 0px;" hidden>:Pendiente por el autor para terminar la captura</span>
                         <span id="spanStatus" class="alert btn-info docEstatus" hidden><i class="glyphicon glyphicon-eye-open" style="padding-right:5px;"></i>Revisado</span><span style="position: absolute;left: 250px;color:#FBFBFB;padding:2px 0px;" hidden>:Revisado para su proceso</span>
@@ -2245,18 +2259,22 @@
             </ul>
             <div class="tab-content" style="padding:15px;">
                 <div id="home" class="tab-pane fade in active">
-                    <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('Aprobaciones');" />
+<%--                    <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('Aprobaciones');" />
                     <img class="img" src="Assets/Images/trash_can.png" alt="Remove Selected" style="cursor: pointer" onclick="return DisableSelectedAprobacion();" />
-                    <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdAprobaciones.PerformCallback('Delete');" />
+                    <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdAprobaciones.PerformCallback('Delete');" />--%>
                     <dx:ASPxGridView ID="xgrdAprobaciones" runat="server" AutoGenerateColumns="true"
                         Width="100%" Font-Names="Segoe UI"
                         OnCustomCallback="xgrdAprobaciones_CustomCallback"
                         OnHtmlDataCellPrepared="xgrdAprobaciones_HtmlDataCellPrepared"
                         ClientInstanceName="xgrdAprobaciones" Theme="Metropolis">
                         <Columns>
-                            <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="0" Width="10px">
+<%--                            <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="0" Width="10px">
+                            </dx:GridViewDataTextColumn>--%>
+                            <dx:GridViewDataTextColumn  FieldName="codigoPerfil" Caption="Perfil">
                             </dx:GridViewDataTextColumn>
-                            <dx:GridViewDataTextColumn FieldName="paso" Caption="Paso" VisibleIndex="1" Width="12%">
+                            <dx:GridViewDataTextColumn  FieldName="codigoEmpleado" Caption="Perfil">
+                            </dx:GridViewDataTextColumn>
+<%--                            <dx:GridViewDataTextColumn FieldName="paso" Caption="Paso" VisibleIndex="1" Width="12%">
                             </dx:GridViewDataTextColumn>
                             <dx:GridViewDataTextColumn FieldName="titulo" Caption="Título" VisibleIndex="2" Width="12%">
                             </dx:GridViewDataTextColumn>
@@ -2271,7 +2289,7 @@
                             <dx:GridViewDataTextColumn FieldName="accion" Caption="Acción" VisibleIndex="7" Width="11%">
                             </dx:GridViewDataTextColumn>
                             <dx:GridViewDataTextColumn FieldName="comentario" Caption="Comentario" VisibleIndex="8" Width="11%">
-                            </dx:GridViewDataTextColumn>
+                            </dx:GridViewDataTextColumn>--%>
                         </Columns>
                         <Styles>
                             <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
@@ -2366,7 +2384,7 @@
                         </tbody>
                     </table>--%>
 
-                            <div id="mdlAprobaciones" class="modal fade" role="dialog">
+<%--                            <div id="mdlAprobaciones" class="modal fade" role="dialog">
                                 <div class="modal-dialog" runat="server">
                                     <div class="modal-content" runat="server">
                                         <div class="modal-header" runat="server">
@@ -2463,7 +2481,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>--%>
                 </div>
                 <div id="menu1" class="tab-pane fade">
                     <h3>Comentarios Adicionales</h3>
