@@ -329,6 +329,11 @@ namespace ControlProductos
             cmbMonedaMtoo.DataSource = BMoneda.GetCombo();
             cmbMonedaMtoo.DataBind();
 
+            cmbMonedaComprador.TextField = "Nombre";
+            cmbMonedaComprador.ValueField = "Codigo";
+            cmbMonedaComprador.DataSource = BMoneda.GetCombo();
+            cmbMonedaComprador.DataBind();
+
             var BUM = new UMedidaDa();
             cmbCodigoUM.TextField = "Nombre";
             cmbCodigoUM.ValueField = "Codigo";
