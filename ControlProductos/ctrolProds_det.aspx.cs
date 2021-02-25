@@ -378,6 +378,7 @@ namespace ControlProductos
             ApplyLayoutTipoArticulo();
             //ApplyLayoutMtto();
             //ApplyLayoutAlmnes();
+
             if (!IsPostBack)
             {
                 if (cmbSubcuenta.Items.Count > 0)
@@ -576,528 +577,7 @@ namespace ControlProductos
                     li.Selected = true;
                 }
 
-                limpiarModalAprnes();
-                int ctrlProdsID = Convert.ToInt32(Session["ctrlProdsID"]);
-                var BctrlProd = new ControlProductosda();
-                List<Entity.ControlProductos> oList = BctrlProd.GetCtrlProducto(ctrlProdsID.ToString());
-                if (ctrlProdsID > 0)
-                {
-                    foreach (Entity.ControlProductos ctrlP in oList)
-                    {
-                        if (ctrlProdsID == ctrlP.ctrlProdsID)
-                        {
-                            lblcodigoSts.Text = ctrlP.codigo_sts_Prods;
-                            switch (ctrlP.sts_Prods)
-                            {
-                                case "Abierto":
-                                    ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-edit' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Pendiente por el autor para terminar la captura</span>";
-                                    break;
-                                case "Revisado":
-                                    ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-eye-open' style='padding-right:5px;'></i>"+ ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Revisado para su proceso</span>";
-                                    break;
-                                case "Cerrado":
-                                    ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-lock' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Cerrado por "+ ctrlP.usuario + " el "+ctrlP.ModFecha+"</span>";
-                                    break;
-                                case "Cancelado":
-                                    ltlSts.Text = "<span id='spanStatus' class='alert btn-warning docEstatus' ><i class='glyphicon glyphicon-ban-circle' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Cancelado por " + ctrlP.usuario + " el " + ctrlP.ModFecha + "</span>";
-                                    break;
-                                case "Aprobado":
-                                    ltlSts.Text = "<span id='spanStatus' class='alert btn-success docEstatus' ><i class='glyphicon glyphicon-ok' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Aprobado por " + ctrlP.usuario + " el " + ctrlP.ModFecha + "</span>";
-                                    break;
-                                case "Pendiente por aprobación":
-                                    ltlSts.Text = "<span id='spanStatus' class='alert btn-primary docEstatus' ><i class='glyphicon glyphicon-dashboard' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Pendiente por el aprobador</span>";
-                                    break;
-                                case "Rechazado":
-                                    ltlSts.Text = "<span id='spanStatus' class='alert btn-danger docEstatus' ><i class='glyphicon glyphicon-remove' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Rechazado por " + ctrlP.usuario +"</span>";
-                                    break;
-                            }
-
-                            lblnDoc.Text = ctrlP.noDocumento;
-                            lblDocSolicitante.Text = ctrlP.usuario;
-                            lblDocFechaSol.Text = ctrlP.fechaSolicitud;
-                            rbAlta.Enabled = false;
-                            rbModificacion.Enabled = false;
-                            rbBaja.Enabled = false;
-                            cmbProducto.Enabled = false;
-                            switch (ctrlP.operacion)
-                            {
-                                case "ALTA":
-                                    rbAlta.Checked = true;
-                                    lblProd.Visible = false;
-                                    cmbProducto.Visible = false;
-                                    dvReemplazaOtro.Visible = true;
-                                    break;
-                                case "MODIFICACIÓN":
-                                    rbModificacion.Checked = true;
-                                    lblProd.Visible = true;
-                                    cmbProducto.Visible = true;
-                                    dvReemplazaOtro.Visible = false;
-                                    break;
-                                case "BAJA":
-                                    rbBaja.Checked = true;
-                                    lblProd.Visible = true;
-                                    cmbProducto.Visible = true;
-                                    dvReemplazaOtro.Visible = false;
-                                    break;
-                            }
-                            ListEditItem oItProd = cmbProducto.Items.FindByValue(ctrlP.producto);
-                            if (oItProd != null)
-                            {
-                                oItProd.Selected = true;
-                            }
-
-                            rbSi.Enabled = false;
-                            rbNo.Enabled = false;
-                            cmbCualArticulo.Enabled = false;
-                            switch (ctrlP.remplazaOtro)
-                            {
-                                case "Si":
-                                    rbSi.Checked = true;
-                                    lblcual.Visible = true;
-                                    cmbCualArticulo.Visible = true;
-                                    break;
-                                case "No":
-                                    rbNo.Checked = true;
-                                    lblcual.Visible = false;
-                                    cmbCualArticulo.Visible = false;
-                                    break;
-                            }
-
-                            ListEditItem oItcual= cmbCualArticulo.Items.FindByValue(ctrlP.cualArticulo);
-                            if (oItcual != null)
-                            {
-                                oItcual.Selected = true;
-                            }
-                            txtdescripcion.Text = ctrlP.descripcion;
-                            txtModelo.Text = ctrlP.modelo;
-
-                            ListEditItem oItsubc = cmbSubcuenta.Items.FindByValue(ctrlP.subcuenta);
-                            if (oItsubc != null)
-                            {
-                                oItsubc.Selected = true;
-                            }
-                            ListEditItem oItcodActFijo = cmbActFijo.Items.FindByValue(ctrlP.codActFijo);
-                            if (oItcodActFijo != null)
-                            {
-                                oItcodActFijo.Selected = true;
-                            }
-
-
-                            archivos = new List<archivos>();
-                            archivos = ctrlP.archivos;
-                            xgrdArchivos.DataSource = archivos;
-                            xgrdArchivos.DataBind();
-
-                            ListEditItem oItMaquina = cmbMaquina.Items.FindByValue(ctrlP.CodigoMaquina);
-                            if (oItMaquina != null)
-                            {
-                                oItMaquina.Selected = true;
-                            }
-
-                            ListEditItem oItmSubCat1 = cmbSubCat1.Items.FindByValue(ctrlP.CodigoSubcategoria1);
-                            if (oItmSubCat1 != null)
-                            {
-                                oItmSubCat1.Selected = true;
-                            }
-
-                            ListEditItem oItmSubCat2 = cmbSubCat2.Items.FindByValue(ctrlP.CodigoSubcategoria2);
-                            if (oItmSubCat2 != null)
-                            {
-                                oItmSubCat2.Selected = true;
-                            }
-
-                            ListEditItem oItmSubCat3 = cmbSubCat3.Items.FindByValue(ctrlP.CodigoSubcategoria3);
-                            if (oItmSubCat3 != null)
-                            {
-                                oItmSubCat3.Selected = true;
-                            }
-
-                            //ListEditItem oItmUtilizado = cmbUtilizado.Items.FindByValue(ctrlP.CodigoUtilizado);
-                            //if (oItmUtilizado != null)
-                            //{
-                            //    oItmUtilizado.Selected = true;
-                            //}
-
-                            ListEditItem oItmDepto = cmbDepa.Items.FindByValue(ctrlP.CodigoDepto);
-                            if (oItmDepto != null)
-                            {
-                                oItmDepto.Selected = true;
-                            }
-                            tiposArticulo = new List<_tipoArticulo>();
-                            tiposArticulo = ctrlP.tiposArticulo;
-                            xgrdTipoArticulo.DataSource = ctrlP.tiposArticulo;
-                            xgrdTipoArticulo.DataBind();
-
-                            int M = 0;
-                            foreach (_tipoArticulo art in ctrlP.tiposArticulo)
-                            {
-                                if(art.valor == "M")
-                                {
-                                    M++;
-                                }
-                            }
-                            if (M > 5)
-                            {
-                                lblstock.Text = "M";
-                                lblstock2.Text = "M: Con Stock";
-                            }
-                            else
-                            {
-                                lblstock.Text = "N";
-                                lblstock2.Text = "N: Con Stock";
-                            }
-
-                            txtDescripcion1.Text = ctrlP.descripcionUno;
-                            txtDescripcion2.Text = ctrlP.descripcionDos;
-                            txtDescripcionLarga.Text = ctrlP.descripcionDos;
-
-                            ListEditItem oItmPlan = cmbPlan.Items.FindByValue(ctrlP.CodigoPlan);
-                            if (oItmPlan != null)
-                            {
-                                oItmPlan.Selected = true;
-                            }
-
-                            txtcomoAyudarStockCero.Text = ctrlP.comoAyudarStockCero;
-                            txtfuncionMaquina.Text = ctrlP.funcionMaquina;
-                            txtCantidad.Text = ctrlP.cantidadOrden.ToString("0.##");
-                            txtStockMin.Text = ctrlP.stockMinimo.ToString("0.##");
-                            txtStockMax.Text = ctrlP.stockMaximo.ToString("0.##");
-
-                            ListEditItem oItmMarca = cmbMarca.Items.FindByValue(ctrlP.CodigoMarca);
-                            if (oItmMarca != null)
-                            {
-                                oItmMarca.Selected = true;
-                            }
-
-                            ListEditItem oItmProveedor = cmbProveedor.Items.FindByValue(ctrlP.CodigoProveedor);
-                            if (oItmProveedor != null)
-                            {
-                                oItmProveedor.Selected = true;
-                            }
-
-
-                            //ListEditItem oItmUnico= cmbUnico.Items.FindByValue(ctrlP.esUnico.ToString());
-                            //if (oItmUnico != null)
-                            //{
-                            //    oItmUnico.Selected = true;
-                            //}
-                            //DateTime fechaCot = new DateTime(Convert.ToInt32(ctrlP.fechaCotizacion.Substring(6, 4)), Convert.ToInt32(ctrlP.fechaCotizacion.Substring(3, 2)), Convert.ToInt32(ctrlP.fechaCotizacion.Substring(0, 2)));
-                            //xDateFechaCot.Date = fechaCot;
-                            txtPrecioU.Text = ctrlP.precioUnitario.ToString("0.##");
-                            txtDiasEntrega.Text = ctrlP.diasEntrega.ToString();
-
-                            ListEditItem oItmMoneda = cmbMoneda.Items.FindByValue(ctrlP.Codigomoneda);
-                            if (oItmMoneda != null)
-                            {
-                                oItmMoneda.Selected = true;
-                            }
-                            ListEditItem oItmMonedaMtto = cmbMonedaMtoo.Items.FindByValue(ctrlP.monedaMtto);
-                            if (oItmMonedaMtto != null)
-                            {
-                                oItmMonedaMtto.Selected = true;
-                            }
-                            //lblTotal.Text = ctrlP.total.ToString("0.##");
-
-                            //mttos = new List<Mtto_Almn>();
-                            //mttos = ctrlP.mantenimientos;
-                            //xgrdMtto.DataSource = ctrlP.mantenimientos;
-                            //xgrdMtto.DataBind();
-
-                            //almnes = new List<Mtto_Almn>();
-                            //almnes = ctrlP.almacenes;
-                            //xgrdAlmacen.DataSource = ctrlP.almacenes;
-                            //xgrdAlmacen.DataBind();
-
-                            //if(ctrlP.fichaDatoSeguridad == "Si")
-                            //{
-                            //    rbFichaSi.Checked = true;
-                            //    rbFichaNo.Checked = false;
-                            //    dvHojaSeg1.Visible = true;
-                            //    dvHojaSeg2.Visible = true;
-                            //}
-                            //else
-                            //{
-                            //    rbFichaSi.Checked = false;
-                            //    rbFichaNo.Checked = true;
-                            //    dvHojaSeg1.Visible = false;
-                            //    dvHojaSeg2.Visible = false;
-                            //}
-
-                            ListEditItem oItmUM = cmbCodigoUM.Items.FindByValue(ctrlP.CodigoUM);
-                            if (oItmUM != null)
-                            {
-                                oItmUM.Selected = true;
-                            }
-
-                            //txtConteoCiclico.Text = ctrlP.conteoCiclico;
-                            ListEditItem oItmCC = cmbConteoCiclico.Items.FindByValue(ctrlP.conteoCiclico);
-                            if (oItmCC != null)
-                            {
-                                oItmCC.Selected = true;
-                            }
-
-                            //if (ctrlP.almacenamientoExternoPosible == "Si")
-                            //{
-                            //    rbAlmExtSi.Checked = true;
-                            //}
-                            //else
-                            //{
-                            //    rbAlmExtNo.Checked = false;
-                            //}
-
-                            ListEditItem oItmPlaneador = cmbPlaneador.Items.FindByValue(ctrlP.codigoPlaneador);
-                            if (oItmPlaneador != null)
-                            {
-                                oItmPlaneador.Selected = true;
-                            }
-
-                            ListEditItem oItmComprador = cmbComprador.Items.FindByValue(ctrlP.codigoComprador);
-                            if (oItmComprador != null)
-                            {
-                                oItmComprador.Selected = true;
-                            }
-
-                            //if(ctrlP.fechaInventario != "")
-                            //{
-                            //    DateTime fInv = new DateTime(Convert.ToInt32(ctrlP.fechaInventario.Substring(6,4)), Convert.ToInt32(ctrlP.fechaInventario.Substring(3, 2)), Convert.ToInt32(ctrlP.fechaInventario.Substring(0, 2)));
-                            //    xDateFechaInv.Date = fInv;
-                            //}
-
-                            txtMultiplo.Text = ctrlP.multiplo;
-                            //txtFile.Text = ctrlP.hojaSeguridad;
-                            txtCodigoArticulo.Text = ctrlP.codigoArticulo;
-
-                            aprbnes = new List<Aprobacion>();
-                            aprbnes = ctrlP.aprobaciones;
-                            xgrdAprobaciones.DataSource = ctrlP.aprobaciones;
-                            xgrdAprobaciones.DataBind();
-
-                            txtConsEstimado.Text = ctrlP.consEstimado.ToString();
-                            ListEditItem oItmUM2 = cmbUM.Items.FindByValue(ctrlP.unidadMedida);
-                            if (oItmUM2 != null)
-                            {
-                                oItmUM2.Selected = true;
-                            }
-                            txtCantMinima.Text = ctrlP.cantMinima.ToString();
-                            DateTime fechaReq = new DateTime(Convert.ToInt32(ctrlP.FechaRequerida.Substring(6, 4)), Convert.ToInt32(ctrlP.FechaRequerida.Substring(3, 2)), Convert.ToInt32(ctrlP.FechaRequerida.Substring(0, 2)));
-                            xDateFechaReq.Date = fechaReq;
-
-                            ListEditItem oItmNOQ= cmbOQ.Items.FindByValue(ctrlP.numOQ);
-                            if (oItmNOQ != null)
-                            {
-                                oItmNOQ.Selected = true;
-                            }
-                            txtPrecio.Text = ctrlP.precio.ToString();
-                            txtContrato.Text = ctrlP.numOrden;
-                            switch (ctrlP.reparar)
-                            {
-                                case "Si":
-                                    rbReparaSi.Checked = true;
-                                    break;
-                                case "No":
-                                    rbReparaNo.Checked = true;
-                                    break;
-                            }
-
-                            ListEditItem oItmglclass= cmbGlClass.Items.FindByValue(ctrlP.GlClass);
-                            if (oItmglclass != null)
-                            {
-                                oItmglclass.Selected = true;
-                            }
-                            txtTextBusq.Text = ctrlP.textBusq;
-                            ListEditItem oItmProveedorComp = cmbProveedorComp.Items.FindByValue(ctrlP.CodigoProveedor_comp);
-                            if (oItmProveedorComp != null)
-                            {
-                                oItmProveedorComp.Selected = true;
-                            }
-                            ListEditItem oItmPais = cmbPaisOrigen.Items.FindByValue(ctrlP.PaisOrigen);
-                            if (oItmPais != null)
-                            {
-                                oItmPais.Selected = true;
-                            }
-                            ListEditItem oItmMtdoInv = cmbMtdoCosteInv.Items.FindByValue(ctrlP.MTDOCoste_Inv);
-                            if (oItmMtdoInv != null)
-                            {
-                                oItmMtdoInv.Selected = true;
-                            }
-                            ListEditItem oItmMtdoPursh = cmbPaisOrigen.Items.FindByValue(ctrlP.MTDOCoste_Pursh);
-                            if (oItmMtdoPursh != null)
-                            {
-                                oItmMtdoPursh.Selected = true;
-                            }
-
-                            ListEditItem oItmTipoEmq = cmbTipoEmaque.Items.FindByValue(ctrlP.codigo_tipoEmpaque);
-                            if (oItmTipoEmq != null)
-                            {
-                                oItmTipoEmq.Selected = true;
-                            }
-                            txtPiezaEmp.Text = ctrlP.piezasEmpaque.ToString();
-                            ListEditItem oItmUmTempq = cmbUmEmpaque.Items.FindByValue(ctrlP.UMEmpaque);
-                            if (oItmUmTempq != null)
-                            {
-                                oItmUmTempq.Selected = true;
-                            }
-                            txtAlto.Text = ctrlP.piezasEmpaque.ToString();
-                            txtAncho.Text = ctrlP.piezasEmpaque.ToString();
-                            txtLargo.Text = ctrlP.piezasEmpaque.ToString();
-
-                            ListEditItem oItmpursh1 = cmbPursh1.Items.FindByValue(ctrlP.pursh1);
-                            if (oItmpursh1 != null)
-                            {
-                                oItmpursh1.Selected = true;
-                            }
-                            ListEditItem oItmpursh2 = cmbPursh1.Items.FindByValue(ctrlP.pursh2);
-                            if (oItmpursh2 != null)
-                            {
-                                oItmpursh2.Selected = true;
-                            }
-                            ListEditItem oItmfamilia = cmbfamilia.Items.FindByValue(ctrlP.codigoFamilia);
-                            if (oItmfamilia != null)
-                            {
-                                oItmfamilia.Selected = true;
-                            }
-                            ListEditItem oItmbranch = cmbbranch.Items.FindByValue(ctrlP.branch);
-                            if (oItmbranch != null)
-                            {
-                                oItmbranch.Selected = true;
-                            }
-                            ListEditItem oItmdias = cmbDias.Items.FindByValue(ctrlP.diasStok);
-                            if (oItmdias != null)
-                            {
-                                oItmdias.Selected = true;
-                            }
-                            ListEditItem oItmUbiPrim = cmbUbicacionPrim.Items.FindByValue(ctrlP.ubicacionPrim);
-                            if (oItmUbiPrim != null)
-                            {
-                                oItmUbiPrim.Selected = true;
-                            }
-                            ListEditItem oItmUbiSec = cmbUbicacionSec.Items.FindByValue(ctrlP.ubicacionSec);
-                            if (oItmUbiSec != null)
-                            {
-                                oItmUbiSec.Selected = true;
-                            }
-                            ListEditItem oItmumALm = cmbUMAlmacen.Items.FindByValue(ctrlP.umAlmacen);
-                            if (oItmumALm != null)
-                            {
-                                oItmumALm.Selected = true;
-                            }
-                            txtAltoAlm.Text = ctrlP.alto_alm.ToString();
-                            txtAnchoAlm.Text = ctrlP.ancho_alm.ToString();
-                            txtLargoAlm.Text = ctrlP.largo_alm.ToString();
-
-                            break;
-                        }   
-                    }
-                }
-                else
-                {
-                    DateTime date = new DateTime();
-                    date = DateTime.Now;
-                    lblcodigoSts.Text = "0001";
-                    ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-edit' style='padding-right:5px;'></i>Abierto</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Pendiente por el autor para terminar la captura</span>";
-                    lblnDoc.Text = BctrlProd.newDoc();
-                    lblDocSolicitante.Text = LoginInfo.CurrentUsuario.NombreCompleto;
-                    lblDocFechaSol.Text = date.ToString("dd/MM/yyyy HH:mm");
-                    rbAlta.Checked = true;
-                    dvReemplazaOtro.Visible = true;
-                    lblProd.Visible = false;
-                    cmbProducto.Visible = false;
-                    rbNo.Checked = true;
-                    lblcual.Visible = false;
-                    cmbCualArticulo.Visible = false;
-                    txtdescripcion.Text = "";
-                    txtModelo.Text = "";
-                    archivos = new List<archivos>();
-                    xgrdArchivos.DataSource = archivos;
-                    xgrdArchivos.DataBind();
-
-                    tiposArticulo = new List<_tipoArticulo>();
-                    //mttos = new List<Mtto_Almn>();
-                    //almnes = new List<Mtto_Almn>();
-
-
-                    foreach (TipoArticulo TipoArt in lTipoArt)
-                    {
-                        _tipoArticulo n = new _tipoArticulo();
-                        n.ctrlPTipoArticuloID = 0;
-                        n.noDocumento = "";
-                        n.codigoTipoArticulo = TipoArt.codigoTipoArticulo;
-                        n.tipoArticulo = TipoArt.tipoArticulo;
-                        n.M = TipoArt.M;
-                        n.N = TipoArt.N;
-                        n.comentarios = TipoArt.comentarios;
-                        n.valor = "M";
-                        tiposArticulo.Add(n);
-                    }
-                    xgrdTipoArticulo.DataSource = tiposArticulo;
-                    xgrdTipoArticulo.DataBind();
-
-                    var tMtto = new MttoAlmnDa();
-                    List<MttoAlmn> ltMtto = tMtto.GetCatalog("", "", true);
-                    foreach (MttoAlmn mtto in ltMtto)
-                    {
-                        Mtto_Almn n = new Mtto_Almn();
-                        n.ctrlPMantenimientoID = 0;
-                        n.noDocumento = "";
-                        n.codigoMttoAlmn = mtto.codigoMttoAlmn;
-                        n.especificacion = mtto.especificacion;
-                        n.notas = mtto.notas;
-                        n.clasificacion = mtto.clasificacion;
-                        n.responsable = mtto.responsable;
-                        n.tipo = mtto.tipo;
-                        //if(mtto.tipo == "M")
-                        //{
-                        //    mttos.Add(n);
-                        //}
-                        //else
-                        //{
-                        //    almnes.Add(n);
-                        //}
-                    }
-                    //xgrdMtto.DataSource = mttos;
-                    //xgrdMtto.DataBind();
-                    //xgrdAlmacen.DataSource = almnes;
-                    //xgrdAlmacen.DataBind();
-
-
-                    txtDescripcion1.Text = "";
-                    txtDescripcion2.Text = "";
-                    txtDescripcionLarga.Text = "";
-
-                    txtcomoAyudarStockCero.Text = "";
-                    txtfuncionMaquina.Text = "";
-                    txtCantidad.Text = "0";
-                    txtStockMin.Text = "0";
-                    txtStockMax.Text = "0";
-
-                    txtPrecioU.Text = "0";
-                    txtDiasEntrega.Text = "0";
-
-                    //lblTotal.Text = "0";
-
-                    //rbFichaSi.Checked = true;
-
-                    ListEditItem oItmCC = cmbConteoCiclico.Items[0];
-                    if (oItmCC != null)
-                    {
-                        oItmCC.Selected = true;
-                    }
-                    //rbAlmExtSi.Checked = true;
-
-                    
-                    txtMultiplo.Text = "";
-                    //txtFile.Text = "";
-                    txtCodigoArticulo.Text = "";
-
-                    aprbnes = new List<Aprobacion>();
-
-                    rbReparaNo.Checked = true;
-
-                    //productos = new List<cotizacion_prod>();
-                    //proveedores = new List<cotizacion_proveedor>();
-                    //comentarios = new List<Entity.cotizacion_comentarios>();
-                    //archivos = new List<cotizacion_archivos>();
-                }
+                refresData();
                 //productosToRel = new List<cotizacion_prodRelProv>();
             }
             else
@@ -1116,48 +596,692 @@ namespace ControlProductos
             }
         }
 
-        public void limpiarModalAprnes()
+        public void refresData()
         {
-            txtCodigoAprobacionAdd.Text = "";
-            txtPasoAdd.Text = "";
-            txtTituloAdd.Text = "";
-            txtAccionAdd.Text = "";
-            txtComentarioAdd.Text = "";
+            var tArtc = new TipoArticuloDa();
+            List<TipoArticulo> lTipoArt = tArtc.GetCatalog("", "", true);
 
-            var BPosicion = new PosicionDa();
-            cmbPuestoAdd.TextField = "Descripcion";
-            cmbPuestoAdd.ValueField = "Codigo";
-            List<Posicion> posiciones = BPosicion.GetCombo(true);
-            cmbPuestoAdd.DataSource = posiciones;
-            cmbPuestoAdd.DataBind();
-
-            if (posiciones.Count > 0)
+            limpiarModalAprnes();
+            int ctrlProdsID = Convert.ToInt32(Session["ctrlProdsID"]);
+            var BctrlProd = new ControlProductosda();
+            List<Entity.ControlProductos> oList = BctrlProd.GetCtrlProducto(ctrlProdsID.ToString());
+            if (ctrlProdsID > 0)
             {
-                ListEditItem iPuesto = cmbPuestoAdd.Items.FindByValue(posiciones[0].Codigo);
-                if (iPuesto != null)
+                foreach (Entity.ControlProductos ctrlP in oList)
                 {
-                    iPuesto.Selected = true;
-                }
-                var BEmpleado = new EmpleadosDa();
-                cmbEmpleadoAdd.TextField = "NombreCompleto";
-                cmbEmpleadoAdd.ValueField = "EmpleadoId";
-                cmbEmpleadoAdd.DataSource = BEmpleado.GetCombo(posiciones[0].Codigo);
-                cmbEmpleadoAdd.DataBind();
-
-                if (cmbEmpleadoAdd.Items.Count > 0)
-                {
-                    ListEditItem iEmp = cmbEmpleadoAdd.Items.FindByValue(cmbEmpleadoAdd.Items[0].Value);
-                    if (iEmp != null)
+                    if (ctrlProdsID == ctrlP.ctrlProdsID)
                     {
-                        iEmp.Selected = true;
+                        lblcodigoSts.Text = ctrlP.codigo_sts_Prods;
+                        lblSigPerf.Text = ctrlP.sigPerfil;
+                        switch (ctrlP.sts_Prods)
+                        {
+                            case "Abierto":
+                                ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-edit' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Pendiente por el autor para terminar la captura</span>";
+                                break;
+                            case "En Aprobación por ":
+                                string perfil = "";
+                                btnSave.Visible = false;
+
+                                if (ctrlP.sigPerfil != LoginInfo.CurrentPerfil.Codigo)
+                                {
+                                    btnEnviarSolicitante.Visible = false;
+                                }
+
+                                switch (ctrlP.sigPerfil)
+                                {
+                                    case "0002":
+                                        perfil = "Comprador";
+                                        break;
+                                    case "0003":
+                                        perfil = "PLANNER";
+                                        break;
+                                    case "0004":
+                                        perfil = "ALMACÉN";
+                                        break;
+                                    case "0005":
+                                        perfil = "GTE MANTENIMIENTO";
+                                        break;
+                                    case "0006":
+                                        perfil = "GTE COMPRAS";
+                                        if (ctrlP.operacion == "BAJA")
+                                        {
+                                            btnEnviarDM.Visible = true;
+                                        }
+
+                                        break;
+                                    case "0007":
+                                        perfil = "DIRECCION";
+                                        break;
+                                }
+
+                                ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-eye-open' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + perfil + "</span>";
+                                break;
+                            case "Aprobado":
+                                btnSave.Visible = false;
+                                btnEnviarSolicitante.Visible = false;
+                                ltlSts.Text = "<span id='spanStatus' class='alert btn-success docEstatus' ><i class='glyphicon glyphicon-ok' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Aprobado por " + ctrlP.usuario + " el " + ctrlP.ModFecha + "</span>";
+                                break;
+                        }
+
+                        if (ctrlP.sigPerfil == LoginInfo.CurrentPerfil.Codigo)
+                        {
+                            List<Aprobacion> lprob = ctrlP.aprobaciones.FindAll(a => a.codigoPerfil == LoginInfo.CurrentPerfil.Codigo);
+
+                            EmpleadosDa empDa = new EmpleadosDa();
+                            List<Empleados> emps = empDa.GetCatalog("", "", "", "", true);
+                            string codigoEmpAprb = "";
+
+                            foreach (Empleados item in emps)
+                            {
+                                if (item.EmpleadoId == LoginInfo.CurrentUsuario.EmpleadoId)
+                                {
+                                    codigoEmpAprb = item.Codigo;
+                                }
+                            }
+
+                            if (lprob.Count > 0)
+                            {
+                                if (codigoEmpAprb != lprob[0].codigoEmpleado)
+                                {
+                                    btnSave.Visible = false;
+                                    btnEnviarSolicitante.Visible = false;
+                                    btnEnviarDM.Visible = false;
+                                }
+                            }
+                            
+                        }
+
+                        lblnDoc.Text = ctrlP.noDocumento;
+                        lblDocSolicitante.Text = ctrlP.usuario;
+                        lblDocFechaSol.Text = ctrlP.fechaSolicitud;
+                        rbAlta.Enabled = false;
+                        rbModificacion.Enabled = false;
+                        rbBaja.Enabled = false;
+                        cmbProducto.Enabled = false;
+                        switch (ctrlP.operacion)
+                        {
+                            case "ALTA":
+                                rbAlta.Checked = true;
+                                lblProd.Visible = false;
+                                cmbProducto.Visible = false;
+                                dvReemplazaOtro.Visible = true;
+                                break;
+                            case "MODIFICACIÓN":
+                                rbModificacion.Checked = true;
+                                lblProd.Visible = true;
+                                cmbProducto.Visible = true;
+                                dvReemplazaOtro.Visible = false;
+                                break;
+                            case "BAJA":
+                                rbBaja.Checked = true;
+                                lblProd.Visible = true;
+                                cmbProducto.Visible = true;
+                                dvReemplazaOtro.Visible = false;
+                                break;
+                        }
+                        ListEditItem oItProd = cmbProducto.Items.FindByValue(ctrlP.producto);
+                        if (oItProd != null)
+                        {
+                            oItProd.Selected = true;
+                        }
+
+                        rbSi.Enabled = false;
+                        rbNo.Enabled = false;
+                        cmbCualArticulo.Enabled = false;
+                        switch (ctrlP.remplazaOtro)
+                        {
+                            case "Si":
+                                rbSi.Checked = true;
+                                lblcual.Visible = true;
+                                cmbCualArticulo.Visible = true;
+                                break;
+                            case "No":
+                                rbNo.Checked = true;
+                                lblcual.Visible = false;
+                                cmbCualArticulo.Visible = false;
+                                break;
+                        }
+
+                        ListEditItem oItcual = cmbCualArticulo.Items.FindByValue(ctrlP.cualArticulo);
+                        if (oItcual != null)
+                        {
+                            oItcual.Selected = true;
+                        }
+                        txtdescripcion.Text = ctrlP.descripcion;
+                        txtModelo.Text = ctrlP.modelo;
+
+                        ListEditItem oItsubc = cmbSubcuenta.Items.FindByValue(ctrlP.subcuenta);
+                        if (oItsubc != null)
+                        {
+                            oItsubc.Selected = true;
+                        }
+                        ListEditItem oItcodActFijo = cmbActFijo.Items.FindByValue(ctrlP.codActFijo);
+                        if (oItcodActFijo != null)
+                        {
+                            oItcodActFijo.Selected = true;
+                        }
+
+
+                        archivos = new List<archivos>();
+                        archivos = ctrlP.archivos;
+                        xgrdArchivos.DataSource = archivos;
+                        xgrdArchivos.DataBind();
+
+                        ListEditItem oItMaquina = cmbMaquina.Items.FindByValue(ctrlP.CodigoMaquina);
+                        if (oItMaquina != null)
+                        {
+                            oItMaquina.Selected = true;
+                        }
+
+                        ListEditItem oItmSubCat1 = cmbSubCat1.Items.FindByValue(ctrlP.CodigoSubcategoria1);
+                        if (oItmSubCat1 != null)
+                        {
+                            oItmSubCat1.Selected = true;
+                        }
+
+                        ListEditItem oItmSubCat2 = cmbSubCat2.Items.FindByValue(ctrlP.CodigoSubcategoria2);
+                        if (oItmSubCat2 != null)
+                        {
+                            oItmSubCat2.Selected = true;
+                        }
+
+                        ListEditItem oItmSubCat3 = cmbSubCat3.Items.FindByValue(ctrlP.CodigoSubcategoria3);
+                        if (oItmSubCat3 != null)
+                        {
+                            oItmSubCat3.Selected = true;
+                        }
+
+                        //ListEditItem oItmUtilizado = cmbUtilizado.Items.FindByValue(ctrlP.CodigoUtilizado);
+                        //if (oItmUtilizado != null)
+                        //{
+                        //    oItmUtilizado.Selected = true;
+                        //}
+
+                        ListEditItem oItmDepto = cmbDepa.Items.FindByValue(ctrlP.CodigoDepto);
+                        if (oItmDepto != null)
+                        {
+                            oItmDepto.Selected = true;
+                        }
+                        tiposArticulo = new List<_tipoArticulo>();
+                        tiposArticulo = ctrlP.tiposArticulo;
+                        xgrdTipoArticulo.DataSource = ctrlP.tiposArticulo;
+                        xgrdTipoArticulo.DataBind();
+
+                        int M = 0;
+                        foreach (_tipoArticulo art in ctrlP.tiposArticulo)
+                        {
+                            if (art.valor == "M")
+                            {
+                                M++;
+                            }
+                        }
+                        if (M > 5)
+                        {
+                            lblstock.Text = "M";
+                            lblstock2.Text = "M: Con Stock";
+                        }
+                        else
+                        {
+                            lblstock.Text = "N";
+                            lblstock2.Text = "N: Con Stock";
+                        }
+
+                        txtDescripcion1.Text = ctrlP.descripcionUno;
+                        txtDescripcion2.Text = ctrlP.descripcionDos;
+                        txtDescripcionLarga.Text = ctrlP.descripcionDos;
+
+                        ListEditItem oItmPlan = cmbPlan.Items.FindByValue(ctrlP.CodigoPlan);
+                        if (oItmPlan != null)
+                        {
+                            oItmPlan.Selected = true;
+                        }
+
+                        txtcomoAyudarStockCero.Text = ctrlP.comoAyudarStockCero;
+                        txtfuncionMaquina.Text = ctrlP.funcionMaquina;
+                        txtCantidad.Text = ctrlP.cantidadOrden.ToString("0.##");
+                        txtStockMin.Text = ctrlP.stockMinimo.ToString("0.##");
+                        txtStockMax.Text = ctrlP.stockMaximo.ToString("0.##");
+
+                        ListEditItem oItmMarca = cmbMarca.Items.FindByValue(ctrlP.CodigoMarca);
+                        if (oItmMarca != null)
+                        {
+                            oItmMarca.Selected = true;
+                        }
+
+                        ListEditItem oItmProveedor = cmbProveedor.Items.FindByValue(ctrlP.CodigoProveedor);
+                        if (oItmProveedor != null)
+                        {
+                            oItmProveedor.Selected = true;
+                        }
+
+
+                        //ListEditItem oItmUnico= cmbUnico.Items.FindByValue(ctrlP.esUnico.ToString());
+                        //if (oItmUnico != null)
+                        //{
+                        //    oItmUnico.Selected = true;
+                        //}
+                        //DateTime fechaCot = new DateTime(Convert.ToInt32(ctrlP.fechaCotizacion.Substring(6, 4)), Convert.ToInt32(ctrlP.fechaCotizacion.Substring(3, 2)), Convert.ToInt32(ctrlP.fechaCotizacion.Substring(0, 2)));
+                        //xDateFechaCot.Date = fechaCot;
+                        txtPrecioU.Text = ctrlP.precioUnitario.ToString("0.##");
+                        txtDiasEntrega.Text = ctrlP.diasEntrega.ToString();
+
+                        ListEditItem oItmMoneda = cmbMoneda.Items.FindByValue(ctrlP.Codigomoneda);
+                        if (oItmMoneda != null)
+                        {
+                            oItmMoneda.Selected = true;
+                        }
+                        ListEditItem oItmMonedaMtto = cmbMonedaMtoo.Items.FindByValue(ctrlP.monedaMtto);
+                        if (oItmMonedaMtto != null)
+                        {
+                            oItmMonedaMtto.Selected = true;
+                        }
+                        //lblTotal.Text = ctrlP.total.ToString("0.##");
+
+                        //mttos = new List<Mtto_Almn>();
+                        //mttos = ctrlP.mantenimientos;
+                        //xgrdMtto.DataSource = ctrlP.mantenimientos;
+                        //xgrdMtto.DataBind();
+
+                        //almnes = new List<Mtto_Almn>();
+                        //almnes = ctrlP.almacenes;
+                        //xgrdAlmacen.DataSource = ctrlP.almacenes;
+                        //xgrdAlmacen.DataBind();
+
+                        //if(ctrlP.fichaDatoSeguridad == "Si")
+                        //{
+                        //    rbFichaSi.Checked = true;
+                        //    rbFichaNo.Checked = false;
+                        //    dvHojaSeg1.Visible = true;
+                        //    dvHojaSeg2.Visible = true;
+                        //}
+                        //else
+                        //{
+                        //    rbFichaSi.Checked = false;
+                        //    rbFichaNo.Checked = true;
+                        //    dvHojaSeg1.Visible = false;
+                        //    dvHojaSeg2.Visible = false;
+                        //}
+
+                        ListEditItem oItmUM = cmbCodigoUM.Items.FindByValue(ctrlP.CodigoUM);
+                        if (oItmUM != null)
+                        {
+                            oItmUM.Selected = true;
+                        }
+
+                        //txtConteoCiclico.Text = ctrlP.conteoCiclico;
+                        ListEditItem oItmCC = cmbConteoCiclico.Items.FindByValue(ctrlP.conteoCiclico);
+                        if (oItmCC != null)
+                        {
+                            oItmCC.Selected = true;
+                        }
+
+                        //if (ctrlP.almacenamientoExternoPosible == "Si")
+                        //{
+                        //    rbAlmExtSi.Checked = true;
+                        //}
+                        //else
+                        //{
+                        //    rbAlmExtNo.Checked = false;
+                        //}
+
+                        ListEditItem oItmPlaneador = cmbPlaneador.Items.FindByValue(ctrlP.codigoPlaneador);
+                        if (oItmPlaneador != null)
+                        {
+                            oItmPlaneador.Selected = true;
+                        }
+
+                        ListEditItem oItmComprador = cmbComprador.Items.FindByValue(ctrlP.codigoComprador);
+                        if (oItmComprador != null)
+                        {
+                            oItmComprador.Selected = true;
+                        }
+
+                        //if(ctrlP.fechaInventario != "")
+                        //{
+                        //    DateTime fInv = new DateTime(Convert.ToInt32(ctrlP.fechaInventario.Substring(6,4)), Convert.ToInt32(ctrlP.fechaInventario.Substring(3, 2)), Convert.ToInt32(ctrlP.fechaInventario.Substring(0, 2)));
+                        //    xDateFechaInv.Date = fInv;
+                        //}
+
+                        txtMultiplo.Text = ctrlP.multiplo;
+                        //txtFile.Text = ctrlP.hojaSeguridad;
+                        txtCodigoArticulo.Text = ctrlP.codigoArticulo;
+
+                        aprbnes = new List<Aprobacion>();
+                        aprbnes = ctrlP.aprobaciones;
+
+                        foreach (Aprobacion item in aprbnes)
+                        {
+                            if (item.codigoEmpleado == "")
+                            {
+                                EmpleadosDa eDa = new EmpleadosDa();
+                                List<Empleados> lemp = eDa.GetCatalog("", "", "", "", true);
+                                foreach (Empleados item2 in lemp)
+                                {
+                                    lemp = lemp.FindAll(e => e.CodigoPerfil == item.codigoPerfil);
+                                    if (lemp.Count > 0)
+                                    {
+                                        item.codigoEmpleado = lemp[0].Codigo;
+                                    }
+                                }
+                            }
+                        }
+
+                        xgrdAprobaciones.DataSource = ctrlP.aprobaciones;
+                        xgrdAprobaciones.DataBind();
+
+                        txtConsEstimado.Text = ctrlP.consEstimado.ToString();
+                        ListEditItem oItmUM2 = cmbUM.Items.FindByValue(ctrlP.unidadMedida);
+                        if (oItmUM2 != null)
+                        {
+                            oItmUM2.Selected = true;
+                        }
+                        txtCantMinima.Text = ctrlP.cantMinima.ToString();
+                        DateTime fechaReq = new DateTime(Convert.ToInt32(ctrlP.FechaRequerida.Substring(6, 4)), Convert.ToInt32(ctrlP.FechaRequerida.Substring(3, 2)), Convert.ToInt32(ctrlP.FechaRequerida.Substring(0, 2)));
+                        xDateFechaReq.Date = fechaReq;
+
+                        ListEditItem oItmNOQ = cmbOQ.Items.FindByValue(ctrlP.numOQ);
+                        if (oItmNOQ != null)
+                        {
+                            oItmNOQ.Selected = true;
+                        }
+                        txtPrecio.Text = ctrlP.precio.ToString();
+                        txtContrato.Text = ctrlP.numOrden;
+                        switch (ctrlP.reparar)
+                        {
+                            case "Si":
+                                rbReparaSi.Checked = true;
+                                break;
+                            case "No":
+                                rbReparaNo.Checked = true;
+                                break;
+                        }
+
+                        ListEditItem oItmglclass = cmbGlClass.Items.FindByValue(ctrlP.GlClass);
+                        if (oItmglclass != null)
+                        {
+                            oItmglclass.Selected = true;
+                        }
+                        txtTextBusq.Text = ctrlP.textBusq;
+                        ListEditItem oItmProveedorComp = cmbProveedorComp.Items.FindByValue(ctrlP.CodigoProveedor_comp);
+                        if (oItmProveedorComp != null)
+                        {
+                            oItmProveedorComp.Selected = true;
+                        }
+                        ListEditItem oItmPais = cmbPaisOrigen.Items.FindByValue(ctrlP.PaisOrigen);
+                        if (oItmPais != null)
+                        {
+                            oItmPais.Selected = true;
+                        }
+                        ListEditItem oItmMtdoInv = cmbMtdoCosteInv.Items.FindByValue(ctrlP.MTDOCoste_Inv);
+                        if (oItmMtdoInv != null)
+                        {
+                            oItmMtdoInv.Selected = true;
+                        }
+                        ListEditItem oItmMtdoPursh = cmbPaisOrigen.Items.FindByValue(ctrlP.MTDOCoste_Pursh);
+                        if (oItmMtdoPursh != null)
+                        {
+                            oItmMtdoPursh.Selected = true;
+                        }
+
+                        ListEditItem oItmTipoEmq = cmbTipoEmaque.Items.FindByValue(ctrlP.codigo_tipoEmpaque);
+                        if (oItmTipoEmq != null)
+                        {
+                            oItmTipoEmq.Selected = true;
+                        }
+                        txtPiezaEmp.Text = ctrlP.piezasEmpaque.ToString();
+                        ListEditItem oItmUmTempq = cmbUmEmpaque.Items.FindByValue(ctrlP.UMEmpaque);
+                        if (oItmUmTempq != null)
+                        {
+                            oItmUmTempq.Selected = true;
+                        }
+                        txtAlto.Text = ctrlP.piezasEmpaque.ToString();
+                        txtAncho.Text = ctrlP.piezasEmpaque.ToString();
+                        txtLargo.Text = ctrlP.piezasEmpaque.ToString();
+
+                        ListEditItem oItmpursh1 = cmbPursh1.Items.FindByValue(ctrlP.pursh1);
+                        if (oItmpursh1 != null)
+                        {
+                            oItmpursh1.Selected = true;
+                        }
+                        ListEditItem oItmpursh2 = cmbPursh1.Items.FindByValue(ctrlP.pursh2);
+                        if (oItmpursh2 != null)
+                        {
+                            oItmpursh2.Selected = true;
+                        }
+                        ListEditItem oItmfamilia = cmbfamilia.Items.FindByValue(ctrlP.codigoFamilia);
+                        if (oItmfamilia != null)
+                        {
+                            oItmfamilia.Selected = true;
+                        }
+                        ListEditItem oItmbranch = cmbbranch.Items.FindByValue(ctrlP.branch);
+                        if (oItmbranch != null)
+                        {
+                            oItmbranch.Selected = true;
+                        }
+                        ListEditItem oItmdias = cmbDias.Items.FindByValue(ctrlP.diasStok);
+                        if (oItmdias != null)
+                        {
+                            oItmdias.Selected = true;
+                        }
+                        ListEditItem oItmUbiPrim = cmbUbicacionPrim.Items.FindByValue(ctrlP.ubicacionPrim);
+                        if (oItmUbiPrim != null)
+                        {
+                            oItmUbiPrim.Selected = true;
+                        }
+                        ListEditItem oItmUbiSec = cmbUbicacionSec.Items.FindByValue(ctrlP.ubicacionSec);
+                        if (oItmUbiSec != null)
+                        {
+                            oItmUbiSec.Selected = true;
+                        }
+                        ListEditItem oItmumALm = cmbUMAlmacen.Items.FindByValue(ctrlP.umAlmacen);
+                        if (oItmumALm != null)
+                        {
+                            oItmumALm.Selected = true;
+                        }
+                        txtAltoAlm.Text = ctrlP.alto_alm.ToString();
+                        txtAnchoAlm.Text = ctrlP.ancho_alm.ToString();
+                        txtLargoAlm.Text = ctrlP.largo_alm.ToString();
+
+                        break;
                     }
                 }
             }
+            else
+            {
+                DateTime date = new DateTime();
+                date = DateTime.Now;
+                lblcodigoSts.Text = "0001";
+                ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-edit' style='padding-right:5px;'></i>Abierto</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Pendiente por el autor para terminar la captura</span>";
+                lblnDoc.Text = BctrlProd.newDoc();
+                lblDocSolicitante.Text = LoginInfo.CurrentUsuario.NombreCompleto;
+                lblDocFechaSol.Text = date.ToString("dd/MM/yyyy HH:mm");
+                rbAlta.Checked = true;
+                dvReemplazaOtro.Visible = true;
+                lblProd.Visible = false;
+                cmbProducto.Visible = false;
+                rbNo.Checked = true;
+                lblcual.Visible = false;
+                cmbCualArticulo.Visible = false;
+                txtdescripcion.Text = "";
+                txtModelo.Text = "";
+                archivos = new List<archivos>();
+                xgrdArchivos.DataSource = archivos;
+                xgrdArchivos.DataBind();
+                xDateFechaReq.Date = date;
 
-            DateTime fechaActual = DateTime.Now;
-            xDateFechaReq.Date = fechaActual;
-            xDateFechaNotAdd.Date = fechaActual;
-            xDateFechaAccionAdd.Date = fechaActual;
+                tiposArticulo = new List<_tipoArticulo>();
+                //mttos = new List<Mtto_Almn>();
+                //almnes = new List<Mtto_Almn>();
+
+
+                foreach (TipoArticulo TipoArt in lTipoArt)
+                {
+                    _tipoArticulo n = new _tipoArticulo();
+                    n.ctrlPTipoArticuloID = 0;
+                    n.noDocumento = "";
+                    n.codigoTipoArticulo = TipoArt.codigoTipoArticulo;
+                    n.tipoArticulo = TipoArt.tipoArticulo;
+                    n.M = TipoArt.M;
+                    n.N = TipoArt.N;
+                    n.comentarios = TipoArt.comentarios;
+                    n.valor = "M";
+                    tiposArticulo.Add(n);
+                }
+                xgrdTipoArticulo.DataSource = tiposArticulo;
+                xgrdTipoArticulo.DataBind();
+
+                var tMtto = new MttoAlmnDa();
+                List<MttoAlmn> ltMtto = tMtto.GetCatalog("", "", true);
+                foreach (MttoAlmn mtto in ltMtto)
+                {
+                    Mtto_Almn n = new Mtto_Almn();
+                    n.ctrlPMantenimientoID = 0;
+                    n.noDocumento = "";
+                    n.codigoMttoAlmn = mtto.codigoMttoAlmn;
+                    n.especificacion = mtto.especificacion;
+                    n.notas = mtto.notas;
+                    n.clasificacion = mtto.clasificacion;
+                    n.responsable = mtto.responsable;
+                    n.tipo = mtto.tipo;
+                    //if(mtto.tipo == "M")
+                    //{
+                    //    mttos.Add(n);
+                    //}
+                    //else
+                    //{
+                    //    almnes.Add(n);
+                    //}
+                }
+                //xgrdMtto.DataSource = mttos;
+                //xgrdMtto.DataBind();
+                //xgrdAlmacen.DataSource = almnes;
+                //xgrdAlmacen.DataBind();
+
+
+                txtDescripcion1.Text = "";
+                txtDescripcion2.Text = "";
+                txtDescripcionLarga.Text = "";
+
+                txtcomoAyudarStockCero.Text = "";
+                txtfuncionMaquina.Text = "";
+                txtCantidad.Text = "0";
+                txtStockMin.Text = "0";
+                txtStockMax.Text = "0";
+
+                txtPrecioU.Text = "0";
+                txtDiasEntrega.Text = "0";
+
+                //lblTotal.Text = "0";
+
+                //rbFichaSi.Checked = true;
+
+                ListEditItem oItmCC = cmbConteoCiclico.Items[0];
+                if (oItmCC != null)
+                {
+                    oItmCC.Selected = true;
+                }
+                //rbAlmExtSi.Checked = true;
+
+
+                txtMultiplo.Text = "";
+                //txtFile.Text = "";
+                txtCodigoArticulo.Text = "";
+
+                aprbnes = new List<Aprobacion>();
+                PerfilDa perda = new PerfilDa();
+                List<Perfil> lperf = perda.GetCatalog("", true);
+
+                foreach (Perfil perf in lperf)
+                {
+                    EmpleadosDa eDa = new EmpleadosDa();
+                    List<Empleados> lemp = eDa.GetCatalog("", "", "", "", true);
+                    string empleadoCod = "";
+                    if (perf.Codigo == "0001" && LoginInfo.CurrentPerfil.Codigo == "0001")
+                    {
+                        for (int i = 0; i < lemp.Count; i++)
+                        {
+                            if (lemp[i].EmpleadoId == LoginInfo.CurrentUsuario.EmpleadoId)
+                            {
+                                empleadoCod = lemp[i].Codigo;
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        lemp = lemp.FindAll(e => e.CodigoPerfil == perf.Codigo);
+                        empleadoCod = lemp[0].Codigo;
+                    }
+
+                    Aprobacion aprb = new Aprobacion();
+                    aprb.AprobacionesID = 0;
+                    aprb.noDocumento = lblnDoc.Text;
+                    aprb.codigoPerfil = perf.Codigo;
+                    aprb.codigoEmpleado = empleadoCod;
+                    aprb.paso = "";
+                    aprb.titulo = "";
+                    aprb.usuario = "";
+                    aprb.puesto = "";
+                    aprb.fechaNotificacion = "";
+                    aprb.fechaAccion = "";
+                    aprb.accion = "";
+                    aprb.comentario = "";
+                    aprbnes.Add(aprb);
+                }
+                xgrdAprobaciones.DataSource = aprbnes;
+                xgrdAprobaciones.DataBind();
+
+                rbReparaNo.Checked = true;
+
+                //productos = new List<cotizacion_prod>();
+                //proveedores = new List<cotizacion_proveedor>();
+                //comentarios = new List<Entity.cotizacion_comentarios>();
+                //archivos = new List<cotizacion_archivos>();
+            }
+        }
+
+        public void limpiarModalAprnes()
+        {
+            //txtCodigoAprobacionAdd.Text = "";
+            //txtPasoAdd.Text = "";
+            //txtTituloAdd.Text = "";
+            //txtAccionAdd.Text = "";
+            //txtComentarioAdd.Text = "";
+
+            //var BPosicion = new PosicionDa();
+            //cmbPuestoAdd.TextField = "Descripcion";
+            //cmbPuestoAdd.ValueField = "Codigo";
+            //List<Posicion> posiciones = BPosicion.GetCombo(true);
+            //cmbPuestoAdd.DataSource = posiciones;
+            //cmbPuestoAdd.DataBind();
+
+            //if (posiciones.Count > 0)
+            //{
+            //    ListEditItem iPuesto = cmbPuestoAdd.Items.FindByValue(posiciones[0].Codigo);
+            //    if (iPuesto != null)
+            //    {
+            //        iPuesto.Selected = true;
+            //    }
+            //    var BEmpleado = new EmpleadosDa();
+            //    cmbEmpleadoAdd.TextField = "NombreCompleto";
+            //    cmbEmpleadoAdd.ValueField = "EmpleadoId";
+            //    cmbEmpleadoAdd.DataSource = BEmpleado.GetCombo(posiciones[0].Codigo);
+            //    cmbEmpleadoAdd.DataBind();
+
+            //    if (cmbEmpleadoAdd.Items.Count > 0)
+            //    {
+            //        ListEditItem iEmp = cmbEmpleadoAdd.Items.FindByValue(cmbEmpleadoAdd.Items[0].Value);
+            //        if (iEmp != null)
+            //        {
+            //            iEmp.Selected = true;
+            //        }
+            //    }
+            //}
+
+            //DateTime fechaActual = DateTime.Now;
+            //xDateFechaReq.Date = fechaActual;
+            //xDateFechaNotAdd.Date = fechaActual;
+            //xDateFechaAccionAdd.Date = fechaActual;
         }
 
         protected void btnRegresar_Click(object sender, EventArgs e)
@@ -1294,10 +1418,12 @@ namespace ControlProductos
 
             foreach (Aprobacion prb in aprbnes)
             {
+                DateTime fecha = new DateTime();
+                fecha = DateTime.Now;
                 Aprobacion nuevo = new Aprobacion();
                 nuevo = prb;
-                nuevo.fechaNotificacion = prb.fechaNotificacion.Substring(6, 4) + prb.fechaNotificacion.Substring(3, 2) + prb.fechaNotificacion.Substring(0, 2);
-                nuevo.fechaAccion = prb.fechaAccion.Substring(6, 4) + prb.fechaAccion.Substring(3, 2) + prb.fechaAccion.Substring(0, 2);
+                nuevo.fechaNotificacion = fecha.ToString().Substring(6, 4) + fecha.ToString().Substring(3, 2) + fecha.ToString().Substring(0, 2);
+                nuevo.fechaAccion = fecha.ToString().Substring(6, 4) + fecha.ToString().Substring(3, 2) + fecha.ToString().Substring(0, 2);
                 aprbInsert.Add(nuevo);
             }
 
@@ -1646,110 +1772,65 @@ namespace ControlProductos
         {
             xgrdAprobaciones.JSProperties["cpAlertMessage"] = string.Empty;
             var pars = e.Parameters;
+            var Valores = e.Parameters;
+            string[] data = Valores.Split(',');
 
-            string EmpleadoId = cmbEmpleadoAdd.SelectedItem.Value.ToString();
-            string code = "";
-            string user = "";
-            var BEmpleado = new EmpleadosDa();
-            List<Empleados> empleados = BEmpleado.GetCatalog(cmbPuestoAdd.SelectedItem.Value.ToString(), "", "", "",true);
-            foreach (Empleados item in empleados)
+            foreach (Aprobacion item in aprbnes)
             {
-                if(item.EmpleadoId.ToString() == EmpleadoId)
+                if(Convert.ToInt32(item.codigoPerfil) == Convert.ToInt32(data[0]))
                 {
-                    code = item.Codigo;
-                    user = item.NombreCompleto;
+                    item.codigoEmpleado = data[1];
                     break;
                 }
             }
-
-            TextBox txtCode = (TextBox)ASPxCallbackPanel1.FindControl("txtCodigoAprobacionAdd");
-
-            string noDocumento = lblnDoc.Text;
-            string codigo = txtCodigoAprobacionAdd.Text;
-            string paso = txtPasoAdd.Text;
-            string titulo = txtTituloAdd.Text;
-            string codigoEmpleado = code;
-            string usuario = user;
-            string puesto = cmbPuestoAdd.SelectedItem.Value.ToString();
-            string fechaNotificacion = xDateFechaNotAdd.Date.ToString("dd-MM-yyyy");
-            string fechaAccion = xDateFechaAccionAdd.Date.ToString("dd-MM-yyyy");
-            string accion = txtAccionAdd.Text;
-            string coment = txtComentarioAdd.Text;
-
-            if (pars == "Save" && (titulo != "" && codigo != ""))
-            {
-                bool bFound = false;
-                Aprobacion aprb = new Aprobacion();
-
-                foreach (Aprobacion item in aprbnes)
-                {
-                    if (item.codigoAprobaciones == codigo)
-                    {
-                        bFound = true;
-                        break;
-                    }
-                }
-
-                if (bFound == true)
-                {
-                    xgrdAprobaciones.JSProperties["cpAlertMessage"] = "Exist";
-                }
-                else
-                {
-                    aprb.AprobacionesID = 0;
-                    aprb.noDocumento = noDocumento;
-                    aprb.codigoAprobaciones = codigo;
-                    aprb.paso = paso;
-                    aprb.titulo = titulo;
-                    aprb.codigoEmpleado = codigoEmpleado;
-                    aprb.usuario = usuario;
-                    aprb.puesto = puesto;
-                    aprb.fechaNotificacion = fechaNotificacion;
-                    aprb.fechaAccion = fechaAccion;
-                    aprb.accion = accion;
-                    aprb.comentario = coment;
-                    aprbnes.Add(aprb);
-                }
-            }
-            else if (pars == "Save" && (titulo == "" && codigo == ""))
-            {
-                xgrdAprobaciones.JSProperties["cpAlertMessage"] = "SelectOne";
-            }
-
-            if (pars == "Delete")
-            {
-                xgrdAprobaciones.DataSource = null;
-                aprbnes.Clear();
-            }
-            else
-            {
-                if (pars != "Save")
-                {
-                    var Valores = e.Parameters;
-                    string[] data = Valores.Split(',');
-
-                    foreach (string d in data)
-                    {
-                        string valor = d.Replace("chk", "");
-                        string[] datos = valor.Split('-');
-                        string idaprb = datos[0];
-                        string folio = datos[1];
-                        aprbnes = aprbnes.FindAll(p => p.codigoAprobaciones != folio);
-                    }
-                }
-
-                xgrdAprobaciones.DataSource = aprbnes;
-            }
+            xgrdAprobaciones.DataSource = aprbnes;
             xgrdAprobaciones.DataBind();
         }
 
         protected void xgrdAprobaciones_HtmlDataCellPrepared(object sender, ASPxGridViewTableDataCellEventArgs e)
         {
-            if (e.DataColumn.Name == "CheckID")
+            if (e.DataColumn.FieldName == "codigoPerfil")
             {
-                var id = e.GetValue("AprobacionesID").ToString() + "-" + e.GetValue("codigoAprobaciones").ToString();
+                PerfilDa pda = new PerfilDa();
+                List<Perfil> perf = pda.GetCombo();
+                List<Perfil> perf2 = perf.FindAll(p => p.Codigo == e.GetValue("codigoPerfil").ToString());
+                e.Cell.Text = perf2[0].CodigoYNombre;
+            }
+            if (e.DataColumn.FieldName == "codigoEmpleado")
+            {
+                var id = e.GetValue("AprobacionesID").ToString() + "-" + e.GetValue("noDocumento").ToString() + "-" + e.GetValue("codigoPerfil").ToString();
 
-                e.Cell.Text = string.Format("<input type='checkbox' class='chkAprb' id='chk{0}'>", id);
+                string disabled = "";
+
+                if(lblcodigoSts.Text != "0001")
+                {
+                    disabled = "disabled='disabled'";
+                }
+
+                EmpleadosDa eDa = new EmpleadosDa();
+                List<Empleados> lemp = eDa.GetEmpleadoWithPerfil();
+                lemp = lemp.FindAll(u => u.CodigoPerfil == e.GetValue("codigoPerfil").ToString());
+                string sel = "<select  class='selEmpleados' id='sel{0}' style='width: 230px'  onchange='javascript: selAprob("+ e.GetValue("codigoPerfil").ToString() + ",this.value); ' "+ disabled + ">";
+                int iteracion = 0;
+                foreach (Empleados emp in lemp)
+                {
+                    string selstr = "";
+                    if(e.GetValue("codigoEmpleado").ToString() == emp.Codigo)
+                    {
+                        selstr = "selected='selected'";
+                    }
+                    else
+                    {
+                        if (iteracion == 0)
+                        {
+                            selstr = "selected='selected'";
+                        }
+                    }
+                    sel += "<option value='"+ emp.Codigo+ "' "+ selstr + ">" + emp.NombreCompleto+"</option>";
+                    iteracion++;
+                }
+                sel += "</select>";
+                e.Cell.Text = string.Format(sel, id);
             }
         }
 
@@ -1765,10 +1846,10 @@ namespace ControlProductos
                 {
                     CodigodPuestoSelected = pS[1];
                     var BEmpleado = new EmpleadosDa();
-                    cmbEmpleadoAdd.TextField = "NombreCompleto";
-                    cmbEmpleadoAdd.ValueField = "EmpleadoId";
-                    cmbEmpleadoAdd.DataSource = BEmpleado.GetCombo(CodigodPuestoSelected);
-                    cmbEmpleadoAdd.DataBind();
+                    //cmbEmpleadoAdd.TextField = "NombreCompleto";
+                    //cmbEmpleadoAdd.ValueField = "EmpleadoId";
+                    //cmbEmpleadoAdd.DataSource = BEmpleado.GetCombo(CodigodPuestoSelected);
+                    //cmbEmpleadoAdd.DataBind();
                 }
                 if (pS[0] == "Limpiar")
                 {
@@ -1777,7 +1858,7 @@ namespace ControlProductos
             }
             else
             {
-                ASPxCallbackPanel1.JSProperties["cpAlertMessage"] = "errror";
+                //ASPxCallbackPanel1.JSProperties["cpAlertMessage"] = "errror";
             }
         }
 
@@ -2067,6 +2148,32 @@ namespace ControlProductos
                     ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = Save();
                     return;
                 }
+                else if (pS[0] == "Enviar")
+                {
+                    int regreso = suguienteEstatus("false");
+                    if(regreso > 0)
+                    {
+                        refresData();
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "EnvSucces";
+                    }
+                    else
+                    {
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "EnvFaild";
+                    }
+                }
+                else if (pS[0] == "EnviarDM")
+                {
+                    int regreso = suguienteEstatus("true");
+                    if (regreso > 0)
+                    {
+                        refresData();
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "EnvSucces";
+                    }
+                    else
+                    {
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "EnvFaild";
+                    }
+                }
                 else if (pS[0] == "rbAlta" || pS[0] == "rbModificacion" || pS[0] == "rbBaja")
                 {
                     switch (pS[0])
@@ -2195,6 +2302,14 @@ namespace ControlProductos
             }
         }
 
+        private int suguienteEstatus(string DM)
+        {
+            int ctrlProdsID = Convert.ToInt32(Session["ctrlProdsID"]);
+            string codPerf = LoginInfo.CurrentPerfil.Codigo;
+            ControlProductosda cpda = new ControlProductosda();
+            return cpda.changeSts(ctrlProdsID.ToString(), LoginInfo.CurrentUsuario.UsuarioId.ToString(), lblSigPerf.Text, DM);
+        }
+
         protected void CIuplGFileArchivo_FileUploadComplete(object sender, FileUploadCompleteEventArgs e)
         {
             if (e.IsValid)
@@ -2257,6 +2372,11 @@ namespace ControlProductos
 
 
             return SelectedFileName;
+        }
+
+        protected void perfil_Init(object sender, EventArgs e)
+        {
+
         }
 
         //protected void rbOperacion_CheckedChanged(object sender, EventArgs e)

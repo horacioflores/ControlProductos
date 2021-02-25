@@ -128,6 +128,7 @@ namespace ControlProductos.Entity
         public int ancho_alm { get; set; }
         public int largo_alm { get; set; }
         public string monedaMtto { get; set; }
+        public string sigPerfil { get; set; }
 
         public List<archivos> archivos { get; set; }
 
@@ -176,10 +177,10 @@ namespace ControlProductos.Entity
     {
         public int AprobacionesID { get; set; }
         public string noDocumento { get; set; }
-        public string codigoAprobaciones { get; set; }
+        public string codigoPerfil { get; set; }
+        public string codigoEmpleado { get; set; }
         public string paso { get; set; }
         public string titulo { get; set; }
-        public string codigoEmpleado { get; set; }
         public string usuario { get; set; }
         public string puesto { get; set; }
         public string fechaNotificacion { get; set; }

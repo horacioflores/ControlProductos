@@ -19,6 +19,11 @@ namespace ControlProductos.Entity
         public List<Empleados> GetCmbEmpleadosResult { get; set; }
     }
 
+    public class GetEmpleadoWithPerfilResult_
+    {
+        public List<Empleados> GetEmpleadoWithPerfilResult { get; set; }
+    }
+
     public class DelEmpleadosResult_
     {
         public int DelEmpleadosResult { get; set; }
@@ -67,5 +72,6 @@ namespace ControlProductos.Entity
         public bool Activo { get; set; }
 
         public string CodigoYNombre { get; set; }
+        public string CodigoPerfil { get; set; }
     }
 }
