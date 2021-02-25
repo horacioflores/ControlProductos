@@ -584,6 +584,8 @@ namespace ControlProductos
             {
                 xgrdTipoArticulo.DataSource = tiposArticulo;
                 xgrdTipoArticulo.DataBind();
+                xgrdArchivos.DataSource = archivos;
+                xgrdArchivos.DataBind();
                 //xgrdMtto.DataSource = mttos;
                 //xgrdMtto.DataBind();
                 //xgrdAlmacen.DataSource = almnes;
@@ -2096,7 +2098,7 @@ namespace ControlProductos
                         ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectPlan";
                         return;
                     }
-                    if (cmbMarca.SelectedItem == null)
+                    if (cmbMarca.SelectedItem == null)  
                     {
                         ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectBrand";
                         return;
@@ -2144,8 +2146,8 @@ namespace ControlProductos
                     //        return;
                     //    }
                     //}
-
-                    ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = Save();
+                    string savestr = Save();
+                    ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = savestr;
                     return;
                 }
                 else if (pS[0] == "Enviar")
