@@ -81,3 +81,4 @@ D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bi
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll.licenses
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.pdb
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.csprojResolveAssemblyReference.cache

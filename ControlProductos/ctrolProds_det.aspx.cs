@@ -623,6 +623,7 @@ namespace ControlProductos
                         switch (ctrlP.sts_Prods)
                         {
                             case "Abierto":
+                                btnEnviarSolicitante.Visible = true;
                                 ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-edit' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Pendiente por el autor para terminar la captura</span>";
                                 break;
                             case "En Aprobación por ":
@@ -632,6 +633,10 @@ namespace ControlProductos
                                 if (ctrlP.sigPerfil != LoginInfo.CurrentPerfil.Codigo)
                                 {
                                     btnEnviarSolicitante.Visible = false;
+                                }
+                                else
+                                {
+                                    btnEnviarSolicitante.Visible = true;
                                 }
 
                                 switch (ctrlP.sigPerfil)
@@ -1454,6 +1459,7 @@ namespace ControlProductos
                 if (regreso > 0)
                 {
                     Session["ctrlProdsID"] = regreso;
+                    refresData();
                     return "successSave";
                    // strScript = "swal('Information', 'The product has been success registered!', 'success');";
                 }
@@ -1468,6 +1474,7 @@ namespace ControlProductos
                 var regreso = BctrlProd.UpdCtrlP(ctrlProd, LoginInfo.CurrentUsuario.UsuarioId.ToString());
                 if (regreso > 0)
                 {
+                    refresData();
                     return "successUpdate";
                     //strScript = "swal('Information', 'The product has been success updated!', 'success');";
                 }
