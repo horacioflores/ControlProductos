@@ -1124,6 +1124,7 @@ namespace ControlProductos
                 xgrdArchivos.DataSource = archivos;
                 xgrdArchivos.DataBind();
                 xDateFechaReq.Date = date;
+                btnEnviarSolicitante.Visible = false;
 
                 tiposArticulo = new List<_tipoArticulo>();
                 //mttos = new List<Mtto_Almn>();
