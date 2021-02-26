@@ -2160,6 +2160,11 @@ namespace ControlProductos
                         ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectBuyer";
                         return;
                     }
+                    if(txtCodigoArticulo.Text == "")
+                    {
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectCodArt";
+                        return;
+                    }
                     //if (rbFichaSi.Checked)
                     //{
                     //    if(txtFile.Text == "")
