@@ -663,6 +663,15 @@ namespace ControlProductos
 
                                 ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-eye-open' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + perfil + "</span>";
                                 break;
+                            case "Pendiente por Data Management":
+                                btnSave.Visible = false;
+
+                                if (ctrlP.sigPerfil != LoginInfo.CurrentPerfil.Codigo)
+                                {
+                                    btnEnviarSolicitante.Visible = false;
+                                }
+                                ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-eye-open' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span>";
+                                break;
                             case "Aprobado":
                                 btnSave.Visible = false;
                                 btnEnviarSolicitante.Visible = false;
