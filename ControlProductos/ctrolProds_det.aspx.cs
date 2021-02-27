@@ -147,7 +147,8 @@ namespace ControlProductos
 
         private void init()
         {
-            var BJDE = new JDEda();
+            //var BJDE = new JDEda();
+            var BJDE = new JDETwoda();
             cmbSubcuenta.TextField = "descripcion";
             cmbSubcuenta.ValueField = "codigo";
             cmbSubcuenta.DataSource = BJDE.GetCombo();
