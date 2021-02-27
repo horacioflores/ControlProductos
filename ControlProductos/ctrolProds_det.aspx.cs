@@ -634,7 +634,6 @@ namespace ControlProductos
                                 break;
                             case "En Aprobación por ":
                                 string perfil = "";
-                                btnSave.Visible = false;
 
                                 if (ctrlP.sigPerfil != LoginInfo.CurrentPerfil.Codigo)
                                 {
@@ -706,7 +705,6 @@ namespace ControlProductos
                                 ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-eye-open' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + perfil + "</span>";
                                 break;
                             case "Pendiente por Data Management":
-                                btnSave.Visible = false;
                                 disabledAutor();
                                 disabledComprador();
                                 disabledPlaneador();
@@ -1434,7 +1432,7 @@ namespace ControlProductos
             ctrlProd.subcuenta = cmbSubcuenta.SelectedItem.Value.ToString();
             ctrlProd.codActFijo = cmbActFijo.SelectedItem.Value.ToString();
             ctrlProd.consEstimado = (txtConsEstimado.Text == "") ? 0 : Convert.ToDecimal(txtConsEstimado.Text);
-            ctrlProd.UMEmpaque = cmbUM.SelectedItem.Value.ToString();
+            ctrlProd.unidadMedida = cmbUM.SelectedItem.Value.ToString();
             ctrlProd.cantMinima = (txtCantMinima.Text == "") ? 0 : Convert.ToDecimal(txtCantMinima.Text);
             ctrlProd.FechaRequerida = (xDateFechaReq.Value == null) ? null : xDateFechaReq.Date.ToString("yyyyMMdd");
             ctrlProd.numOQ = cmbOQ.SelectedItem.Value.ToString();
@@ -2230,15 +2228,24 @@ namespace ControlProductos
                         }
                     }
 
-                    int regreso = suguienteEstatus("false");
-                    if (regreso > 0)
+                    string savestr = Save();
+                    if (savestr.Contains("error"))
                     {
-                        refresData();
-                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "EnvSucces";
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = savestr;
+                        return;
                     }
                     else
                     {
-                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "EnvFaild";
+                        int regreso = suguienteEstatus("false");
+                        if (regreso > 0)
+                        {
+                            refresData();
+                            ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "EnvSucces";
+                        }
+                        else
+                        {
+                            ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "EnvFaild";
+                        }
                     }
                 }
                 else if (pS[0] == "EnviarDM")
