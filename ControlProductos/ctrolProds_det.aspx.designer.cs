@@ -238,6 +238,33 @@ namespace ControlProductos {
         protected global::System.Web.UI.WebControls.TextBox txtModelo;
         
         /// <summary>
+        /// Control addArchAd.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage addArchAd;
+        
+        /// <summary>
+        /// Control delArchAd.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage delArchAd;
+        
+        /// <summary>
+        /// Control delAllArchAd.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage delAllArchAd;
+        
+        /// <summary>
         /// Control xgrdArchivos.
         /// </summary>
         /// <remarks>

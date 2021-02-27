@@ -953,7 +953,7 @@
         </div>
         <form class="container">
             <section id="sSolicitante" class="row CeroPM">
-                <div class="col-xs-12">
+                <div class="col-xs-12" id="dvautor">
                     <div class="panel panel-info" id="infoSolicitante">
                         <div class="panel-heading">
                             <h3 class="panel-title">Información del Solicitante</h3>
@@ -1030,9 +1030,9 @@
                             <div class="row form-group CeroPM">
                                 <br/>
                                 <h5>ARCHIVOS ADJUNTOS</h5>
-                                <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('archivos');" />
-                                <img class="img" src="Assets/Images/trash_can.png" alt="Remove Selected" style="cursor: pointer" onclick="return DisableSelectedArchivo();" />
-                                <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdArchivos.PerformCallback('Delete');" />
+                                <img id="addArchAd" runat="server" src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('archivos');" />
+                                <img id="delArchAd" runat="server"  class="img" src="Assets/Images/trash_can.png" alt="Remove Selected" style="cursor: pointer" onclick="return DisableSelectedArchivo();" />
+                                <img id="delAllArchAd" runat="server" class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdArchivos.PerformCallback('Delete');" />
                                 <dx:ASPxGridView ID="xgrdArchivos" runat="server" AutoGenerateColumns="true"
                                     Width="100%" Font-Names="Segoe UI"
                                     OnCustomCallback="xgrdArchivos_CustomCallback"
@@ -1321,66 +1321,6 @@
                                 <ClientSideEvents EndCallback="OnTipoArticuloEndCallback" />
                             </dx:ASPxGridView>
 
-<%--                            <div class="row form-group CeroPM">
-                                <div class="col-xs-12">
-                                    <table id="table1"
-                                           data-toggle="table"
-                                           data-sortable="true"
-                                           data-sort-name="resTipo"
-                                           data-sort-order="asc"
-                                           data-show-toggle="true"
-                                           data-show-columns="true"
-                                           data-show-fullscreen="true"
-                                           data-buttons-class="primary"
-                                           data-search="true"
-                                           data-show-search-clear-button="true"
-                                           data-resizable="true"
-                                           data-show-footer="true"
-                                           class="CeroPM">
-                                        <thead style="background-color:#d9edf7;text-align:center;">
-                                            <tr>
-                                                <th data-field="resTipo" data-sortable="true" data-width="50" data-width-unit="%">Tipo de Artículo</th>
-                                                <th data-field="resM" data-sortable="true" data-width="10" data-width-unit="%">M</th>
-                                                <th data-field="resN" data-sortable="true" data-width="10" data-width-unit="%">N</th>
-                                                <th data-field="resComs" data-sortable="true" data-width="30" data-width-unit="%">Comentarios / Justificaciones</th>   
-                                            </tr>
-                                        </thead>
-                                        <tbody style="background-color:white;">
-                                            <asp:Repeater id="tbRepetTipoArticulo" runat="server">
-                                                <ItemTemplate>
-                                                    <tr>
-                                                        <td><%# Eval("tipo") %></td>
-                                                        <td><%# Eval("M") %></td>
-                                                        <td><%# Eval("N") %></td>
-                                                        <td><%# Eval("commentarios") %></td>
-                                                    </tr>
-                                                </ItemTemplate>
-                                            </asp:Repeater>
-<%--                                            <tr>
-                                                <td>Impacto en la productividad a causa de la escasez de una refacción</td>
-                                                <td>Fuerte</td>
-                                                <td>Medio/Bajo</td>
-                                                <td>Justificar</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tiempo para suministrar o la disponibilidad de un proveedor local</td>
-                                                <td>>2 días</td>
-                                                <td><2 días</td>
-                                                <td>Solución en la hoja de preparación</td>
-                                            </tr>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <td>TOTALES</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>--%>
-
                             <div id="mdlTipoArticulo" class="modal fade" role="dialog">
                                 <div class="modal-dialog" runat="server">
                                     <div class="modal-content" runat="server">
@@ -1546,7 +1486,7 @@
                 </div>
             </section>
             <section id="sComprador" class="row CeroPM">
-                <div class="col-xs-12">
+                <div class="col-xs-12" id="dvcomprador">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">Información del Comprador</h3>
@@ -1887,141 +1827,6 @@
                             <h3 class="panel-title">Información de Almacén</h3>
                             <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
                         </div>
-<%--                            <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('Almacen');" />
-                            <img class="img" src="Assets/Images/trash_can.png" alt="Remove Selected" style="cursor: pointer" onclick="return DisableSelectedAlmacen();" />
-                            <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdAlmacen.PerformCallback('Delete');" />
-                            <dx:ASPxGridView ID="xgrdAlmacen" runat="server" AutoGenerateColumns="true"
-                                Width="100%" Font-Names="Segoe UI"
-                                OnCustomCallback="xgrdAlmacen_CustomCallback"
-                                OnHtmlDataCellPrepared="xgrdAlmacen_HtmlDataCellPrepared"
-                                ClientInstanceName="xgrdAlmacen" Theme="Metropolis">
-                                <Columns>
-                                    <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="0" Width="10px">
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn FieldName="especificacion" Caption="Especificación" VisibleIndex="1" Width="23%">
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn FieldName="notas" Caption="Notas" VisibleIndex="2" Width="22%">
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn FieldName="clasificacion" Caption="Clasificación" VisibleIndex="3" Width="22%">
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn FieldName="responsable" Caption="Responsable" VisibleIndex="4" Width="23%">
-                                    </dx:GridViewDataTextColumn>
-                                </Columns>
-                                <Styles>
-                                    <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
-                                    <RowHotTrack BackColor="#CEECF5"></RowHotTrack>
-                                    <Header BackColor="#F2F2F2"></Header>
-                                </Styles>
-                                <SettingsPager Mode="ShowPager" PageSize="20" />
-                                <Settings ShowFilterRow="True" />
-                                <ClientSideEvents EndCallback="OnAlmacenEndCallback" />
-                            </dx:ASPxGridView>
-                        <div class="panel-body">
-                            <div class="row form-group CeroPM">
-                                <div class="col-xs-12">
-                                    <table id="table1"
-                                           data-toggle="table"
-                                           data-sortable="true"
-                                           data-sort-name="talmId"
-                                           data-sort-order="asc"
-                                           data-show-toggle="true"
-                                           data-show-columns="true"
-                                           data-show-fullscreen="true"
-                                           data-buttons-class="primary"
-                                           data-search="true"
-                                           data-show-search-clear-button="true"
-                                           data-resizable="true"
-                                           data-click-to-select="true"
-                                           class="CeroPM">
-                                        <thead style="background-color:#d9edf7;text-align:center;">
-                                            <tr>
-                                                <th data-field="talmId" data-checkbox="true" data-formatter="quitaChecked"></th>
-                                                <th data-field="talmEsp" data-sortable="true" data-width="45" data-width-unit="%">Especificación</th>
-                                                <th data-field="talmNotas" data-sortable="true" data-width="25" data-width-unit="%">Notas</th>
-                                                <th data-field="talmClas" data-sortable="true" data-width="10" data-width-unit="%">Clasificación</th>
-                                                <th data-field="talmResp" data-sortable="true" data-width="20" data-width-unit="%">Responsable</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody style="background-color:white;">
-                                            <asp:Repeater id="tbRepetAlmacen" runat="server">
-                                                <ItemTemplate>
-                                                    <tr>
-                                                        <td><%# Eval("especificacion") %></td>
-                                                        <td><%# Eval("notas") %></td>
-                                                        <td><%# Eval("clasificacion") %></td>
-                                                        <td><%# Eval("responsable") %></td>
-                                                    </tr>
-                                                </ItemTemplate>
-                                            </asp:Repeater>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Refractario (35)</td>
-                                                <td>A: No se que</td>
-                                                <td>S500</td>
-                                                <td>RESPONSABLE DEL MTTO</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Obsoleto</td>
-                                                <td>U : Posible consumo</td>
-                                                <td>S100</td>
-                                                <td>RESP. DE ALMACÉN</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Consignación</td>
-                                                <td></td>
-                                                <td>S700</td>
-                                                <td>RESP. DE ALMACÉN</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <br />
-                        </div>
-                            <div id="mdlAlmacen" class="modal fade" role="dialog">
-                                <div class="modal-dialog" runat="server">
-                                    <div class="modal-content" runat="server">
-                                        <div class="modal-header" runat="server">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4>Almacén</h4>
-                                        </div>
-                                        <div class="modal-body" runat="server">
-                                            <dx:ASPxGridView ID="xgrdAlmacenMDL" runat="server" AutoGenerateColumns="true"
-                                                Width="100%" Font-Names="Segoe UI"
-                                                OnCustomCallback="xgrdAlmacenMDL_CustomCallback"
-                                                OnHtmlDataCellPrepared="xgrdAlmacenMDL_HtmlDataCellPrepared"
-                                                ClientInstanceName="xgrdAlmacenMDL" Theme="Metropolis">
-                                                <Columns>
-                                                    <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="0" Width="10px">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="especificacion" Caption="Especificación" VisibleIndex="1" Width="23%">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="notas" Caption="Notas" VisibleIndex="2" Width="22%">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="clasificacion" Caption="Clasificación" VisibleIndex="3" Width="22%">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="responsable" Caption="Responsable" VisibleIndex="4" Width="23%">
-                                                    </dx:GridViewDataTextColumn>
-                                                </Columns>
-                                                <Styles>
-                                                    <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
-                                                    <RowHotTrack BackColor="#CEECF5"></RowHotTrack>
-                                                    <Header BackColor="#F2F2F2"></Header>
-                                                </Styles>
-                                                <SettingsPager Mode="ShowPager" PageSize="20" />
-                                                <Settings ShowFilterRow="True" />
-                                                <ClientSideEvents EndCallback="OnAlmacenMDLEndCallback" />
-                                            </dx:ASPxGridView>
-                                            <br />
-                                            <div>
-                                                <button type="button" class="btn btn-primary" onclick="AddedAlmnes();" data-dismiss="modal">Add</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>--%>
                         <div class="panel-body">
                             <fieldset style="padding:10px;border: 1px solid #B5D2EA;border-radius:5px;">
                                 <legend style="font-size:12px;font-weight:600;border:none;width: auto;padding:2px;color:#8CBADF;margin-bottom:0px;">Datos de Almacenaje</legend>
@@ -2092,142 +1897,6 @@
                             <h3 class="panel-title">Información de Mantenimiento</h3>
                             <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
                         </div>
-<%--                            <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('Mantenimiento');" />
-                            <img class="img" src="Assets/Images/trash_can.png" alt="Remove Selected" style="cursor: pointer" onclick="return DisableSelectedMtto();" />
-                            <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdMtto.PerformCallback('Delete');" />
-                            <dx:ASPxGridView ID="xgrdMtto" runat="server" AutoGenerateColumns="true"
-                                Width="100%" Font-Names="Segoe UI"
-                                OnCustomCallback="xgrdMtto_CustomCallback"
-                                OnHtmlDataCellPrepared="xgrdMtto_HtmlDataCellPrepared"
-                                ClientInstanceName="xgrdMtto" Theme="Metropolis">
-                                <Columns>
-                                    <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="0" Width="10px">
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn FieldName="especificacion" Caption="Especificación" VisibleIndex="1" Width="23%">
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn FieldName="notas" Caption="Notas" VisibleIndex="2" Width="22%">
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn FieldName="clasificacion" Caption="Clasificación" VisibleIndex="3" Width="22%">
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn FieldName="responsable" Caption="Responsable" VisibleIndex="4" Width="23%">
-                                    </dx:GridViewDataTextColumn>
-                                </Columns>
-                                <Styles>
-                                    <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
-                                    <RowHotTrack BackColor="#CEECF5"></RowHotTrack>
-                                    <Header BackColor="#F2F2F2"></Header>
-                                </Styles>
-                                <SettingsPager Mode="ShowPager" PageSize="20" />
-                                <Settings ShowFilterRow="True" />
-                                <ClientSideEvents EndCallback="OnMttoEndCallback" />
-                            </dx:ASPxGridView>
-                         <div class="panel-body">
-                            <div class="row form-group CeroPM">
-                                <div class="col-xs-12">
-                                    <table id="table1"
-                                           data-toggle="table"
-                                           data-sortable="true"
-                                           data-sort-name="resId"
-                                           data-sort-order="asc"
-                                           data-show-toggle="true"
-                                           data-show-columns="true"
-                                           data-show-fullscreen="true"
-                                           data-buttons-class="primary"
-                                           data-search="true"
-                                           data-show-search-clear-button="true"
-                                           data-resizable="true"
-                                           data-click-to-select="true"
-                                           class="CeroPM">
-                                        <thead style="background-color:#d9edf7;text-align:center;">
-                                            <tr>
-                                                <th data-field="tmttoId" data-checkbox="true" data-formatter="quitaChecked"></th>
-                                                <th data-field="tmttoEsp" data-sortable="true" data-width="45" data-width-unit="%">Especificación</th>
-                                                <th data-field="tmttoNot" data-sortable="true" data-width="25" data-width-unit="%">Notas</th>
-                                                <th data-field="tmttoClas" data-sortable="true" data-width="10" data-width-unit="%">Clasificación</th>
-                                                <th data-field="tmttoResp" data-sortable="true" data-width="20" data-width-unit="%">Responsable</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody style="background-color:white;">
-                                            <asp:Repeater id="tbRepetMtto" runat="server">
-                                                <ItemTemplate>
-                                                    <tr>
-                                                        <td><%# Eval("especificacion") %></td>
-                                                        <td><%# Eval("notas") %></td>
-                                                        <td><%# Eval("clasificacion") %></td>
-                                                        <td><%# Eval("responsable") %></td>
-                                                    </tr>
-                                                </ItemTemplate>
-                                            </asp:Repeater>
-                                             <tr>
-                                                <td>1</td>
-                                                <td>Estratégico  (60)</td>
-                                                <td>A: No se que</td>
-                                                <td>S500</td>
-                                                <td>RESPONSABLE DEL MTTO</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Reparable  (29)</td>
-                                                <td></td>
-                                                <td>S100</td>
-                                                <td>SOLICITANTE</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Reposición bajo demanda   (20)</td>
-                                                <td></td>
-                                                <td>S100</td>
-                                                <td>RESP. DE ALMACÉN</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <br />
-                        </div>
-
-                            <div id="mdlMtto" class="modal fade" role="dialog">
-                                <div class="modal-dialog" runat="server">
-                                    <div class="modal-content" runat="server">
-                                        <div class="modal-header" runat="server">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4>Mantenimiento</h4>
-                                        </div>
-                                        <div class="modal-body" runat="server">
-                                            <dx:ASPxGridView ID="xgrdMttoMDL" runat="server" AutoGenerateColumns="true"
-                                                Width="100%" Font-Names="Segoe UI"
-                                                OnCustomCallback="xgrdMttoMDL_CustomCallback"
-                                                OnHtmlDataCellPrepared="xgrdMttoMDL_HtmlDataCellPrepared"
-                                                ClientInstanceName="xgrdMttoMDL" Theme="Metropolis">
-                                                <Columns>
-                                                    <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="0" Width="10px">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="especificacion" Caption="Especificación" VisibleIndex="1" Width="23%">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="notas" Caption="Notas" VisibleIndex="2" Width="22%">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="clasificacion" Caption="Clasificación" VisibleIndex="3" Width="22%">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="responsable" Caption="Responsable" VisibleIndex="4" Width="23%">
-                                                    </dx:GridViewDataTextColumn>
-                                                </Columns>
-                                                <Styles>
-                                                    <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
-                                                    <RowHotTrack BackColor="#CEECF5"></RowHotTrack>
-                                                    <Header BackColor="#F2F2F2"></Header>
-                                                </Styles>
-                                                <SettingsPager Mode="ShowPager" PageSize="20" />
-                                                <Settings ShowFilterRow="True" />
-                                                <ClientSideEvents EndCallback="OnMttoxgrdMttoMDLEndCallback" />
-                                            </dx:ASPxGridView>
-                                            <br />
-                                            <div>
-                                                <button type="button" class="btn btn-primary" onclick="AddedMttos();" data-dismiss="modal">Add</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>--%>
                         <div class="panel-body">
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-1">Monto Total en la primera compra</label>
