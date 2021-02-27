@@ -233,12 +233,12 @@ namespace ControlProductos
             cmbTipoDoc.DataBind();
 
             var BCtrlProd = new ControlProductosda();
-            cmbProducto.TextField = "codigoYNombre";
+            cmbProducto.TextField = "codigoArticulo";
             cmbProducto.ValueField = "codigoArticulo";
             cmbProducto.DataSource = BCtrlProd.GetCombo();
             cmbProducto.DataBind();
 
-            cmbCualArticulo.TextField = "codigoYNombre";
+            cmbCualArticulo.TextField = "codigoArticulo";
             cmbCualArticulo.ValueField = "codigoArticulo";
             cmbCualArticulo.DataSource = BCtrlProd.GetCombo();
             cmbCualArticulo.DataBind();
@@ -301,7 +301,7 @@ namespace ControlProductos
             cmbProveedorComp.ValueField = "Codigo";
             cmbProveedorComp.DataSource = BProveedor.GetCombo();
             cmbProveedorComp.DataBind();
-            
+
 
             //List<Unico> lUnico = new List<Unico>();
             //Unico item = new Unico();
@@ -623,6 +623,11 @@ namespace ControlProductos
                         switch (ctrlP.sts_Prods)
                         {
                             case "Abierto":
+                                disabledComprador();
+                                disabledPlaneador();
+                                disabledAlmacen();
+                                disabledMtoo();
+                                disabledDM();
                                 btnEnviarSolicitante.Visible = true;
                                 ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-edit' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Pendiente por el autor para terminar la captura</span>";
                                 break;
@@ -643,15 +648,35 @@ namespace ControlProductos
                                 {
                                     case "0002":
                                         perfil = "Comprador";
+                                        disabledAutor();
+                                        disabledPlaneador();
+                                        disabledAlmacen();
+                                        disabledMtoo();
+                                        disabledDM();
                                         break;
                                     case "0003":
                                         perfil = "PLANNER";
+                                        disabledAutor();
+                                        disabledComprador();
+                                        disabledAlmacen();
+                                        disabledMtoo();
+                                        disabledDM();
                                         break;
                                     case "0004":
                                         perfil = "ALMACÉN";
+                                        disabledAutor();
+                                        disabledComprador();
+                                        disabledPlaneador();
+                                        disabledMtoo();
+                                        disabledDM();
                                         break;
                                     case "0005":
                                         perfil = "GTE MANTENIMIENTO";
+                                        disabledAutor();
+                                        disabledComprador();
+                                        disabledPlaneador();
+                                        disabledAlmacen();
+                                        disabledDM();
                                         break;
                                     case "0006":
                                         perfil = "GTE COMPRAS";
@@ -659,10 +684,21 @@ namespace ControlProductos
                                         {
                                             btnEnviarDM.Visible = true;
                                         }
-
+                                        disabledAutor();
+                                        disabledComprador();
+                                        disabledPlaneador();
+                                        disabledAlmacen();
+                                        disabledMtoo();
+                                        disabledDM();
                                         break;
                                     case "0007":
                                         perfil = "DIRECCION";
+                                        disabledAutor();
+                                        disabledComprador();
+                                        disabledPlaneador();
+                                        disabledAlmacen();
+                                        disabledMtoo();
+                                        disabledDM();
                                         break;
                                 }
 
@@ -670,7 +706,11 @@ namespace ControlProductos
                                 break;
                             case "Pendiente por Data Management":
                                 btnSave.Visible = false;
-
+                                disabledAutor();
+                                disabledComprador();
+                                disabledPlaneador();
+                                disabledAlmacen();
+                                disabledMtoo();
                                 if (ctrlP.sigPerfil != LoginInfo.CurrentPerfil.Codigo)
                                 {
                                     btnEnviarSolicitante.Visible = false;
@@ -678,6 +718,12 @@ namespace ControlProductos
                                 ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-eye-open' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span>";
                                 break;
                             case "Aprobado":
+                                disabledAutor();
+                                disabledComprador();
+                                disabledPlaneador();
+                                disabledAlmacen();
+                                disabledMtoo();
+                                disabledDM();
                                 btnSave.Visible = false;
                                 btnEnviarSolicitante.Visible = false;
                                 ltlSts.Text = "<span id='spanStatus' class='alert btn-success docEstatus' ><i class='glyphicon glyphicon-ok' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Aprobado por " + ctrlP.usuario + " el " + ctrlP.ModFecha + "</span>";
@@ -709,7 +755,7 @@ namespace ControlProductos
                                     btnEnviarDM.Visible = false;
                                 }
                             }
-                            
+
                         }
 
                         lblnDoc.Text = ctrlP.noDocumento;
@@ -1337,7 +1383,7 @@ namespace ControlProductos
             ctrlProd.codigoSolicitante = LoginInfo.CurrentUsuario.Codigo;
             ctrlProd.fechaSolicitud = lblDocFechaSol.Text.Substring(6, 4) + lblDocFechaSol.Text.Substring(3, 2) + lblDocFechaSol.Text.Substring(0, 2) + " " + lblDocFechaSol.Text.Substring(11, 5);
             ctrlProd.remplazaOtro = remplazaOtro;
-            ctrlProd.cualArticulo = (remplazaOtro == "Si")?cmbCualArticulo.SelectedItem.Value.ToString():"";
+            ctrlProd.cualArticulo = (remplazaOtro == "Si") ? cmbCualArticulo.SelectedItem.Value.ToString() : "";
             ctrlProd.CodigoMaquina = cmbMaquina.SelectedItem.Value.ToString();
             ctrlProd.CodigoSubcategoria1 = cmbSubCat1.SelectedItem.Value.ToString();
             ctrlProd.CodigoSubcategoria2 = cmbSubCat2.SelectedItem.Value.ToString();
@@ -1350,7 +1396,7 @@ namespace ControlProductos
             ctrlProd.CodigoPlan = cmbPlan.SelectedItem.Value.ToString();
             ctrlProd.comoAyudarStockCero = txtcomoAyudarStockCero.Text;
             ctrlProd.funcionMaquina = txtfuncionMaquina.Text;
-            ctrlProd.cantidadOrden = (txtCantidad.Text == "")?0:Convert.ToDecimal(txtCantidad.Text);
+            ctrlProd.cantidadOrden = (txtCantidad.Text == "") ? 0 : Convert.ToDecimal(txtCantidad.Text);
             ctrlProd.stockMinimo = (txtStockMin.Text == "") ? 0 : Convert.ToDecimal(txtStockMin.Text);
             ctrlProd.stockMaximo = (txtStockMax.Text == "") ? 0 : Convert.ToDecimal(txtStockMax.Text);
             ctrlProd.CodigoMarca = cmbMarca.SelectedItem.Value.ToString();
@@ -1461,7 +1507,7 @@ namespace ControlProductos
                     Session["ctrlProdsID"] = regreso;
                     refresData();
                     return "successSave";
-                   // strScript = "swal('Information', 'The product has been success registered!', 'success');";
+                    // strScript = "swal('Information', 'The product has been success registered!', 'success');";
                 }
                 else
                 {
@@ -1496,7 +1542,7 @@ namespace ControlProductos
                 string[] datos = pars.Split(',');
                 foreach (var item in tiposArticulo)
                 {
-                    if(item.codigoTipoArticulo == datos[1])
+                    if (item.codigoTipoArticulo == datos[1])
                     {
                         item.comentarios = datos[2];
                     }
@@ -1504,7 +1550,7 @@ namespace ControlProductos
                 xgrdTipoArticulo.DataSource = tiposArticulo;
                 xgrdTipoArticulo.DataBind();
             }
-            else if(pars == "Delete")
+            else if (pars == "Delete")
             {
                 xgrdTipoArticulo.DataSource = null;
                 tiposArticulo.Clear();
@@ -1742,7 +1788,7 @@ namespace ControlProductos
 
 
                 List<archivos> exists = archivos.FindAll(ex => ex.archivo == a.archivo);
-                if(exists.Count > 0)
+                if (exists.Count > 0)
                 {
                     xgrdArchivos.JSProperties["cpAlertMessage"] = "Exist";
                     return;
@@ -1768,7 +1814,7 @@ namespace ControlProductos
             {
                 var Valores = e.Parameters;
                 string[] data = Valores.Split(',');
-                foreach(string d in data)
+                foreach (string d in data)
                 {
                     string[] datos = d.Split('-');
                     string codigoTipoDocumento = datos[1];
@@ -1801,7 +1847,7 @@ namespace ControlProductos
 
             foreach (Aprobacion item in aprbnes)
             {
-                if(Convert.ToInt32(item.codigoPerfil) == Convert.ToInt32(data[0]))
+                if (Convert.ToInt32(item.codigoPerfil) == Convert.ToInt32(data[0]))
                 {
                     item.codigoEmpleado = data[1];
                     break;
@@ -1826,7 +1872,7 @@ namespace ControlProductos
 
                 string disabled = "";
 
-                if(lblcodigoSts.Text != "0001")
+                if (lblcodigoSts.Text != "0001")
                 {
                     disabled = "disabled='disabled'";
                 }
@@ -1834,12 +1880,12 @@ namespace ControlProductos
                 EmpleadosDa eDa = new EmpleadosDa();
                 List<Empleados> lemp = eDa.GetEmpleadoWithPerfil();
                 lemp = lemp.FindAll(u => u.CodigoPerfil == e.GetValue("codigoPerfil").ToString());
-                string sel = "<select  class='selEmpleados' id='sel{0}' style='width: 230px'  onchange='javascript: selAprob("+ e.GetValue("codigoPerfil").ToString() + ",this.value); ' "+ disabled + ">";
+                string sel = "<select  class='selEmpleados' id='sel{0}' style='width: 230px'  onchange='javascript: selAprob(" + e.GetValue("codigoPerfil").ToString() + ",this.value); ' " + disabled + ">";
                 int iteracion = 0;
                 foreach (Empleados emp in lemp)
                 {
                     string selstr = "";
-                    if(e.GetValue("codigoEmpleado").ToString() == emp.Codigo)
+                    if (e.GetValue("codigoEmpleado").ToString() == emp.Codigo)
                     {
                         selstr = "selected='selected'";
                     }
@@ -1850,7 +1896,7 @@ namespace ControlProductos
                             selstr = "selected='selected'";
                         }
                     }
-                    sel += "<option value='"+ emp.Codigo+ "' "+ selstr + ">" + emp.NombreCompleto+"</option>";
+                    sel += "<option value='" + emp.Codigo + "' " + selstr + ">" + emp.NombreCompleto + "</option>";
                     iteracion++;
                 }
                 sel += "</select>";
@@ -1929,7 +1975,7 @@ namespace ControlProductos
                 var id = e.GetValue("codigoTipoArticulo").ToString();
                 bool rel = false;
                 List<_tipoArticulo> tipos = tiposArticulo.FindAll(item => item.codigoTipoArticulo == id);
-                if(tipos.Count > 0)
+                if (tipos.Count > 0)
                 {
                     rel = true;
                 }
@@ -2120,7 +2166,7 @@ namespace ControlProductos
                         ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectPlan";
                         return;
                     }
-                    if (cmbMarca.SelectedItem == null)  
+                    if (cmbMarca.SelectedItem == null)
                     {
                         ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectBrand";
                         return;
@@ -2160,11 +2206,6 @@ namespace ControlProductos
                         ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectBuyer";
                         return;
                     }
-                    if(txtCodigoArticulo.Text == "")
-                    {
-                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectCodArt";
-                        return;
-                    }
                     //if (rbFichaSi.Checked)
                     //{
                     //    if(txtFile.Text == "")
@@ -2179,8 +2220,17 @@ namespace ControlProductos
                 }
                 else if (pS[0] == "Enviar")
                 {
+                    if (lblSigPerf.Text == "0008")
+                    {
+                        if (txtCodigoArticulo.Text == "")
+                        {
+                            ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectCodArt";
+                            return;
+                        }
+                    }
+
                     int regreso = suguienteEstatus("false");
-                    if(regreso > 0)
+                    if (regreso > 0)
                     {
                         refresData();
                         ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "EnvSucces";
@@ -2336,7 +2386,7 @@ namespace ControlProductos
             int ctrlProdsID = Convert.ToInt32(Session["ctrlProdsID"]);
             string codPerf = LoginInfo.CurrentPerfil.Codigo;
             ControlProductosda cpda = new ControlProductosda();
-            return cpda.changeSts(ctrlProdsID.ToString(), LoginInfo.CurrentUsuario.UsuarioId.ToString(), lblSigPerf.Text, DM);
+            return cpda.changeSts(ctrlProdsID.ToString(), LoginInfo.CurrentUsuario.UsuarioId.ToString(), lblSigPerf.Text, DM, txtCodigoArticulo.Text);
         }
 
         protected void CIuplGFileArchivo_FileUploadComplete(object sender, FileUploadCompleteEventArgs e)
@@ -2440,5 +2490,97 @@ namespace ControlProductos
         //        }
         //    }
         //}
+
+        public void disabledAutor()
+        {
+            cmbProducto.Attributes.Add("disabled", "");
+            cmbCualArticulo.Attributes.Add("disabled", "");
+            txtdescripcion.Attributes.Add("disabled", "");
+            cmbMarca.Attributes.Add("disabled", "");
+            txtModelo.Attributes.Add("disabled", "");
+            addArchAd.Attributes.Add("disabled", "");
+            delArchAd.Attributes.Add("disabled", "");
+            delAllArchAd.Attributes.Add("disabled", "");
+            cmbDepa.Attributes.Add("disabled", "");
+            cmbSubcuenta.Attributes.Add("disabled", "");
+            cmbMaquina.Attributes.Add("disabled", "");
+            txtfuncionMaquina.Attributes.Add("disabled", "");
+            cmbActFijo.Attributes.Add("disabled", "");
+            xgrdTipoArticulo.Attributes.Add("disabled", "");
+            txtConsEstimado.Attributes.Add("disabled", "");
+            cmbUM.Attributes.Add("disabled", "");
+            txtCantMinima.Attributes.Add("disabled", "");
+            xDateFechaReq.Attributes.Add("disabled", "");
+            cmbOQ.Attributes.Add("disabled", "");
+            txtcomoAyudarStockCero.Attributes.Add("disabled", "");
+            txtPrecio.Attributes.Add("disabled", "");
+            cmbMoneda.Attributes.Add("disabled", "");
+            cmbProveedor.Attributes.Add("disabled", "");
+            cmbPlan.Attributes.Add("disabled", "");
+            txtContrato.Attributes.Add("disabled", "");
+            rbReparaSi.Attributes.Add("disabled", "");
+            rbReparaNo.Attributes.Add("disabled", "");
+        }
+
+        public void disabledComprador()
+        {
+            txtDescripcion1.Attributes.Add("disabled", "");
+            txtDescripcion2.Attributes.Add("disabled", "");
+            txtDescripcionLarga.Attributes.Add("disabled", "");
+            cmbGlClass.Attributes.Add("disabled", "");
+            txtTextBusq.Attributes.Add("disabled", "");
+            cmbProveedorComp.Attributes.Add("disabled", "");
+            cmbPaisOrigen.Attributes.Add("disabled", "");
+            txtPrecioU.Attributes.Add("disabled", "");
+            cmbMonedaComprador.Attributes.Add("disabled", "");
+            txtMultiplo.Attributes.Add("disabled", "");
+            cmbCodigoUM.Attributes.Add("disabled", "");
+            cmbComprador.Attributes.Add("disabled", "");
+            txtDiasEntrega.Attributes.Add("disabled", "");
+            cmbMtdoCosteInv.Attributes.Add("disabled", "");
+            cmbMtdoCostePursh.Attributes.Add("disabled", "");
+            cmbTipoEmaque.Attributes.Add("disabled", "");
+            txtPiezaEmp.Attributes.Add("disabled", "");
+            cmbUmEmpaque.Attributes.Add("disabled", "");
+            txtAlto.Attributes.Add("disabled", "");
+            txtAncho.Attributes.Add("disabled", "");
+            txtLargo.Attributes.Add("disabled", "");
+            cmbPursh1.Attributes.Add("disabled", "");
+            cmbPursh2.Attributes.Add("disabled", "");
+            cmbfamilia.Attributes.Add("disabled", "");
+
+        }
+
+        public void disabledPlaneador()
+        {
+            cmbbranch.Attributes.Add("disabled", "");
+            txtStockMin.Attributes.Add("disabled", "");
+            txtStockMax.Attributes.Add("disabled", "");
+            cmbDias.Attributes.Add("disabled", "");
+            cmbPlaneador.Attributes.Add("disabled", "");
+            cmbConteoCiclico.Attributes.Add("disabled", "");
+        }
+
+        public void disabledAlmacen()
+        {
+            cmbUbicacionPrim.Attributes.Add("disabled", "");
+            cmbUbicacionSec.Attributes.Add("disabled", "");
+            cmbUMAlmacen.Attributes.Add("disabled", "");
+            txtAltoAlm.Attributes.Add("disabled", "");
+            txtAnchoAlm.Attributes.Add("disabled", "");
+            txtLargoAlm.Attributes.Add("disabled", "");
+        }
+
+        public void disabledMtoo()
+        {
+            txtCantidad.Attributes.Add("disabled", "");
+            txtTotal.Attributes.Add("disabled", "");
+            cmbMonedaMtoo.Attributes.Add("disabled", "");
+        }
+
+        public void disabledDM()
+        {
+            txtCodigoArticulo.Attributes.Add("disabled", "");
+        }
     }
 }
