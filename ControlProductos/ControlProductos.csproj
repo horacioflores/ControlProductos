@@ -3729,6 +3729,7 @@
     <Compile Include="dataAccess\ActFijo.cs" />
     <Compile Include="dataAccess\familia.cs" />
     <Compile Include="dataAccess\JDE.cs" />
+    <Compile Include="dataAccess\JDETwo.cs" />
     <Compile Include="dataAccess\Maquina.cs" />
     <Compile Include="dataAccess\Marca.cs" />
     <Compile Include="dataAccess\Menu.cs" />
@@ -3762,6 +3763,7 @@
     <Compile Include="Entity\ActFijos.cs" />
     <Compile Include="Entity\familia.cs" />
     <Compile Include="Entity\JDE.cs" />
+    <Compile Include="Entity\JDETwo.cs" />
     <Compile Include="Entity\loggedEmpleado.cs" />
     <Compile Include="Entity\Maquina.cs" />
     <Compile Include="Entity\Marca.cs" />
