@@ -302,21 +302,43 @@
                       </DataItemTemplate>
                 </dx:GridViewDataColumn>
                 <dx:GridViewDataTextColumn FieldName="noDocumento" VisibleIndex="3" Caption="Document Number">
-                </dx:GridViewDataTextColumn>     
-                <dx:GridViewDataTextColumn FieldName="codigoArticulo" VisibleIndex="4" Caption="Item code">
-                </dx:GridViewDataTextColumn>  
-                <dx:GridViewDataTextColumn FieldName="codigoSolicitante" VisibleIndex="5" Caption="Applicant">
+                </dx:GridViewDataTextColumn>   
+                <dx:GridViewDataTextColumn FieldName="codigoArticulo" VisibleIndex="4" Caption="Part Number">
                 </dx:GridViewDataTextColumn>    
-                <dx:GridViewDataTextColumn FieldName="fechaSolicitud" VisibleIndex="6" Caption="Request Date">
+                <dx:GridViewDataTextColumn FieldName="descripcion" VisibleIndex="5" Caption="Description">
+                </dx:GridViewDataTextColumn>  
+                <dx:GridViewDataTextColumn FieldName="Marca" VisibleIndex="6" Caption="Marca">
+                </dx:GridViewDataTextColumn>  
+                 <dx:GridViewDataTextColumn FieldName="modelo" VisibleIndex="7" Caption="Model">
+                </dx:GridViewDataTextColumn>  
+                <dx:GridViewDataTextColumn FieldName="usuario" VisibleIndex="8" Caption="User">
+                </dx:GridViewDataTextColumn>  
+                 <dx:GridViewDataTextColumn FieldName="fechaSolicitud" VisibleIndex="9" Caption="Request Date">
                 </dx:GridViewDataTextColumn> 
-                <dx:GridViewDataTextColumn FieldName="cualArticulo" VisibleIndex="7" Caption="Request">
+                <dx:GridViewDataTextColumn FieldName="codigoSolicitante" VisibleIndex="10" Caption="Applicant">
+                </dx:GridViewDataTextColumn>      
+                <dx:GridViewDataTextColumn FieldName="Departamento" VisibleIndex="11" Caption="Depto">
+                </dx:GridViewDataTextColumn>      
+                <dx:GridViewDataTextColumn FieldName="Comprador" VisibleIndex="12" Caption="Buyer">
+                </dx:GridViewDataTextColumn>  
+                <dx:GridViewDataTextColumn FieldName="totalAnual" VisibleIndex="13" Caption="total annual">
+                </dx:GridViewDataTextColumn>       
+                <dx:GridViewDataTextColumn FieldName="unidadMedida" VisibleIndex="14" Caption="UM">
+                </dx:GridViewDataTextColumn>
+                <dx:GridViewDataTextColumn FieldName="Subcategoria1" VisibleIndex="15" Caption="Subcategory 1">
+                </dx:GridViewDataTextColumn>   
+                <dx:GridViewDataTextColumn FieldName="GlClass" VisibleIndex="16" Caption="GL Class">
+                </dx:GridViewDataTextColumn>  
+                <dx:GridViewDataTextColumn FieldName="operacion" VisibleIndex="17" Caption="Request Type">
+                </dx:GridViewDataTextColumn>   
+                <dx:GridViewDataTextColumn FieldName="sts_Prods" VisibleIndex="18" Caption="Status">
+                </dx:GridViewDataTextColumn>   
+                <%--<dx:GridViewDataTextColumn FieldName="cualArticulo" VisibleIndex="7" Caption="Request">
                 </dx:GridViewDataTextColumn> 
                 <dx:GridViewDataTextColumn FieldName="sts_Prods" VisibleIndex="8" Caption="Status">
                 </dx:GridViewDataTextColumn>  
                 <dx:GridViewDataTextColumn FieldName="CodigoMaquina" VisibleIndex="9" Caption="Associated Machine">
                 </dx:GridViewDataTextColumn>     
-<%--                <dx:GridViewDataTextColumn FieldName="CodigoUtilizado" VisibleIndex="10" Caption="Used">
-                </dx:GridViewDataTextColumn> --%>
                 <dx:GridViewDataTextColumn FieldName="descripcionUno" VisibleIndex="11" Caption="Description1">
                 </dx:GridViewDataTextColumn> 
                 <dx:GridViewDataTextColumn FieldName="descripcionDos" VisibleIndex="12" Caption="Description2">
@@ -343,10 +365,8 @@
                 </dx:GridViewDataTextColumn>
                 <dx:GridViewDataTextColumn FieldName="diasEntrega" VisibleIndex="23" Caption="Days Delivery">
                 </dx:GridViewDataTextColumn> 
-<%--                <dx:GridViewDataTextColumn FieldName="fechaCotizacion" VisibleIndex="24" Caption="Quote Date">
-                </dx:GridViewDataTextColumn> --%>
                 <dx:GridViewDataTextColumn FieldName="CodigoMarca" VisibleIndex="25" Caption="Supplier Brand">
-                </dx:GridViewDataTextColumn>                                                                                                                                                                                                                                                                                                                      
+                </dx:GridViewDataTextColumn>    --%>                                                                                                                                                                                                                                                                                                                  
             </Columns>
             <SettingsBehavior ConfirmDelete="true"/>
             <SettingsPager Mode="ShowPager" PageSize="13"/>

@@ -129,6 +129,12 @@ namespace ControlProductos.Entity
         public int largo_alm { get; set; }
         public string monedaMtto { get; set; }
         public string sigPerfil { get; set; }
+                
+        public string Marca { get; set; }
+        public string Comprador { get; set; }
+        public string Subcategoria1 { get; set; }        
+        public string Departamento { get; set; }        
+        public decimal totalAnual { get; set; }
 
         public List<archivos> archivos { get; set; }
 

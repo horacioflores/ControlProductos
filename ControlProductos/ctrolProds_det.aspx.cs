@@ -147,101 +147,396 @@ namespace ControlProductos
 
         private void init()
         {
-            //var BJDE = new JDEda();
-            var BJDE = new JDETwoda();
-            cmbSubcuenta.TextField = "descripcion";
-            cmbSubcuenta.ValueField = "codigo";
-            cmbSubcuenta.DataSource = BJDE.GetCombo();
-            cmbSubcuenta.DataBind();
+            ////var BJDE = new JDEda();
+            //var BJDE = new JDETwoda();
+            //cmbSubcuenta.TextField = "descripcion";
+            //cmbSubcuenta.ValueField = "codigo";
+            //cmbSubcuenta.DataSource = BJDE.GetCombo();
+            //cmbSubcuenta.DataBind();
 
-            cmbUM.TextField = "descripcion";
-            cmbUM.ValueField = "codigo";
-            cmbUM.DataSource = BJDE.GetCombo();
+            //cmbUM.TextField = "descripcion";
+            //cmbUM.ValueField = "codigo";
+            //cmbUM.DataSource = BJDE.GetCombo();
+            //cmbUM.DataBind();
+
+            //cmbOQ.TextField = "descripcion";
+            //cmbOQ.ValueField = "codigo";
+            //cmbOQ.DataSource = BJDE.GetCombo();
+            //cmbOQ.DataBind();
+
+            //cmbGlClass.TextField = "descripcion";
+            //cmbGlClass.ValueField = "codigo";
+            //cmbGlClass.DataSource = BJDE.GetCombo();
+            //cmbGlClass.DataBind();
+
+            //cmbPaisOrigen.TextField = "descripcion";
+            //cmbPaisOrigen.ValueField = "codigo";
+            //cmbPaisOrigen.DataSource = BJDE.GetCombo();
+            //cmbPaisOrigen.DataBind();
+
+            //cmbMtdoCosteInv.TextField = "descripcion";
+            //cmbMtdoCosteInv.ValueField = "codigo";
+            //cmbMtdoCosteInv.DataSource = BJDE.GetCombo();
+            //cmbMtdoCosteInv.DataBind();
+
+            //cmbMtdoCostePursh.TextField = "descripcion";
+            //cmbMtdoCostePursh.ValueField = "codigo";
+            //cmbMtdoCostePursh.DataSource = BJDE.GetCombo();
+            //cmbMtdoCostePursh.DataBind();
+
+            //cmbPursh1.TextField = "descripcion";
+            //cmbPursh1.ValueField = "codigo";
+            //cmbPursh1.DataSource = BJDE.GetCombo();
+            //cmbPursh1.DataBind();
+
+            //cmbPursh2.TextField = "descripcion";
+            //cmbPursh2.ValueField = "codigo";
+            //cmbPursh2.DataSource = BJDE.GetCombo();
+            //cmbPursh2.DataBind();
+
+            //cmbbranch.TextField = "descripcion";
+            //cmbbranch.ValueField = "codigo";
+            //cmbbranch.DataSource = BJDE.GetCombo();
+            //cmbbranch.DataBind();
+
+            //cmbUbicacionPrim.TextField = "descripcion";
+            //cmbUbicacionPrim.ValueField = "codigo";
+            //cmbUbicacionPrim.DataSource = BJDE.GetCombo();
+            //cmbUbicacionPrim.DataBind();
+
+            //cmbUbicacionSec.TextField = "descripcion";
+            //cmbUbicacionSec.ValueField = "codigo";
+            //cmbUbicacionSec.DataSource = BJDE.GetCombo();
+            //cmbUbicacionSec.DataBind();
+
+            //var BActFijo = new ActFijoda();
+            //cmbActFijo.TextField = "descripcion";
+            //cmbActFijo.ValueField = "codigo";
+            //cmbActFijo.DataSource = BActFijo.GetCombo();
+            //cmbActFijo.DataBind();
+
+            //var BTipoEmqt = new tipoEmpaqueda();
+            //cmbTipoEmaque.TextField = "descripcion";
+            //cmbTipoEmaque.ValueField = "codigo";
+            //cmbTipoEmaque.DataSource = BActFijo.GetCombo();
+            //cmbTipoEmaque.DataBind();
+
+            //var BFamilia = new familiada();
+            //cmbfamilia.TextField = "descripcion";
+            //cmbfamilia.ValueField = "codigo";
+            //cmbfamilia.DataSource = BFamilia.GetCombo();
+            //cmbfamilia.DataBind();
+
+            //var BtipoDoc = new tipoDocumentoda();
+            //cmbTipoDoc.TextField = "descripcion";
+            //cmbTipoDoc.ValueField = "codigo";
+            //cmbTipoDoc.DataSource = BtipoDoc.GetTiposDocumentos();
+            //cmbTipoDoc.DataBind();
+
+            //var BCtrlProd = new ControlProductosda();
+            //cmbProducto.TextField = "codigoArticulo";
+            //cmbProducto.ValueField = "codigoArticulo";
+            //cmbProducto.DataSource = BCtrlProd.GetCombo();
+            //cmbProducto.DataBind();
+
+            //cmbCualArticulo.TextField = "codigoArticulo";
+            //cmbCualArticulo.ValueField = "codigoArticulo";
+            //cmbCualArticulo.DataSource = BCtrlProd.GetCombo();
+            //cmbCualArticulo.DataBind();
+
+            //var BMaquina = new MaquinaDa();
+            //cmbMaquina.TextField = "Nombre";
+            //cmbMaquina.ValueField = "Codigo";
+            //cmbMaquina.DataSource = BMaquina.GetCombo();
+            //cmbMaquina.DataBind();
+
+            //var BSubcategoria1 = new SubCategoria1Da();
+            //cmbSubCat1.TextField = "Nombre";
+            //cmbSubCat1.ValueField = "Codigo";
+            //cmbSubCat1.DataSource = BSubcategoria1.GetCombo();
+            //cmbSubCat1.DataBind();
+
+            //var BSubcategoria2 = new SubCategoria2Da();
+            //cmbSubCat2.TextField = "Nombre";
+            //cmbSubCat2.ValueField = "Codigo";
+            //cmbSubCat2.DataSource = BSubcategoria2.GetCombo();
+            //cmbSubCat2.DataBind();
+
+            //var BSubcategoria3 = new SubCategoria3Da();
+            //cmbSubCat3.TextField = "Nombre";
+            //cmbSubCat3.ValueField = "Codigo";
+            //cmbSubCat3.DataSource = BSubcategoria3.GetCombo();
+            //cmbSubCat3.DataBind();
+
+            ////var BUtilizado = new UtilizadoDa();
+            ////cmbUtilizado.TextField = "Nombre";
+            ////cmbUtilizado.ValueField = "Codigo";
+            ////cmbUtilizado.DataSource = BUtilizado.GetCombo();
+            ////cmbUtilizado.DataBind();
+
+            //var BDepartamento = new DepartamentoDa();
+            //cmbDepa.TextField = "Descripcion";
+            //cmbDepa.ValueField = "Codigo";
+            //cmbDepa.DataSource = BDepartamento.GetCombo();
+            //cmbDepa.DataBind();
+
+            //var BPlan = new PlanDa();
+            //cmbPlan.TextField = "Nombre";
+            //cmbPlan.ValueField = "Codigo";
+            //cmbPlan.DataSource = BPlan.GetCombo();
+            //cmbPlan.DataBind();
+
+            //var BMarca = new MarcaDa();
+            //cmbMarca.TextField = "Nombre";
+            //cmbMarca.ValueField = "Codigo";
+            //cmbMarca.DataSource = BMarca.GetCombo();
+            //cmbMarca.DataBind();
+
+            //var BProveedor = new ProveedorDa();
+            //cmbProveedor.TextField = "Nombre";
+            //cmbProveedor.ValueField = "Codigo";
+            //cmbProveedor.DataSource = BProveedor.GetCombo();
+            //cmbProveedor.DataBind();
+
+            //cmbProveedorComp.TextField = "Nombre";
+            //cmbProveedorComp.ValueField = "Codigo";
+            //cmbProveedorComp.DataSource = BProveedor.GetCombo();
+            //cmbProveedorComp.DataBind();
+
+
+            ////List<Unico> lUnico = new List<Unico>();
+            ////Unico item = new Unico();
+            ////item.value = true;
+            ////item.text = "Si";
+            ////Unico item2 = new Unico();
+            ////item2.value = false;
+            ////item2.text = "No";
+            ////lUnico.Add(item);
+            ////lUnico.Add(item2);
+
+            ////cmbUnico.TextField = "text";
+            ////cmbUnico.ValueField = "value";
+            ////cmbUnico.DataSource = lUnico;
+            ////cmbUnico.DataBind();
+
+            //var BMoneda = new MonedaDa();
+            //cmbMoneda.TextField = "Nombre";
+            //cmbMoneda.ValueField = "Codigo";
+            //cmbMoneda.DataSource = BMoneda.GetCombo();
+            //cmbMoneda.DataBind();
+
+            //cmbMonedaMtoo.TextField = "Nombre";
+            //cmbMonedaMtoo.ValueField = "Codigo";
+            //cmbMonedaMtoo.DataSource = BMoneda.GetCombo();
+            //cmbMonedaMtoo.DataBind();
+
+            //cmbMonedaComprador.TextField = "Nombre";
+            //cmbMonedaComprador.ValueField = "Codigo";
+            //cmbMonedaComprador.DataSource = BMoneda.GetCombo();
+            //cmbMonedaComprador.DataBind();
+
+            //var BUM = new UMedidaDa();
+            //cmbCodigoUM.TextField = "Nombre";
+            //cmbCodigoUM.ValueField = "Codigo";
+            //cmbCodigoUM.DataSource = BUM.GetCombo();
+            //cmbCodigoUM.DataBind();
+
+            //cmbUmEmpaque.TextField = "Nombre";
+            //cmbUmEmpaque.ValueField = "Codigo";
+            //cmbUmEmpaque.DataSource = BUM.GetCombo();
+            //cmbUmEmpaque.DataBind();
+
+            //cmbUMAlmacen.TextField = "Nombre";
+            //cmbUMAlmacen.ValueField = "Codigo";
+            //cmbUMAlmacen.DataSource = BUM.GetCombo();
+            //cmbUMAlmacen.DataBind();
+
+            //var BPlaneador = new PlaneadorDa();
+            //cmbPlaneador.TextField = "Nombre";
+            //cmbPlaneador.ValueField = "Codigo";
+            //cmbPlaneador.DataSource = BPlaneador.GetCombo();
+            //cmbPlaneador.DataBind();
+
+            //var BComprador = new CompradorDa();
+            //cmbComprador.TextField = "Nombre";
+            //cmbComprador.ValueField = "Codigo";
+            //cmbComprador.DataSource = BComprador.GetCombo();
+            //cmbComprador.DataBind();
+
+            //var BConteo = new ConteoDa();
+            //cmbConteoCiclico.TextField = "Nombre";
+            //cmbConteoCiclico.ValueField = "Codigo";
+            //cmbConteoCiclico.DataSource = BConteo.GetCombo();
+            //cmbConteoCiclico.DataBind();
+
+            //var BDias = new diasda();
+            //cmbDias.TextField = "descripcion";
+            //cmbDias.ValueField = "codigo";
+            //cmbDias.DataSource = BDias.GetCombo();
+            //cmbDias.DataBind();
+
+            // Combos externos
+            var BCombos = new CombosDa();
+            cmbSubcuenta.TextField = "TextoCombo";
+            cmbSubcuenta.ValueField = "ValorCombo";
+            cmbSubcuenta.DataSource = BCombos.GetAccounts();
+            cmbSubcuenta.DataBind();
+            
+            cmbSubcuenta.TextField = "TextoCombo";
+            cmbSubcuenta.ValueField = "ValorCombo";
+            cmbSubcuenta.DataSource = BCombos.GetCostCenter();
+            cmbSubcuenta.DataBind();
+                        
+            var BUMList = BCombos.GetUoM();
+            cmbUM.TextField = "TextoCombo";
+            cmbUM.ValueField = "ValorCombo";
+            cmbUM.DataSource = BUMList;
             cmbUM.DataBind();
 
-            cmbOQ.TextField = "descripcion";
-            cmbOQ.ValueField = "codigo";
-            cmbOQ.DataSource = BJDE.GetCombo();
-            cmbOQ.DataBind();
+            cmbCodigoUM.TextField = "TextoCombo";
+            cmbCodigoUM.ValueField = "ValorCombo";
+            cmbCodigoUM.DataSource = BUMList;
+            cmbCodigoUM.DataBind();
 
-            cmbGlClass.TextField = "descripcion";
-            cmbGlClass.ValueField = "codigo";
-            cmbGlClass.DataSource = BJDE.GetCombo();
+            cmbUmEmpaque.TextField = "TextoCombo";
+            cmbUmEmpaque.ValueField = "ValorCombo";
+            cmbUmEmpaque.DataSource = BUMList;
+            cmbUmEmpaque.DataBind();
+
+            cmbUMAlmacen.TextField = "TextoCombo";
+            cmbUMAlmacen.ValueField = "ValorCombo";
+            cmbUMAlmacen.DataSource = BUMList;
+            cmbUMAlmacen.DataBind();
+                        
+            cmbGlClass.TextField = "TextoCombo";
+            cmbGlClass.ValueField = "ValorCombo";
+            cmbGlClass.DataSource = BCombos.GetGLClass();
             cmbGlClass.DataBind();
+                        
+            var ProveedorList = BCombos.GetVendor();
+            cmbProveedor.TextField = "TextoCombo";
+            cmbProveedor.ValueField = "ValorCombo";
+            cmbProveedor.DataSource = ProveedorList;
+            cmbProveedor.DataBind();
 
-            cmbPaisOrigen.TextField = "descripcion";
-            cmbPaisOrigen.ValueField = "codigo";
-            cmbPaisOrigen.DataSource = BJDE.GetCombo();
+            cmbProveedorComp.TextField = "TextoCombo";
+            cmbProveedorComp.ValueField = "ValorCombo";
+            cmbProveedorComp.DataSource = ProveedorList;
+            cmbProveedorComp.DataBind();
+
+            // Aquí me quedé en la validación del funcionamiento de los combos            
+            var MonedaList = BCombos.GetCurrency();
+            cmbMoneda.TextField = "TextoCombo";
+            cmbMoneda.ValueField = "ValorCombo";
+            cmbMoneda.DataSource = MonedaList;
+            cmbMoneda.DataBind();
+
+            cmbMonedaMtoo.TextField = "TextoCombo";
+            cmbMonedaMtoo.ValueField = "ValorCombo";
+            cmbMonedaMtoo.DataSource = MonedaList;
+            cmbMonedaMtoo.DataBind();
+
+            cmbMonedaComprador.TextField = "TextoCombo";
+            cmbMonedaComprador.ValueField = "ValorCombo";
+            cmbMonedaComprador.DataSource = MonedaList;
+            cmbMonedaComprador.DataBind();
+                        
+            cmbPursh1.TextField = "TextoCombo";
+            cmbPursh1.ValueField = "ValorCombo";
+            cmbPursh1.DataSource = BCombos.GetPurchaseCategory();
+            cmbPursh1.DataBind();
+                        
+            cmbPursh2.TextField = "TextoCombo";
+            cmbPursh2.ValueField = "ValorCombo";
+            cmbPursh2.DataSource = BCombos.GetPurchaseCategory();
+            cmbPursh2.DataBind();
+                        
+            cmbbranch.TextField = "TextoCombo";
+            cmbbranch.ValueField = "ValorCombo";
+            cmbbranch.DataSource = BCombos.GetPlant();
+            cmbbranch.DataBind();
+            
+            cmbUbicacionPrim.TextField = "TextoCombo";
+            cmbUbicacionPrim.ValueField = "ValorCombo";
+            cmbUbicacionPrim.DataSource = BCombos.GetLocDepartment();
+            cmbUbicacionPrim.DataBind();
+                        
+            cmbUbicacionSec.TextField = "TextoCombo";
+            cmbUbicacionSec.ValueField = "ValorCombo";
+            cmbUbicacionSec.DataSource = BCombos.GetLocEquip();
+            cmbUbicacionSec.DataBind();
+                        
+            cmbPlaneador.TextField = "TextoCombo";
+            cmbPlaneador.ValueField = "ValorCombo";
+            cmbPlaneador.DataSource = BCombos.GetEMailBuyer();
+            cmbPlaneador.DataBind();
+
+            //Estos dos marcan error  
+            //Nota: LHH -> Se soluciona corrigiendo el sp el de Get OQ los dos campos deven de convertirse a varchar
+                      
+            cmbOQ.TextField = "TextoCombo";
+            cmbOQ.ValueField = "ValorCombo";
+            cmbOQ.DataSource = BCombos.GetOQ();
+            cmbOQ.DataBind();
+                        
+            //Nota: LHH -> Se soluciona corrigiendo el sp de Get Vendor Country el alias del segundo campo debe de ser TextoCombo
+            cmbPaisOrigen.TextField = "TextoCombo";
+            cmbPaisOrigen.ValueField = "ValorCombo";
+            cmbPaisOrigen.DataSource = BCombos.GetVendorCountry();
             cmbPaisOrigen.DataBind();
+
+            //Nota: LHH ->Eestos faltan no los consideraron.....
+            var BJDE = new JDEda();
+            var JDEList = BJDE.GetCombo();
 
             cmbMtdoCosteInv.TextField = "descripcion";
             cmbMtdoCosteInv.ValueField = "codigo";
-            cmbMtdoCosteInv.DataSource = BJDE.GetCombo();
+            cmbMtdoCosteInv.DataSource = JDEList;
             cmbMtdoCosteInv.DataBind();
 
             cmbMtdoCostePursh.TextField = "descripcion";
             cmbMtdoCostePursh.ValueField = "codigo";
-            cmbMtdoCostePursh.DataSource = BJDE.GetCombo();
+            cmbMtdoCostePursh.DataSource = JDEList;
             cmbMtdoCostePursh.DataBind();
 
-            cmbPursh1.TextField = "descripcion";
-            cmbPursh1.ValueField = "codigo";
-            cmbPursh1.DataSource = BJDE.GetCombo();
-            cmbPursh1.DataBind();
-
-            cmbPursh2.TextField = "descripcion";
-            cmbPursh2.ValueField = "codigo";
-            cmbPursh2.DataSource = BJDE.GetCombo();
-            cmbPursh2.DataBind();
-
-            cmbbranch.TextField = "descripcion";
-            cmbbranch.ValueField = "codigo";
-            cmbbranch.DataSource = BJDE.GetCombo();
-            cmbbranch.DataBind();
-
-            cmbUbicacionPrim.TextField = "descripcion";
-            cmbUbicacionPrim.ValueField = "codigo";
-            cmbUbicacionPrim.DataSource = BJDE.GetCombo();
-            cmbUbicacionPrim.DataBind();
-
-            cmbUbicacionSec.TextField = "descripcion";
-            cmbUbicacionSec.ValueField = "codigo";
-            cmbUbicacionSec.DataSource = BJDE.GetCombo();
-            cmbUbicacionSec.DataBind();
-
+            // Combos Internos
             var BActFijo = new ActFijoda();
+            var ActFijoList = BActFijo.GetCombo();
             cmbActFijo.TextField = "descripcion";
             cmbActFijo.ValueField = "codigo";
-            cmbActFijo.DataSource = BActFijo.GetCombo();
+            cmbActFijo.DataSource = ActFijoList;
             cmbActFijo.DataBind();
 
             var BTipoEmqt = new tipoEmpaqueda();
             cmbTipoEmaque.TextField = "descripcion";
             cmbTipoEmaque.ValueField = "codigo";
-            cmbTipoEmaque.DataSource = BActFijo.GetCombo();
+            cmbTipoEmaque.DataSource = ActFijoList;
             cmbTipoEmaque.DataBind();
 
             var BFamilia = new familiada();
+            var FamiliaList = BFamilia.GetCombo();
             cmbfamilia.TextField = "descripcion";
             cmbfamilia.ValueField = "codigo";
-            cmbfamilia.DataSource = BFamilia.GetCombo();
+            cmbfamilia.DataSource = FamiliaList;
             cmbfamilia.DataBind();
 
             var BtipoDoc = new tipoDocumentoda();
+            var tipoDocList = BtipoDoc.GetTiposDocumentos();
             cmbTipoDoc.TextField = "descripcion";
             cmbTipoDoc.ValueField = "codigo";
-            cmbTipoDoc.DataSource = BtipoDoc.GetTiposDocumentos();
+            cmbTipoDoc.DataSource = tipoDocList;
             cmbTipoDoc.DataBind();
 
             var BCtrlProd = new ControlProductosda();
-            cmbProducto.TextField = "codigoArticulo";
+            var CtrlProdList = BCtrlProd.GetCombo();
+            cmbProducto.TextField = "codigoYNombre";
             cmbProducto.ValueField = "codigoArticulo";
-            cmbProducto.DataSource = BCtrlProd.GetCombo();
+            cmbProducto.DataSource = CtrlProdList;
             cmbProducto.DataBind();
 
-            cmbCualArticulo.TextField = "codigoArticulo";
+            cmbCualArticulo.TextField = "codigoYNombre";
             cmbCualArticulo.ValueField = "codigoArticulo";
-            cmbCualArticulo.DataSource = BCtrlProd.GetCombo();
+            cmbCualArticulo.DataSource = CtrlProdList;
             cmbCualArticulo.DataBind();
 
             var BMaquina = new MaquinaDa();
@@ -291,71 +586,6 @@ namespace ControlProductos
             cmbMarca.ValueField = "Codigo";
             cmbMarca.DataSource = BMarca.GetCombo();
             cmbMarca.DataBind();
-
-            var BProveedor = new ProveedorDa();
-            cmbProveedor.TextField = "Nombre";
-            cmbProveedor.ValueField = "Codigo";
-            cmbProveedor.DataSource = BProveedor.GetCombo();
-            cmbProveedor.DataBind();
-
-            cmbProveedorComp.TextField = "Nombre";
-            cmbProveedorComp.ValueField = "Codigo";
-            cmbProveedorComp.DataSource = BProveedor.GetCombo();
-            cmbProveedorComp.DataBind();
-
-
-            //List<Unico> lUnico = new List<Unico>();
-            //Unico item = new Unico();
-            //item.value = true;
-            //item.text = "Si";
-            //Unico item2 = new Unico();
-            //item2.value = false;
-            //item2.text = "No";
-            //lUnico.Add(item);
-            //lUnico.Add(item2);
-
-            //cmbUnico.TextField = "text";
-            //cmbUnico.ValueField = "value";
-            //cmbUnico.DataSource = lUnico;
-            //cmbUnico.DataBind();
-
-            var BMoneda = new MonedaDa();
-            cmbMoneda.TextField = "Nombre";
-            cmbMoneda.ValueField = "Codigo";
-            cmbMoneda.DataSource = BMoneda.GetCombo();
-            cmbMoneda.DataBind();
-
-            cmbMonedaMtoo.TextField = "Nombre";
-            cmbMonedaMtoo.ValueField = "Codigo";
-            cmbMonedaMtoo.DataSource = BMoneda.GetCombo();
-            cmbMonedaMtoo.DataBind();
-
-            cmbMonedaComprador.TextField = "Nombre";
-            cmbMonedaComprador.ValueField = "Codigo";
-            cmbMonedaComprador.DataSource = BMoneda.GetCombo();
-            cmbMonedaComprador.DataBind();
-
-            var BUM = new UMedidaDa();
-            cmbCodigoUM.TextField = "Nombre";
-            cmbCodigoUM.ValueField = "Codigo";
-            cmbCodigoUM.DataSource = BUM.GetCombo();
-            cmbCodigoUM.DataBind();
-
-            cmbUmEmpaque.TextField = "Nombre";
-            cmbUmEmpaque.ValueField = "Codigo";
-            cmbUmEmpaque.DataSource = BUM.GetCombo();
-            cmbUmEmpaque.DataBind();
-
-            cmbUMAlmacen.TextField = "Nombre";
-            cmbUMAlmacen.ValueField = "Codigo";
-            cmbUMAlmacen.DataSource = BUM.GetCombo();
-            cmbUMAlmacen.DataBind();
-
-            var BPlaneador = new PlaneadorDa();
-            cmbPlaneador.TextField = "Nombre";
-            cmbPlaneador.ValueField = "Codigo";
-            cmbPlaneador.DataSource = BPlaneador.GetCombo();
-            cmbPlaneador.DataBind();
 
             var BComprador = new CompradorDa();
             cmbComprador.TextField = "Nombre";

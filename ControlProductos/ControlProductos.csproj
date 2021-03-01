@@ -3720,6 +3720,7 @@
       <DependentUpon>ctrolProds_det.aspx</DependentUpon>
     </Compile>
     <Compile Include="dataAccess\Aplicacion.cs" />
+    <Compile Include="dataAccess\Combos.cs" />
     <Compile Include="dataAccess\Comprador.cs" />
     <Compile Include="dataAccess\Conteo.cs" />
     <Compile Include="dataAccess\ControlProductos.cs" />
@@ -3754,6 +3755,7 @@
     <Compile Include="dataAccess\Usuario.cs" />
     <Compile Include="dataAccess\Utilizado.cs" />
     <Compile Include="Entity\Aplicacion.cs" />
+    <Compile Include="Entity\Combos.cs" />
     <Compile Include="Entity\dias.cs" />
     <Compile Include="Entity\Comprador.cs" />
     <Compile Include="Entity\Conteo.cs" />
