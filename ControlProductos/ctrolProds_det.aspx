@@ -521,8 +521,59 @@
                 if (s.cpAlertMessage == 'SelectFile') {
                     swal("Information", "Please upload the security file", "info");
                 }
+                if (s.cpAlertMessage == 'Selectdescripcion') {
+                    swal("Information", "Description is missing", "info");
+                }
+                if (s.cpAlertMessage == 'SelectModelo') {
+                    swal("Information", "Modelo is missing", "info");
+                }
+                if (s.cpAlertMessage == 'SelectFuncionMaquina') {
+                    swal("Information", "Machine function is missing", "info");
+                }
+                if (s.cpAlertMessage == 'SelectAccionContencion') {
+                    swal("Information", "Containment action missing on Inventory 0", "info");
+                }
+                if (s.cpAlertMessage == 'SelectContrato') {
+                    swal("Information", "Contract number is missing", "info");
+                }
+                if (s.cpAlertMessage == 'Selectdescripcion1') {
+                    swal("Information", "Description 1 is missing", "info");
+                }
+                if (s.cpAlertMessage == 'Selectdescripcion2') {
+                    swal("Information", "Description 2 is missing", "info");
+                }
+                if (s.cpAlertMessage == 'Selectdescripcionlarga') {
+                    swal("Information", "Long description is missing", "info");
+                }
+                if (s.cpAlertMessage == 'SelectGLClass') {
+                    swal("Information", "GL Class is missing", "info");
+                }
+                if (s.cpAlertMessage == 'SelectGLClass') {
+                    swal("Information", "GL Class is missing", "info");
+                }
+                if (s.cpAlertMessage == 'SelectTextBusq') {
+                    swal("Information", "Search text is missing", "info");
+                }
+                if (s.cpAlertMessage == 'SelectPursh1') {
+                    swal("Information", "Pursh 1 is missing", "info");
+                }
+                if (s.cpAlertMessage == 'SelectPursh2') {
+                    swal("Information", "Pursh 2 is missing", "info");
+                }
+                if (s.cpAlertMessage == 'SelectPlaneador') {
+                    swal("Information", "Glider missing", "info");
+                }
+                if (s.cpAlertMessage == 'SelectUbicacionPrim') {
+                    swal("Information", "Primary location is missing", "info");
+                }
+                if (s.cpAlertMessage == 'SelectUbicacionSec') {
+                    swal("Information", "Secondary location is missing", "info");
+                }
                 if (s.cpAlertMessage == 'SelectCodArt') {
-                    swal("Information", "Please upload the security file", "info");
+                    swal("Information", "Part number missing", "info");
+                }
+                if (s.cpAlertMessage == 'exists') {
+                    swal("Information", "The part number already exists", "info");
                 }
 
                 if (s.cpAlertMessage == 'successSave') {
@@ -547,6 +598,18 @@
                 }
             }
             s.cpAlertMessage = "";
+        }
+
+        function PrecargaProducto(valor) {
+            var operacion = "";
+            if (document.getElementById("MainContent_ASPxCallbackPanel2_rbModificacion").checked) {
+                operacion = "MODIFICACIÓN";
+            }
+            else {
+                operacion = "BAJA";
+            }
+            var Valores = "changeProd," + valor + "," + operacion;
+            ASPxCallbackPanel2.PerformCallback(Valores);
         }
 
         function SelMN() {
@@ -695,7 +758,6 @@
             var Valores = "saveComment," + tipoArticulo + "," + commentario;
             xgrdTipoArticulo.PerformCallback(Valores);
         }
-
     </script>
     <style>
         html {
@@ -976,7 +1038,7 @@
                                         <ValidationSettings>
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
-                                        <ClientSideEvents/>
+                                        <ClientSideEvents ValueChanged="function(s, e) { PrecargaProducto(s.GetValue()); }"/>
                                         <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
                                     </dx:ASPxComboBox>
                                 </div>
@@ -1514,7 +1576,7 @@
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnGLClass" value='<%# Eval("GlClass")%>' runat="server"/>
                                     <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbGlClass" runat="server" IncrementalFilteringMode="Contains" 
-                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
+                                        FilterMinLength="0" EnableCallbackMode="True" Enabled="<%# disabledComp %>" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
@@ -1905,7 +1967,7 @@
                                 </div>
                                 <label class="text-form col-sm-1">Monto Mensual Inv Promedio</label>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txtTotal"  TextMode="Number" step="0.1" disabled="disabled" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <asp:TextBox ID="txtTotal"  TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                                 <label class="text-form col-sm-1">Moneda</label>
                                 <div class="col-sm-3">

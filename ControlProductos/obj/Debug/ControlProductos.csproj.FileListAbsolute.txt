@@ -40,27 +40,6 @@ C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProduct
 C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll
 C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.pdb
 C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.csprojResolveAssemblyReference.cache
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\csc.exe
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CodeAnalysis.dll
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CSharp.Core.targets
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.VisualBasic.Core.targets
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\System.Collections.Immutable.dll
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\System.Reflection.Metadata.dll
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\vbc.exe
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\VBCSCompiler.exe
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\VBCSCompiler.exe.config
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\ControlProductos.dll.config
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\ControlProductos.dll
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\ControlProductos.pdb
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll.licenses
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.pdb
-D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.csprojResolveAssemblyReference.cache
 C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\csc.exe
 C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -82,3 +61,24 @@ C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProducto
 C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll.licenses
 C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll
 C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.pdb
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\csc.exe
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\System.Collections.Immutable.dll
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\System.Reflection.Metadata.dll
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\vbc.exe
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\VBCSCompiler.exe
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\VBCSCompiler.exe.config
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\ControlProductos.dll.config
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\ControlProductos.dll
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\ControlProductos.pdb
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.csprojResolveAssemblyReference.cache
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll.licenses
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll
+D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.pdb
