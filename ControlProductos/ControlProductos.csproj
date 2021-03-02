@@ -180,6 +180,8 @@
   <ItemGroup>
     <Content Include="CatMttoAlmn.aspx" />
     <Content Include="CatTypeArticle.aspx" />
+    <Content Include="ctrolProds_MisPendientes.aspx" />
+    <Content Include="ctrolProds_MisSolicitudes.aspx" />
     <Content Include="SmartFormas.css" />
     <Content Include="SmartFormas.js" />
     <Content Include="CatBrands.aspx" />
@@ -3718,6 +3720,20 @@
     </Compile>
     <Compile Include="ctrolProds_det.aspx.designer.cs">
       <DependentUpon>ctrolProds_det.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ctrolProds_MisPendientes.aspx.cs">
+      <DependentUpon>ctrolProds_MisPendientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ctrolProds_MisPendientes.aspx.designer.cs">
+      <DependentUpon>ctrolProds_MisPendientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ctrolProds_MisSolicitudes.aspx.cs">
+      <DependentUpon>ctrolProds_MisSolicitudes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ctrolProds_MisSolicitudes.aspx.designer.cs">
+      <DependentUpon>ctrolProds_MisSolicitudes.aspx</DependentUpon>
     </Compile>
     <Compile Include="dataAccess\Aplicacion.cs" />
     <Compile Include="dataAccess\Combos.cs" />
