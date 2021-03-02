@@ -135,6 +135,8 @@ namespace ControlProductos.Entity
         public string Subcategoria1 { get; set; }        
         public string Departamento { get; set; }        
         public decimal totalAnual { get; set; }
+        public string monedaComprador { get; set; }
+        public decimal montoMensual { get; set; }
 
         public List<archivos> archivos { get; set; }
 

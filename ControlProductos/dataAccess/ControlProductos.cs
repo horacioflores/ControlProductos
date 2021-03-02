@@ -55,5 +55,11 @@ namespace ControlProductos.dataAccess
             Entity.newDocResult_ regreso = JsonConvert.DeserializeObject<Entity.newDocResult_>(json);
             return regreso.newDocResult;
         }
+
+        public int ValProducto(string ctrlProdsID, string codigoArticulo, string codigoProducto)
+        {
+            int regreso = Convert.ToInt32(methodPost("ValProducto/" + ctrlProdsID + "/" + codigoArticulo + "/" + codigoProducto));
+            return regreso;
+        }
     }
 }
