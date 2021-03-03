@@ -5,6 +5,14 @@ using System.Web;
 
 namespace ControlProductos.Entity
 {
+    public class GetCtrlProd_MisSolicitudesResult_
+    {
+        public List<ControlProductos> GetCtrlProd_MisSolicitudesResult { get; set; }
+    }
+    public class GetCtrlProd_MisPendientesResult_
+    {
+        public List<ControlProductos> GetCtrlProd_MisPendientesResult { get; set; }
+    }
     public class GetCtrlProdResult_
     {
         public List<ControlProductos> GetCtrlProdResult { get; set; }

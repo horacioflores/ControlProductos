@@ -182,7 +182,7 @@
                                 <div id="Parametros" runat="server" visible="true">
                                             
                                 <table style="float: left; width: 40%"" class="OptionsTable BottomMargin">
-                                    <tr style="height:10px"></tr>
+                                    <%--<tr style="height:10px"></tr>
                                     <tr>
                                         <td  style="width:10%; text-align:left">
                                                 <dx:ASPxLabel ID="lblFolio" runat="server" Text="Document Number: ">
@@ -192,7 +192,7 @@
                                             <dx:ASPxTextBox runat="server" Theme="SoftOrange" Height="5px"  ID="xtxtFolio" Enabled="True" Width="100%" FocusedStyle-Border-BorderColor="#3399ff" FocusedStyle-Border-BorderStyle="Double">
                                             </dx:ASPxTextBox>
                                         </td>
-                                    </tr>
+                                    </tr>--%>
                                     <tr style="height:10px"></tr>
                                     <tr>
                                         <td  style="width:10%; text-align:left">

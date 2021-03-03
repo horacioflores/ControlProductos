@@ -43,12 +43,12 @@ namespace ControlProductos
 
         public void fillGrid()
         {
-            ASPxTextBox xtxtFolio = ASPxNavBar2.Groups[0].FindControl("xtxtFolio") as ASPxTextBox;
+            //ASPxTextBox xtxtFolio = ASPxNavBar2.Groups[0].FindControl("xtxtFolio") as ASPxTextBox;
             ASPxDateEdit xDateFechaFin = ASPxNavBar2.Groups[0].FindControl("xDateFechaFin") as ASPxDateEdit;
             ASPxDateEdit xDateFechaIni = ASPxNavBar2.Groups[0].FindControl("xDateFechaIni") as ASPxDateEdit;
-
+            string Folio = string.Empty;
             var BCtrlProd = new ControlProductosda();
-            var oListProd = BCtrlProd.GetCtrlProd(xDateFechaIni.Text, xDateFechaFin.Text, xtxtFolio.Text);
+            var oListProd = BCtrlProd.GetCtrlProd_MisSolicitudes(xDateFechaIni.Text, xDateFechaFin.Text, Folio, LoginInfo.CurrentUsuario.Codigo);
             xgrdProds.DataSource = oListProd;
             xgrdProds.DataBind();
         }

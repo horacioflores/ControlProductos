@@ -10,9 +10,23 @@ namespace ControlProductos.dataAccess
 {
     public class ControlProductosda : Base
     {
+        public List<Entity.ControlProductos> GetCtrlProd_MisSolicitudes(string fechaini, string fechafin, string folio,string codigoSolicitante)
+        {
+            string json = methodGet("GetCtrlProd_MisSolicitudes/" + fechaini + "/" + fechafin + "/" + folio + "/" + codigoSolicitante);
+            Entity.GetCtrlProd_MisSolicitudesResult_ regreso = JsonConvert.DeserializeObject<Entity.GetCtrlProd_MisSolicitudesResult_>(json);
+            return regreso.GetCtrlProd_MisSolicitudesResult;
+        }
+        
+        public List<Entity.ControlProductos> GetCtrlProd_MisPendientes(string fechaini, string fechafin, string folio, string codigoPerfil)
+        {
+            string json = methodGet("GetCtrlProd_MisPendientes/" + fechaini + "/" + fechafin + "/" + folio + "/" + codigoPerfil);
+            Entity.GetCtrlProd_MisPendientesResult_ regreso = JsonConvert.DeserializeObject<Entity.GetCtrlProd_MisPendientesResult_>(json);
+            return regreso.GetCtrlProd_MisPendientesResult;
+        }
+
         public List<Entity.ControlProductos> GetCtrlProd(string fechaini, string fechafin, string folio)
         {
-            string json = methodGet("GetCtrlProd/" + fechaini + "/" + fechafin + "/" + folio);
+            string json = methodGet("GetCtrlProd/" + fechaini + "/" + fechafin + "/" + folio );
             Entity.GetCtrlProdResult_ regreso = JsonConvert.DeserializeObject<Entity.GetCtrlProdResult_>(json);
             return regreso.GetCtrlProdResult;
         }
