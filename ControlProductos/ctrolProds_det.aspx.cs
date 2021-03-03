@@ -645,17 +645,6 @@ namespace ControlProductos
                             case "En Aprobación por ":
                                 string perfil = "";
 
-                                if (ctrlP.sigPerfil != LoginInfo.CurrentPerfil.Codigo)
-                                {
-                                    btnEnviarSolicitante.Visible = false;
-                                    btnSave.Visible = false;
-                                }
-                                else
-                                {
-                                    btnEnviarSolicitante.Visible = true;
-                                    btnSave.Visible = true;
-                                }
-
                                 switch (ctrlP.sigPerfil)
                                 {
                                     case "0002":
@@ -712,6 +701,18 @@ namespace ControlProductos
                                         disabledMtoo();
                                         disabledDM();
                                         break;
+                                }
+
+                                if (ctrlP.sigPerfil != LoginInfo.CurrentPerfil.Codigo)
+                                {
+                                    btnEnviarSolicitante.Visible = false;
+                                    btnSave.Visible = false;
+                                    btnEnviarDM.Visible = false;
+                                }
+                                else
+                                {
+                                    btnEnviarSolicitante.Visible = true;
+                                    btnSave.Visible = true;
                                 }
 
                                 ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-eye-open' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + perfil + "</span>";
@@ -1122,7 +1123,7 @@ namespace ControlProductos
                         {
                             oItmpursh1.Selected = true;
                         }
-                        ListEditItem oItmpursh2 = cmbPursh1.Items.FindByValue(ctrlP.pursh2);
+                        ListEditItem oItmpursh2 = cmbPursh2.Items.FindByValue(ctrlP.pursh2);
                         if (oItmpursh2 != null)
                         {
                             oItmpursh2.Selected = true;
@@ -1550,7 +1551,7 @@ namespace ControlProductos
                         {
                             oItmpursh1.Selected = true;
                         }
-                        ListEditItem oItmpursh2 = cmbPursh1.Items.FindByValue(ctrlP.pursh2);
+                        ListEditItem oItmpursh2 = cmbPursh2.Items.FindByValue(ctrlP.pursh2);
                         if (oItmpursh2 != null)
                         {
                             oItmpursh2.Selected = true;
