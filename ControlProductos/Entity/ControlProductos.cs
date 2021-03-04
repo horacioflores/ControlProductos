@@ -13,6 +13,10 @@ namespace ControlProductos.Entity
     {
         public List<ControlProductos> GetCtrlProd_MisPendientesResult { get; set; }
     }
+    public class GetCtrlProd_ProductosVigentesResult_
+    {
+        public List<ControlProductos> GetCtrlProd_ProductosVigentesResult { get; set; }
+    }
     public class GetCtrlProdResult_
     {
         public List<ControlProductos> GetCtrlProdResult { get; set; }

@@ -24,6 +24,13 @@ namespace ControlProductos.dataAccess
             return regreso.GetCtrlProd_MisPendientesResult;
         }
 
+        public List<Entity.ControlProductos> GetCtrlProd_ProductosVigentes(string fechaini, string fechafin, string folio, string codigoPerfil)
+        {
+            string json = methodGet("GetCtrlProd_ProductosVigentes/" + fechaini + "/" + fechafin + "/" + folio + "/" + codigoPerfil);
+            Entity.GetCtrlProd_ProductosVigentesResult_ regreso = JsonConvert.DeserializeObject<Entity.GetCtrlProd_ProductosVigentesResult_>(json);
+            return regreso.GetCtrlProd_ProductosVigentesResult;
+        }
+
         public List<Entity.ControlProductos> GetCtrlProd(string fechaini, string fechafin, string folio)
         {
             string json = methodGet("GetCtrlProd/" + fechaini + "/" + fechafin + "/" + folio );
