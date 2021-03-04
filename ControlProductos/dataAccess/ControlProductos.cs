@@ -57,9 +57,9 @@ namespace ControlProductos.dataAccess
             return regreso;
         }
 
-        public int changeSts(string idctrlProds, string UsuarioId, string sigPerfil, string DM,string codigoArticulo)
+        public int changeSts(string idctrlProds, string UsuarioId, string sigPerfil, string DM,string codigoArticulo, string aprobacion, string comentario)
         {
-            int regreso = Convert.ToInt32(methodPost("changeSts/"+ idctrlProds + "/" + UsuarioId + "/" + sigPerfil + "/" + DM + "/" + codigoArticulo));
+            int regreso = Convert.ToInt32(methodPost("changeSts/"+ idctrlProds + "/" + UsuarioId + "/" + sigPerfil + "/" + DM + "/" + codigoArticulo+ "/" + aprobacion + "/" + comentario));
             return regreso;
         }
 
@@ -73,6 +73,12 @@ namespace ControlProductos.dataAccess
         public int ValProducto(string ctrlProdsID, string codigoArticulo, string codigoProducto)
         {
             int regreso = Convert.ToInt32(methodPost("ValProducto/" + ctrlProdsID + "/" + codigoArticulo + "/" + codigoProducto));
+            return regreso;
+        }
+
+        public int ValProducto2(string codigoProducto)
+        {
+            int regreso = Convert.ToInt32(methodPost("ValProducto2/" + codigoProducto));
             return regreso;
         }
     }
