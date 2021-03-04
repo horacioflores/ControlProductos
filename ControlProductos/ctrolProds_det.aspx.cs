@@ -646,6 +646,8 @@ namespace ControlProductos
                     {
                         lblcodigoSts.Text = ctrlP.codigo_sts_Prods;
                         lblSigPerf.Text = ctrlP.sigPerfil;
+                        EmpleadosDa empDa = new EmpleadosDa();
+                        UsuarioDa usuDa = new UsuarioDa();
                         switch (ctrlP.sts_Prods)
                         {
                             case "Abierto":
@@ -654,7 +656,33 @@ namespace ControlProductos
                                 disabledAlmacen();
                                 disabledMtoo();
                                 disabledDM();
-                                btnAsignAutor.Visible = true;
+                                Usuario usu = usuDa.GetUsuario(LoginInfo.CurrentUsuario.UsuarioId);
+
+
+                                List<Empleados> emps = empDa.GetCatalog("", "", "", "", true);
+                                List<Empleados> emps1 = emps.FindAll(e => e.Codigo == ctrlP.codigoSolicitante);
+                                if (emps1.Count > 0)
+                                {
+                                    if (ctrlP.aprobaciones.Count > 0)
+                                    {
+                                        if (ctrlP.aprobaciones[0].codigoEmpleado == emps1[0].Codigo)
+                                        {
+                                            btnAsignAutor.Visible = true;
+                                        }
+                                        else
+                                        {
+                                            btnAsignAutor.Visible = false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        btnAsignAutor.Visible = false;
+                                    }
+                                }
+                                else
+                                {
+                                    btnAsignAutor.Visible = false;
+                                }
                                 btnEnviarSolicitante.Visible = true;
                                 btnRechazar.Visible = false;
                                 btnEnviarSolicitante.Src = "Assets/images/BtnEnviarProveedor.png";
@@ -767,7 +795,7 @@ namespace ControlProductos
                                 break;
                         }
 
-                        EmpleadosDa empDa = new EmpleadosDa();
+                        
                         if (ctrlP.sigPerfil == LoginInfo.CurrentPerfil.Codigo)
                         {
                             List<Aprobacion> lprob = ctrlP.aprobaciones.FindAll(a => a.codigoPerfil == LoginInfo.CurrentPerfil.Codigo);
@@ -2545,6 +2573,238 @@ namespace ControlProductos
             {
                 if (pS[0] == "Save" || pS[0] == "Save2")
                 {
+                    if (lblSigPerf.Text == "")
+                    {
+                        int ctrlProdsID = Convert.ToInt32(Session["ctrlProdsID"]);
+                        var BctrlProd = new ControlProductosda();
+                        List<Entity.ControlProductos> oList = BctrlProd.GetCtrlProducto(ctrlProdsID.ToString());
+                        if (ctrlProdsID > 0)
+                        {
+                            foreach (Entity.ControlProductos ctrlP in oList)
+                            {
+                                if (ctrlProdsID == ctrlP.ctrlProdsID)
+                                {
+                                    lblcodigoSts.Text = ctrlP.codigo_sts_Prods;
+                                    lblSigPerf.Text = ctrlP.sigPerfil;
+                                    switch (ctrlP.sts_Prods)
+                                    {
+                                        case "Abierto":
+                                            disabledComprador();
+                                            disabledPlaneador();
+                                            disabledAlmacen();
+                                            disabledMtoo();
+                                            disabledDM();
+                                            btnAsignAutor.Visible = true;
+                                            btnEnviarSolicitante.Visible = true;
+                                            btnRechazar.Visible = false;
+                                            btnEnviarSolicitante.Src = "Assets/images/BtnEnviarProveedor.png";
+                                            ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-edit' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Pendiente por el autor para terminar la captura</span>";
+                                            break;
+                                        case "En Aprobación por ":
+                                            string perfil = "";
+
+                                            switch (ctrlP.sigPerfil)
+                                            {
+                                                case "0002":
+                                                    perfil = "Comprador";
+                                                    disabledAutor();
+                                                    disabledPlaneador();
+                                                    disabledAlmacen();
+                                                    disabledMtoo();
+                                                    disabledDM();
+                                                    break;
+                                                case "0003":
+                                                    perfil = "PLANNER";
+                                                    disabledAutor();
+                                                    disabledComprador();
+                                                    disabledAlmacen();
+                                                    disabledMtoo();
+                                                    disabledDM();
+                                                    break;
+                                                case "0004":
+                                                    perfil = "ALMACÉN";
+                                                    disabledAutor();
+                                                    disabledComprador();
+                                                    disabledPlaneador();
+                                                    disabledMtoo();
+                                                    disabledDM();
+                                                    break;
+                                                case "0005":
+                                                    perfil = "GTE MANTENIMIENTO";
+                                                    disabledAutor();
+                                                    disabledComprador();
+                                                    disabledPlaneador();
+                                                    disabledAlmacen();
+                                                    disabledDM();
+                                                    break;
+                                                case "0006":
+                                                    perfil = "GTE COMPRAS";
+                                                    if (ctrlP.operacion == "BAJA")
+                                                    {
+                                                        btnEnviarDM.Visible = true;
+                                                    }
+                                                    disabledAutor();
+                                                    disabledComprador();
+                                                    disabledPlaneador();
+                                                    disabledAlmacen();
+                                                    disabledMtoo();
+                                                    disabledDM();
+                                                    break;
+                                                case "0007":
+                                                    perfil = "DIRECCION";
+                                                    disabledAutor();
+                                                    disabledComprador();
+                                                    disabledPlaneador();
+                                                    disabledAlmacen();
+                                                    disabledMtoo();
+                                                    disabledDM();
+                                                    break;
+                                            }
+                                            btnAsignAutor.Visible = false;
+                                            if (ctrlP.sigPerfil != LoginInfo.CurrentPerfil.Codigo)
+                                            {
+                                                btnEnviarSolicitante.Visible = false;
+                                                btnRechazar.Visible = false;
+                                                btnSave.Visible = false;
+                                                btnEnviarDM.Visible = false;
+                                            }
+                                            else
+                                            {
+                                                btnEnviarSolicitante.Visible = true;
+                                                btnRechazar.Visible = true;
+                                                btnSave.Visible = true;
+                                            }
+
+                                            ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-eye-open' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + perfil + "</span>";
+                                            break;
+                                        case "Pendiente por Data Management":
+                                            disabledAutor();
+                                            disabledComprador();
+                                            disabledPlaneador();
+                                            disabledAlmacen();
+                                            disabledMtoo();
+                                            btnAsignAutor.Visible = false;
+                                            if (ctrlP.sigPerfil != LoginInfo.CurrentPerfil.Codigo)
+                                            {
+                                                btnSave.Visible = false;
+                                                btnEnviarSolicitante.Visible = false;
+                                                btnRechazar.Visible = false;
+                                            }
+                                            ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-eye-open' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span>";
+                                            break;
+                                        case "Aprobado":
+                                            disabledAutor();
+                                            disabledComprador();
+                                            disabledPlaneador();
+                                            disabledAlmacen();
+                                            disabledMtoo();
+                                            disabledDM();
+                                            btnAsignAutor.Visible = false;
+                                            btnSave.Visible = false;
+                                            btnEnviarSolicitante.Visible = false;
+                                            btnRechazar.Visible = false;
+                                            ltlSts.Text = "<span id='spanStatus' class='alert btn-success docEstatus' ><i class='glyphicon glyphicon-ok' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Aprobado por " + ctrlP.usuario + " el " + ctrlP.ModFecha + "</span>";
+                                            break;
+                                    }
+
+                                    if (ctrlP.sigPerfil == LoginInfo.CurrentPerfil.Codigo)
+                                    {
+                                        List<Aprobacion> lprob = ctrlP.aprobaciones.FindAll(a => a.codigoPerfil == LoginInfo.CurrentPerfil.Codigo);
+
+                                        EmpleadosDa empDa = new EmpleadosDa();
+                                        List<Empleados> emps = empDa.GetCatalog("", "", "", "", true);
+                                        string codigoEmpAprb = "";
+
+                                        foreach (Empleados item in emps)
+                                        {
+                                            if (item.EmpleadoId == LoginInfo.CurrentUsuario.EmpleadoId)
+                                            {
+                                                codigoEmpAprb = item.Codigo;
+                                            }
+                                        }
+
+                                        if (lprob.Count > 0)
+                                        {
+                                            if (codigoEmpAprb != lprob[0].codigoEmpleado)
+                                            {
+                                                btnSave.Visible = false;
+                                                btnEnviarSolicitante.Visible = false;
+                                                btnRechazar.Visible = false;
+                                                btnEnviarDM.Visible = false;
+                                            }
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        btnSave.Visible = false;
+                                        btnEnviarSolicitante.Visible = false;
+                                        btnRechazar.Visible = false;
+                                        btnEnviarDM.Visible = false;
+                                        btnAsignAutor.Visible = false;
+                                    }
+
+                                    lblnDoc.Text = ctrlP.noDocumento;
+                                    lblDocSolicitante.Text = ctrlP.usuario;
+                                    lblDocFechaSol.Text = ctrlP.fechaSolicitud;
+                                    rbAlta.Enabled = false;
+                                    rbModificacion.Enabled = false;
+                                    rbBaja.Enabled = false;
+                                    cmbProducto.Enabled = false;
+                                    switch (ctrlP.operacion)
+                                    {
+                                        case "ALTA":
+                                            rbAlta.Checked = true;
+                                            lblProd.Visible = false;
+                                            cmbProducto.Visible = false;
+                                            dvReemplazaOtro.Visible = true;
+                                            break;
+                                        case "MODIFICACIÓN":
+                                            rbModificacion.Checked = true;
+                                            lblProd.Visible = true;
+                                            cmbProducto.Visible = true;
+                                            dvReemplazaOtro.Visible = false;
+                                            break;
+                                        case "BAJA":
+                                            rbBaja.Checked = true;
+                                            lblProd.Visible = true;
+                                            cmbProducto.Visible = true;
+                                            dvReemplazaOtro.Visible = false;
+                                            break;
+                                    }
+                                    ListEditItem oItProd = cmbProducto.Items.FindByValue(ctrlP.producto);
+                                    if (oItProd != null)
+                                    {
+                                        oItProd.Selected = true;
+                                    }
+
+                                    rbSi.Enabled = false;
+                                    rbNo.Enabled = false;
+                                    cmbCualArticulo.Enabled = false;
+                                    switch (ctrlP.remplazaOtro)
+                                    {
+                                        case "Si":
+                                            rbSi.Checked = true;
+                                            lblcual.Visible = true;
+                                            cmbCualArticulo.Visible = true;
+                                            break;
+                                        case "No":
+                                            rbNo.Checked = true;
+                                            lblcual.Visible = false;
+                                            cmbCualArticulo.Visible = false;
+                                            break;
+                                    }
+
+                                    ListEditItem oItcual = cmbCualArticulo.Items.FindByValue(ctrlP.cualArticulo);
+                                    if (oItcual != null)
+                                    {
+                                        oItcual.Selected = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     if (pS[0] == "Save2")
                     {
                         if (aprbnes.Count > 0)
@@ -2683,6 +2943,7 @@ namespace ControlProductos
                                             btnAsignAutor.Visible = true;
                                             btnEnviarSolicitante.Visible = true;
                                             btnRechazar.Visible = false;
+                                            btnEnviarSolicitante.Src = "Assets/images/BtnEnviarProveedor.png";
                                             ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-edit' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Pendiente por el autor para terminar la captura</span>";
                                             break;
                                         case "En Aprobación por ":
