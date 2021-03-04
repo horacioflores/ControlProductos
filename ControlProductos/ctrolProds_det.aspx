@@ -450,6 +450,9 @@
 
         function openModal(opcion) {
             switch (opcion) {
+                case 'comentarios':
+                    $('#mdlComentarios').modal('show');
+                    break;
                 case 'archivos':
                     $('#mdlArchivo').modal('show');
                     break;
@@ -470,6 +473,9 @@
 
         function ASPxCallbackPanel2_EndCallback(s, e) {
             if (s.cpAlertMessage != '') {
+                if (s.cpAlertMessage == 'changeUser') {
+                    swal("Information", "You must change the author user of the approvers", "info");
+                }
                 if (s.cpAlertMessage == 'InputNoDoc') {
                     swal("Information", "Add the document number", "info");
                 }
@@ -527,6 +533,9 @@
                 if (s.cpAlertMessage == 'SelectModelo') {
                     swal("Information", "Modelo is missing", "info");
                 }
+                if (s.cpAlertMessage == 'SelectFiles') {
+                    swal("Information", "You must attach at least one file", "info");
+                }
                 if (s.cpAlertMessage == 'SelectFuncionMaquina') {
                     swal("Information", "Machine function is missing", "info");
                 }
@@ -575,6 +584,9 @@
                 if (s.cpAlertMessage == 'exists') {
                     swal("Information", "The part number already exists", "info");
                 }
+                if (s.cpAlertMessage == 'exists2') {
+                    swal("Information", "Another application with this part number is in the approval process", "info");
+                }
 
                 if (s.cpAlertMessage == 'successSave') {
                     swal("Information", "The product has been success registered!", "success");
@@ -589,12 +601,22 @@
                 if (s.cpAlertMessage == 'EnvFaild') {
                     swal("Information", "There was an error submitting the request!", "success");
                 }
+                if (s.cpAlertMessage == 'errorAprbnes') {
+                    swal("Information", "Error: Approver list is not missing", "error");
+                }
 
                 if (s.cpAlertMessage == 'errorSave') {
                     swal("Information", "There was an error registering the product!", "error");
                 }
                 if (s.cpAlertMessage == 'errorUpdate') {
                     swal("Information", "There was an error updating the product!", "error");
+                }
+
+                if (s.cpAlertMessage == 'RechSucces') {
+                    swal("Information", "The request has been rejected successfully!", "success");
+                }
+                if (s.cpAlertMessage == 'EnvFaild') {
+                    swal("Information", "There was an error rejecting the request!", "success");
                 }
             }
             s.cpAlertMessage = "";
@@ -758,6 +780,39 @@
             var Valores = "saveComment," + tipoArticulo + "," + commentario;
             xgrdTipoArticulo.PerformCallback(Valores);
         }
+
+        function selEnviar(tipo) {
+            if (tipo == 'Enviar') {
+                document.getElementById("MainContent_ASPxCallbackPanel2_txttipo").value = "Enviar";
+                document.getElementById("MainContent_ASPxCallbackPanel2_txtAprobar").value = "1";
+            }
+            if (tipo == 'EnviarDM') {
+                document.getElementById("MainContent_ASPxCallbackPanel2_txttipo").value = "EnviarDM";
+                document.getElementById("MainContent_ASPxCallbackPanel2_txtAprobar").value = "1";
+            }
+            if (tipo == 'Rechazar') {
+                document.getElementById("MainContent_ASPxCallbackPanel2_txttipo").value = "Rechazar";
+                document.getElementById("MainContent_ASPxCallbackPanel2_txtAprobar").value = "0";
+            }
+            openModal('comentarios');
+        }
+
+        function enviar() {
+            var Valores = "";
+            var aprobacion = document.getElementById("MainContent_ASPxCallbackPanel2_txtAprobar").value;
+            var tipo = document.getElementById("MainContent_ASPxCallbackPanel2_txttipo").value;
+            var comentarios = document.getElementById("MainContent_ASPxCallbackPanel2_comentariosEnviar").value;
+
+            if (comentarios == '') {
+                swal("Information", "Comments are missing", "info");
+            } else {
+
+                Valores = tipo + "," + aprobacion + "," + comentarios;
+                ASPxCallbackPanel2.PerformCallback(Valores);
+            }
+        }
+        
+
     </script>
     <style>
         html {
@@ -966,14 +1021,41 @@
               <dx:PanelContent>
         <div id="divBotones" class="col-xs-12 btn-group CeroPM" data-spy="affix" data-offset-top="100" style="padding-top:15px; color:white;width:100%;z-index:1 !important;background-color:#EFEFEF;">
             <img ID="btnSave" runat="server" class="btn" Style="margin: 0px; padding: 0px;" onclick="ASPxCallbackPanel2.PerformCallback('Save');" src="Assets/images/BtnGuardar.png" /><%--OnClick="btnSave_Click"--%>
-            <img ID="btnEnviarSolicitante" runat="server" class="btn" Style="margin: 0px; padding: 0px;" onclick="ASPxCallbackPanel2.PerformCallback('Enviar');" src="Assets/images/BtnEnviar.png" />
-            <img ID="btnEnviarDM" runat="server" visible="false" class="btn" Style="margin: 0px; padding: 0px;" onclick="ASPxCallbackPanel2.PerformCallback('EnviarDM');" src="Assets/images/BtnEnviarDM.png" />
+            <img ID="btnEnviarSolicitante" runat="server" class="btn" Style="margin: 0px; padding: 0px;" onclick="selEnviar('Enviar');" src="Assets/images/BtnEnviar.png" /> <%--  onclick="ASPxCallbackPanel2.PerformCallback('Enviar');" --%>
+            <img ID="btnRechazar" runat="server" class="btn" Style="margin: 0px; padding: 0px;" onclick="selEnviar('Rechazar');"  src="Assets/images/BtnRechazar.png" /> <%-- onclick="ASPxCallbackPanel2.PerformCallback('Rechazar');" --%>
+            <img ID="btnAsignAutor" runat="server" class="btn" Style="margin: 0px; padding: 0px;" onclick="ASPxCallbackPanel2.PerformCallback('Save2');" src="Assets/images/BtnAsignarAutor.png" />
+            <img ID="btnEnviarDM" runat="server" visible="false" class="btn" Style="margin: 0px; padding: 0px;" onclick="selEnviar('EnviarDM');" src="Assets/images/BtnEnviarDM.png" /> <%-- onclick="ASPxCallbackPanel2.PerformCallback('EnviarDM');" --%>
             <asp:ImageButton ID="btnRegresar" class="btn" Style="margin: 0px; padding: 0px;" runat="server" ImageUrl="~/Assets/images/BtnSalir.png" OnClick="btnRegresar_Click" />
             <div class="BtnGpoIniFin">
                 <a class="BtnIniFin" id="BtnInicio" href="#Inicio" title="Inicio" onmouseover="rotate('imgaRotarI');" onmouseout="rotate('imgaRotarI');"><i id="imgaRotarI" class="glyphicon glyphicon glyphicon-circle-arrow-up"></i><span class="badge badge-xs badge-danger">Alt+9</span></a>
                 <a class="BtnIniFin" id="BtnFinal" href="#pieForma" title="Historial" onmouseover="rotate('imgaRotarF');" onmouseout="rotate('imgaRotarF');"><i id="imgaRotarF" class="glyphicon glyphicon glyphicon-circle-arrow-down"></i><span class="badge badge-xs badge-danger">Alt+0</span></a>
             </div>
         </div>
+                                <div id="mdlComentarios" class="modal fade" role="dialog">
+                                    <div class="modal-dialog" runat="server">
+                                        <div class="modal-content" runat="server">
+                                            <div class="modal-header" runat="server">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4>Comentarios</h4>
+                                                <asp:TextBox ID="txtAprobar" runat="server" CssClass="form-control input-sm hidden"></asp:TextBox>
+                                                <asp:TextBox ID="txttipo" runat="server" CssClass="form-control input-sm hidden"></asp:TextBox>
+                                            </div>
+                                            <div class="modal-body" runat="server">
+                                                <div class="row">
+                                                    <label class="text-form col-sm-3">Comentarios</label>
+                                                    <div class="col-sm-5">
+                                                        <asp:TextBox ID="comentariosEnviar" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div>
+                                                    <button type="button" class="btn btn-primary" onclick="enviar();" data-dismiss="modal">Confirmar</button>
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Regresar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
         <div class="jumbotron CeroPM" style="padding: 5px;">
             <div class="row CeroPM">
                 <div class="col-xs-12">
@@ -2013,7 +2095,7 @@
             </div>
             <ul class="nav nav-tabs" style="padding-left:5px;">
                 <li class="active"><a data-toggle="tab" href="#home">Aprobaciones</a></li>
-                <li><a data-toggle="tab" href="#menu1">Comentarios adicionales</a></li>
+                <li><a data-toggle="tab" href="#menu1">Historial</a></li>
             </ul>
             <div class="tab-content" style="padding:15px;">
                 <div id="home" class="tab-pane fade in active">
@@ -2242,8 +2324,30 @@
                             </div>--%>
                 </div>
                 <div id="menu1" class="tab-pane fade">
-                    <h3>Comentarios Adicionales</h3>
-                    <p><asp:TextBox ID="txtComentarios" TextMode="MultiLine" Rows="3" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox></p>
+                    <h3>Historial</h3>
+                    <p><asp:TextBox ID="txtComentarios" TextMode="MultiLine" Rows="3" runat="server" CssClass="form-control input-sm hidden"></asp:TextBox></p>
+                    <dx:ASPxGridView ID="xgrdHistorial" runat="server" AutoGenerateColumns="true"
+                        Width="100%" Font-Names="Segoe UI"
+                        ClientInstanceName="xgrdHistorial" Theme="Metropolis">
+                        <Columns>
+                            <dx:GridViewDataTextColumn FieldName="fecha" Caption="Fecha" VisibleIndex="0">
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn FieldName="accion" Caption="" VisibleIndex="1">
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn FieldName="comentarios" Caption="Comentarios" VisibleIndex="2">
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn FieldName="NombreCompleto" Caption="Usuario" VisibleIndex="3">
+                            </dx:GridViewDataTextColumn>
+                        </Columns>
+                        <Styles>
+                            <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
+                            <RowHotTrack BackColor="#CEECF5"></RowHotTrack>
+                            <Header BackColor="#F2F2F2" HorizontalAlign="Center" Font-Bold="true" CssClass="text-center"></Header>
+                        </Styles>
+                        <SettingsPager Mode="ShowPager" PageSize="20" />
+                        <Settings ShowFilterRow="True" />
+                        <ClientSideEvents/>
+                    </dx:ASPxGridView>
                 </div>
             </div>
         </div>

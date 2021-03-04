@@ -152,6 +152,7 @@ namespace ControlProductos.Entity
         public List<Mtto_Almn> mantenimientos { get; set; }
         public List<Mtto_Almn> almacenes { get; set; }
         public List<Aprobacion> aprobaciones { get; set; }
+        public List<historial> historial { get; set; }
     }
 
     public class archivos
@@ -203,6 +204,16 @@ namespace ControlProductos.Entity
         public string fechaAccion { get; set; }
         public string accion { get; set; }
         public string comentario { get; set; }
+    }
+
+    public class historial
+    {
+        public string noDocumento { get; set; }
+        public string fecha { get; set; }
+        public string accion { get; set; }
+        public string comentarios { get; set; }
+        public string codigoEmpleado { get; set; }
+        public string NombreCompleto { get; set; }
     }
 
 

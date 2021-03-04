@@ -116,6 +116,19 @@ namespace ControlProductos
             }
         }
 
+
+        public List<historial> hist
+        {
+            get
+            {
+                return (List<historial>)Session["Currenthist"];
+            }
+            set
+            {
+                Session["Currenthist"] = value;
+            }
+        }
+
         public void ApplyLayoutTipoArticulo()
         {
             xgrdTipoArticuloMDL.DataSource = tArticulos;
@@ -608,6 +621,8 @@ namespace ControlProductos
                 //xgrdAlmacen.DataBind();
                 xgrdAprobaciones.DataSource = aprbnes;
                 xgrdAprobaciones.DataBind();
+                xgrdHistorial.DataSource = hist;
+                xgrdHistorial.DataBind();
                 ApplyLayoutTipoArticulo();
                 //ApplyLayoutMtto();
                 //ApplyLayoutAlmnes();
@@ -639,7 +654,10 @@ namespace ControlProductos
                                 disabledAlmacen();
                                 disabledMtoo();
                                 disabledDM();
+                                btnAsignAutor.Visible = true;
                                 btnEnviarSolicitante.Visible = true;
+                                btnRechazar.Visible = false;
+                                btnEnviarSolicitante.Src = "Assets/images/BtnEnviarProveedor.png";
                                 ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-edit' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Pendiente por el autor para terminar la captura</span>";
                                 break;
                             case "En Aprobación por ":
@@ -702,16 +720,18 @@ namespace ControlProductos
                                         disabledDM();
                                         break;
                                 }
-
+                                btnAsignAutor.Visible = false;
                                 if (ctrlP.sigPerfil != LoginInfo.CurrentPerfil.Codigo)
                                 {
                                     btnEnviarSolicitante.Visible = false;
+                                    btnRechazar.Visible = false;
                                     btnSave.Visible = false;
                                     btnEnviarDM.Visible = false;
                                 }
                                 else
                                 {
                                     btnEnviarSolicitante.Visible = true;
+                                    btnRechazar.Visible = true;
                                     btnSave.Visible = true;
                                 }
 
@@ -723,10 +743,12 @@ namespace ControlProductos
                                 disabledPlaneador();
                                 disabledAlmacen();
                                 disabledMtoo();
+                                btnAsignAutor.Visible = false;
                                 if (ctrlP.sigPerfil != LoginInfo.CurrentPerfil.Codigo)
                                 {
                                     btnSave.Visible = false;
                                     btnEnviarSolicitante.Visible = false;
+                                    btnRechazar.Visible = false;
                                 }
                                 ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-eye-open' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span>";
                                 break;
@@ -737,17 +759,19 @@ namespace ControlProductos
                                 disabledAlmacen();
                                 disabledMtoo();
                                 disabledDM();
+                                btnAsignAutor.Visible = false;
                                 btnSave.Visible = false;
                                 btnEnviarSolicitante.Visible = false;
+                                btnRechazar.Visible = false;
                                 ltlSts.Text = "<span id='spanStatus' class='alert btn-success docEstatus' ><i class='glyphicon glyphicon-ok' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Aprobado por " + ctrlP.usuario + " el " + ctrlP.ModFecha + "</span>";
                                 break;
                         }
 
+                        EmpleadosDa empDa = new EmpleadosDa();
                         if (ctrlP.sigPerfil == LoginInfo.CurrentPerfil.Codigo)
                         {
                             List<Aprobacion> lprob = ctrlP.aprobaciones.FindAll(a => a.codigoPerfil == LoginInfo.CurrentPerfil.Codigo);
 
-                            EmpleadosDa empDa = new EmpleadosDa();
                             List<Empleados> emps = empDa.GetCatalog("", "", "", "", true);
                             string codigoEmpAprb = "";
 
@@ -763,16 +787,36 @@ namespace ControlProductos
                             {
                                 if (codigoEmpAprb != lprob[0].codigoEmpleado)
                                 {
-                                    btnSave.Visible = false;
-                                    btnEnviarSolicitante.Visible = false;
-                                    btnEnviarDM.Visible = false;
+                                    if (LoginInfo.CurrentPerfil.Codigo != "0001")
+                                    {
+                                        btnSave.Visible = false;
+                                        btnEnviarSolicitante.Visible = false;
+                                        btnRechazar.Visible = false;
+                                        btnEnviarDM.Visible = false;
+                                    }
                                 }
                             }
 
                         }
+                        else
+                        {
+                            btnSave.Visible = false;
+                            btnEnviarSolicitante.Visible = false;
+                            btnRechazar.Visible = false;
+                            btnEnviarDM.Visible = false;
+                            btnAsignAutor.Visible = false;
+                        }
+
+                        List<Empleados> empsolicitante = empDa.GetCatalog("", "", "", "", true);
+                        List<Empleados> empsolici = empsolicitante.FindAll(emsol => emsol.Codigo == ctrlP.codigoSolicitante);
+                        string solicitante = "";
+                        if (empsolici.Count > 0)
+                        {
+                            solicitante = empsolici[0].NombreCompleto;
+                        }
 
                         lblnDoc.Text = ctrlP.noDocumento;
-                        lblDocSolicitante.Text = ctrlP.usuario;
+                        lblDocSolicitante.Text = solicitante;
                         lblDocFechaSol.Text = ctrlP.fechaSolicitud;
                         rbAlta.Enabled = false;
                         rbModificacion.Enabled = false;
@@ -1046,8 +1090,13 @@ namespace ControlProductos
                             }
                         }
 
-                        xgrdAprobaciones.DataSource = ctrlP.aprobaciones;
+                        xgrdAprobaciones.DataSource = aprbnes;
                         xgrdAprobaciones.DataBind();
+
+                        hist = new List<historial>();
+                        hist = ctrlP.historial;
+                        xgrdHistorial.DataSource = hist;
+                        xgrdHistorial.DataBind();
 
                         txtConsEstimado.Text = ctrlP.consEstimado.ToString();
                         ListEditItem oItmUM2 = cmbUM.Items.FindByValue(ctrlP.unidadMedida);
@@ -1195,6 +1244,8 @@ namespace ControlProductos
                 xgrdArchivos.DataBind();
                 xDateFechaReq.Date = date;
                 btnEnviarSolicitante.Visible = false;
+                btnRechazar.Visible = false;
+                btnAsignAutor.Visible = false;
 
                 tiposArticulo = new List<_tipoArticulo>();
                 //mttos = new List<Mtto_Almn>();
@@ -1275,6 +1326,7 @@ namespace ControlProductos
                 txtCodigoArticulo.Text = "";
 
                 aprbnes = new List<Aprobacion>();
+                hist = new List<historial>();
                 PerfilDa perda = new PerfilDa();
                 List<Perfil> lperf = perda.GetCatalog("", true);
 
@@ -1317,6 +1369,8 @@ namespace ControlProductos
                 }
                 xgrdAprobaciones.DataSource = aprbnes;
                 xgrdAprobaciones.DataBind();
+                xgrdHistorial.DataSource = hist;
+                xgrdHistorial.DataBind();
 
                 rbReparaNo.Checked = true;
                 txtMultiplo.Text = "0";
@@ -1629,8 +1683,14 @@ namespace ControlProductos
                             }
                         }
 
-                        xgrdAprobaciones.DataSource = ctrlP.aprobaciones;
+                        xgrdAprobaciones.DataSource = aprbnes;
                         xgrdAprobaciones.DataBind();
+
+                        hist = new List<historial>();
+                        hist = ctrlP.historial;
+                        xgrdHistorial.DataSource = hist;
+                        xgrdHistorial.DataBind();
+
                         break;
                     }
                 }
@@ -1838,6 +1898,17 @@ namespace ControlProductos
             //string strScript;
             if (ctrlProd.ctrlProdsID == 0)
             {
+                int valProducto = 0;
+                if (ctrlProd.producto != "")
+                {
+                    valProducto = BctrlProd.ValProducto2(ctrlProd.producto);
+                }
+                
+                if(valProducto>0)
+                {
+                    return "exists2";
+                }
+
                 var regreso = BctrlProd.InsCtrlP(ctrlProd, LoginInfo.CurrentUsuario.UsuarioId.ToString());
                 if (regreso > 0)
                 {
@@ -2208,10 +2279,21 @@ namespace ControlProductos
                 var id = e.GetValue("AprobacionesID").ToString() + "-" + e.GetValue("noDocumento").ToString() + "-" + e.GetValue("codigoPerfil").ToString();
 
                 string disabled = "";
-
-                if (lblcodigoSts.Text != "0001")
+                string codperfil = lblSigPerf.Text;
+                if(codperfil == "")
+                {
+                    codperfil = "0";
+                }
+                if (Convert.ToInt32(codperfil) >= Convert.ToInt32(e.GetValue("codigoPerfil").ToString()))
                 {
                     disabled = "disabled='disabled'";
+                    if (Convert.ToInt32(codperfil) == Convert.ToInt32(e.GetValue("codigoPerfil").ToString()))
+                    {
+                        if (Convert.ToInt32(e.GetValue("codigoPerfil").ToString()) == 1)
+                        {
+                            disabled = "";
+                        }
+                    }
                 }
 
                 EmpleadosDa eDa = new EmpleadosDa();
@@ -2461,8 +2543,28 @@ namespace ControlProductos
 
             if (pS.Length > 0)
             {
-                if (pS[0] == "Save")
+                if (pS[0] == "Save" || pS[0] == "Save2")
                 {
+                    if (pS[0] == "Save2")
+                    {
+                        if (aprbnes.Count > 0)
+                        {
+                            EmpleadosDa empDa = new EmpleadosDa();
+                            List<Empleados> emp = empDa.GetEmpleado(aprbnes[0].codigoEmpleado);
+                            List<Empleados> empfilter = emp.FindAll(em => em.NombreCompleto == lblDocSolicitante.Text);
+                            if (empfilter.Count > 0)
+                            {
+                                ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "changeUser";
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "errorAprbnes";
+                            return;
+                        }
+                    }
+
                     if (lblnDoc.Text == "")
                     {
                         ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "InputNoDoc";
@@ -2557,6 +2659,237 @@ namespace ControlProductos
                 }
                 else if (pS[0] == "Enviar")
                 {
+                    if (lblSigPerf.Text == "")
+                    {
+                        int ctrlProdsID = Convert.ToInt32(Session["ctrlProdsID"]);
+                        var BctrlProd = new ControlProductosda();
+                        List<Entity.ControlProductos> oList = BctrlProd.GetCtrlProducto(ctrlProdsID.ToString());
+                        if (ctrlProdsID > 0)
+                        {
+                            foreach (Entity.ControlProductos ctrlP in oList)
+                            {
+                                if (ctrlProdsID == ctrlP.ctrlProdsID)
+                                {
+                                    lblcodigoSts.Text = ctrlP.codigo_sts_Prods;
+                                    lblSigPerf.Text = ctrlP.sigPerfil;
+                                    switch (ctrlP.sts_Prods)
+                                    {
+                                        case "Abierto":
+                                            disabledComprador();
+                                            disabledPlaneador();
+                                            disabledAlmacen();
+                                            disabledMtoo();
+                                            disabledDM();
+                                            btnAsignAutor.Visible = true;
+                                            btnEnviarSolicitante.Visible = true;
+                                            btnRechazar.Visible = false;
+                                            ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-edit' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Pendiente por el autor para terminar la captura</span>";
+                                            break;
+                                        case "En Aprobación por ":
+                                            string perfil = "";
+
+                                            switch (ctrlP.sigPerfil)
+                                            {
+                                                case "0002":
+                                                    perfil = "Comprador";
+                                                    disabledAutor();
+                                                    disabledPlaneador();
+                                                    disabledAlmacen();
+                                                    disabledMtoo();
+                                                    disabledDM();
+                                                    break;
+                                                case "0003":
+                                                    perfil = "PLANNER";
+                                                    disabledAutor();
+                                                    disabledComprador();
+                                                    disabledAlmacen();
+                                                    disabledMtoo();
+                                                    disabledDM();
+                                                    break;
+                                                case "0004":
+                                                    perfil = "ALMACÉN";
+                                                    disabledAutor();
+                                                    disabledComprador();
+                                                    disabledPlaneador();
+                                                    disabledMtoo();
+                                                    disabledDM();
+                                                    break;
+                                                case "0005":
+                                                    perfil = "GTE MANTENIMIENTO";
+                                                    disabledAutor();
+                                                    disabledComprador();
+                                                    disabledPlaneador();
+                                                    disabledAlmacen();
+                                                    disabledDM();
+                                                    break;
+                                                case "0006":
+                                                    perfil = "GTE COMPRAS";
+                                                    if (ctrlP.operacion == "BAJA")
+                                                    {
+                                                        btnEnviarDM.Visible = true;
+                                                    }
+                                                    disabledAutor();
+                                                    disabledComprador();
+                                                    disabledPlaneador();
+                                                    disabledAlmacen();
+                                                    disabledMtoo();
+                                                    disabledDM();
+                                                    break;
+                                                case "0007":
+                                                    perfil = "DIRECCION";
+                                                    disabledAutor();
+                                                    disabledComprador();
+                                                    disabledPlaneador();
+                                                    disabledAlmacen();
+                                                    disabledMtoo();
+                                                    disabledDM();
+                                                    break;
+                                            }
+                                            btnAsignAutor.Visible = false;
+                                            if (ctrlP.sigPerfil != LoginInfo.CurrentPerfil.Codigo)
+                                            {
+                                                btnEnviarSolicitante.Visible = false;
+                                                btnRechazar.Visible = false;
+                                                btnSave.Visible = false;
+                                                btnEnviarDM.Visible = false;
+                                            }
+                                            else
+                                            {
+                                                btnEnviarSolicitante.Visible = true;
+                                                btnRechazar.Visible = true;
+                                                btnSave.Visible = true;
+                                            }
+
+                                            ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-eye-open' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + perfil + "</span>";
+                                            break;
+                                        case "Pendiente por Data Management":
+                                            disabledAutor();
+                                            disabledComprador();
+                                            disabledPlaneador();
+                                            disabledAlmacen();
+                                            disabledMtoo();
+                                            btnAsignAutor.Visible = false;
+                                            if (ctrlP.sigPerfil != LoginInfo.CurrentPerfil.Codigo)
+                                            {
+                                                btnSave.Visible = false;
+                                                btnEnviarSolicitante.Visible = false;
+                                                btnRechazar.Visible = false;
+                                            }
+                                            ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-eye-open' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span>";
+                                            break;
+                                        case "Aprobado":
+                                            disabledAutor();
+                                            disabledComprador();
+                                            disabledPlaneador();
+                                            disabledAlmacen();
+                                            disabledMtoo();
+                                            disabledDM();
+                                            btnAsignAutor.Visible = false;
+                                            btnSave.Visible = false;
+                                            btnEnviarSolicitante.Visible = false;
+                                            btnRechazar.Visible = false;
+                                            ltlSts.Text = "<span id='spanStatus' class='alert btn-success docEstatus' ><i class='glyphicon glyphicon-ok' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Aprobado por " + ctrlP.usuario + " el " + ctrlP.ModFecha + "</span>";
+                                            break;
+                                    }
+
+                                    if (ctrlP.sigPerfil == LoginInfo.CurrentPerfil.Codigo)
+                                    {
+                                        List<Aprobacion> lprob = ctrlP.aprobaciones.FindAll(a => a.codigoPerfil == LoginInfo.CurrentPerfil.Codigo);
+
+                                        EmpleadosDa empDa = new EmpleadosDa();
+                                        List<Empleados> emps = empDa.GetCatalog("", "", "", "", true);
+                                        string codigoEmpAprb = "";
+
+                                        foreach (Empleados item in emps)
+                                        {
+                                            if (item.EmpleadoId == LoginInfo.CurrentUsuario.EmpleadoId)
+                                            {
+                                                codigoEmpAprb = item.Codigo;
+                                            }
+                                        }
+
+                                        if (lprob.Count > 0)
+                                        {
+                                            if (codigoEmpAprb != lprob[0].codigoEmpleado)
+                                            {
+                                                btnSave.Visible = false;
+                                                btnEnviarSolicitante.Visible = false;
+                                                btnRechazar.Visible = false;
+                                                btnEnviarDM.Visible = false;
+                                            }
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        btnSave.Visible = false;
+                                        btnEnviarSolicitante.Visible = false;
+                                        btnRechazar.Visible = false;
+                                        btnEnviarDM.Visible = false;
+                                        btnAsignAutor.Visible = false;
+                                    }
+
+                                    lblnDoc.Text = ctrlP.noDocumento;
+                                    lblDocSolicitante.Text = ctrlP.usuario;
+                                    lblDocFechaSol.Text = ctrlP.fechaSolicitud;
+                                    rbAlta.Enabled = false;
+                                    rbModificacion.Enabled = false;
+                                    rbBaja.Enabled = false;
+                                    cmbProducto.Enabled = false;
+                                    switch (ctrlP.operacion)
+                                    {
+                                        case "ALTA":
+                                            rbAlta.Checked = true;
+                                            lblProd.Visible = false;
+                                            cmbProducto.Visible = false;
+                                            dvReemplazaOtro.Visible = true;
+                                            break;
+                                        case "MODIFICACIÓN":
+                                            rbModificacion.Checked = true;
+                                            lblProd.Visible = true;
+                                            cmbProducto.Visible = true;
+                                            dvReemplazaOtro.Visible = false;
+                                            break;
+                                        case "BAJA":
+                                            rbBaja.Checked = true;
+                                            lblProd.Visible = true;
+                                            cmbProducto.Visible = true;
+                                            dvReemplazaOtro.Visible = false;
+                                            break;
+                                    }
+                                    ListEditItem oItProd = cmbProducto.Items.FindByValue(ctrlP.producto);
+                                    if (oItProd != null)
+                                    {
+                                        oItProd.Selected = true;
+                                    }
+
+                                    rbSi.Enabled = false;
+                                    rbNo.Enabled = false;
+                                    cmbCualArticulo.Enabled = false;
+                                    switch (ctrlP.remplazaOtro)
+                                    {
+                                        case "Si":
+                                            rbSi.Checked = true;
+                                            lblcual.Visible = true;
+                                            cmbCualArticulo.Visible = true;
+                                            break;
+                                        case "No":
+                                            rbNo.Checked = true;
+                                            lblcual.Visible = false;
+                                            cmbCualArticulo.Visible = false;
+                                            break;
+                                    }
+
+                                    ListEditItem oItcual = cmbCualArticulo.Items.FindByValue(ctrlP.cualArticulo);
+                                    if (oItcual != null)
+                                    {
+                                        oItcual.Selected = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     switch (lblSigPerf.Text)
                     {
                         case "0001":
@@ -2568,6 +2901,11 @@ namespace ControlProductos
                             if (txtModelo.Text == "")
                             {
                                 ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectModelo";
+                                return;
+                            }
+                            if (archivos.Count== 0)
+                            {
+                                ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "SelectFiles";
                                 return;
                             }
                             if (txtfuncionMaquina.Text == "")
@@ -2659,7 +2997,7 @@ namespace ControlProductos
                     }
                     else
                     {
-                        int regreso = suguienteEstatus("false");
+                        int regreso = suguienteEstatus("false", pS[1], pS[2]);
                         if (regreso > 0)
                         {
                             refresData();
@@ -2673,7 +3011,7 @@ namespace ControlProductos
                 }
                 else if (pS[0] == "EnviarDM")
                 {
-                    int regreso = suguienteEstatus("true");
+                    int regreso = suguienteEstatus("true", pS[1], pS[2]);
                     if (regreso > 0)
                     {
                         refresData();
@@ -2682,6 +3020,19 @@ namespace ControlProductos
                     else
                     {
                         ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "EnvFaild";
+                    }
+                }
+                else if (pS[0] == "Rechazar")
+                {
+                    int regreso = suguienteEstatus("false", pS[1], pS[2]);
+                    if (regreso > 0)
+                    {
+                        refresData();
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "RechSucces";
+                    }
+                    else
+                    {
+                        ASPxCallbackPanel2.JSProperties["cpAlertMessage"] = "RechFaild";
                     }
                 }
                 else if (pS[0] == "changeProd")
@@ -2833,12 +3184,12 @@ namespace ControlProductos
             }
         }
 
-        private int suguienteEstatus(string DM)
+        private int suguienteEstatus(string DM, string aprobacion, string comentario)
         {
             int ctrlProdsID = Convert.ToInt32(Session["ctrlProdsID"]);
             string codPerf = LoginInfo.CurrentPerfil.Codigo;
             ControlProductosda cpda = new ControlProductosda();
-            return cpda.changeSts(ctrlProdsID.ToString(), LoginInfo.CurrentUsuario.UsuarioId.ToString(), lblSigPerf.Text, DM, txtCodigoArticulo.Text);
+            return cpda.changeSts(ctrlProdsID.ToString(), LoginInfo.CurrentUsuario.UsuarioId.ToString(), lblSigPerf.Text, DM, txtCodigoArticulo.Text, aprobacion, comentario);
         }
 
         protected void CIuplGFileArchivo_FileUploadComplete(object sender, FileUploadCompleteEventArgs e)
