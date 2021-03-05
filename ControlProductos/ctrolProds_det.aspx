@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server" Visible="false">
     <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">--%>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>--%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <!--Formateo de tablas-->
@@ -2018,15 +2018,15 @@
                                 <div class="row form-group CeroPM">
                                     <label class="text-form col-sm-1">Alto</label>
                                     <div class="col-sm-3">
-                                       <asp:TextBox ID="txtAltoAlm" runat="server" CssClass="form-control input-sm Campos Campos6Cols"></asp:TextBox>
+                                       <asp:TextBox ID="txtAltoAlm" TextMode="Number" runat="server" CssClass="form-control input-sm Campos Campos6Cols"></asp:TextBox>
                                     </div>
                                     <label class="text-form col-sm-1">Ancho</label>
                                     <div class="col-sm-3">
-                                        <asp:TextBox ID="txtAnchoAlm" runat="server" CssClass="form-control input-sm Campos Campos6Cols"></asp:TextBox>
+                                        <asp:TextBox ID="txtAnchoAlm" TextMode="Number" runat="server" CssClass="form-control input-sm Campos Campos6Cols"></asp:TextBox>
                                     </div>
                                     <label class="text-form col-sm-1">Largo</label>
                                     <div class="col-sm-3">
-                                        <asp:TextBox ID="txtLargoAlm" runat="server" CssClass="form-control input-sm Campos Campos6Cols"></asp:TextBox>
+                                        <asp:TextBox ID="txtLargoAlm" TextMode="Number" runat="server" CssClass="form-control input-sm Campos Campos6Cols"></asp:TextBox>
                                     </div>
                                 </div>
                             </fieldset>

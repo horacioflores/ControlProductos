@@ -169,7 +169,7 @@ namespace ControlProductos
         protected void imgEditar_Click(object sender, ImageClickEventArgs e)
         {
             ImageButton imgEditar = (ImageButton)sender;
-            string arguments = imgEditar.CommandArgument;
+            string arguments = hdnRedirect.Value;
             Session["ctrlProdsID"] = arguments;
             Response.Redirect("ctrolProds_det.aspx");
         }
