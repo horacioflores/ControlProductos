@@ -85,6 +85,13 @@ namespace ControlProductos
                 e.Cell.Text = string.Format("<input type='checkbox' class='chk' id='chk{0}'>", id);
             }
 
+            if (e.DataColumn.Name == "CheckIDEdit")
+            {
+                var id = e.GetValue("ctrlProdsID");
+
+                e.Cell.Text = string.Format("<asp:ImageButton ID='imgEditar{0}' runat='server' ImageUrl='~/Assets/images/layout_edit.png'  OnClick='imgEditar_Click' CommandArgument='{0}' />", id);
+            }
+
             if (e.DataColumn.FieldName == "fechaSolicitud")
             {
                 e.Cell.Text = e.GetValue("fechaSolicitud").ToString().Substring(0, 10);
@@ -170,7 +177,7 @@ namespace ControlProductos
         protected void imgEditar_Click(object sender, ImageClickEventArgs e)
         {
             ImageButton imgEditar = (ImageButton)sender;
-            string arguments = imgEditar.CommandArgument;
+            string arguments = hdnRedirect.Value;
             Session["ctrlProdsID"] = arguments;
             Response.Redirect("ctrolProds_det.aspx");
         }

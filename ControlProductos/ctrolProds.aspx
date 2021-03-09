@@ -153,6 +153,11 @@
                 //alert(s.cpAlertMessage);
             }
         }
+
+        function redirect(value) {
+            document.getElementById("MainContent_hdnRedirect").value = value;
+        }
+
     </script>
     <style>
         .Campos {
@@ -282,7 +287,7 @@
         </dx:ASPxNavBar>
     </div>
     <div id="Detalle" runat="server">
-
+        <input type="hidden" runat="server" id="hdnRedirect" />
         <dx:ASPxGridView ID="xgrdProds" runat="server" AutoGenerateColumns="False" 
             Width="100%" Font-Names="Segoe UI"
             KeyFieldName="ctrlProdsID" 
@@ -296,9 +301,11 @@
                 </dx:GridViewDataTextColumn>
                 <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="1" Width="1%">
                 </dx:GridViewDataTextColumn>
+<%--                <dx:GridViewDataTextColumn Name="CheckIDEdit" VisibleIndex="2">
+                </dx:GridViewDataTextColumn>--%>
                 <dx:GridViewDataColumn FieldName="ctrlProdsID" VisibleIndex="2"  Caption="Actions" CellStyle-HorizontalAlign="Left">
                       <DataItemTemplate>
-                          <asp:ImageButton ID="imgEditar" runat="server" ImageUrl="~/Assets/images/layout_edit.png"  OnClick="imgEditar_Click" CommandArgument='<%# Eval("ctrlProdsID") %>' />
+                          <asp:ImageButton ID="imgEditar" runat="server" ImageUrl="~/Assets/images/layout_edit.png" OnClientClick='<%# string.Format("redirect(\"{0}\"); return true;", Eval("ctrlProdsID")) %>'  OnClick="imgEditar_Click" CommandArgument='<%# Eval("ctrlProdsID") %>' />
                       </DataItemTemplate>
                 </dx:GridViewDataColumn>
                 <dx:GridViewDataTextColumn FieldName="noDocumento" VisibleIndex="3" Caption="Document Number">
@@ -332,41 +339,7 @@
                 <dx:GridViewDataTextColumn FieldName="operacion" VisibleIndex="17" Caption="Request Type">
                 </dx:GridViewDataTextColumn>   
                 <dx:GridViewDataTextColumn FieldName="sts_Prods" VisibleIndex="18" Caption="Status">
-                </dx:GridViewDataTextColumn>   
-                <%--<dx:GridViewDataTextColumn FieldName="cualArticulo" VisibleIndex="7" Caption="Request">
-                </dx:GridViewDataTextColumn> 
-                <dx:GridViewDataTextColumn FieldName="sts_Prods" VisibleIndex="8" Caption="Status">
-                </dx:GridViewDataTextColumn>  
-                <dx:GridViewDataTextColumn FieldName="CodigoMaquina" VisibleIndex="9" Caption="Associated Machine">
-                </dx:GridViewDataTextColumn>     
-                <dx:GridViewDataTextColumn FieldName="descripcionUno" VisibleIndex="11" Caption="Description1">
-                </dx:GridViewDataTextColumn> 
-                <dx:GridViewDataTextColumn FieldName="descripcionDos" VisibleIndex="12" Caption="Description2">
-                </dx:GridViewDataTextColumn>
-                <dx:GridViewDataTextColumn FieldName="CodigoDepto" VisibleIndex="13" Caption="Department">
-                </dx:GridViewDataTextColumn>  
-                <dx:GridViewDataTextColumn FieldName="CodigoPlan" VisibleIndex="14" Caption="Plan">
-                </dx:GridViewDataTextColumn>
-                <dx:GridViewDataTextColumn FieldName="codigoPlaneador" VisibleIndex="15" Caption="Glider">
-                </dx:GridViewDataTextColumn>  
-                <dx:GridViewDataTextColumn FieldName="codigoComprador" VisibleIndex="16" Caption="Buyer">
-                </dx:GridViewDataTextColumn>  
-                <dx:GridViewDataTextColumn FieldName="CodigoUM" VisibleIndex="17" Caption="UM">
-                </dx:GridViewDataTextColumn> 
-                <dx:GridViewDataTextColumn FieldName="cantidadOrden" VisibleIndex="18" Caption="Quantity">
-                </dx:GridViewDataTextColumn> 
-                <dx:GridViewDataTextColumn FieldName="stockMinimo" VisibleIndex="19" Caption="Minimum Stock">
-                </dx:GridViewDataTextColumn>
-                <dx:GridViewDataTextColumn FieldName="stockMaximo" VisibleIndex="20" Caption="Maximum Stock">
-                </dx:GridViewDataTextColumn>
-                <dx:GridViewDataTextColumn FieldName="precioUnitario" VisibleIndex="21" Caption="Unit price">
-                </dx:GridViewDataTextColumn> 
-                <dx:GridViewDataTextColumn FieldName="Codigomoneda" VisibleIndex="22" Caption="Coin">
-                </dx:GridViewDataTextColumn>
-                <dx:GridViewDataTextColumn FieldName="diasEntrega" VisibleIndex="23" Caption="Days Delivery">
-                </dx:GridViewDataTextColumn> 
-                <dx:GridViewDataTextColumn FieldName="CodigoMarca" VisibleIndex="25" Caption="Supplier Brand">
-                </dx:GridViewDataTextColumn>    --%>                                                                                                                                                                                                                                                                                                                  
+                </dx:GridViewDataTextColumn>                                                                                                                                                                                                                                                                                                               
             </Columns>
             <SettingsBehavior ConfirmDelete="true"/>
             <SettingsPager Mode="ShowPager" PageSize="13"/>
@@ -380,81 +353,6 @@
                 <Header BackColor="#F2F2F2"></Header>                                              
             </Styles>
             <SettingsBehavior EnableRowHotTrack="true" />                 
-<%--            <Templates>
-                <DetailRow>
-                    <dx:ASPxGridView ID="xgrdCotizacion_2" runat="server" AutoGenerateColumns="False" 
-                        Width="100%" Font-Names="Segoe UI"
-                        KeyFieldName="cotizacionProdID" 
-                        OnDetailRowExpandedChanged="xgrdCotizacion2_DetailRowExpandedChanged"
-                        ClientInstanceName="grid2"
-                        Theme="Metropolis">
-                        <Columns>
-                            <dx:GridViewDataTextColumn FieldName="cotizacionProdID" Visible="false" Caption="Identifier" VisibleIndex="0">
-                            </dx:GridViewDataTextColumn>
-                            <dx:GridViewDataTextColumn FieldName="parteCodigo" VisibleIndex="3" Caption="Prod. Code" Width="7%">
-                            </dx:GridViewDataTextColumn>     
-                            <dx:GridViewDataTextColumn FieldName="parte" VisibleIndex="4" Caption="Product Name" Width="25%">
-                            </dx:GridViewDataTextColumn>    
-                            <dx:GridViewDataTextColumn FieldName="um" VisibleIndex="5" Caption="UM" Width="25%">
-                            </dx:GridViewDataTextColumn>  
-                            <dx:GridViewDataTextColumn FieldName="done" VisibleIndex="6" Caption="Quote Done" Width="15%">
-                            </dx:GridViewDataTextColumn>  
-                        </Columns>
-                        <SettingsBehavior ConfirmDelete="true"/>
-                        <SettingsPager Mode="ShowPager" PageSize="13"/>
-                        <Settings ShowFilterRow="True" />
-                        <SettingsText ConfirmDelete="Are you sure you want to enable/disable this Solicitud"/> 
-                        <SettingsDetail ShowDetailRow="true" />
-                        <Styles>
-                            <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
-                            <RowHotTrack BackColor="#CEECF5"></RowHotTrack>
-                            <Header BackColor="#F2F2F2"></Header>                                              
-                        </Styles>
-                        <SettingsBehavior EnableRowHotTrack="true" />               
-                        <Templates>
-                            <DetailRow>
-                                <dx:ASPxGridView ID="xgrdCotizacion_3" runat="server" AutoGenerateColumns="False" 
-                                    Width="100%" Font-Names="Segoe UI"
-                                    OnHtmlDataCellPrepared="xgrdCotizacion_3_HtmlDataCellPrepared"
-                                    KeyFieldName="cotizacionID" 
-                                    ClientInstanceName="grid2"
-                                    Theme="Metropolis">
-                                    <Columns>
-                                        <dx:GridViewDataTextColumn FieldName="cotizacionID" Visible="false" Caption="Identifier" VisibleIndex="0">
-                                        </dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="ProveedorCodigo" VisibleIndex="1" Caption="Supp. Code" Width="7%">
-                                        </dx:GridViewDataTextColumn>     
-                                        <dx:GridViewDataTextColumn FieldName="proveedor" VisibleIndex="2" Caption="Supplier Name" Width="25%">
-                                        </dx:GridViewDataTextColumn>    
-                                        <dx:GridViewDataTextColumn FieldName="precio_unitario" VisibleIndex="3" Caption="Unit Price" Width="15%">
-                                        </dx:GridViewDataTextColumn>  
-                                        <dx:GridViewDataTextColumn FieldName="entrega" VisibleIndex="4" Caption="Delivery Time" Width="15%">
-                                        </dx:GridViewDataTextColumn>  
-                                        <dx:GridViewDataTextColumn FieldName="fechaCotizacion" VisibleIndex="5" Caption="Quotation Date" Width="10%">
-                                        </dx:GridViewDataTextColumn>  
-                                        <dx:GridViewDataTextColumn FieldName="sstatus" VisibleIndex="6" Caption="Status" Width="15%">
-                                        </dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn Name="sstatus" VisibleIndex="7" >
-                                        </dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn Name="Assigned" Caption="Assigned" VisibleIndex="8" >
-                                        </dx:GridViewDataTextColumn>
-                                    </Columns>
-                                    <SettingsBehavior ConfirmDelete="true"/>
-                                    <SettingsPager Mode="ShowPager" PageSize="13"/>
-                                    <Settings ShowFilterRow="True" />
-                                    <SettingsText ConfirmDelete="Are you sure you want to enable/disable this Solicitud"/> 
-                                    <Styles>
-                                        <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
-                                        <RowHotTrack BackColor="#CEECF5"></RowHotTrack>
-                                        <Header BackColor="#F2F2F2"></Header>                                              
-                                    </Styles>
-                                    <SettingsBehavior EnableRowHotTrack="true" />                               
-                                </dx:ASPxGridView>                     
-                            </DetailRow>
-                        </Templates>                
-                    </dx:ASPxGridView> 
-                </DetailRow>
-            </Templates>                --%>
         </dx:ASPxGridView>
     </div>
 </asp:Content>

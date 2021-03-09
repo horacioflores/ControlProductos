@@ -153,6 +153,9 @@
                 //alert(s.cpAlertMessage);
             }
         }
+        function redirect(value) {
+            document.getElementById("MainContent_hdnRedirect").value = value;
+        }
     </script>
     <style>
         .Campos {
@@ -282,7 +285,7 @@
         </dx:ASPxNavBar>
     </div>
     <div id="Detalle" runat="server">
-
+        <input type="hidden" runat="server" id="hdnRedirect" />
         <dx:ASPxGridView ID="xgrdProds" runat="server" AutoGenerateColumns="False" 
             Width="100%" Font-Names="Segoe UI"
             KeyFieldName="ctrlProdsID" 
@@ -298,7 +301,7 @@
                 </dx:GridViewDataTextColumn>
                 <dx:GridViewDataColumn FieldName="ctrlProdsID" VisibleIndex="2"  Caption="Actions" CellStyle-HorizontalAlign="Left">
                       <DataItemTemplate>
-                          <asp:ImageButton ID="imgEditar" runat="server" ImageUrl="~/Assets/images/layout_edit.png"  OnClick="imgEditar_Click" CommandArgument='<%# Eval("ctrlProdsID") %>' />
+                          <asp:ImageButton ID="imgEditar" runat="server" ImageUrl="~/Assets/images/layout_edit.png" OnClientClick='<%# string.Format("redirect(\"{0}\"); return true;", Eval("ctrlProdsID")) %>'  OnClick="imgEditar_Click" CommandArgument='<%# Eval("ctrlProdsID") %>' />
                       </DataItemTemplate>
                 </dx:GridViewDataColumn>
                 <dx:GridViewDataTextColumn FieldName="noDocumento" VisibleIndex="3" Caption="Document Number">
