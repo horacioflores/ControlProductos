@@ -637,9 +637,11 @@ namespace ControlProductos
             limpiarModalAprnes();
             int ctrlProdsID = Convert.ToInt32(Session["ctrlProdsID"]);
             var BctrlProd = new ControlProductosda();
-            List<Entity.ControlProductos> oList = BctrlProd.GetCtrlProducto(ctrlProdsID.ToString());
+
             if (ctrlProdsID > 0)
-            {
+            {                
+                List<Entity.ControlProductos> oList = BctrlProd.GetCtrlProducto(ctrlProdsID.ToString());
+
                 foreach (Entity.ControlProductos ctrlP in oList)
                 {
                     if (ctrlProdsID == ctrlP.ctrlProdsID)
@@ -1276,8 +1278,6 @@ namespace ControlProductos
                 btnAsignAutor.Visible = false;
 
                 tiposArticulo = new List<_tipoArticulo>();
-                //mttos = new List<Mtto_Almn>();
-                //almnes = new List<Mtto_Almn>();
 
 
                 foreach (TipoArticulo TipoArt in lTipoArt)
@@ -1308,21 +1308,8 @@ namespace ControlProductos
                     n.notas = mtto.notas;
                     n.clasificacion = mtto.clasificacion;
                     n.responsable = mtto.responsable;
-                    n.tipo = mtto.tipo;
-                    //if(mtto.tipo == "M")
-                    //{
-                    //    mttos.Add(n);
-                    //}
-                    //else
-                    //{
-                    //    almnes.Add(n);
-                    //}
+                    n.tipo = mtto.tipo;                   
                 }
-                //xgrdMtto.DataSource = mttos;
-                //xgrdMtto.DataBind();
-                //xgrdAlmacen.DataSource = almnes;
-                //xgrdAlmacen.DataBind();
-
 
                 txtDescripcion1.Text = "";
                 txtDescripcion2.Text = "";
@@ -1336,10 +1323,6 @@ namespace ControlProductos
 
                 txtPrecioU.Text = "0";
                 txtDiasEntrega.Text = "0";
-
-                //lblTotal.Text = "0";
-
-                //rbFichaSi.Checked = true;
 
                 ListEditItem oItmCC = cmbConteoCiclico.Items[0];
                 if (oItmCC != null)
@@ -1403,6 +1386,12 @@ namespace ControlProductos
                 rbReparaNo.Checked = true;
                 txtMultiplo.Text = "0";
                 txtTotal.Text = "0";
+
+                disabledComprador();
+                disabledPlaneador();
+                disabledAlmacen();
+                disabledMtoo();
+                disabledDM();
 
                 //productos = new List<cotizacion_prod>();
                 //proveedores = new List<cotizacion_proveedor>();
@@ -3557,93 +3546,104 @@ namespace ControlProductos
 
         public void disabledAutor()
         {
-            cmbProducto.Attributes.Add("disabled", "");
-            cmbCualArticulo.Attributes.Add("disabled", "");
-            txtdescripcion.Attributes.Add("disabled", "");
-            cmbMarca.Attributes.Add("disabled", "");
+           
+            txtdescripcion.Attributes.Add("disabled", "");          
             txtModelo.Attributes.Add("disabled", "");
             addArchAd.Attributes.Add("disabled", "");
             delArchAd.Attributes.Add("disabled", "");
-            delAllArchAd.Attributes.Add("disabled", "");
-            cmbDepa.Attributes.Add("disabled", "");
-            cmbSubcuenta.Attributes.Add("disabled", "");
-            cmbMaquina.Attributes.Add("disabled", "");
-            txtfuncionMaquina.Attributes.Add("disabled", "");
-            cmbActFijo.Attributes.Add("disabled", "");
+            delAllArchAd.Attributes.Add("disabled", "");            
+            txtfuncionMaquina.Attributes.Add("disabled", "");           
             xgrdTipoArticulo.Attributes.Add("disabled", "");
-            txtConsEstimado.Attributes.Add("disabled", "");
-            cmbUM.Attributes.Add("disabled", "");
+            txtConsEstimado.Attributes.Add("disabled", "");            
             txtCantMinima.Attributes.Add("disabled", "");
-            xDateFechaReq.Attributes.Add("disabled", "");
-            cmbOQ.Attributes.Add("disabled", "");
+            xDateFechaReq.Attributes.Add("disabled", "");            
             txtcomoAyudarStockCero.Attributes.Add("disabled", "");
-            txtPrecio.Attributes.Add("disabled", "");
-            cmbMoneda.Attributes.Add("disabled", "");
-            cmbProveedor.Attributes.Add("disabled", "");
-            cmbPlan.Attributes.Add("disabled", "");
+            txtPrecio.Attributes.Add("disabled", "");            
             txtContrato.Attributes.Add("disabled", "");
             rbReparaSi.Attributes.Add("disabled", "");
             rbReparaNo.Attributes.Add("disabled", "");
             addArchAd.Visible = false;
             delArchAd.Visible = false;
             delAllArchAd.Visible = false;
+
+            cmbMoneda.ClientEnabled = false;
+            cmbProveedor.ClientEnabled = false;
+            cmbPlan.ClientEnabled = false;
+            cmbOQ.ClientEnabled = false;
+            cmbUM.ClientEnabled = false;
+            cmbActFijo.ClientEnabled = false;
+            cmbDepa.ClientEnabled = false;
+            cmbSubcuenta.ClientEnabled = false;
+            cmbMaquina.ClientEnabled = false;
+            cmbProducto.ClientEnabled = false;
+            cmbCualArticulo.ClientEnabled = false;
+            cmbMarca.ClientEnabled = false;
+            cmbMarca.ClientEnabled = false;
+            cmbSubCat1.ClientEnabled = false;
+            cmbSubCat2.ClientEnabled = false;
+            cmbSubCat3.ClientEnabled = false;
+
         }
 
         public void disabledComprador()
         {
             txtDescripcion1.Attributes.Add("disabled", "");
             txtDescripcion2.Attributes.Add("disabled", "");
-            txtDescripcionLarga.Attributes.Add("disabled", "");
-            cmbGlClass.Attributes.Add("Enabled", "false");
+            txtDescripcionLarga.Attributes.Add("disabled", "");    
             disabledComp = false;
-            txtTextBusq.Attributes.Add("disabled", "");
-            cmbProveedorComp.Attributes.Add("disabled", "");
-            cmbPaisOrigen.Attributes.Add("disabled", "");
-            txtPrecioU.Attributes.Add("disabled", "");
-            cmbMonedaComprador.Attributes.Add("disabled", "");
-            txtMultiplo.Attributes.Add("disabled", "");
-            cmbCodigoUM.Attributes.Add("disabled", "");
-            cmbComprador.Attributes.Add("disabled", "");
+            txtTextBusq.Attributes.Add("disabled", "");    
+            txtPrecioU.Attributes.Add("disabled", "");           
+            txtMultiplo.Attributes.Add("disabled", "");            
             txtDiasEntrega.Attributes.Add("disabled", "");
-            cmbMtdoCosteInv.Attributes.Add("disabled", "");
-            cmbMtdoCostePursh.Attributes.Add("disabled", "");
-            cmbTipoEmaque.Attributes.Add("disabled", "");
-            txtPiezaEmp.Attributes.Add("disabled", "");
-            cmbUmEmpaque.Attributes.Add("disabled", "");
+            txtPiezaEmp.Attributes.Add("disabled", "");           
             txtAlto.Attributes.Add("disabled", "");
             txtAncho.Attributes.Add("disabled", "");
             txtLargo.Attributes.Add("disabled", "");
-            cmbPursh1.Attributes.Add("disabled", "");
-            cmbPursh2.Attributes.Add("disabled", "");
-            cmbfamilia.Attributes.Add("disabled", "");
+
+            cmbGlClass.ClientEnabled = false;
+            cmbProveedorComp.ClientEnabled = false;
+            cmbPaisOrigen.ClientEnabled = false;
+            cmbMonedaComprador.ClientEnabled = false;
+            cmbCodigoUM.ClientEnabled = false;
+            cmbComprador.ClientEnabled = false;
+            cmbMtdoCosteInv.ClientEnabled = false;
+            cmbMtdoCostePursh.ClientEnabled = false;
+            cmbTipoEmaque.ClientEnabled = false;
+            cmbUmEmpaque.ClientEnabled = false;
+            cmbPursh1.ClientEnabled = false;
+            cmbPursh2.ClientEnabled = false;
+            cmbfamilia.ClientEnabled = false;
 
         }
 
         public void disabledPlaneador()
-        {
-            cmbbranch.Attributes.Add("disabled", "");
+        {            
             txtStockMin.Attributes.Add("disabled", "");
             txtStockMax.Attributes.Add("disabled", "");
-            cmbDias.Attributes.Add("disabled", "");
-            cmbPlaneador.Attributes.Add("disabled", "");
-            cmbConteoCiclico.Attributes.Add("disabled", "");
+
+            cmbbranch.ClientEnabled = false;
+            cmbDias.ClientEnabled = false;
+            cmbPlaneador.ClientEnabled = false;
+            cmbConteoCiclico.ClientEnabled = false;
         }
 
         public void disabledAlmacen()
-        {
-            cmbUbicacionPrim.Attributes.Add("disabled", "");
-            cmbUbicacionSec.Attributes.Add("disabled", "");
-            cmbUMAlmacen.Attributes.Add("disabled", "");
+        {          
             txtAltoAlm.Attributes.Add("disabled", "");
             txtAnchoAlm.Attributes.Add("disabled", "");
             txtLargoAlm.Attributes.Add("disabled", "");
+
+            cmbUbicacionPrim.ClientEnabled = false;
+            cmbUbicacionSec.ClientEnabled = false;
+            cmbUMAlmacen.ClientEnabled = false;
         }
 
         public void disabledMtoo()
         {
             txtCantidad.Attributes.Add("disabled", "");
             txtTotal.Attributes.Add("disabled", "");
-            cmbMonedaMtoo.Attributes.Add("disabled", "");
+
+            cmbMonedaMtoo.ClientEnabled = false;
         }
 
         public void disabledDM()

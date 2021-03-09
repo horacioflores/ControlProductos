@@ -1114,7 +1114,7 @@
                                 </div>
                                 <label id="lblProd" runat="server" class="text-form col-sm-2">Selecciona Producto</label>
                                 <div class="col-sm-4">
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbProducto" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbProducto" ClientInstanceName="cmbProducto" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1134,7 +1134,7 @@
                                 </div>
                                 <label id="lblcual" runat="server" class="text-form col-sm-2">Cuál artículo</label>
                                 <div class="col-sm-4">
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbCualArticulo" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbCualArticulo" ClientInstanceName="cmbCualArticulo" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1156,7 +1156,7 @@
                                 <label class="text-form col-sm-2">Marca</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnCodigoMarca" value='<%# Eval("CodigoMarca")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMarca" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMarca" ClientInstanceName="cmbMarca" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1213,7 +1213,7 @@
                                                 <div class="row">
                                                     <label class="text-form col-sm-3">Tipo Documento</label>
                                                     <div class="col-sm-5">
-                                                        <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbTipoDoc" runat="server" IncrementalFilteringMode="Contains" 
+                                                        <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbTipoDoc" ClientInstanceName="cmbTipoDoc" runat="server" IncrementalFilteringMode="Contains" 
                                                             FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
                                                             PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                                             <ValidationSettings>
@@ -1320,7 +1320,7 @@
                                 <label class="text-form col-sm-2">Departamento</label>
                                 <div class="col-sm-4">
                                         <input type="hidden" id="hdnCodigoDepto" value='<%# Eval("CodigoDepto")%>' runat="server"/>
-                                        <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbDepa" runat="server" IncrementalFilteringMode="Contains" 
+                                        <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbDepa" ClientInstanceName="cmbDepa" runat="server" IncrementalFilteringMode="Contains" 
                                             FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                             PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                             <ValidationSettings>
@@ -1333,7 +1333,7 @@
                                 <label class="text-form col-sm-2">Subcuenta</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnSubcuenta" value='<%# Eval("subcuenta")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbSubcuenta" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbSubcuenta" ClientInstanceName ="cmbSubcuenta" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1348,7 +1348,7 @@
                                 <label class="text-form col-sm-2">Equipos donde se utiliza (Máquina)</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnCodigoMaquina" value='<%# Eval("CodigoMaquina")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMaquina" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMaquina" ClientInstanceName="cmbMaquina" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1367,7 +1367,7 @@
                                 <label class="text-form col-sm-2">Número de Activo fijo</label>
                                 <div class="col-sm-10">
                                     <input type="hidden" id="hdnActFijo" value='<%# Eval("codActFijo")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbActFijo" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbActFijo" ClientInstanceName="cmbActFijo" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1382,7 +1382,7 @@
                                 <label class="text-form col-sm-1">Subcategoría 1</label>
                                 <div class="col-sm-3">
                                     <input type="hidden" id="hdnCodigoSubCat1" value='<%# Eval("CodigoSubcategoria1")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos Campos6Cols" ID="cmbSubCat1" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos Campos6Cols" ID="cmbSubCat1" ClientInstanceName="cmbSubCat1" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1395,7 +1395,7 @@
                                 <label class="text-form col-sm-1">Subcategoría 2</label>
                                 <div class="col-sm-3">
                                     <input type="hidden" id="hdnCodigoSubCat2" value='<%# Eval("CodigoSubcategoria2")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos Campos6Cols" ID="cmbSubCat2" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos Campos6Cols" ID="cmbSubCat2" ClientInstanceName="cmbSubCat2" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1408,7 +1408,7 @@
                                 <label class="text-form col-sm-1">Subcategoría 3</label>
                                 <div class="col-sm-3">
                                     <input type="hidden" id="hdnCodigoSubCat3" value='<%# Eval("CodigoSubcategoria3")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos Campos6Cols" ID="cmbSubCat3" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos Campos6Cols" ID="cmbSubCat3" ClientInstanceName="cmbSubCat3" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1522,7 +1522,7 @@
                                 <label class="text-form col-sm-2">Unidad de medida</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnUM" value='<%# Eval("unidadMedida")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbUM" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbUM" ClientInstanceName="cmbUM" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1552,7 +1552,7 @@
                                 <label class="text-form col-sm-2">Número de OQ/Solicitud de Cotización</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnOQ" value='<%# Eval("numOQ")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbOQ" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbOQ" ClientInstanceName="cmbOQ" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1575,7 +1575,7 @@
                                 <label class="text-form col-sm-2">Moneda</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnCodigomoneda" value='<%# Eval("Codigomoneda")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMoneda" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMoneda" ClientInstanceName="cmbMoneda" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Width="100%" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1590,7 +1590,7 @@
                                 <label class="text-form col-sm-2">Proveedor Sugerido</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnCodigoProveedor" value='<%# Eval("CodigoProveedor")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbProveedor" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbProveedor" ClientInstanceName="cmbProveedor" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1603,7 +1603,7 @@
                                 <label class="text-form col-sm-2">Estatus del contrato (No. plan)</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hfnCodigoPlan" value='<%# Eval("CodigoPlan")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPlan" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPlan" ClientInstanceName="cmbPlan" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1657,7 +1657,7 @@
                                 <label class="text-form col-sm-2">GL Class</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnGLClass" value='<%# Eval("GlClass")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbGlClass" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbGlClass" ClientInstanceName="cmbGlClass" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" Enabled="<%# disabledComp %>" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1676,7 +1676,7 @@
                                 <label class="text-form col-sm-2">Proveedor</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnCodProvComp" value='<%# Eval("CodigoProveedor_comp")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbProveedorComp" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbProveedorComp" ClientInstanceName="cmbProveedorComp" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1689,7 +1689,7 @@
                                 <label class="text-form col-sm-2">País de origen proveedor</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnPaisOrigen" value='<%# Eval("PaisOrigen")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPaisOrigen" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPaisOrigen" ClientInstanceName="cmbPaisOrigen" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1708,7 +1708,7 @@
                                 <label class="text-form col-sm-2">Moneda</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnCodigomonedaComprador" value='<%# Eval("Codigomoneda")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMonedaComprador" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMonedaComprador" ClientInstanceName="cmbMonedaComprador" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1727,7 +1727,7 @@
                                 <label class="text-form col-sm-2">Unidad de Medida</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnCodigoUM" value='<%# Eval("CodigoUM")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbCodigoUM" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbCodigoUM" ClientInstanceName="cmbCodigoUM" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1742,7 +1742,7 @@
                                 <label class="text-form col-sm-2">Comprador</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnComprador" value='<%# Eval("codigoComprador")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbComprador" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbComprador" ClientInstanceName="cmbComprador" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1761,7 +1761,7 @@
                                 <label class="text-form col-sm-2">Método de Coste Sales/Inventory</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnMtdoCosteInv" value='<%# Eval("MTDOCoste_Inv")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMtdoCosteInv" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMtdoCosteInv" ClientInstanceName="cmbMtdoCosteInv" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1774,7 +1774,7 @@
                                 <label class="text-form col-sm-2">Método de Coste Sales/Purchasing</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnMtdoCostePursh" value='<%# Eval("MTDOCoste_Pursh")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMtdoCostePursh" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMtdoCostePursh" ClientInstanceName="cmbMtdoCostePursh" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1791,7 +1791,7 @@
                                     <label class="text-form col-sm-1">Tipo de Empaque</label>
                                     <div class="col-sm-3">
                                     <input type="hidden" id="hdnTipoEmpaque" value='<%# Eval("codigo_tipoEmpaque")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbTipoEmaque" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbTipoEmaque" ClientInstanceName="cmbTipoEmaque" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1808,7 +1808,7 @@
                                     <label class="text-form col-sm-1">Unidad de Medida</label>
                                     <div class="col-sm-3">
                                         <input type="hidden" id="hdnUMEmpq" value='<%# Eval("UMEmpaque")%>' runat="server"/>
-                                        <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbUmEmpaque" runat="server" IncrementalFilteringMode="Contains" 
+                                        <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbUmEmpaque" ClientInstanceName="cmbUmEmpaque" runat="server" IncrementalFilteringMode="Contains" 
                                             FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                             PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                             <ValidationSettings>
@@ -1839,7 +1839,7 @@
                                 <label class="text-form col-sm-2">Purch 1/Categoría</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnPursh1" value='<%# Eval("pursh1")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPursh1" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPursh1" ClientInstanceName="cmbPursh1" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1852,7 +1852,7 @@
                                 <label class="text-form col-sm-2">Purch 2/Categoría</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnPursh2" value='<%# Eval("pursh2")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPursh2" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPursh2" ClientInstanceName="cmbPursh2" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1867,7 +1867,7 @@
                                 <label class="text-form col-sm-2">Familia</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnFamilia" value='<%# Eval("codigoFamilia")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbfamilia" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbfamilia" ClientInstanceName="cmbfamilia" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1895,7 +1895,7 @@
                                 <div class="col-sm-4">
 
                                     <input type="hidden" id="hdnbranch" value='<%# Eval("branch")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbbranch" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbbranch" ClientInstanceName="cmbbranch" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1920,7 +1920,7 @@
                                 <div class="col-sm-4">
                                     
                                     <input type="hidden" id="hndDias" value='<%# Eval("diasStok")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbDias" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbDias" ClientInstanceName="cmbDias" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1937,7 +1937,7 @@
                                 <label class="text-form col-sm-2">Planeador</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnPlaneador" value='<%# Eval("codigoPlaneador")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPlaneador" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPlaneador" ClientInstanceName="cmbPlaneador" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1949,7 +1949,7 @@
                                 </div>
                                 <label class="text-form col-sm-2">Categoría de Conteo Cíclico</label>
                                 <div class="col-sm-4">
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbConteoCiclico" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbConteoCiclico" ClientInstanceName="cmbConteoCiclico" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1978,7 +1978,7 @@
                                     <label class="text-form col-sm-1">Ubicación Primaria</label>
                                     <div class="col-sm-3">
                                         <input type="hidden" id="hndubicacionPrim" value='<%# Eval("ubicacionPrim")%>' runat="server"/>
-                                        <dx:ASPxComboBox class="form-control input-sm Campos Campos6Cols" ID="cmbUbicacionPrim" runat="server" IncrementalFilteringMode="Contains" 
+                                        <dx:ASPxComboBox class="form-control input-sm Campos Campos6Cols" ID="cmbUbicacionPrim" ClientInstanceName="cmbUbicacionPrim" runat="server" IncrementalFilteringMode="Contains" 
                                             FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                             PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                             <ValidationSettings>
@@ -1991,7 +1991,7 @@
                                     <label class="text-form col-sm-1">Ubicación Secundaria</label>
                                     <div class="col-sm-3">
                                         <input type="hidden" id="hndubicacionSec" value='<%# Eval("ubicacionSec")%>' runat="server"/>
-                                        <dx:ASPxComboBox class="form-control input-sm Campos Campos6Cols" ID="cmbUbicacionSec" runat="server" IncrementalFilteringMode="Contains" 
+                                        <dx:ASPxComboBox class="form-control input-sm Campos Campos6Cols" ID="cmbUbicacionSec" ClientInstanceName="cmbUbicacionSec" runat="server" IncrementalFilteringMode="Contains" 
                                             FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                             PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                             <ValidationSettings>
@@ -2004,7 +2004,7 @@
                                     <label class="text-form col-sm-1">Unidad de Medida</label>
                                     <div class="col-sm-3">
                                         <input type="hidden" id="hdnumAlmacen" value='<%# Eval("umAlmacen")%>' runat="server"/>
-                                        <dx:ASPxComboBox class="form-control input-sm Campos Campos6Cols" ID="cmbUMAlmacen" runat="server" IncrementalFilteringMode="Contains" 
+                                        <dx:ASPxComboBox class="form-control input-sm Campos Campos6Cols" ID="cmbUMAlmacen"  ClientInstanceName="cmbUMAlmacen" runat="server" IncrementalFilteringMode="Contains" 
                                             FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Width="100%" Paddings-Padding="0px" Theme="Aqua"  
                                             PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                             <ValidationSettings>
@@ -2054,7 +2054,7 @@
                                 <label class="text-form col-sm-1">Moneda</label>
                                 <div class="col-sm-3">
                                     <input type="hidden" id="hdnMoneda" value='<%# Eval("monedaMtto")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos Campos6Cols" ID="cmbMonedaMtoo" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox class="form-control input-sm Campos Campos6Cols" ID="cmbMonedaMtoo" ClientInstanceName="cmbMonedaMtoo" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
