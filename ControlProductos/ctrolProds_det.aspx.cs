@@ -402,6 +402,8 @@ namespace ControlProductos
             //ApplyLayoutMtto();
             //ApplyLayoutAlmnes();
 
+            txtCantidad.Attributes.Add("disabled", "");
+
             if (!IsPostBack)
             {
                 if (cmbSubcuenta.Items.Count > 0)
@@ -687,8 +689,9 @@ namespace ControlProductos
                                 }
                                 btnEnviarSolicitante.Visible = true;
                                 btnRechazar.Visible = false;
-                                btnEnviarSolicitante.Src = "Assets/images/BtnEnviarProveedor.png";
-                                ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-edit' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Pendiente por el autor para terminar la captura</span>";
+                                // btnEnviarSolicitante.Src = "Assets/images/BtnEnviarProveedor.png";
+                                btnEnviarSolicitante.Style["background-image"] = "Assets/images/BtnEnviarProveedor.png";
+                                 ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-edit' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Pendiente por el autor para terminar la captura</span>";
                                 break;
                             case "En Aprobación por ":
                                 string perfil = "";
@@ -2597,7 +2600,8 @@ namespace ControlProductos
                                             btnAsignAutor.Visible = true;
                                             btnEnviarSolicitante.Visible = true;
                                             btnRechazar.Visible = false;
-                                            btnEnviarSolicitante.Src = "Assets/images/BtnEnviarProveedor.png";
+                                            //     btnEnviarSolicitante.Src = "Assets/images/BtnEnviarProveedor.png";
+                                            btnEnviarSolicitante.Style["background-image"] = "Assets/images/BtnEnviarProveedor.png";
                                             ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-edit' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Pendiente por el autor para terminar la captura</span>";
                                             break;
                                         case "En Aprobación por ":
@@ -2943,7 +2947,8 @@ namespace ControlProductos
                                             btnAsignAutor.Visible = true;
                                             btnEnviarSolicitante.Visible = true;
                                             btnRechazar.Visible = false;
-                                            btnEnviarSolicitante.Src = "Assets/images/BtnEnviarProveedor.png";
+                                            //  btnEnviarSolicitante.Src = "Assets/images/BtnEnviarProveedor.png";
+                                            btnEnviarSolicitante.Style["background-image"] = "Assets/images/BtnEnviarProveedor.png";
                                             ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-edit' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Pendiente por el autor para terminar la captura</span>";
                                             break;
                                         case "En Aprobación por ":
@@ -3651,7 +3656,6 @@ namespace ControlProductos
 
         public void disabledMtoo()
         {
-            txtCantidad.Attributes.Add("disabled", "");
             txtTotal.Attributes.Add("disabled", "");
 
             cmbMonedaMtoo.ClientEnabled = false;
