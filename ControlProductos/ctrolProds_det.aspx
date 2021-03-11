@@ -1177,6 +1177,7 @@
                                 <img id="addArchAd" runat="server" src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('archivos');" />
                                 <img id="delArchAd" runat="server"  class="img" src="Assets/Images/trash_can.png" alt="Remove Selected" style="cursor: pointer" onclick="return DisableSelectedArchivo();" />
                                 <img id="delAllArchAd" runat="server" class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdArchivos.PerformCallback('Delete');" />
+                                
                                 <dx:ASPxGridView ID="xgrdArchivos" runat="server" AutoGenerateColumns="true"
                                     Width="100%" Font-Names="Segoe UI"
                                     OnCustomCallback="xgrdArchivos_CustomCallback"
@@ -1188,9 +1189,14 @@
                                         <dx:GridViewDataTextColumn FieldName="TipoDocumento" Caption="Tipo" VisibleIndex="1" Width="33%">
                                         </dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="descripcion" Caption="Descripción" VisibleIndex="2" Width="34%">
-                                        </dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="archivo" Caption="Archivo" VisibleIndex="3" Width="33%">
-                                        </dx:GridViewDataTextColumn>
+                                        </dx:GridViewDataTextColumn>          
+                                         <dx:GridViewDataTextColumn FieldName="archivo" Caption="Archivo" VisibleIndex="3" Width="33%">
+                                        </dx:GridViewDataTextColumn>                              
+                                         <dx:GridViewDataColumn FieldName="ctrlPArchivosID" VisibleIndex="4"  Caption="Actions" CellStyle-HorizontalAlign="Left">
+                                          <DataItemTemplate>
+                                              <asp:ImageButton ID="imgEditar" runat="server" ImageUrl="~/Assets/images/layout_edit.png" OnClientClick='<%# string.Format("redirect(\"{0}\"); return true;", Eval("ctrlPArchivosID")) %>'  OnClick="imgEditar_Click" CommandArgument='<%# Eval("archivo") %>' />
+                                          </DataItemTemplate>
+                                    </dx:GridViewDataColumn>
                                     </Columns>
                                     <Styles>
                                         <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>

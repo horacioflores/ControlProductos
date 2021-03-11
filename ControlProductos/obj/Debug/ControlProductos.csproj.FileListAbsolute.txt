@@ -44,27 +44,6 @@ D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bi
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CodeAnalysis.dll
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\System.Reflection.Metadata.dll
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\VBCSCompiler.exe
-C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\csc.exe
-C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CodeAnalysis.dll
-C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CSharp.Core.targets
-C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.VisualBasic.Core.targets
-C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\System.Collections.Immutable.dll
-C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\System.Reflection.Metadata.dll
-C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\vbc.exe
-C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\VBCSCompiler.exe
-C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\VBCSCompiler.exe.config
-C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\ControlProductos.dll.config
-C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\ControlProductos.dll
-C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\ControlProductos.pdb
-C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll.licenses
-C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll
-C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.pdb
-C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.csprojResolveAssemblyReference.cache
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\csc.exe
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
@@ -82,3 +61,41 @@ D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\ob
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll.licenses
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.pdb
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\csc.exe
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\vbc.exe
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\VBCSCompiler.exe
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\ControlProductos.dll.config
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\ControlProductos.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\ControlProductos.pdb
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\DevExpress.XtraReports.v15.2.Web.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\DevExpress.XtraReports.v15.2.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\DevExpress.XtraGauges.v15.2.Core.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\DevExpress.XtraReports.v15.2.Web.xml
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\DevExpress.XtraReports.v15.2.xml
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\DevExpress.XtraGauges.v15.2.Core.xml
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\de\DevExpress.XtraReports.v15.2.Web.resources.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\es\DevExpress.XtraReports.v15.2.Web.resources.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\ja\DevExpress.XtraReports.v15.2.Web.resources.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\ru\DevExpress.XtraReports.v15.2.Web.resources.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\de\DevExpress.XtraReports.v15.2.resources.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\es\DevExpress.XtraReports.v15.2.resources.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\ja\DevExpress.XtraReports.v15.2.resources.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\ru\DevExpress.XtraReports.v15.2.resources.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\de\DevExpress.XtraGauges.v15.2.Core.resources.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\es\DevExpress.XtraGauges.v15.2.Core.resources.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\ja\DevExpress.XtraGauges.v15.2.Core.resources.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\bin\ru\DevExpress.XtraGauges.v15.2.Core.resources.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll.licenses
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.pdb

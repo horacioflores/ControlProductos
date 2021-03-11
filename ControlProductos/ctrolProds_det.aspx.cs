@@ -2261,7 +2261,18 @@ namespace ControlProductos
 
                 e.Cell.Text = string.Format("<input type='checkbox' class='chkArchivo' id='chk{0}'>", id);
             }
+            
         }
+
+        protected void imgEditar_Click(object sender, ImageClickEventArgs e)
+        {
+            ImageButton imgEditar = (ImageButton)sender;
+            var valor = imgEditar.CommandArgument;
+            var ok = string.Empty;            
+        }
+
+
+
 
         protected void xgrdAprobaciones_CustomCallback(object sender, ASPxGridViewCustomCallbackEventArgs e)
         {
