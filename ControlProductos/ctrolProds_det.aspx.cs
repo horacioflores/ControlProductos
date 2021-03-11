@@ -2264,8 +2264,20 @@ namespace ControlProductos
 
                 e.Cell.Text = string.Format("<input type='checkbox' class='chkArchivo' id='chk{0}'>", id);
             }
-            
-        }
+
+            if (e.DataColumn.Name == "Nombre_Archivo_Img")
+            {
+                if (e.GetValue("archivo").ToString() != "")
+                {
+                    var archivo = e.GetValue("archivo").ToString();                  
+
+                    string sHTML = "";
+                    sHTML += string.Format("<a href='{0}' target='_blank'> <img title='Download file' src='Assets/images/layout_edit.png'></a>", "ShowFiles.aspx?codeFile=" + archivo);
+
+                    e.Cell.Text = sHTML;
+                }
+            }
+    }
 
         protected void imgEditar_Click(object sender, ImageClickEventArgs e)
         {

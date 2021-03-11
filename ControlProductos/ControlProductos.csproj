@@ -184,6 +184,7 @@
     <Content Include="ctrolProds_ProductosVigentes.aspx" />
     <Content Include="ctrolProds_MisPendientes.aspx" />
     <Content Include="ctrolProds_MisSolicitudes.aspx" />
+    <Content Include="ShowFiles.aspx" />
     <Content Include="SmartFormas.css" />
     <Content Include="SmartFormas.js" />
     <Content Include="CatBrands.aspx" />
@@ -3831,6 +3832,13 @@
       <DependentUpon>Principal.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShowFiles.aspx.cs">
+      <DependentUpon>ShowFiles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowFiles.aspx.designer.cs">
+      <DependentUpon>ShowFiles.aspx</DependentUpon>
+    </Compile>
     <Compile Include="utilities\Encryption.cs" />
     <Compile Include="utilities\Utility.cs" />
     <Compile Include="wellcome.aspx.cs">

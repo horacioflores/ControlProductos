@@ -1185,12 +1185,18 @@
                                         <dx:GridViewDataTextColumn FieldName="descripcion" Caption="Descripción" VisibleIndex="2" Width="34%">
                                         </dx:GridViewDataTextColumn>          
                                          <dx:GridViewDataTextColumn FieldName="archivo" Caption="Archivo" VisibleIndex="3" Width="33%">
-                                        </dx:GridViewDataTextColumn>                              
-                                         <dx:GridViewDataColumn FieldName="ctrlPArchivosID" VisibleIndex="4"  Caption="Actions" CellStyle-HorizontalAlign="Left">
-                                          <DataItemTemplate>
-                                              <asp:ImageButton ID="imgEditar" runat="server" ImageUrl="~/Assets/images/layout_edit.png" OnClientClick='<%# string.Format("redirect(\"{0}\"); return true;", Eval("ctrlPArchivosID")) %>'  OnClick="imgEditar_Click" CommandArgument='<%# Eval("archivo") %>' />
-                                          </DataItemTemplate>
-                                    </dx:GridViewDataColumn>
+                                        </dx:GridViewDataTextColumn>           
+                                        <dx:GridViewDataTextColumn FieldName="noDocumento" Visible="false" Caption="noDocumento" VisibleIndex="3" Width="33%">
+                                        </dx:GridViewDataTextColumn> 
+                                        <dx:GridViewDataTextColumn FieldName="archivo" Caption="Visualizar" VisibleIndex="4" Width="30%">
+                                           <DataItemTemplate>
+                                               <a id="clickElement" target="_blank" href='Upload/<%# Eval("archivo").ToString() %>'><%# Eval("archivo").ToString()%></a>
+                                           </DataItemTemplate>
+                                       </dx:GridViewDataTextColumn>
+                                           
+                                        <dx:GridViewDataBinaryImageColumn name="Nombre_Archivo_Img" Caption="Descargar" VisibleIndex="9" Width="5%" CellStyle-HorizontalAlign="Center">
+                                            <PropertiesBinaryImage DisplayFormatString="{0}"/>
+                                        </dx:GridViewDataBinaryImageColumn>     
                                     </Columns>
                                     <Styles>
                                         <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
