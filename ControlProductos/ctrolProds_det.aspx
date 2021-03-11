@@ -1,24 +1,23 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Principal.Master" EnableEventValidation="false" AutoEventWireup="true" CodeBehind="ctrolProds_det.aspx.cs" Inherits="ControlProductos.ctrolProds_det" %>
 <%@ Register Assembly="DevExpress.Web.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server" Visible="false">
-    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">--%>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>--%>
+<%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">--%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>--%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <!--Formateo de tablas-->
-    <link href="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.css" rel="stylesheet">
-    <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.js"></script>
-    <!--Tabla resize, borrar si no se necesita-->
-    <script src="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.min.js"></script>
-    <link href="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.css" rel="stylesheet">
-    <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/extensions/resizable/bootstrap-table-resizable.min.js"></script>
-        <!-- jQuery  -->
-        <script src="Assets/plugins/sweetalert/dist/sweetalert.min.js"></script>
-        <script src="Assets/pages/jquery.sweet-alert.init.js"></script> <!--prueba github-->
-    <script type="text/jscript">
-
-        function HabilitaCambio() {
+<!--Formateo de tablas-->
+<link href="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.css" rel="stylesheet">
+<script src="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.js"></script>
+<!--Tabla resize, borrar si no se necesita-->
+<script src="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.min.js"></script>
+<link href="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.css" rel="stylesheet">
+<script src="https://unpkg.com/bootstrap-table@1.18.0/dist/extensions/resizable/bootstrap-table-resizable.min.js"></script>
+<!-- jQuery  -->
+<script src="Assets/plugins/sweetalert/dist/sweetalert.min.js"></script>
+<script src="Assets/pages/jquery.sweet-alert.init.js"></script> <!--prueba github-->
+<script type="text/jscript">
+       function HabilitaCambio() {
             var btn = document.getElementById("BtnUploadFile");
             var srcdesc = btn.src;
             var expresionRegular = "/";
@@ -168,7 +167,6 @@
        }
 
        function DisableSelectedMtto() {
-
            var Valores = "";
            $(".chkMtto").each(function () {
                if (this.checked) {
@@ -282,7 +280,6 @@
        }
 
        function DisableSelectedAlmacen() {
-
            var Valores = "";
            $(".chkAlmn").each(function () {
                if (this.checked) {
@@ -324,14 +321,12 @@
            s.cpAlertMessage = "";
        }
 
-
        function selAprob(perfil, empleado) {
            var valores = perfil + "," + empleado;
            xgrdAprobaciones.PerformCallback(valores);
        }
 
        function DisableSelectedAprobacion() {
-
            var Valores = "";
            $(".chkAprb").each(function () {
                if (this.checked) {
@@ -358,9 +353,20 @@
 
        function recalcular() {
            cantidad = parseFloat(document.getElementById("MainContent_ASPxCallbackPanel2_txtConsEstimado").value);
-           precio = parseFloat(document.getElementById("MainContent_txtPrecioU").value);
+           precio = parseFloat(document.getElementById("MainContent_ASPxCallbackPanel2_txtPrecioU").value);
+           document.getElementById("MainContent_ASPxCallbackPanel2_txtCantidad").value = cantidad * precio;
 
-           document.getElementById("MainContent_txtCantidad").value = cantidad * precio;
+           recalcularReorden();
+       }
+
+       function recalcularReorden() {
+           consumo = parseFloat(document.getElementById("MainContent_ASPxCallbackPanel2_txtConsEstimado").value);
+           te = parseFloat(document.getElementById("MainContent_ASPxCallbackPanel2_txtDiasEntrega").value);
+           stock = parseFloat(document.getElementById("MainContent_ASPxCallbackPanel2_cmbDias").value);
+           
+           part1 = (consumo / 365) * te;
+           part2 = (consumo / 365) * te;
+           document.getElementById("MainContent_ASPxCallbackPanel2_txtStockMin").value = part1 + part2;
        }
 
        function OnPanel1EndCallback(s, e) {
@@ -371,7 +377,6 @@
             }
        }
 
-
         $(document).ready(function () {
             // Muestra las teclas rápidas
             $("span.badge").hide(); //Se puso aquí para que no cambara de lugar los botones
@@ -381,25 +386,25 @@
                 }
                 if (e.altKey) {
                     if (e.altKey && ((e.which == 49) || (e.which == 97))) { //1
-                        alert('boton 1');
+                        $('.btnSave').click();
                     }
                     if (e.altKey && ((e.which == 50) || (e.which == 98))) {//2
-                        alert('boton 2');
+                        $('.btnEnviarSolicitante').click();
                     }
                     if (e.altKey && ((e.which == 51) || (e.which == 99))) {//3
-                        alert('boton 3');
+                        $('.btnAsignAutor').click();
                     }
                     if (e.altKey && ((e.which == 52) || (e.which == 100))) {//4
-                        alert('boton 4');
+                        $('.btnRechazar').click();
                     }
                     if (e.altKey && ((e.which == 53) || (e.which == 101))) {//5
-                        alert('boton 5');
+                        $('.btnEnviarDM').click();
                     }
                     if (e.altKey && ((e.which == 54) || (e.which == 102))) {//6
-                        alert('boton 6');
+                        $('.btnRegresar').click();
                     }
                     if (e.altKey && ((e.which == 55) || (e.which == 103))) {//7
-                        $(".clickable").click();
+                        // Pendiente
                     }
                     if (e.altKey && ((e.which == 56) || (e.which == 104))) {//8
                         $(".clickable").click();
@@ -430,6 +435,7 @@
                 $(".clickable").click();
             });
         });
+
         //Rota los iconos de inicio y fin, va fuera del ready
         function rotate(imgName) {
             var elm = document.getElementById(imgName);
@@ -439,13 +445,6 @@
             } else {
                 elm.className = elm.className.replace(' BtnRotar', '');
             };
-        };
-        //Quita los checked de default de las tablas de bootstrap
-        function quitaChecked(value) {
-            return {
-                checked: false
-            }
-            return value
         };
 
         function openModal(opcion) {
@@ -811,298 +810,293 @@
                 ASPxCallbackPanel2.PerformCallback(Valores);
             }
         }
-        
-
     </script>
     <style>
-        html {
-            scroll-behavior: smooth;
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background-color: #FBFBFB;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 12px;
+    }
+
+    .jumbotron {
+        background-color: #FBFBFB;
+    }
+
+    .CeroPM {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .BGFormularioTitulo {
+        margin-top: 5px;
+        padding-bottom: 18px;
+        background-image: url('./Assets/images/IconoFormulario.png');
+        background-repeat: no-repeat;
+        background-position: left top;
+    }
+
+    .HeaderSpanNombreFormulario {
+        text-align: left;
+        color: #355D87;
+        margin: 0px;
+        margin-left: 35px;
+    }
+
+    .RowsControl {
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        border-bottom: 1px;
+        border-bottom-color: #BCE8F1;
+        border-bottom-style: dashed;
+    }
+
+    .clickable {
+        cursor: pointer;
+    }
+
+    .panel {
+        margin-bottom: 15px;
+    }
+
+    .panel-heading {
+        height: 25px;
+        font-weight: 400;
+        padding: 5px 15px;
+    }
+
+        .panel-heading span {
+            margin-top: -20px;
+            font-size: 15px;
         }
 
-        body {
-            background-color: #FBFBFB;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 12px;
+    .panel-title {
+        font-size: 14px;
+        font-weight: normal;
+    }
+
+    .text-form {
+        color: #585858;
+        font-weight: normal;
+        padding: 5px;
+        vertical-align: central;
+    }
+
+    .Campos {
+        height: 25px;
+        background-color: white;
+        margin: 1px;
+        padding: 2px;
+        border: 1px dashed #D9D9D9;
+        border-radius: 3px;
+        color: black;
+    }
+
+    /*Ajusta campos de acuerdo a la resolución*/
+    @media only screen and (max-width: 450px) {.Campos {width:300px;}}
+    @media(min-width:451px){.Campos {width:410px;}}
+    @media(min-width:650px){.Campos {width:550px;}}
+    @media(min-width:768px){
+        .Campos {width:200px;}
+        .Campos6Cols {width:150px;}
+    }
+    @media(min-width:1001px){
+        .Campos {width:280px;}
+        .Campos6Cols {width:200px;}
+    }
+    @media(min-width:1350px){
+        .Campos {width:400px;}
+        .Campos6Cols {width:290px;}
+    }
+    @media(min-width:1700px){
+        .Campos {width:510px;}
+        .Campos6Cols {width:370px;}
+    }
+
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+        color: #31708f !important;
+        background-color: #d9edf7;
+    }
+
+    .BtnGpoIniFin {
+        background-color: white;
+        vertical-align: central;
+        text-align: center;
+        height: 81px;
+        width: 35px;
+        top: 50vh;
+        right: 0px;
+        position: fixed;
+        z-index: 1;
+        border-radius: 4px 0 0 4px;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    }
+
+    .BtnIniFin {
+        display: block;
+        height: 40px;
+        font-size: x-large;
+        padding-top: 5px;
+    }
+
+    .BtnRotar {
+        animation-name: rotarImagen;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes rotarImagen {
+        100% {
+            color: forestgreen;
+            left: 0px;
+            top: 0px;
+            transform: rotate(360deg);
+        }
+    }
+
+    #spanStatus {
+        width: 190px;
+        transition-property: width;
+        transition-duration: 1s;
+    }
+
+    #spanStatus:hover {
+        width: 390px;
+    }
+
+    .docEstatus {
+        position: absolute;
+        left: 60px;
+        font-weight: bold;
+        padding: 1px 10px;
+        margin: 0px;
+    }
+
+    .fixed-table-toolbar {
+        width: 100%;
+    }
+
+    .bootstrap-table bootstrap3 {
+        width: 100%;
+    }
+    .badge{
+        font-size:9px;
+        font-weight:normal;
+        transform: translate(5px, -8px);
+        padding:2px 2px;
+    }
+    .hidden{
+        display:none;
+    }
+    h3 {
+        line-height: 15px;
         }
 
-        .jumbotron {
-            background-color: #FBFBFB;
-        }
+    .form-control:focus {
+        border-color: #66afe9;
+        outline: 0;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+    }
 
-        .CeroPM {
-            padding: 0px;
-            margin: 0px;
-        }
-
-        .BGFormularioTitulo {
-            margin-top: 5px;
-            padding-bottom: 18px;
-            background-image: url('./Assets/images/IconoFormulario.png');
-            background-repeat: no-repeat;
-            background-position: left top;
-        }
-
-        .HeaderSpanNombreFormulario {
-            text-align: left;
-            color: #355D87;
-            margin: 0px;
-            margin-left: 35px;
-        }
-
-        .RowsControl {
-            margin: 0px;
-            padding: 0px;
-            border: 0px;
-            border-bottom: 1px;
-            border-bottom-color: #BCE8F1;
-            border-bottom-style: dashed;
-        }
-
-        .clickable {
-            cursor: pointer;
-        }
-
-        .panel {
-            margin-bottom: 15px;
-        }
-
-        .panel-heading {
-            height: 25px;
-            font-weight: 400;
-            padding: 5px 15px;
-        }
-
-            .panel-heading span {
-                margin-top: -20px;
-                font-size: 15px;
-            }
-
-        .panel-title {
-            font-size: 14px;
-            font-weight: normal;
-        }
-
-        .text-form {
-            color: #585858;
-            font-weight: normal;
-            padding: 5px;
-            vertical-align: central;
-        }
-
-        .Campos {
-            height: 25px;
-            background-color: white;
-            margin: 1px;
-            padding: 2px;
-            border: 1px dashed #D9D9D9;
-            border-radius: 3px;
-            color: black;
-        }
-
-
-        /*Ajusta campos de acuerdo a la resolución*/
-        @media only screen and (max-width: 450px) {.Campos {width:300px;}}
-        @media(min-width:451px){.Campos {width:410px;}}
-        @media(min-width:650px){.Campos {width:550px;}}
-        @media(min-width:768px){
-            .Campos {width:200px;}
-            .Campos6Cols {width:150px;}
-        }
-        @media(min-width:1001px){
-            .Campos {width:280px;}
-            .Campos6Cols {width:200px;}
-        }
-        @media(min-width:1350px){
-            .Campos {width:400px;}
-            .Campos6Cols {width:290px;}
-        }
-        @media(min-width:1700px){
-            .Campos {width:510px;}
-            .Campos6Cols {width:370px;}
-        }
-
-        .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
-            color: #fff;
-            background-color: #337AB7;
-        }
-
-        .BtnGpoIniFin {
-            background-color: white;
-            vertical-align: central;
-            text-align: center;
-            height: 81px;
-            width: 35px;
-            top: 50vh;
-            right: 0px;
-            position: fixed;
-            z-index: 1;
-            border-radius: 4px 0 0 4px;
-            box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
-        }
-
-        .BtnIniFin {
-            display: block;
-            height: 40px;
-            font-size: x-large;
-            padding-top: 5px;
-        }
-
-        .BtnRotar {
-            animation-name: rotarImagen;
-            animation-duration: 1s;
-            animation-iteration-count: infinite;
-        }
-
-        @keyframes rotarImagen {
-            100% {
-                color: forestgreen;
-                left: 0px;
-                top: 0px;
-                transform: rotate(360deg);
-            }
-        }
-
-        #spanStatus {
-            width: 190px;
-            transition-property: width;
-            transition-duration: 1s;
-        }
-
-            #spanStatus:hover {
-                width: 390px;
-            }
-
-        .docEstatus {
-            position: absolute;
-            left: 60px;
-            font-weight: bold;
-            padding: 1px 10px;
-            margin: 0px;
-        }
-
-        .fixed-table-toolbar {
-            width: 100%;
-        }
-
-        .bootstrap-table bootstrap3 {
-            width: 100%;
-        }
-        .badge{
-            font-size:9px;
-            font-weight:normal;
-            transform: translate(5px, -8px);
-            padding:2px 2px;
-        }
-        .hidden{
-            display:none;
-        }
-        h3 {
-            line-height: 15px;
-           }
-
-        .form-control:focus {
-              border-color: #66afe9;
-              outline: 0;
-              -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
-                      box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
-            }
-
-.dxpnlControl {
-    font: 12px 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-}
+    .dxpnlControl {
+        font: 12px 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    }
     </style>
     <div class="CeroPM" id="Inicio">
     <div class="container-fluid CeroPM">
-      <dx:ASPxCallbackPanel runat="server" ID="ASPxCallbackPanel2" Width="100%"
-        ClientInstanceName="ASPxCallbackPanel2" RenderMode="Table" 
+      <dx:ASPxCallbackPanel runat="server" ID="ASPxCallbackPanel2" Width="100%" ClientInstanceName="ASPxCallbackPanel2" RenderMode="Table" 
         OnCallback="ASPxCallbackPanel2_Callback">
-          <ClientSideEvents EndCallback="ASPxCallbackPanel2_EndCallback"/>
-          <PanelCollection>
-              <dx:PanelContent>
-        <div id="divBotones" class="col-xs-12 btn-group CeroPM" data-spy="affix" data-offset-top="100" style="padding-top:15px; color:white;width:100%;z-index:1 !important;background-color:#EFEFEF;">
-            <img ID="btnSave" runat="server" class="btn" Style="margin: 0px; padding: 0px;" onclick="ASPxCallbackPanel2.PerformCallback('Save');" src="Assets/images/BtnGuardar.png" /><%--OnClick="btnSave_Click"--%>
-            <img ID="btnEnviarSolicitante" runat="server" class="btn" Style="margin: 0px; padding: 0px;" onclick="selEnviar('Enviar');" src="Assets/images/BtnEnviar.png" /> <%--  onclick="ASPxCallbackPanel2.PerformCallback('Enviar');" --%>
-            <img ID="btnRechazar" runat="server" class="btn" Style="margin: 0px; padding: 0px;" onclick="selEnviar('Rechazar');"  src="Assets/images/BtnRechazar.png" /> <%-- onclick="ASPxCallbackPanel2.PerformCallback('Rechazar');" --%>
-            <img ID="btnAsignAutor" runat="server" class="btn" Style="margin: 0px; padding: 0px;" onclick="ASPxCallbackPanel2.PerformCallback('Save2');" src="Assets/images/BtnAsignarAutor.png" />
-            <img ID="btnEnviarDM" runat="server" visible="false" class="btn" Style="margin: 0px; padding: 0px;" onclick="selEnviar('EnviarDM');" src="Assets/images/BtnEnviarDM.png" /> <%-- onclick="ASPxCallbackPanel2.PerformCallback('EnviarDM');" --%>
-            <asp:ImageButton ID="btnRegresar" class="btn" Style="margin: 0px; padding: 0px;" runat="server" ImageUrl="~/Assets/images/BtnSalir.png" OnClick="btnRegresar_Click" />
-            <div class="BtnGpoIniFin">
-                <a class="BtnIniFin" id="BtnInicio" href="#Inicio" title="Inicio" onmouseover="rotate('imgaRotarI');" onmouseout="rotate('imgaRotarI');"><i id="imgaRotarI" class="glyphicon glyphicon glyphicon-circle-arrow-up"></i><span class="badge badge-xs badge-danger">Alt+9</span></a>
-                <a class="BtnIniFin" id="BtnFinal" href="#pieForma" title="Historial" onmouseover="rotate('imgaRotarF');" onmouseout="rotate('imgaRotarF');"><i id="imgaRotarF" class="glyphicon glyphicon glyphicon-circle-arrow-down"></i><span class="badge badge-xs badge-danger">Alt+0</span></a>
+        <ClientSideEvents EndCallback="ASPxCallbackPanel2_EndCallback"/>
+        <PanelCollection>
+          <dx:PanelContent>
+            <div id="divBotones" class="col-xs-12 btn-group CeroPM" data-spy="affix" data-offset-top="100" style="padding-top:15px; color:white;width:100%;z-index:1 !important;background-color:#EFEFEF;">
+                <button type="button" runat="server" id="btnSave" class="btn btnSave" title="alt+1" Style="margin: 0px; padding: 0px; background-image: url('Assets/images/BtnGuardar.png');height:30px;width:103px;" onclick="ASPxCallbackPanel2.PerformCallback('Save');"><span class="badge">Alt+1</span></button>
+                <button type="button" runat="server" id="btnEnviarSolicitante" class="btn btnEnviarSolicitante" title="alt+2" Style="margin: 0px; padding: 0px;background-image:url('Assets/images/BtnEnviar.png');height:30px;width:103px;" onclick="selEnviar('Enviar');"><span class="badge">Alt+2</span></button>
+                <button type="button" runat="server" id="btnRechazar" class="btn btnRechazar" title="alt+4" Style="margin: 0px; padding: 0px;background-image:url('Assets/images/BtnRechazar.png');height:30px;width:103px;" onclick="selEnviar('Rechazar');"><span class="badge">Alt+4</span></button>
+                <button type="button" runat="server" id="btnAsignAutor" class="btn btnAsignAutor" title="alt+3" Style="margin: 0px; padding: 0px;background-image:url('Assets/images/BtnAsignarAutor.png');height:30px;width:103px;" onclick="ASPxCallbackPanel2.PerformCallback('Save2');"><span class="badge">Alt+3</span></button>
+                <button type="button" runat="server" id="btnEnviarDM" visible="false" class="btn btnEnviarDM" title="alt+5" Style="margin: 0px; padding: 0px;background-image:url('Assets/images/BtnAsignarAutor.png');height:30px;width:103px;" onclick="selEnviar('EnviarDM');"><span class="badge">Alt+5</span></button>
+                
+<%--                <img ID="btnSave" runat="server" class="btn btnSave" title="alt+1" Style="margin: 0px; padding: 0px;" onclick="ASPxCallbackPanel2.PerformCallback('Save');" src="Assets/images/BtnGuardar.png"/>
+                <img ID="btnEnviarSolicitante" runat="server" class="btn btnEnviarSolicitante" title="alt+2" Style="margin: 0px; padding: 0px;" onclick="selEnviar('Enviar');" src="Assets/images/BtnEnviar.png" />
+                <img ID="btnRechazar" runat="server" class="btn btnRechazar" title="alt+4" Style="margin: 0px; padding: 0px;" onclick="selEnviar('Rechazar');"  src="Assets/images/BtnRechazar.png" />
+                <img ID="btnAsignAutor" runat="server" class="btn btnAsignAutor" title="alt+3" Style="margin: 0px; padding: 0px;" onclick="ASPxCallbackPanel2.PerformCallback('Save2');" src="Assets/images/BtnAsignarAutor.png" />
+                <img ID="btnEnviarDM" runat="server" visible="false" class="btn btnEnviarDM" title="alt+5" Style="margin: 0px; padding: 0px;" onclick="selEnviar('EnviarDM');" src="Assets/images/BtnEnviarDM.png" />--%>
+                <asp:ImageButton ID="btnRegresar" class="btn btnRegresar" title="alt+6" Style="margin: 0px; padding: 0px;" runat="server" ImageUrl="~/Assets/images/BtnSalir.png" OnClick="btnRegresar_Click" />
+                <div class="BtnGpoIniFin">
+                    <a class="BtnIniFin" id="BtnInicio" href="#Inicio" title="Inicio" onmouseover="rotate('imgaRotarI');" onmouseout="rotate('imgaRotarI');"><i id="imgaRotarI" class="glyphicon glyphicon glyphicon-circle-arrow-up"></i><span class="badge badge-xs badge-info">Alt+9</span></a>
+                    <a class="BtnIniFin" id="BtnFinal" href="#pieForma" title="Historial" onmouseover="rotate('imgaRotarF');" onmouseout="rotate('imgaRotarF');"><i id="imgaRotarF" class="glyphicon glyphicon glyphicon-circle-arrow-down"></i><span class="badge badge-xs badge-info">Alt+0</span></a>
+                </div>
             </div>
-        </div>
-                                <div id="mdlComentarios" class="modal fade" role="dialog">
-                                    <div class="modal-dialog" runat="server">
-                                        <div class="modal-content" runat="server">
-                                            <div class="modal-header" runat="server">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4>Comentarios</h4>
-                                                <asp:TextBox ID="txtAprobar" runat="server" CssClass="form-control input-sm hidden"></asp:TextBox>
-                                                <asp:TextBox ID="txttipo" runat="server" CssClass="form-control input-sm hidden"></asp:TextBox>
-                                            </div>
-                                            <div class="modal-body" runat="server">
-                                                <div class="row">
-                                                    <label class="text-form col-sm-3">Comentarios</label>
-                                                    <div class="col-sm-5">
-                                                        <asp:TextBox ID="comentariosEnviar" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                                    </div>
-                                                </div>
-                                                <br />
-                                                <div>
-                                                    <button type="button" class="btn btn-primary" onclick="enviar();" data-dismiss="modal">Confirmar</button>
-                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Regresar</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+            <div id="mdlComentarios" class="modal fade" role="dialog">
+                <div class="modal-dialog" runat="server">
+                    <div class="modal-content" runat="server">
+                        <div class="modal-header" runat="server">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4>Comentarios</h4>
+                            <asp:TextBox ID="txtAprobar" runat="server" CssClass="form-control input-sm hidden"></asp:TextBox>
+                            <asp:TextBox ID="txttipo" runat="server" CssClass="form-control input-sm hidden"></asp:TextBox>
+                        </div>
+                        <div class="modal-body" runat="server">
+                            <div class="row">
+                                <label class="text-form col-sm-3">Comentarios</label>
+                                <div class="col-sm-5">
+                                    <asp:TextBox ID="comentariosEnviar" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
-        <div class="jumbotron CeroPM" style="padding: 5px;">
-            <div class="row CeroPM">
-                <div class="col-xs-12">
-                    <div class="col-xs-12 col-sm-8 form-group BGFormularioTitulo">
-                        <h2 class="HeaderSpanNombreFormulario">SOLICITUD DE PROCESO MRO</h2>
-                        <asp:Label ID="lblcodigoSts" runat="server" CssClass="hidden"></asp:Label>
-                        <asp:Label ID="lblSigPerf" runat="server" CssClass="hidden"></asp:Label>
-                        <asp:Literal ID="ltlSts" runat="server"></asp:Literal>
-<%--                        <span id="spanStatus" class="alert btn-info docEstatus" hidden><i class="glyphicon glyphicon-edit" style="padding-right:5px;"></i>Abierto</span><span style="position: absolute;left: 250px;color:#FBFBFB;padding:2px 0px;" hidden>:Pendiente por el autor para terminar la captura</span>
-                        <span id="spanStatus" class="alert btn-info docEstatus" hidden><i class="glyphicon glyphicon-eye-open" style="padding-right:5px;"></i>Revisado</span><span style="position: absolute;left: 250px;color:#FBFBFB;padding:2px 0px;" hidden>:Revisado para su proceso</span>
-                        <span id="spanStatus" class="alert btn-info docEstatus" hidden><i class="glyphicon glyphicon-lock" style="padding-right:5px;"></i>Cerrado</span><span style="position: absolute;left: 250px;color:#FBFBFB;padding:2px 0px;" hidden>:Cerrado por Alejandro Gonalez el 12/10/20 2:35PM</span>
-                        <span id="spanStatus" class="alert btn-warning docEstatus" hidden><i class="glyphicon glyphicon-ban-circle" style="padding-right:5px;"></i>Cancelado</span><span style="position: absolute;left: 250px;color:#FBFBFB;padding:2px 0px;" hidden>:Por Alejandro Gonzalez el 12/10/20 10:02AM</span>
-                        <span id="spanStatus" class="alert btn-success docEstatus" hidden><i class="glyphicon glyphicon-ok" style="padding-right:5px;"></i>Aprobado</span><span style="position: absolute;left: 250px;color:#FBFBFB;padding:2px 0px;" hidden>:Aprobado el 24/10/20 08:20AM</span>
-                        <span id="spanStatus" class="alert btn-primary docEstatus" hidden><i class="glyphicon glyphicon-dashboard" style="padding-right:5px;text-align:center;"></i>Pendiente por aprobación</span><span style="position: absolute;left: 250px;color:#FBFBFB;padding:2px 0px;" hidden>:Pendiente por el aprobador</span>
-                        <span id="spanStatus" class="alert btn-danger docEstatus"><i class="glyphicon glyphicon-remove" style="padding-right:5px;"></i>Rechazado</span><span style="position: absolute;left: 250px;color:#FBFBFB;padding:2px 0px;">:Rechazado por Joel Hernandez</span>--%>
-                    </div>
-                    <div class="col-xs-12 col-sm-4 CeroPM" style="padding-top:3px;">
-                        <div class="row form-group RowsControl">
-                            <label class="text-form col-xs-4" style="padding: 1px;margin: 0px;">No. Documento</label>
-                            <div class="col-xs-4 " style="color:red; font-weight:800;">
-                                <asp:TextBox ID="lblnDoc" runat="server" style="background-color: transparent !important; border:0px;" Enabled="false"></asp:TextBox>
                             </div>
-                        </div>
-                        <div class="row form-group RowsControl">
-                            <label class="text-form col-xs-4" style="padding: 1px;margin: 0px;">Solicitante</label>
-                            <div class="col-xs-8" style="color:limegreen;">
-                                <asp:Label ID="lblDocSolicitante" runat="server"></asp:Label>
-                            </div>
-                        </div>
-                        <div class="row form-group RowsControl">
-                            <label class="text-form col-xs-4" style="padding: 1px;margin: 0px;">Fecha de solicitud</label>
-                            <div class="col-xs-8" style="color:limegreen;">
-                                <asp:Label ID="lblDocFechaSol" runat="server"></asp:Label>
+                            <br />
+                            <div>
+                                <button type="button" class="btn btn-primary" onclick="enviar();" data-dismiss="modal">Confirmar</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Regresar</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <form class="container">
-            <section id="sSolicitante" class="row CeroPM">
+            <div class="jumbotron CeroPM" style="padding: 5px;">
+                <div class="row CeroPM">
+                <div class="col-xs-12">
+                    <div class="col-xs-12 col-sm-8 form-group BGFormularioTitulo">
+                        <h2 class="HeaderSpanNombreFormulario">SOLICITUD DE PROCESO MRO</h2>
+                        <asp:Label ID="lblcodigoSts" runat="server" CssClass="hidden"/>
+                        <asp:Label ID="lblSigPerf" runat="server" CssClass="hidden"/>
+                        <asp:Literal ID="ltlSts" runat="server"></asp:Literal>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 CeroPM" style="padding-top:3px;">
+                        <div class="row form-group RowsControl">
+                            <label class="text-form col-xs-4" style="padding: 1px;margin: 0px;">No. Documento</label>
+                            <div class="col-xs-4 " style="color:red; font-weight:800;">
+                                <asp:TextBox ID="lblnDoc" runat="server" style="background-color: transparent !important; border:0px;" Enabled="false"/>
+                            </div>
+                        </div>
+                        <div class="row form-group RowsControl">
+                            <label class="text-form col-xs-4" style="padding: 1px;margin: 0px;">Solicitante</label>
+                            <div class="col-xs-8" style="color:limegreen;">
+                                <asp:Label ID="lblDocSolicitante" runat="server"/>
+                            </div>
+                        </div>
+                        <div class="row form-group RowsControl">
+                            <label class="text-form col-xs-4" style="padding: 1px;margin: 0px;">Fecha de solicitud</label>
+                            <div class="col-xs-8" style="color:limegreen;">
+                                <asp:Label ID="lblDocFechaSol" runat="server"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <form class="container">
+                <section id="sSolicitante" class="row CeroPM">
                 <div class="col-xs-12" id="dvautor">
                     <div class="panel panel-info" id="infoSolicitante">
                         <div class="panel-heading">
                             <h3 class="panel-title">Información del Solicitante</h3>
                             <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
-                            <span class="pull-right" id="btnColapsable" style="padding-right: 10px;cursor: pointer;"><i class="glyphicon glyphicon glyphicon-sort"></i><span class="badge badge-xs badge-info" style="font-size:9px;">Alt+8</span></span>
+                            <span class="pull-right" id="btnColapsable" style="padding-right: 20px;cursor: pointer;"><i class="glyphicon glyphicon glyphicon-sort"></i><span class="badge badge-xs badge-info" style="font-size:9px;">Alt+8</span></span>
                         </div>
                         <div class="panel-body">
                             <div class="row form-group CeroPM">
@@ -1114,7 +1108,7 @@
                                 </div>
                                 <label id="lblProd" runat="server" class="text-form col-sm-2">Selecciona Producto</label>
                                 <div class="col-sm-4">
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbProducto" ClientInstanceName="cmbProducto" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox  CssClass="form-control input-sm Campos" ID="cmbProducto" ClientInstanceName="cmbProducto" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1134,7 +1128,7 @@
                                 </div>
                                 <label id="lblcual" runat="server" class="text-form col-sm-2">Cuál artículo</label>
                                 <div class="col-sm-4">
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbCualArticulo" ClientInstanceName="cmbCualArticulo" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbCualArticulo" ClientInstanceName="cmbCualArticulo" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1156,9 +1150,9 @@
                                 <label class="text-form col-sm-2">Marca</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnCodigoMarca" value='<%# Eval("CodigoMarca")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMarca" ClientInstanceName="cmbMarca" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbMarca" ClientInstanceName="cmbMarca" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
-                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
+                                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true"  ReadOnlyStyle-ForeColor="DarkGray">
                                         <ValidationSettings>
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
@@ -1201,7 +1195,6 @@
                                     <Settings ShowFilterRow="True" />
                                     <ClientSideEvents EndCallback="OnArchivosEndCallback" />
                                 </dx:ASPxGridView>
-
                                 <div id="mdlArchivo" class="modal fade" role="dialog">
                                     <div class="modal-dialog" runat="server">
                                         <div class="modal-content" runat="server">
@@ -1270,57 +1263,13 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-<%--                                <table style="width:100%;" border="1">
-                                    <tr>
-                                        <td style="width:60%;">
-                                            Dibujo
-                                        </td>
-                                        <td style="width:40%;">
-                                            archivo.xxx
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Tarjeta Amarilla
-                                        </td>
-                                        <td>
-                                            archivo.xxx
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Especificaciones
-                                        </td>
-                                        <td>
-                                            archivo.xxx
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Foto
-                                        </td>
-                                        <td>
-                                            archivo.xxx
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            MSDS (Hoja de Seguridad)
-                                        </td>
-                                        <td>
-                                            archivo.xxx
-                                        </td>
-                                    </tr>
-                                </table>--%>
                                 <br/>
                             </div>
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-2">Departamento</label>
                                 <div class="col-sm-4">
                                         <input type="hidden" id="hdnCodigoDepto" value='<%# Eval("CodigoDepto")%>' runat="server"/>
-                                        <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbDepa" ClientInstanceName="cmbDepa" runat="server" IncrementalFilteringMode="Contains" 
+                                        <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbDepa" ClientInstanceName="cmbDepa" runat="server" IncrementalFilteringMode="Contains" 
                                             FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                             PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                             <ValidationSettings>
@@ -1333,7 +1282,7 @@
                                 <label class="text-form col-sm-2">Subcuenta</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnSubcuenta" value='<%# Eval("subcuenta")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbSubcuenta" ClientInstanceName ="cmbSubcuenta" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbSubcuenta" ClientInstanceName ="cmbSubcuenta" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1348,7 +1297,7 @@
                                 <label class="text-form col-sm-2">Equipos donde se utiliza (Máquina)</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnCodigoMaquina" value='<%# Eval("CodigoMaquina")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMaquina" ClientInstanceName="cmbMaquina" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbMaquina" ClientInstanceName="cmbMaquina" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1367,7 +1316,7 @@
                                 <label class="text-form col-sm-2">Número de Activo fijo</label>
                                 <div class="col-sm-10">
                                     <input type="hidden" id="hdnActFijo" value='<%# Eval("codActFijo")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbActFijo" ClientInstanceName="cmbActFijo" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbActFijo" ClientInstanceName="cmbActFijo" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1382,7 +1331,7 @@
                                 <label class="text-form col-sm-1">Subcategoría 1</label>
                                 <div class="col-sm-3">
                                     <input type="hidden" id="hdnCodigoSubCat1" value='<%# Eval("CodigoSubcategoria1")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos Campos6Cols" ID="cmbSubCat1" ClientInstanceName="cmbSubCat1" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos Campos6Cols" ID="cmbSubCat1" ClientInstanceName="cmbSubCat1" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1395,7 +1344,7 @@
                                 <label class="text-form col-sm-1">Subcategoría 2</label>
                                 <div class="col-sm-3">
                                     <input type="hidden" id="hdnCodigoSubCat2" value='<%# Eval("CodigoSubcategoria2")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos Campos6Cols" ID="cmbSubCat2" ClientInstanceName="cmbSubCat2" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos Campos6Cols" ID="cmbSubCat2" ClientInstanceName="cmbSubCat2" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1408,7 +1357,7 @@
                                 <label class="text-form col-sm-1">Subcategoría 3</label>
                                 <div class="col-sm-3">
                                     <input type="hidden" id="hdnCodigoSubCat3" value='<%# Eval("CodigoSubcategoria3")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos Campos6Cols" ID="cmbSubCat3" ClientInstanceName="cmbSubCat3" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos Campos6Cols" ID="cmbSubCat3" ClientInstanceName="cmbSubCat3" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1522,7 +1471,7 @@
                                 <label class="text-form col-sm-2">Unidad de medida</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnUM" value='<%# Eval("unidadMedida")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbUM" ClientInstanceName="cmbUM" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbUM" ClientInstanceName="cmbUM" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1552,7 +1501,7 @@
                                 <label class="text-form col-sm-2">Número de OQ/Solicitud de Cotización</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnOQ" value='<%# Eval("numOQ")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbOQ" ClientInstanceName="cmbOQ" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbOQ" ClientInstanceName="cmbOQ" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1575,8 +1524,8 @@
                                 <label class="text-form col-sm-2">Moneda</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnCodigomoneda" value='<%# Eval("Codigomoneda")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMoneda" ClientInstanceName="cmbMoneda" runat="server" IncrementalFilteringMode="Contains" 
-                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Width="100%" Paddings-Padding="0px" Theme="Aqua"  
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbMoneda" ClientInstanceName="cmbMoneda" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
@@ -1590,7 +1539,7 @@
                                 <label class="text-form col-sm-2">Proveedor Sugerido</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnCodigoProveedor" value='<%# Eval("CodigoProveedor")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbProveedor" ClientInstanceName="cmbProveedor" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbProveedor" ClientInstanceName="cmbProveedor" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1603,7 +1552,7 @@
                                 <label class="text-form col-sm-2">Estatus del contrato (No. plan)</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hfnCodigoPlan" value='<%# Eval("CodigoPlan")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPlan" ClientInstanceName="cmbPlan" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbPlan" ClientInstanceName="cmbPlan" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1628,8 +1577,8 @@
                         </div>
                     </div>
                 </div>
-            </section>
-            <section id="sComprador" class="row CeroPM">
+                </section>
+                <section id="sComprador" class="row CeroPM">
                 <div class="col-xs-12" id="dvcomprador">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -1657,7 +1606,7 @@
                                 <label class="text-form col-sm-2">GL Class</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnGLClass" value='<%# Eval("GlClass")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbGlClass" ClientInstanceName="cmbGlClass" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbGlClass" ClientInstanceName="cmbGlClass" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" Enabled="<%# disabledComp %>" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1669,14 +1618,14 @@
                                 </div>
                                 <label class="text-form col-sm-2">Texto de búsqueda</label>
                                 <div class="col-sm-4">
-                                    <asp:TextBox ID="txtTextBusq" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <asp:TextBox ID="txtTextBusq" runat="server" CssClass="form-control input-sm Campos"/>
                                 </div>
                             </div>
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-2">Proveedor</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnCodProvComp" value='<%# Eval("CodigoProveedor_comp")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbProveedorComp" ClientInstanceName="cmbProveedorComp" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbProveedorComp" ClientInstanceName="cmbProveedorComp" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1689,7 +1638,7 @@
                                 <label class="text-form col-sm-2">País de origen proveedor</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnPaisOrigen" value='<%# Eval("PaisOrigen")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPaisOrigen" ClientInstanceName="cmbPaisOrigen" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbPaisOrigen" ClientInstanceName="cmbPaisOrigen" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1708,7 +1657,7 @@
                                 <label class="text-form col-sm-2">Moneda</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnCodigomonedaComprador" value='<%# Eval("Codigomoneda")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMonedaComprador" ClientInstanceName="cmbMonedaComprador" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbMonedaComprador" ClientInstanceName="cmbMonedaComprador" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1727,7 +1676,7 @@
                                 <label class="text-form col-sm-2">Unidad de Medida</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnCodigoUM" value='<%# Eval("CodigoUM")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbCodigoUM" ClientInstanceName="cmbCodigoUM" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbCodigoUM" ClientInstanceName="cmbCodigoUM" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1742,7 +1691,7 @@
                                 <label class="text-form col-sm-2">Comprador</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnComprador" value='<%# Eval("codigoComprador")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbComprador" ClientInstanceName="cmbComprador" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbComprador" ClientInstanceName="cmbComprador" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1754,14 +1703,14 @@
                                 </div>
                                 <label class="text-form col-sm-2">Tiempo de Entrega (días)</label>
                                 <div class="col-sm-4">
-                                    <asp:TextBox ID="txtDiasEntrega" TextMode="Number" step="1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <asp:TextBox ID="txtDiasEntrega" TextMode="Number" onChange="recalcularReorden()" step="1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-2">Método de Coste Sales/Inventory</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnMtdoCosteInv" value='<%# Eval("MTDOCoste_Inv")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMtdoCosteInv" ClientInstanceName="cmbMtdoCosteInv" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbMtdoCosteInv" ClientInstanceName="cmbMtdoCosteInv" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1774,7 +1723,7 @@
                                 <label class="text-form col-sm-2">Método de Coste Sales/Purchasing</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnMtdoCostePursh" value='<%# Eval("MTDOCoste_Pursh")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbMtdoCostePursh" ClientInstanceName="cmbMtdoCostePursh" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbMtdoCostePursh" ClientInstanceName="cmbMtdoCostePursh" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1791,7 +1740,7 @@
                                     <label class="text-form col-sm-1">Tipo de Empaque</label>
                                     <div class="col-sm-3">
                                     <input type="hidden" id="hdnTipoEmpaque" value='<%# Eval("codigo_tipoEmpaque")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbTipoEmaque" ClientInstanceName="cmbTipoEmaque" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos Campos6Cols" ID="cmbTipoEmaque" ClientInstanceName="cmbTipoEmaque" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1808,7 +1757,7 @@
                                     <label class="text-form col-sm-1">Unidad de Medida</label>
                                     <div class="col-sm-3">
                                         <input type="hidden" id="hdnUMEmpq" value='<%# Eval("UMEmpaque")%>' runat="server"/>
-                                        <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbUmEmpaque" ClientInstanceName="cmbUmEmpaque" runat="server" IncrementalFilteringMode="Contains" 
+                                        <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbUmEmpaque" ClientInstanceName="cmbUmEmpaque" runat="server" IncrementalFilteringMode="Contains" 
                                             FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                             PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                             <ValidationSettings>
@@ -1839,7 +1788,7 @@
                                 <label class="text-form col-sm-2">Purch 1/Categoría</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnPursh1" value='<%# Eval("pursh1")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPursh1" ClientInstanceName="cmbPursh1" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbPursh1" ClientInstanceName="cmbPursh1" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1852,7 +1801,7 @@
                                 <label class="text-form col-sm-2">Purch 2/Categoría</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnPursh2" value='<%# Eval("pursh2")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPursh2" ClientInstanceName="cmbPursh2" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbPursh2" ClientInstanceName="cmbPursh2" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1867,7 +1816,7 @@
                                 <label class="text-form col-sm-2">Familia</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnFamilia" value='<%# Eval("codigoFamilia")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbfamilia" ClientInstanceName="cmbfamilia" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbfamilia" ClientInstanceName="cmbfamilia" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1882,7 +1831,7 @@
                      </div>
                 </div>
             </section>
-            <section id="sPlaneador" class="row CeroPM">
+                <section id="sPlaneador" class="row CeroPM">
                 <div class="col-xs-12">
                     <div class="panel panel-info">
                         <div class="panel-heading">
@@ -1895,11 +1844,11 @@
                                 <div class="col-sm-4">
 
                                     <input type="hidden" id="hdnbranch" value='<%# Eval("branch")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbbranch" ClientInstanceName="cmbbranch" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbbranch" ClientInstanceName="cmbbranch" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
-                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                            <RequiredField IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
                                         <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
@@ -1918,16 +1867,15 @@
                                 </div> 
                                 <label class="text-form col-sm-2">Días de Stock de Seguridad</label>
                                 <div class="col-sm-4">
-                                    
                                     <input type="hidden" id="hndDias" value='<%# Eval("diasStok")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbDias" ClientInstanceName="cmbDias" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbDias" ClientInstanceName="cmbDias" onChange="recalcularReorden()" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
-                                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                            <RequiredField IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>
                                     </dx:ASPxComboBox>
 
                                 </div>
@@ -1937,7 +1885,7 @@
                                 <label class="text-form col-sm-2">Planeador</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hdnPlaneador" value='<%# Eval("codigoPlaneador")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPlaneador" ClientInstanceName="cmbPlaneador" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbPlaneador" ClientInstanceName="cmbPlaneador" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1949,7 +1897,7 @@
                                 </div>
                                 <label class="text-form col-sm-2">Categoría de Conteo Cíclico</label>
                                 <div class="col-sm-4">
-                                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbConteoCiclico" ClientInstanceName="cmbConteoCiclico" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbConteoCiclico" ClientInstanceName="cmbConteoCiclico" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -1964,7 +1912,7 @@
                     </div>
                 </div>
             </section>
-            <section id="sAlmacen" class="row CeroPM">
+                <section id="sAlmacen" class="row CeroPM">
                 <div class="col-xs-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -1978,7 +1926,7 @@
                                     <label class="text-form col-sm-1">Ubicación Primaria</label>
                                     <div class="col-sm-3">
                                         <input type="hidden" id="hndubicacionPrim" value='<%# Eval("ubicacionPrim")%>' runat="server"/>
-                                        <dx:ASPxComboBox class="form-control input-sm Campos Campos6Cols" ID="cmbUbicacionPrim" ClientInstanceName="cmbUbicacionPrim" runat="server" IncrementalFilteringMode="Contains" 
+                                        <dx:ASPxComboBox CssClass="form-control input-sm Campos Campos6Cols" ID="cmbUbicacionPrim" ClientInstanceName="cmbUbicacionPrim" runat="server" IncrementalFilteringMode="Contains" 
                                             FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                             PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                             <ValidationSettings>
@@ -1991,7 +1939,7 @@
                                     <label class="text-form col-sm-1">Ubicación Secundaria</label>
                                     <div class="col-sm-3">
                                         <input type="hidden" id="hndubicacionSec" value='<%# Eval("ubicacionSec")%>' runat="server"/>
-                                        <dx:ASPxComboBox class="form-control input-sm Campos Campos6Cols" ID="cmbUbicacionSec" ClientInstanceName="cmbUbicacionSec" runat="server" IncrementalFilteringMode="Contains" 
+                                        <dx:ASPxComboBox CssClass="form-control input-sm Campos Campos6Cols" ID="cmbUbicacionSec" ClientInstanceName="cmbUbicacionSec" runat="server" IncrementalFilteringMode="Contains" 
                                             FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                             PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                             <ValidationSettings>
@@ -2004,11 +1952,11 @@
                                     <label class="text-form col-sm-1">Unidad de Medida</label>
                                     <div class="col-sm-3">
                                         <input type="hidden" id="hdnumAlmacen" value='<%# Eval("umAlmacen")%>' runat="server"/>
-                                        <dx:ASPxComboBox class="form-control input-sm Campos Campos6Cols" ID="cmbUMAlmacen"  ClientInstanceName="cmbUMAlmacen" runat="server" IncrementalFilteringMode="Contains" 
+                                        <dx:ASPxComboBox CssClass="form-control input-sm Campos Campos6Cols" ID="cmbUMAlmacen"  ClientInstanceName="cmbUMAlmacen" runat="server" IncrementalFilteringMode="Contains" 
                                             FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Width="100%" Paddings-Padding="0px" Theme="Aqua"  
                                             PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                             <ValidationSettings>
-                                                <RequiredField  IsRequired="true" ErrorText="Select a option"/>
+                                                <RequiredField IsRequired="true" ErrorText="Select a option"/>
                                             </ValidationSettings>
                                             <ClientSideEvents/>
                                             <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
@@ -2034,7 +1982,7 @@
                     </div>
                 </div>
             </section>
-            <section id="sMantenimiento" class="row CeroPM">
+                <section id="sMantenimiento" class="row CeroPM">
                 <div class="col-xs-12">
                     <div class="panel panel-info">
                         <div class="panel-heading">
@@ -2045,16 +1993,16 @@
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-1">Monto Total en la primera compra</label>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txtCantidad"  TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <asp:TextBox ID="txtCantidad"  TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos Campos6Cols"></asp:TextBox>
                                 </div>
                                 <label class="text-form col-sm-1">Monto Mensual Inv Promedio</label>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txtTotal"  TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <asp:TextBox ID="txtTotal"  TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos Campos6Cols"></asp:TextBox>
                                 </div>
                                 <label class="text-form col-sm-1">Moneda</label>
                                 <div class="col-sm-3">
                                     <input type="hidden" id="hdnMoneda" value='<%# Eval("monedaMtto")%>' runat="server"/>
-                                    <dx:ASPxComboBox class="form-control input-sm Campos Campos6Cols" ID="cmbMonedaMtoo" ClientInstanceName="cmbMonedaMtoo" runat="server" IncrementalFilteringMode="Contains" 
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos Campos6Cols" ID="cmbMonedaMtoo" ClientInstanceName="cmbMonedaMtoo" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
@@ -2069,7 +2017,7 @@
                     </div>
                 </div>
             </section>
-            <section id="sDataManagement" class="row CeroPM">
+                <section id="sDataManagement" class="row CeroPM">
                 <div class="col-xs-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -2088,8 +2036,8 @@
                     </div>
                 </div>
             </section>
-        </form>
-        <div id="pieForma" class="container">
+            </form>
+            <div id="pieForma" class="container">
             <div class="col-xs-12" style="background-color:dimgray;height:25px;font-weight:600;color:white;text-align:center;font-size:16px;">
                 Historal del documento
             </div>
@@ -2099,37 +2047,12 @@
             </ul>
             <div class="tab-content" style="padding:15px;">
                 <div id="home" class="tab-pane fade in active">
-<%--                    <img src="Assets/Images/New.png" alt="add without file" title="add" style="cursor: pointer;" onclick="openModal('Aprobaciones');" />
-                    <img class="img" src="Assets/Images/trash_can.png" alt="Remove Selected" style="cursor: pointer" onclick="return DisableSelectedAprobacion();" />
-                    <img class="img" src="Assets/Images/delete_all.png" alt="Remove Selected" style="cursor: pointer" onclick="return xgrdAprobaciones.PerformCallback('Delete');" />--%>
-                    <dx:ASPxGridView ID="xgrdAprobaciones" runat="server" AutoGenerateColumns="true"
-                        Width="100%" Font-Names="Segoe UI"
-                        OnCustomCallback="xgrdAprobaciones_CustomCallback"
-                        OnHtmlDataCellPrepared="xgrdAprobaciones_HtmlDataCellPrepared"
+                    <dx:ASPxGridView ID="xgrdAprobaciones" runat="server" AutoGenerateColumns="true" Width="100%" Font-Names="Segoe UI"
+                        OnCustomCallback="xgrdAprobaciones_CustomCallback" OnHtmlDataCellPrepared="xgrdAprobaciones_HtmlDataCellPrepared"
                         ClientInstanceName="xgrdAprobaciones" Theme="Metropolis">
                         <Columns>
-<%--                            <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="0" Width="10px">
-                            </dx:GridViewDataTextColumn>--%>
-                            <dx:GridViewDataTextColumn  FieldName="codigoPerfil" Caption="Perfil">
-                            </dx:GridViewDataTextColumn>
-                            <dx:GridViewDataTextColumn  FieldName="codigoEmpleado" Caption="Perfil">
-                            </dx:GridViewDataTextColumn>
-<%--                            <dx:GridViewDataTextColumn FieldName="paso" Caption="Paso" VisibleIndex="1" Width="12%">
-                            </dx:GridViewDataTextColumn>
-                            <dx:GridViewDataTextColumn FieldName="titulo" Caption="Título" VisibleIndex="2" Width="12%">
-                            </dx:GridViewDataTextColumn>
-                            <dx:GridViewDataTextColumn FieldName="usuario" Caption="Usuario" VisibleIndex="3" Width="11%">
-                            </dx:GridViewDataTextColumn>
-                            <dx:GridViewDataTextColumn FieldName="puesto" Caption="Puesto" VisibleIndex="4" Width="11%">
-                            </dx:GridViewDataTextColumn>
-                            <dx:GridViewDataTextColumn FieldName="fechaNotificacion" Caption="Fecha de notificación" VisibleIndex="5" Width="11%">
-                            </dx:GridViewDataTextColumn>
-                            <dx:GridViewDataTextColumn FieldName="fechaAccion" Caption="Fecha de acción" VisibleIndex="6" Width="11%">
-                            </dx:GridViewDataTextColumn>
-                            <dx:GridViewDataTextColumn FieldName="accion" Caption="Acción" VisibleIndex="7" Width="11%">
-                            </dx:GridViewDataTextColumn>
-                            <dx:GridViewDataTextColumn FieldName="comentario" Caption="Comentario" VisibleIndex="8" Width="11%">
-                            </dx:GridViewDataTextColumn>--%>
+                            <dx:GridViewDataTextColumn  FieldName="codigoPerfil" Caption="Autoriza"/>
+                            <dx:GridViewDataTextColumn  FieldName="codigoEmpleado" Caption="Nombre del Autorizador"/>
                         </Columns>
                         <Styles>
                             <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
@@ -2140,209 +2063,22 @@
                         <Settings ShowFilterRow="True" />
                         <ClientSideEvents EndCallback="OnAprobacionesEndCallback" />
                     </dx:ASPxGridView>
-<%--                    <table id="table"
-                           data-toggle="table"
-                           data-sort-class="table-active"
-                           data-sortable="true"
-                           data-sort-name="id"
-                           data-sort-order="asc"
-                           data-show-toggle="true"
-                           data-show-columns="true"
-                           data-show-fullscreen="true"
-                           data-buttons-class="primary"
-                           data-search="true"
-                           data-show-search-clear-button="true"
-                           data-resizable="true"
-                           class="CeroPM">
-                        <thead style="background-color:#d9edf7;text-align:center;">
-                            <tr>
-                                <th data-field="id" data-sortable="true">Paso</th>
-                                <th data-field="titulo" data-sortable="true">Título </th>
-                                <th data-field="usuario" data-sortable="true">Usuario</th>
-                                <th data-field="name" data-sortable="true">Puesto</th>
-                                <th data-field="fechainicio" data-sortable="true">Fecha de notificación</th>
-                                <th data-field="fechafin" data-sortable="true">Fecha de acción</th>
-                                <th data-field="accion" data-sortable="true">Acción</th>
-                                <th data-field="comentario" data-sortable="true">Comentario</th>
-                            </tr>
-                        </thead>
-                        <tbody style="background-color:white;">
-                            <asp:Repeater id="tbRepetAprobaciones" runat="server">
-                                <ItemTemplate>
-                                    <tr>
-                                        <td><%# Eval("paso") %></td>
-                                        <td><%# Eval("titulo") %></td>
-                                        <td><%# Eval("codigoEmpleado") %></td>
-                                        <td><%# Eval("codigoEmpleado") %></td>
-                                        <td><%# Eval("fechaNotificacion") %></td>
-                                        <td><%# Eval("fechaAccion") %></td>
-                                        <td><%# Eval("accion") %></td>
-                                        <td><%# Eval("comentario") %></td>
-                                    </tr>
-                                </ItemTemplate>
-                            </asp:Repeater>
-<%--                            <tr>
-                                <td>1</td>
-                                <td>Autor</td>
-                                <td>Alejandro Gonzalez</td>
-                                <td>Supervisor</td>
-                                <td>02/11/2020 08:45AM</td>
-                                <td>02/11/2020 09:00AM</td>
-                                <td>Envío</td>
-                                <td>Todo listo para tirar</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jefe Directo</td>
-                                <td>Juan Perez</td>
-                                <td>Sub gerente</td>
-                                <td>02/11/2020 09:00AM</td>
-                                <td>02/11/2020 09:15AM</td>
-                                <td>Aprobó</td>
-                                <td>Facturen lo más pronto posible</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Transportista</td>
-                                <td>Julio Guerrero</td>
-                                <td>Proveedor</td>
-                                <td>02/11/2020 09:15AM</td>
-                                <td>03/11/2020 4:30PM</td>
-                                <td>Cargó</td>
-                                <td>Ninguno</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Entrega de manifiesto</td>
-                                <td>Juan Carlos Perez</td>
-                                <td>Especialista</td>
-                                <td>03/11/2020 04:30pM</td>
-                                <td>10/11/2020 1:30PM</td>
-                                <td>Recibió</td>
-                                <td>Comenta el transportista que hubo problemas con la documentación, por lo tanto esta es una descripción nmuy larga apra ver co</td>
-                            </tr>
-                        </tbody>
-                    </table>--%>
-
-<%--                            <div id="mdlAprobaciones" class="modal fade" role="dialog">
-                                <div class="modal-dialog" runat="server">
-                                    <div class="modal-content" runat="server">
-                                        <div class="modal-header" runat="server">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4>Aprobación</h4>
-                                        </div>
-                                        <div class="modal-body" runat="server">
-                                            <dx:ASPxCallbackPanel runat="server" ID="ASPxCallbackPanel1" Width="100%"
-                                                ClientInstanceName="CallbackPanel" RenderMode="Table"
-                                                OnCallback="ASPxCallbackPanel1_Callback">
-                                                <ClientSideEvents EndCallback="OnPanel1EndCallback" />
-                                                <PanelCollection>
-                                                    <dx:PanelContent ID="PanelContent3" runat="server">
-                                                        <div class="row form-group CeroPM">
-                                                            <label class="text-form col-sm-2">Codigo</label>
-                                                            <div class="col-sm-4">
-                                                                <asp:TextBox ID="txtCodigoAprobacionAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row form-group CeroPM">
-                                                            <label class="text-form col-sm-2">Paso</label>
-                                                            <div class="col-sm-4">
-                                                                <asp:TextBox ID="txtPasoAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                                            </div>
-                                                            <label class="text-form col-sm-2">Título</label>
-                                                            <div class="col-sm-4">
-                                                                <asp:TextBox ID="txtTituloAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row form-group CeroPM">
-                                                            <label class="text-form col-sm-2">Puesto</label>
-                                                            <div class="col-sm-4">
-                                                                <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbPuestoAdd" runat="server" IncrementalFilteringMode="Contains" 
-                                                                    FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" 
-                                                                    PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
-                                                                    <ValidationSettings>
-                                                                        <RequiredField  IsRequired="true" ErrorText="Select a option"/>
-                                                                    </ValidationSettings>
-                                                                    <ClientSideEvents SelectedIndexChanged="function(s, e) { 
-                                                                                CallbackPanel.PerformCallback('filterPuesto,'+s.lastSuccessValue.toString());}" />
-                                                                    <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
-                                                                </dx:ASPxComboBox>
-                                                            </div>
-                                                            <label class="text-form col-sm-2">Empleado</label>
-                                                            <div class="col-sm-4">
-                                                                <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbEmpleadoAdd" runat="server" IncrementalFilteringMode="Contains" 
-                                                                    FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
-                                                                    PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
-                                                                    <ValidationSettings>
-                                                                        <RequiredField  IsRequired="true" ErrorText="Select a option"/>
-                                                                    </ValidationSettings>
-                                                                    <ClientSideEvents/>
-                                                                    <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
-                                                                </dx:ASPxComboBox>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row form-group CeroPM">
-                                                            <label class="text-form col-sm-2">Fecha Notificación</label>
-                                                            <div class="col-sm-4">
-                                                                <dx:ASPxDateEdit ID="xDateFechaNotAdd" runat="server" CssClass="form-control input-sm Campos"
-                                                                    DisplayFormatString="yyyy-MM-dd" EditFormatString="yyyy-MM-dd">                                                             
-                                                                    <TimeSectionProperties>
-                                                                        <TimeEditProperties EditFormatString="hh:mm tt" />
-                                                                    </TimeSectionProperties>
-                                                                </dx:ASPxDateEdit>                                                     
-                                                            </div>
-                                                            <label class="text-form col-sm-2">Fecha Acción</label>
-                                                            <div class="col-sm-4">
-                                                                <dx:ASPxDateEdit ID="xDateFechaAccionAdd" runat="server" CssClass="form-control input-sm Campos"
-                                                                    DisplayFormatString="yyyy-MM-dd" EditFormatString="yyyy-MM-dd">                                                             
-                                                                    <TimeSectionProperties>
-                                                                        <TimeEditProperties EditFormatString="hh:mm tt" />
-                                                                    </TimeSectionProperties>
-                                                                </dx:ASPxDateEdit>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row form-group CeroPM">
-                                                            <label class="text-form col-sm-2">Acción</label>
-                                                            <div class="col-sm-4">
-                                                                 <asp:TextBox ID="txtAccionAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>                                                 
-                                                            </div>
-                                                            <label class="text-form col-sm-2">Comentario</label>
-                                                            <div class="col-sm-4">
-                                                                <asp:TextBox ID="txtComentarioAdd" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>  
-                                                            </div>
-                                                        </div>
-                                                        </dx:PanelContent>
-                                                    </PanelCollection>
-                                                </dx:ASPxCallbackPanel>
-                                            <br />
-                                            <div>
-                                                <button type="button" class="btn btn-primary" onclick="xgrdAprobaciones.PerformCallback('Save');" data-dismiss="modal">Add</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>--%>
                 </div>
                 <div id="menu1" class="tab-pane fade">
                     <h3>Historial</h3>
                     <p><asp:TextBox ID="txtComentarios" TextMode="MultiLine" Rows="3" runat="server" CssClass="form-control input-sm hidden"></asp:TextBox></p>
-                    <dx:ASPxGridView ID="xgrdHistorial" runat="server" AutoGenerateColumns="true"
-                        Width="100%" Font-Names="Segoe UI"
+                    <dx:ASPxGridView ID="xgrdHistorial" runat="server" AutoGenerateColumns="true" Width="100%" Font-Names="Segoe UI"
                         ClientInstanceName="xgrdHistorial" Theme="Metropolis">
                         <Columns>
-                            <dx:GridViewDataTextColumn FieldName="fecha" Caption="Fecha" VisibleIndex="0">
-                            </dx:GridViewDataTextColumn>
-                            <dx:GridViewDataTextColumn FieldName="accion" Caption="" VisibleIndex="1">
-                            </dx:GridViewDataTextColumn>
-                            <dx:GridViewDataTextColumn FieldName="comentarios" Caption="Comentarios" VisibleIndex="2">
-                            </dx:GridViewDataTextColumn>
-                            <dx:GridViewDataTextColumn FieldName="NombreCompleto" Caption="Usuario" VisibleIndex="3">
-                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn FieldName="fecha" Caption="Fecha" VisibleIndex="0" Width="15%"/>
+                            <dx:GridViewDataTextColumn FieldName="NombreCompleto" Caption="Usuario" VisibleIndex="1" Width="25%"/>
+                            <dx:GridViewDataTextColumn FieldName="accion" Caption="" VisibleIndex="2" Width="10%"/>
+                            <dx:GridViewDataTextColumn FieldName="comentarios" Caption="Comentarios" VisibleIndex="3" Width="50%"/>
                         </Columns>
                         <Styles>
-                            <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
-                            <RowHotTrack BackColor="#CEECF5"></RowHotTrack>
-                            <Header BackColor="#F2F2F2" HorizontalAlign="Center" Font-Bold="true" CssClass="text-center"></Header>
+                            <AlternatingRow BackColor="#F2F2F2"/>
+                            <RowHotTrack BackColor="#CEECF5"/>
+                            <Header BackColor="#F2F2F2" HorizontalAlign="Center" Font-Bold="true" CssClass="text-center"/>
                         </Styles>
                         <SettingsPager Mode="ShowPager" PageSize="20" />
                         <Settings ShowFilterRow="True" />
@@ -2351,137 +2087,7 @@
                 </div>
             </div>
         </div>
-
-<%--            <div class="row form-group CeroPM" style="padding-top:10px;">
-                <label class="text-form col-sm-2">Utilizado en </label>
-                <div class="col-sm-4">
-                        <input type="hidden" id="hdnCodigoUtilizado" value='<%# Eval("CodigoUtilizado")%>' runat="server"/>
-                        <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbUtilizado" runat="server" IncrementalFilteringMode="Contains" 
-                            FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
-                            PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
-                            <ValidationSettings>
-                                <RequiredField  IsRequired="true" ErrorText="Select a option"/>
-                            </ValidationSettings>
-                            <ClientSideEvents/>
-                            <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
-                        </dx:ASPxComboBox>
-                </div>
-
-            </div>
-            <div class="row form-group CeroPM">
-
-
-                <label class="text-form col-sm-1">¿Es único?</label>
-                <div class="col-sm-2">
-                    <dx:ASPxComboBox class="form-control input-sm Campos" ID="cmbUnico" runat="server" IncrementalFilteringMode="Contains" 
-                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20"
-                        PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
-                        <ValidationSettings>
-                            <RequiredField  IsRequired="true" ErrorText="Select a option"/>
-                        </ValidationSettings>
-                        <ClientSideEvents/>
-                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
-                    </dx:ASPxComboBox>
-                </div>
-            </div>
-            <div class="row form-group CeroPM">
-                <label class="text-form col-sm-1">Fecha Cotización</label>
-                <div class="col-sm-2">
-                    <dx:ASPxDateEdit ID="xDateFechaCot" runat="server" Width="200px"  CssClass="form-control input-sm Campos"
-                        DisplayFormatString="yyyy-MM-dd" EditFormatString="yyyy-MM-dd">                                                             
-                        <TimeSectionProperties>
-                            <TimeEditProperties EditFormatString="hh:mm tt" />
-                        </TimeSectionProperties>
-                    </dx:ASPxDateEdit> 
-                </div>
-
-
-
-            </div>
-            <div class="row form-group CeroPM">
-                <h3>
-                    <label class="text-form col-sm-offset-4 col-sm-2" style="text-align:right">Total</label>
-                    <label class="text-form col-sm-2" style="color:green;;width:15px">$ </label>
-                    <asp:Label ID="lblTotal" runat="server" CssClass="text-form col-sm-2" style="color:green;"></asp:Label>
-                </h3>
-            </div>
-
-            <section id="sCompradordddd" class="row CeroPM">
-                <div class="col-xs-12">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Información del Comprador</h3>
-                            <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row form-group CeroPM">
-                                <label class="text-form col-sm-3">Ficha de datos de seguridad</label>
-                                <div class="col-sm-3">
-                                    <asp:RadioButton ID="rbFichaSi" runat="server" GroupName="FichaSeguridad" Text="&nbsp;Si" onchange="ASPxCallbackPanel2.PerformCallback('rbFichaSegSi');"/>&nbsp;
-                                    <asp:RadioButton ID="rbFichaNo" runat="server" GroupName="FichaSeguridad" Text="&nbsp;No" onchange="ASPxCallbackPanel2.PerformCallback('rbFichaSegNo');"/>&nbsp;
-                                    <%--<asp:TextBox ID="txtFichaSeguridad" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                </div>
-
-                            </div>
-                            <div class="row form-group CeroPM">
-
-                                <label class="text-form col-sm-3">Alacenamiento externo posbible</label>
-                                <div class="col-sm-3">
-                                    <asp:RadioButton ID="rbAlmExtSi" runat="server" GroupName="AlmaExt" Text="&nbsp;Si" />&nbsp;
-                                    <asp:RadioButton ID="rbAlmExtNo" runat="server" GroupName="AlmaExt" Text="&nbsp;No"/>&nbsp;
-                                </div>
-                            </div>
-
-                            <div class="row form-group CeroPM">
-                                <label class="text-form col-sm-3">Fecha de inventario</label>
-                                <div class="col-sm-3">
-                                    <dx:ASPxDateEdit ID="xDateFechaInv" runat="server" Width="200px"  CssClass="form-control input-sm Campos"
-                                        DisplayFormatString="yyyy-MM-dd" EditFormatString="yyyy-MM-dd">                                                             
-                                        <TimeSectionProperties>
-                                            <TimeEditProperties EditFormatString="hh:mm tt" />
-                                        </TimeSectionProperties>
-                                    </dx:ASPxDateEdit> 
-                                </div>
-
-                            </div>
-                            <div id="dvHojaSeg1" runat="server" class="row form-group CeroPM">
-                               <label class="text-form col-sm-3">Hoja de seguridad</label>
-                               <div class="col-sm-3">
-                                    <dx:ASPxUploadControl ID="uplGraphicsFile" runat="server" Theme="SoftOrange" 
-                                        ClientInstanceName="CIuplGraphicsFile" ShowProgressPanel="True"
-                                        NullText="Click here to browse files..." Size="35"
-                                        OnFileUploadComplete="CIuplGraphicsFile_FileUploadComplete" CssClass="labelGral"
-                                        Width="100%">
-                                        <ClientSideEvents 
-                                            FileUploadComplete="function(s, e) { CIuplGraphicsFile_OnFileUploadComplete(s,e); }"
-                                                FilesUploadComplete="function(s, e) { CIuplGraphicsFile_OnFilesUploadComplete(e); }"
-                                            FileUploadStart="function(s, e) { CIuplGraphicsFile_OnUploadStart(); }"
-                                            TextChanged="function(s, e) { UpdateUploadGraphicsFileButton(); }">                                                                            
-                                        </ClientSideEvents>
-                                        <ValidationSettings MaxFileSize="4194304" AllowedFileExtensions=".pdf, .doc, .png, .jpg, .xlsx">                                                                            
-                                        </ValidationSettings>
-                                        <ButtonStyle CssClass="labelGral" Font-Size="10pt"></ButtonStyle>
-                                    </dx:ASPxUploadControl>
-                                </div>
-                                <div class="col-sm-3">
-                                    <dx:ASPxButton ID="btnUploadGraphicsFile" runat="server" AutoPostBack="False" Theme="SoftOrange" 
-                                        Text="Upload File" ClientInstanceName="btnUploadGraphicsFile"
-                                        Width="100px" ClientEnabled="False">
-                                        <ClientSideEvents Click="function(s, e) { CIuplGraphicsFile.Upload(); }" />
-                                    </dx:ASPxButton>
-                               </div>
-                            </div>
-                            <div id="dvHojaSeg2" runat="server" class="row form-group CeroPM">
-                                <div class="col-sm-6">
-                                    <asp:TextBox ID="txtFile" Width="100%" Enabled="false" runat="server"></asp:TextBox>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>--%>
-
-              </dx:PanelContent>
+          </dx:PanelContent>
           </PanelCollection>
       </dx:ASPxCallbackPanel>
      </div>

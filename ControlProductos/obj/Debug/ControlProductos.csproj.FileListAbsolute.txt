@@ -39,7 +39,6 @@ C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProduct
 C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll.licenses
 C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll
 C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.pdb
-C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.csprojResolveAssemblyReference.cache
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\Microsoft.CodeAnalysis.dll
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\bin\roslyn\System.Reflection.Metadata.dll
@@ -82,3 +81,4 @@ D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\ob
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll.licenses
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll
 D:\Horacio\EHSYS\Proyectos\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.pdb
+C:\Users\aleja\OneDrive\Documentos\AltaProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.csprojResolveAssemblyReference.cache

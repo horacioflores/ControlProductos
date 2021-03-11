@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Principal.Master" AutoEventWireup="true" CodeBehind="ctrolProds_ProductosVigentes.aspx.cs" Inherits="ControlProductos.ctrolProds_ProductosVigentes" %>
 <%@ Register Assembly="DevExpress.Web.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-</asp:Content>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server"/>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/jscript">
           function OnEndCallback(s, e) {              
@@ -174,254 +173,146 @@
         }
     </style>
     <div id="Busqueda" runat="server">
-        <dx:ASPxNavBar ID="ASPxNavBar2" runat="server" Theme="Metropolis" Width="100%" 
-            Font-Bold="False">
+        <dx:ASPxNavBar ID="ASPxNavBar2" runat="server" Theme="Metropolis" Width="100%" Font-Bold="False">
             <Groups>
                 <dx:NavBarGroup Text="Control Products\ Filters">
-                        <ContentTemplate>
-                                <div id="Parametros" runat="server" visible="true">
-                                            
-                                <table style="float: left; width: 40%"" class="OptionsTable BottomMargin">
-                                    <%--<tr style="height:10px"></tr>
-                                    <tr>
-                                        <td  style="width:10%; text-align:left">
-                                                <dx:ASPxLabel ID="lblFolio" runat="server" Text="Document Number: ">
-                                        </dx:ASPxLabel>
-                                        </td>
-                                        <td  style="width:30%; text-align:left">
-                                            <dx:ASPxTextBox runat="server" Theme="SoftOrange" Height="5px"  ID="xtxtFolio" Enabled="True" Width="100%" FocusedStyle-Border-BorderColor="#3399ff" FocusedStyle-Border-BorderStyle="Double">
-                                            </dx:ASPxTextBox>
-                                        </td>
-                                    </tr>--%>
-                                    <tr style="height:10px"></tr>
-                                    <tr>
-                                        <td  style="width:10%; text-align:left">
-                                             <dx:ASPxLabel ID="ASPxLblFechaIni" runat="server" Text="Initial Date: "></dx:ASPxLabel>
-                                        </td>
-                                        <td  style="width:30%; text-align:left">
-                                            <dx:ASPxDateEdit ID="xDateFechaIni" runat="server" Width="200px"  Theme="SoftOrange"
-                                                DisplayFormatString="yyyy-MM-dd" EditFormatString="yyyy-MM-dd">                                                             
-                                                <TimeSectionProperties>
-                                                    <TimeEditProperties EditFormatString="hh:mm tt" />
-                                                </TimeSectionProperties>
-                                            </dx:ASPxDateEdit> 
-                                        </td>
+                    <ContentTemplate>
+                        <div id="Parametros" runat="server" visible="true">                        
+                            <table style="float: left; width: 40%"" class="OptionsTable BottomMargin">
+                                <tr style="height:10px"></tr>
+                                <tr>
+                                    <td  style="width:10%; text-align:left">
+                                        <dx:ASPxLabel ID="ASPxLblFechaIni" runat="server" Text="Initial Date: "/>
+                                    </td>
+                                    <td  style="width:30%; text-align:left">
+                                        <dx:ASPxDateEdit ID="xDateFechaIni" runat="server" Width="200px"  Theme="SoftOrange"
+                                            DisplayFormatString="yyyy-MM-dd" EditFormatString="yyyy-MM-dd">                                                             
+                                            <TimeSectionProperties>
+                                                <TimeEditProperties EditFormatString="hh:mm tt" />
+                                            </TimeSectionProperties>
+                                        </dx:ASPxDateEdit> 
+                                    </td>
+                                </tr>
+                                <tr style="height:10px"></tr>
+                                <tr>
+                                    <td  style="width:10%; text-align:left">
+                                            <dx:ASPxLabel ID="ASPxLblFechaFin" runat="server" Text="End Date: "></dx:ASPxLabel>
+                                    </td>
+                                    <td  style="width:30%; text-align:left">
+                                        <dx:ASPxDateEdit ID="xDateFechaFin" runat="server" Width="200px"  Theme="SoftOrange"
+                                            DisplayFormatString="yyyy-MM-dd" EditFormatString="yyyy-MM-dd">                                                             
+                                            <TimeSectionProperties>
+                                                <TimeEditProperties EditFormatString="hh:mm tt" />
+                                            </TimeSectionProperties>
+                                        </dx:ASPxDateEdit> 
+                                    </td>
+                                </tr>
+                                <tr style="height:10px"></tr>
+                                <tr>
+                                    <td  style="width:20%; text-align:right">
+                                        <dx:ASPxButton ID="btnBuscar" runat="server" Text="Search" Theme="SoftOrange" AutoPostBack="false" >
+                                            <ClientSideEvents Click="OnCallback" />
+                                        </dx:ASPxButton>
+                                    </td>                                                   
                                     </tr>
-                                    <tr style="height:10px"></tr>
-                                    <tr>
-                                        <td  style="width:10%; text-align:left">
-                                             <dx:ASPxLabel ID="ASPxLblFechaFin" runat="server" Text="End Date: "></dx:ASPxLabel>
-                                        </td>
-                                        <td  style="width:30%; text-align:left">
-                                            <dx:ASPxDateEdit ID="xDateFechaFin" runat="server" Width="200px"  Theme="SoftOrange"
-                                                DisplayFormatString="yyyy-MM-dd" EditFormatString="yyyy-MM-dd">                                                             
-                                                <TimeSectionProperties>
-                                                    <TimeEditProperties EditFormatString="hh:mm tt" />
-                                                </TimeSectionProperties>
-                                            </dx:ASPxDateEdit> 
-                                        </td>
-                                    </tr>
-                                    <tr style="height:10px"></tr>
-                                    <tr>
-                                        <td  style="width:20%; text-align:right">
-                                            <dx:ASPxButton ID="btnBuscar" runat="server" Text="Search" Theme="SoftOrange" AutoPostBack="false" >
-                                                <ClientSideEvents Click="OnCallback" />
-                                            </dx:ASPxButton>
-                                        </td>                                                   
-                                      </tr>
-                                </table>
-                                <table style="float: right; width: 20%" class="OptionsTable BottomMargin">
-                                    <tr>
-                                        <td>
-                                                <dx:ASPxRoundPanel ID="ASPxRoundPanel1" runat="server" Width="100%" HeaderText="+ Options" Theme="Metropolis" Visible="false" >
-                                                <PanelCollection>
-                                                <dx:PanelContent>
-                                                    <div>
-                                                        <table>
-                                                            <tr>
-                                                                <td style="width:100%">
-                                                                    <div class="div-container">
-                                                                        <div class="div-img" >
+                            </table>
+                            <table style="float: right; width: 20%" class="OptionsTable BottomMargin">
+                                <tr>
+                                    <td>
+                                        <dx:ASPxRoundPanel ID="ASPxRoundPanel1" runat="server" Width="100%" HeaderText="+ Options" Theme="Metropolis" Visible="false" >
+                                            <PanelCollection>
+                                            <dx:PanelContent>
+                                                <div>
+                                                    <table>
+                                                        <tr>
+                                                            <td style="width:100%">
+                                                                <div class="div-container">
+                                                                    <div class="div-img" >
                                                                         <asp:ImageButton runat="server" id="imgNew" class="img"   ImageUrl="Assets/Images/New.png" OnClick="imgNew_Click" alt="New" style="cursor:pointer" title="New" />
-                                                                        </div>
                                                                     </div>
-                                                                </td> 
-                                                                    <td style="width:20%">
-                                                                        <div class="div-container">
-                                                                        <div class="div-img" >
-                                                                        <img class="img" src="Assets/Images/trash_can.png" alt="Remove Selected" style="cursor:pointer" onclick="return DisableSelected();" title="Remove Selected" />
-                                                                        </div>
-                                                                        </div>
-                                                                </td>
-                                                                <td style="width:20%" >
+                                                                </div>
+                                                            </td> 
+                                                                <td style="width:20%">
                                                                     <div class="div-container">
-                                                                        <div class="div-img" >
-                                                                            <img class="img" src="Assets/Images/delete_all.png" alt="Remove All" style="cursor:pointer" onclick="return DisableAll();" title="Remove All" /> 
-                                                                        </div>
+                                                                    <div class="div-img" >
+                                                                        <img class="img" src="Assets/Images/trash_can.png" alt="Remove Selected" style="cursor:pointer" onclick="return DisableSelected();" title="Remove Selected" />
                                                                     </div>
-                                                                </td>
-                                                                    <td>
-                                                                    <dx:ASPxCallbackPanel ID="CallbackPanelDisable" ClientInstanceName="CallbackPanelDisable" runat="server" Width="200px" oncallback="CallbackPanelDisable_Callback">
-                                                                    </dx:ASPxCallbackPanel>
-                                                                    <dx:ASPxCallbackPanel ID="CallbackPanelDisableAll" ClientInstanceName="CallbackPanelDisableAll" runat="server" Width="200px" oncallback="CallbackPanelDisableAll_Callback">
-                                                                    </dx:ASPxCallbackPanel>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                </dx:PanelContent>
-                                                </PanelCollection>
-                                            </dx:ASPxRoundPanel>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </ContentTemplate>                                
+                                                                    </div>
+                                                            </td>
+                                                            <td style="width:20%" >
+                                                                <div class="div-container">
+                                                                    <div class="div-img" >
+                                                                        <img class="img" src="Assets/Images/delete_all.png" alt="Remove All" style="cursor:pointer" onclick="return DisableAll();" title="Remove All" /> 
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                                <td>
+                                                                <dx:ASPxCallbackPanel ID="CallbackPanelDisable" ClientInstanceName="CallbackPanelDisable" runat="server" Width="200px" oncallback="CallbackPanelDisable_Callback"/>
+                                                                <dx:ASPxCallbackPanel ID="CallbackPanelDisableAll" ClientInstanceName="CallbackPanelDisableAll" runat="server" Width="200px" oncallback="CallbackPanelDisableAll_Callback"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </dx:PanelContent>
+                                            </PanelCollection>
+                                        </dx:ASPxRoundPanel>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </ContentTemplate>                                
                 </dx:NavBarGroup>                            
             </Groups>
         </dx:ASPxNavBar>
     </div>
     <div id="Detalle" runat="server">
-
-        <dx:ASPxGridView ID="xgrdProds" runat="server" AutoGenerateColumns="False" 
-            Width="100%" Font-Names="Segoe UI"
-            KeyFieldName="ctrlProdsID" 
-            OnHtmlDataCellPrepared="xgrdProds_HtmlDataCellPrepared"
-            OnDetailRowExpandedChanged="xgrdProds_DetailRowExpandedChanged"
-            ClientInstanceName="grid"
-            Theme="Metropolis">
-            <Settings HorizontalScrollBarMode="Auto"/>
+        <dx:ASPxGridView ID="xgrdProds" runat="server" AutoGenerateColumns="False" Width="100%" Font-Names="Segoe UI"
+            KeyFieldName="ctrlProdsID" OnHtmlDataCellPrepared="xgrdProds_HtmlDataCellPrepared" OnDetailRowExpandedChanged="xgrdProds_DetailRowExpandedChanged"
+            ClientInstanceName="grid" Theme="Metropolis">
+            <SettingsBehavior ConfirmDelete="true" ColumnResizeMode="Control" EnableRowHotTrack="true" AllowEllipsisInText="True"/>
+            <Settings HorizontalScrollBarMode="Auto" ShowFilterRow="True" ShowHeaderFilterButton="true" GridLines="Horizontal" 
+                ShowFilterBar="Visible" ShowFilterRowMenu="true" ShowFooter="true" VerticalScrollBarMode="Hidden" ShowGroupPanel="true"/>
+		    <SettingsPager Mode="ShowPager" PageSize="14" AllButton-Visible="true" Position="Bottom" ShowEmptyDataRows="true">
+		        <AllButton Visible="true"/>
+                <FirstPageButton Visible="true"/>
+                <LastPageButton Visible="true"/>
+                <PageSizeItemSettings ShowAllItem="true" Visible="true"/>
+            </SettingsPager>
+            <SettingsText ConfirmDelete="Are you sure you want to enable/disable this Solicitud"/> 
             <Columns>
-                <dx:GridViewDataTextColumn FieldName="ctrlProdsID" Visible="false" Caption="Identifier" VisibleIndex="0">
-                </dx:GridViewDataTextColumn>
-                <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="1" Width="1%">
-                </dx:GridViewDataTextColumn>
-                <dx:GridViewDataColumn FieldName="ctrlProdsID" VisibleIndex="2"  Caption="Actions" CellStyle-HorizontalAlign="Left">
+                <dx:GridViewDataTextColumn FieldName="ctrlProdsID" Visible="false" Caption="Identifier" VisibleIndex="0"/>
+                <dx:GridViewDataTextColumn Name="CheckID" VisibleIndex="1" Width="1%"/>
+                <dx:GridViewDataColumn FieldName="ctrlProdsID" VisibleIndex="2"  Caption="" CellStyle-HorizontalAlign="Left" Width="30px">
                       <DataItemTemplate>
                           <asp:ImageButton ID="imgEditar" runat="server" ImageUrl="~/Assets/images/layout_edit.png"  OnClick="imgEditar_Click" CommandArgument='<%# Eval("ctrlProdsID") %>' />
                       </DataItemTemplate>
                 </dx:GridViewDataColumn>
-                <dx:GridViewDataTextColumn FieldName="noDocumento" VisibleIndex="3" Caption="Document Number">
-                </dx:GridViewDataTextColumn>   
-                <dx:GridViewDataTextColumn FieldName="codigoArticulo" VisibleIndex="4" Caption="Part Number">
-                </dx:GridViewDataTextColumn>    
-                <dx:GridViewDataTextColumn FieldName="descripcion" VisibleIndex="5" Caption="Description">
-                </dx:GridViewDataTextColumn>  
-                <dx:GridViewDataTextColumn FieldName="Marca" VisibleIndex="6" Caption="Marca">
-                </dx:GridViewDataTextColumn>  
-                 <dx:GridViewDataTextColumn FieldName="modelo" VisibleIndex="7" Caption="Model">
-                </dx:GridViewDataTextColumn>  
-                <dx:GridViewDataTextColumn FieldName="usuario" VisibleIndex="8" Caption="User">
-                </dx:GridViewDataTextColumn>  
-                 <dx:GridViewDataTextColumn FieldName="fechaSolicitud" VisibleIndex="9" Caption="Request Date">
-                </dx:GridViewDataTextColumn> 
-                <dx:GridViewDataTextColumn FieldName="codigoSolicitante" VisibleIndex="10" Caption="Applicant">
-                </dx:GridViewDataTextColumn>      
-                <dx:GridViewDataTextColumn FieldName="Departamento" VisibleIndex="11" Caption="Depto">
-                </dx:GridViewDataTextColumn>      
-                <dx:GridViewDataTextColumn FieldName="Comprador" VisibleIndex="12" Caption="Buyer">
-                </dx:GridViewDataTextColumn>  
-                <dx:GridViewDataTextColumn FieldName="totalAnual" VisibleIndex="13" Caption="total annual">
-                </dx:GridViewDataTextColumn>       
-                <dx:GridViewDataTextColumn FieldName="unidadMedida" VisibleIndex="14" Caption="UM">
-                </dx:GridViewDataTextColumn>
-                <dx:GridViewDataTextColumn FieldName="Subcategoria1" VisibleIndex="15" Caption="Subcategory 1">
-                </dx:GridViewDataTextColumn>   
-                <dx:GridViewDataTextColumn FieldName="GlClass" VisibleIndex="16" Caption="GL Class">
-                </dx:GridViewDataTextColumn>  
-                <dx:GridViewDataTextColumn FieldName="operacion" VisibleIndex="17" Caption="Request Type">
-                </dx:GridViewDataTextColumn>   
-              <%--  <dx:GridViewDataTextColumn FieldName="sts_Prods" VisibleIndex="18" Caption="Status">
-                </dx:GridViewDataTextColumn>   --%>
-                                                                                                                                                                                                                                                                                                
+                <dx:GridViewDataTextColumn FieldName="noDocumento" VisibleIndex="3" Caption="Doc. Number" Width="50px" CellStyle-ForeColor="#FF0000"/>   
+                <dx:GridViewDataTextColumn FieldName="codigoArticulo" VisibleIndex="4" Caption="Part Number" CellStyle-ForeColor="#0066FF"/>
+                <dx:GridViewDataTextColumn FieldName="descripcion" VisibleIndex="5" Caption="Description" Width="200px"/>  
+                <dx:GridViewDataTextColumn FieldName="Marca" VisibleIndex="6" Caption="Marca"/>  
+                <dx:GridViewDataTextColumn FieldName="modelo" VisibleIndex="7" Caption="Model"/>  
+                <dx:GridViewDataTextColumn FieldName="usuario" VisibleIndex="8" Caption="User" />
+                <dx:GridViewDataTextColumn FieldName="fechaSolicitud" VisibleIndex="9" Caption="Request Date" />
+                <dx:GridViewDataTextColumn FieldName="codigoSolicitante" VisibleIndex="10" Caption="Applicant" />
+                <dx:GridViewDataTextColumn FieldName="Departamento" VisibleIndex="11" Caption="Depto" />
+                <dx:GridViewDataTextColumn FieldName="Comprador" VisibleIndex="12" Caption="Buyer" />
+                <dx:GridViewDataTextColumn FieldName="totalAnual" VisibleIndex="13" Caption="total annual" />
+                <dx:GridViewDataTextColumn FieldName="unidadMedida" VisibleIndex="14" Caption="UM" />
+                <dx:GridViewDataTextColumn FieldName="Subcategoria1" VisibleIndex="15" Caption="Subcategory 1" />
+                <dx:GridViewDataTextColumn FieldName="GlClass" VisibleIndex="16" Caption="GL Class" />
+                <dx:GridViewDataTextColumn FieldName="operacion" VisibleIndex="17" Caption="Request Type" />
+              <%--  <dx:GridViewDataTextColumn FieldName="sts_Prods" VisibleIndex="18" Caption="Status"/>   --%>
             </Columns>
-            <SettingsBehavior ConfirmDelete="true"/>
-            <SettingsPager Mode="ShowPager" PageSize="13"/>
-            <Settings ShowFilterRow="True" />
-            <SettingsDetail ShowDetailRow="false" />
-            <SettingsText ConfirmDelete="Are you sure you want to enable/disable this Solicitud"/> 
-            <SettingsEditing Mode="EditForm"></SettingsEditing>
+            <GroupSummary>
+                <dx:ASPxSummaryItem SummaryType="Count" />
+            </GroupSummary>
             <Styles>
-                <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
-                <RowHotTrack BackColor="#CEECF5"></RowHotTrack>
-                <Header BackColor="#F2F2F2"></Header>                                              
+                <AlternatingRow BackColor="#F4F4F4"/>
+                <RowHotTrack BackColor="#CEECF5"/>
+                <Header BackColor="#F2F2F2" HorizontalAlign="Center" Font-Bold="true" CssClass="text-center"/>
+                <GroupRow Font-Italic="true" ForeColor="#0066FF"/>
             </Styles>
-            <SettingsBehavior EnableRowHotTrack="true" />                 
-<%--            <Templates>
-                <DetailRow>
-                    <dx:ASPxGridView ID="xgrdCotizacion_2" runat="server" AutoGenerateColumns="False" 
-                        Width="100%" Font-Names="Segoe UI"
-                        KeyFieldName="cotizacionProdID" 
-                        OnDetailRowExpandedChanged="xgrdCotizacion2_DetailRowExpandedChanged"
-                        ClientInstanceName="grid2"
-                        Theme="Metropolis">
-                        <Columns>
-                            <dx:GridViewDataTextColumn FieldName="cotizacionProdID" Visible="false" Caption="Identifier" VisibleIndex="0">
-                            </dx:GridViewDataTextColumn>
-                            <dx:GridViewDataTextColumn FieldName="parteCodigo" VisibleIndex="3" Caption="Prod. Code" Width="7%">
-                            </dx:GridViewDataTextColumn>     
-                            <dx:GridViewDataTextColumn FieldName="parte" VisibleIndex="4" Caption="Product Name" Width="25%">
-                            </dx:GridViewDataTextColumn>    
-                            <dx:GridViewDataTextColumn FieldName="um" VisibleIndex="5" Caption="UM" Width="25%">
-                            </dx:GridViewDataTextColumn>  
-                            <dx:GridViewDataTextColumn FieldName="done" VisibleIndex="6" Caption="Quote Done" Width="15%">
-                            </dx:GridViewDataTextColumn>  
-                        </Columns>
-                        <SettingsBehavior ConfirmDelete="true"/>
-                        <SettingsPager Mode="ShowPager" PageSize="13"/>
-                        <Settings ShowFilterRow="True" />
-                        <SettingsText ConfirmDelete="Are you sure you want to enable/disable this Solicitud"/> 
-                        <SettingsDetail ShowDetailRow="true" />
-                        <Styles>
-                            <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
-                            <RowHotTrack BackColor="#CEECF5"></RowHotTrack>
-                            <Header BackColor="#F2F2F2"></Header>                                              
-                        </Styles>
-                        <SettingsBehavior EnableRowHotTrack="true" />               
-                        <Templates>
-                            <DetailRow>
-                                <dx:ASPxGridView ID="xgrdCotizacion_3" runat="server" AutoGenerateColumns="False" 
-                                    Width="100%" Font-Names="Segoe UI"
-                                    OnHtmlDataCellPrepared="xgrdCotizacion_3_HtmlDataCellPrepared"
-                                    KeyFieldName="cotizacionID" 
-                                    ClientInstanceName="grid2"
-                                    Theme="Metropolis">
-                                    <Columns>
-                                        <dx:GridViewDataTextColumn FieldName="cotizacionID" Visible="false" Caption="Identifier" VisibleIndex="0">
-                                        </dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="ProveedorCodigo" VisibleIndex="1" Caption="Supp. Code" Width="7%">
-                                        </dx:GridViewDataTextColumn>     
-                                        <dx:GridViewDataTextColumn FieldName="proveedor" VisibleIndex="2" Caption="Supplier Name" Width="25%">
-                                        </dx:GridViewDataTextColumn>    
-                                        <dx:GridViewDataTextColumn FieldName="precio_unitario" VisibleIndex="3" Caption="Unit Price" Width="15%">
-                                        </dx:GridViewDataTextColumn>  
-                                        <dx:GridViewDataTextColumn FieldName="entrega" VisibleIndex="4" Caption="Delivery Time" Width="15%">
-                                        </dx:GridViewDataTextColumn>  
-                                        <dx:GridViewDataTextColumn FieldName="fechaCotizacion" VisibleIndex="5" Caption="Quotation Date" Width="10%">
-                                        </dx:GridViewDataTextColumn>  
-                                        <dx:GridViewDataTextColumn FieldName="sstatus" VisibleIndex="6" Caption="Status" Width="15%">
-                                        </dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn Name="sstatus" VisibleIndex="7" >
-                                        </dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn Name="Assigned" Caption="Assigned" VisibleIndex="8" >
-                                        </dx:GridViewDataTextColumn>
-                                    </Columns>
-                                    <SettingsBehavior ConfirmDelete="true"/>
-                                    <SettingsPager Mode="ShowPager" PageSize="13"/>
-                                    <Settings ShowFilterRow="True" />
-                                    <SettingsText ConfirmDelete="Are you sure you want to enable/disable this Solicitud"/> 
-                                    <Styles>
-                                        <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
-                                        <RowHotTrack BackColor="#CEECF5"></RowHotTrack>
-                                        <Header BackColor="#F2F2F2"></Header>                                              
-                                    </Styles>
-                                    <SettingsBehavior EnableRowHotTrack="true" />                               
-                                </dx:ASPxGridView>                     
-                            </DetailRow>
-                        </Templates>                
-                    </dx:ASPxGridView> 
-                </DetailRow>
-            </Templates>                --%>
         </dx:ASPxGridView>
     </div>
 </asp:Content>
