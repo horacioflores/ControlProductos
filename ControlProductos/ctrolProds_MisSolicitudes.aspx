@@ -297,17 +297,17 @@
                 <dx:GridViewDataTextColumn FieldName="descripcion" VisibleIndex="5" Caption="Description" Width="200px"/>
                 <dx:GridViewDataTextColumn FieldName="Marca" VisibleIndex="6" Caption="Marca"/>
                 <dx:GridViewDataTextColumn FieldName="modelo" VisibleIndex="7" Caption="Model"/>
-                <dx:GridViewDataTextColumn FieldName="usuario" VisibleIndex="8" Caption="User"/>
-                <dx:GridViewDataTextColumn FieldName="fechaSolicitud" VisibleIndex="9" Caption="Request Date"/>
-                <dx:GridViewDataTextColumn FieldName="codigoSolicitante" VisibleIndex="10" Caption="Applicant"/>
-                <dx:GridViewDataTextColumn FieldName="Departamento" VisibleIndex="11" Caption="Depto"/>
-                <dx:GridViewDataTextColumn FieldName="Comprador" VisibleIndex="12" Caption="Buyer"/>
-                <dx:GridViewDataTextColumn FieldName="totalAnual" VisibleIndex="13" Caption="total annual"/>
-                <dx:GridViewDataTextColumn FieldName="unidadMedida" VisibleIndex="14" Caption="UM"/>
-                <dx:GridViewDataTextColumn FieldName="Subcategoria1" VisibleIndex="15" Caption="Subcategory 1"/>
-                <dx:GridViewDataTextColumn FieldName="GlClass" VisibleIndex="16" Caption="GL Class"/>
-                <dx:GridViewDataTextColumn FieldName="operacion" VisibleIndex="17" Caption="Request Type"/>
-                <dx:GridViewDataTextColumn FieldName="sts_Prods" VisibleIndex="18" Caption="Status" CellStyle-ForeColor="#0066FF"/>
+                <dx:GridViewDataTextColumn FieldName="fechaSolicitud" VisibleIndex="8" Caption="Request Date"/>
+                <dx:GridViewDataTextColumn FieldName="Comprador" VisibleIndex="9" Caption="Buyer"/>
+                <dx:GridViewDataTextColumn FieldName="usuario" VisibleIndex="10" Caption="Current User"/>
+                <dx:GridViewDataTextColumn FieldName="totalAnual" VisibleIndex="11" Caption="total annual"/>
+                <dx:GridViewDataTextColumn FieldName="operacion" VisibleIndex="12" Caption="Request Type"/>
+                <dx:GridViewDataTextColumn FieldName="sts_Prods" VisibleIndex="13" Caption="Status" CellStyle-ForeColor="#0066FF"/>
+                <dx:GridViewDataTextColumn FieldName="codigoSolicitante" VisibleIndex="14" Caption="Author"/>
+                <dx:GridViewDataTextColumn FieldName="Departamento" VisibleIndex="15" Caption="Depto"/>
+                <dx:GridViewDataTextColumn FieldName="unidadMedida" VisibleIndex="16" Caption="UM"/>
+                <dx:GridViewDataTextColumn FieldName="Subcategoria1" VisibleIndex="17" Caption="Subcategory 1"/>
+                <dx:GridViewDataTextColumn FieldName="GlClass" VisibleIndex="18" Caption="GL Class"/>
             </Columns>
             <GroupSummary>
                 <dx:ASPxSummaryItem SummaryType="Count" />

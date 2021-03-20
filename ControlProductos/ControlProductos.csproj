@@ -179,6 +179,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Temas\BgWelcome.jpg" />
     <Content Include="CatMttoAlmn.aspx" />
     <Content Include="CatTypeArticle.aspx" />
     <Content Include="ctrolProds_ProductosVigentes.aspx" />

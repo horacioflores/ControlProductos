@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Principal.Master" AutoEventWireup="true" CodeBehind="wellcome.aspx.cs" Inherits="ControlProductos.wellcome" %>
 <%@ Register Assembly="DevExpress.Web.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/drilldown.js"></script>
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -10,8 +10,15 @@
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
     <style>
+        body {
+            height:100vh;
+            background-color:white;
+            background-image:url('Assets/Temas/BgWelcome.jpg');
+            background-repeat:no-repeat;
+            background-size:100vw;   
+        }
+
         .ind_card{
             margin-top: 30px !important;
         }

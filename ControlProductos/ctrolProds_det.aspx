@@ -179,7 +179,6 @@
            });
 
            if (Valores == "") {
-
                swal({
                    title: "Information",
                    text: "No records selected!",
@@ -187,7 +186,6 @@
                });
                return;
            }
-
            xgrdMtto.PerformCallback(Valores);
        }
 
@@ -204,7 +202,6 @@
            });
 
            if (Valores == "") {
-
                swal({
                    title: "Information",
                    text: "No records selected!",
@@ -259,7 +256,6 @@
            });
 
            if (Valores == "") {
-
                swal({
                    title: "Information",
                    text: "No records selected!",
@@ -292,7 +288,6 @@
            });
 
            if (Valores == "") {
-
                swal({
                    title: "Information",
                    text: "No records selected!",
@@ -300,7 +295,6 @@
                });
                return;
            }
-
            xgrdAlmacen.PerformCallback(Valores);
        }
 
@@ -339,7 +333,6 @@
            });
 
            if (Valores == "") {
-
                swal({
                    title: "Information",
                    text: "No records selected!",
@@ -347,26 +340,28 @@
                });
                return;
            }
-
            xgrdAprobaciones.PerformCallback(Valores);
        }
 
        function recalcular() {
            cantidad = parseFloat(document.getElementById("MainContent_ASPxCallbackPanel2_txtConsEstimado").value);
            precio = parseFloat(document.getElementById("MainContent_ASPxCallbackPanel2_txtPrecioU").value);
-           document.getElementById("MainContent_ASPxCallbackPanel2_txtCantidad").value = cantidad * precio;
-
+           var vMontoC = cantidad * precio;
+           var vMontoT = (cantidad * precio) / 12;
+           document.getElementById("MainContent_ASPxCallbackPanel2_txtCantidad").value = vMontoC.toFixed(2).toString();
+           document.getElementById("MainContent_ASPxCallbackPanel2_txtTotal").value = vMontoT.toFixed(2).toString();
            recalcularReorden();
        }
 
        function recalcularReorden() {
            consumo = parseFloat(document.getElementById("MainContent_ASPxCallbackPanel2_txtConsEstimado").value);
            te = parseFloat(document.getElementById("MainContent_ASPxCallbackPanel2_txtDiasEntrega").value);
-           stock = parseFloat(document.getElementById("MainContent_ASPxCallbackPanel2_cmbDias").value);
-           
-           part1 = (consumo / 365) * te;
-           part2 = (consumo / 365) * te;
-           document.getElementById("MainContent_ASPxCallbackPanel2_txtStockMin").value = part1 + part2;
+           stock = parseFloat(document.getElementById("MainContent_ASPxCallbackPanel2_cmbDias_I").value);
+           var part1 = (consumo / 365) * te;
+           var part2 = (consumo / 365) * stock;
+           // var rounded = Math.round(part1 + part2);
+           var rounded = part1 + part2;
+           document.getElementById("MainContent_ASPxCallbackPanel2_txtStockMin").value = rounded.toFixed(2);
        }
 
        function OnPanel1EndCallback(s, e) {
@@ -466,6 +461,7 @@
                     break;
                 case 'Aprobaciones':
                     $('#mdlAprobaciones').modal('show');
+
                     break;
             }
         }
@@ -586,7 +582,6 @@
                 if (s.cpAlertMessage == 'exists2') {
                     swal("Information", "Another application with this part number is in the approval process", "info");
                 }
-
                 if (s.cpAlertMessage == 'successSave') {
                     swal("Information", "The product has been success registered!", "success");
                 }
@@ -654,7 +649,6 @@
                 });
                 return;
             }
-
             ASPxCallbackPanel2.PerformCallback(Valores);
         }
 
@@ -691,16 +685,11 @@
         function CIuplGraphicsFile_OnFileUploadComplete(s, e) {
             if (e.isValid) {
                 console.log(e.callbackData);
-
                 MainContent_ASPxCallbackPanel2_txtFile.value = e.callbackData;
-
                 //cbSaveVars.PerformCallback(e.callbackData);
-
                 //var params = "SaveWithFile";
                 //xgrdPartes.PerformCallback(params);
-
                 //HabilitaCambio();
-
             }
             else {
                 swal("Warning", "An error has occurred from the database");
@@ -722,9 +711,7 @@
         function CIuplGFileArchivo_OnFileUploadComplete(s, e) {
             if (e.isValid) {
                 console.log(e.callbackData);
-
                 MainContent_ASPxCallbackPanel2_txtFileArchivo.value = e.callbackData;
-
             }
             else {
                 swal("Warning", "An error has occurred from the database");
@@ -748,7 +735,6 @@
         }
 
         function DisableSelectedArchivo() {
-
             var Valores = "";
             $(".chkArchivo").each(function () {
                 if (this.checked) {
@@ -761,7 +747,6 @@
             });
 
             if (Valores == "") {
-
                 swal({
                     title: "Information",
                     text: "No records selected!",
@@ -769,10 +754,10 @@
                 });
                 return;
             }
-
             xgrdArchivos.PerformCallback(Valores);
 
         }
+
         function saveComment(tipoArticulo, commentario) {
             console.log(tipoArticulo);
             console.log(commentario);
@@ -805,7 +790,6 @@
             if (comentarios == '') {
                 swal("Information", "Comments are missing", "info");
             } else {
-
                 Valores = tipo + "," + aprobacion + "," + comentarios;
                 ASPxCallbackPanel2.PerformCallback(Valores);
             }
@@ -1014,18 +998,18 @@
         <ClientSideEvents EndCallback="ASPxCallbackPanel2_EndCallback"/>
         <PanelCollection>
           <dx:PanelContent>
-            <div id="divBotones" class="col-xs-12 btn-group CeroPM" data-spy="affix" data-offset-top="100" style="padding-top:15px; color:white;width:100%;z-index:1 !important;background-color:#EFEFEF;">
-                <button type="button" runat="server" id="btnSave" class="btn btnSave" title="alt+1" Style="margin: 0px; padding: 0px; background-image: url('Assets/images/BtnGuardar.png');height:30px;width:103px;" onclick="ASPxCallbackPanel2.PerformCallback('Save');"><span class="badge">Alt+1</span></button>
+            <div id="divBotones" class="col-xs-12 btn-group CeroPM" data-spy="affix" data-offset-top="25" style="padding-top:15px; color:white;width:100%;z-index:1 !important;background-color:#EFEFEF;">
+<%--                <button type="button" runat="server" id="btnSave" class="btn btnSave" title="alt+1" Style="margin: 0px; padding: 0px; background-image: url('Assets/images/BtnGuardar.png');height:30px;width:103px;" onclick="ASPxCallbackPanel2.PerformCallback('Save');"><span class="badge">Alt+1</span></button>
                 <button type="button" runat="server" id="btnEnviarSolicitante" class="btn btnEnviarSolicitante" title="alt+2" Style="margin: 0px; padding: 0px;background-image:url('Assets/images/BtnEnviar.png');height:30px;width:103px;" onclick="selEnviar('Enviar');"><span class="badge">Alt+2</span></button>
                 <button type="button" runat="server" id="btnRechazar" class="btn btnRechazar" title="alt+4" Style="margin: 0px; padding: 0px;background-image:url('Assets/images/BtnRechazar.png');height:30px;width:103px;" onclick="selEnviar('Rechazar');"><span class="badge">Alt+4</span></button>
                 <button type="button" runat="server" id="btnAsignAutor" class="btn btnAsignAutor" title="alt+3" Style="margin: 0px; padding: 0px;background-image:url('Assets/images/BtnAsignarAutor.png');height:30px;width:103px;" onclick="ASPxCallbackPanel2.PerformCallback('Save2');"><span class="badge">Alt+3</span></button>
-                <button type="button" runat="server" id="btnEnviarDM" visible="false" class="btn btnEnviarDM" title="alt+5" Style="margin: 0px; padding: 0px;background-image:url('Assets/images/BtnAsignarAutor.png');height:30px;width:103px;" onclick="selEnviar('EnviarDM');"><span class="badge">Alt+5</span></button>
+                <button type="button" runat="server" id="btnEnviarDM" visible="false" class="btn btnEnviarDM" title="alt+5" Style="margin: 0px; padding: 0px;background-image:url('Assets/images/BtnAsignarAutor.png');height:30px;width:103px;" onclick="selEnviar('EnviarDM');"><span class="badge">Alt+5</span></button>--%>
                 
-<%--                <img ID="btnSave" runat="server" class="btn btnSave" title="alt+1" Style="margin: 0px; padding: 0px;" onclick="ASPxCallbackPanel2.PerformCallback('Save');" src="Assets/images/BtnGuardar.png"/>
+                <img ID="btnSave" runat="server" class="btn btnSave" title="alt+1" Style="margin: 0px; padding: 0px;" onclick="ASPxCallbackPanel2.PerformCallback('Save');" src="Assets/images/BtnGuardar.png"/>
                 <img ID="btnEnviarSolicitante" runat="server" class="btn btnEnviarSolicitante" title="alt+2" Style="margin: 0px; padding: 0px;" onclick="selEnviar('Enviar');" src="Assets/images/BtnEnviar.png" />
                 <img ID="btnRechazar" runat="server" class="btn btnRechazar" title="alt+4" Style="margin: 0px; padding: 0px;" onclick="selEnviar('Rechazar');"  src="Assets/images/BtnRechazar.png" />
                 <img ID="btnAsignAutor" runat="server" class="btn btnAsignAutor" title="alt+3" Style="margin: 0px; padding: 0px;" onclick="ASPxCallbackPanel2.PerformCallback('Save2');" src="Assets/images/BtnAsignarAutor.png" />
-                <img ID="btnEnviarDM" runat="server" visible="false" class="btn btnEnviarDM" title="alt+5" Style="margin: 0px; padding: 0px;" onclick="selEnviar('EnviarDM');" src="Assets/images/BtnEnviarDM.png" />--%>
+                <img ID="btnEnviarDM" runat="server" visible="false" class="btn btnEnviarDM" title="alt+5" Style="margin: 0px; padding: 0px;" onclick="selEnviar('EnviarDM');" src="Assets/images/BtnEnviarDM.png" />
                 <asp:ImageButton ID="btnRegresar" class="btn btnRegresar" title="alt+6" Style="margin: 0px; padding: 0px;" runat="server" ImageUrl="~/Assets/images/BtnSalir.png" OnClick="btnRegresar_Click" />
                 <div class="BtnGpoIniFin">
                     <a class="BtnIniFin" id="BtnInicio" href="#Inicio" title="Inicio" onmouseover="rotate('imgaRotarI');" onmouseout="rotate('imgaRotarI');"><i id="imgaRotarI" class="glyphicon glyphicon glyphicon-circle-arrow-up"></i><span class="badge badge-xs badge-info">Alt+9</span></a>
@@ -1038,14 +1022,14 @@
                         <div class="modal-header" runat="server">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4>Comentarios</h4>
-                            <asp:TextBox ID="txtAprobar" runat="server" CssClass="form-control input-sm hidden"></asp:TextBox>
-                            <asp:TextBox ID="txttipo" runat="server" CssClass="form-control input-sm hidden"></asp:TextBox>
+                            <asp:TextBox ID="txtAprobar" runat="server" CssClass="form-control input-sm hidden"/>
+                            <asp:TextBox ID="txttipo" runat="server" CssClass="form-control input-sm hidden"/>
                         </div>
                         <div class="modal-body" runat="server">
                             <div class="row">
                                 <label class="text-form col-sm-3">Comentarios</label>
                                 <div class="col-sm-5">
-                                    <asp:TextBox ID="comentariosEnviar" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <asp:TextBox ID="comentariosEnviar" runat="server" CssClass="form-control input-sm Campos comentariosEnviar"></asp:TextBox>
                                 </div>
                             </div>
                             <br />
@@ -1115,7 +1099,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents ValueChanged="function(s, e) { PrecargaProducto(s.GetValue()); }"/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                             </div>
@@ -1135,7 +1119,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF" />
                                     </dx:ASPxComboBox>
                                     <%--<asp:TextBox ID="cualArticulo" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>--%>
                                 </div>
@@ -1157,12 +1141,12 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-2">Modelo</label>
                                 <div class="col-sm-4">
-                                    <asp:TextBox ID="txtModelo" runat="server" style="width:100%" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <asp:TextBox ID="txtModelo" runat="server" style="width:100%" CssClass="form-control input-sm Campos"/>
                                 </div>
                             </div>
                             <div class="row form-group CeroPM">
@@ -1178,30 +1162,24 @@
                                     OnHtmlDataCellPrepared="xgrdArchivos_HtmlDataCellPrepared"
                                     ClientInstanceName="xgrdArchivos" Theme="Metropolis">
                                     <Columns>
-                                        <dx:GridViewDataTextColumn Name="ctrlPArchivosID" VisibleIndex="0" Width="10px">
-                                        </dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="TipoDocumento" Caption="Tipo" VisibleIndex="1" Width="33%">
-                                        </dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="descripcion" Caption="Descripción" VisibleIndex="2" Width="34%">
-                                        </dx:GridViewDataTextColumn>          
-                                         <dx:GridViewDataTextColumn FieldName="archivo" Caption="Archivo" VisibleIndex="3" Width="33%">
-                                        </dx:GridViewDataTextColumn>           
-                                        <dx:GridViewDataTextColumn FieldName="noDocumento" Visible="false" Caption="noDocumento" VisibleIndex="3" Width="33%">
-                                        </dx:GridViewDataTextColumn> 
+                                        <dx:GridViewDataTextColumn Name="ctrlPArchivosID" VisibleIndex="0" Width="10px"/>
+                                        <dx:GridViewDataTextColumn FieldName="TipoDocumento" Caption="Tipo" VisibleIndex="1" Width="33%"/>
+                                        <dx:GridViewDataTextColumn FieldName="descripcion" Caption="Descripción" VisibleIndex="2" Width="34%" />
+                                         <dx:GridViewDataTextColumn FieldName="archivo" Caption="Archivo" VisibleIndex="3" Width="33%" />
+                                        <dx:GridViewDataTextColumn FieldName="noDocumento" Visible="false" Caption="noDocumento" VisibleIndex="3" Width="33%" />
                                         <dx:GridViewDataTextColumn FieldName="archivo" Caption="Visualizar" VisibleIndex="4" Width="30%">
                                            <DataItemTemplate>
                                                <a id="clickElement" target="_blank" href='Upload/<%# Eval("archivo").ToString() %>'><%# Eval("archivo").ToString()%></a>
                                            </DataItemTemplate>
-                                       </dx:GridViewDataTextColumn>
-                                           
+                                       </dx:GridViewDataTextColumn>   
                                         <dx:GridViewDataBinaryImageColumn name="Nombre_Archivo_Img" Caption="Descargar" VisibleIndex="9" Width="5%" CellStyle-HorizontalAlign="Center">
                                             <PropertiesBinaryImage DisplayFormatString="{0}"/>
                                         </dx:GridViewDataBinaryImageColumn>     
                                     </Columns>
                                     <Styles>
-                                        <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
-                                        <RowHotTrack BackColor="#CEECF5"></RowHotTrack>
-                                        <Header BackColor="#F2F2F2" HorizontalAlign="Center" Font-Bold="true" CssClass="text-center"></Header>
+                                        <AlternatingRow BackColor="#F2F2F2"/>
+                                        <RowHotTrack BackColor="#CEECF5"/>
+                                        <Header BackColor="#F2F2F2" HorizontalAlign="Center" Font-Bold="true" CssClass="text-center"/>
                                     </Styles>
                                     <SettingsPager Mode="ShowPager" PageSize="20" />
                                     <Settings ShowFilterRow="True" />
@@ -1225,7 +1203,7 @@
                                                                 <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                                             </ValidationSettings>
                                                             <ClientSideEvents/>
-                                                            <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                                            <ButtonStyle BackColor="#0099FF"/>
                                                         </dx:ASPxComboBox>
                                                     </div>
                                                 </div>
@@ -1288,7 +1266,7 @@
                                                 <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                             </ValidationSettings>
                                             <ClientSideEvents/>
-                                            <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                            <ButtonStyle BackColor="#0099FF" />
                                         </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-2">Subcuenta</label>
@@ -1301,7 +1279,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF" />
                                     </dx:ASPxComboBox>
                                 </div>
                             </div>
@@ -1316,7 +1294,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF" />
                                     </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-2">Función de la máquina</label>
@@ -1335,7 +1313,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF" />
                                     </dx:ASPxComboBox>
                                 </div>
                             </div>
@@ -1350,7 +1328,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-1">Subcategoría 2</label>
@@ -1363,7 +1341,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-1">Subcategoría 3</label>
@@ -1376,7 +1354,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                             </div>
@@ -1490,7 +1468,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                             </div>
@@ -1520,12 +1498,15 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
-                                <label class="text-form col-sm-2">Acción de contención en caso de Inventario 0</label>
+                                <label class="text-form col-sm-2">Es un artículo que se puede reparar</label>
                                 <div class="col-sm-4">
-                                    <asp:TextBox ID="txtcomoAyudarStockCero" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
+                                    <%--<asp:RadioButton ID="rbReparaSi" runat="server" GroupName="Repara" Text="&nbsp;Si" onchange="ASPxCallbackPanel2.PerformCallback('rbRepSi');"/>&nbsp;
+                                    <asp:RadioButton ID="rbReparaNo" runat="server" GroupName="Repara" Text="&nbsp;No"  onchange="ASPxCallbackPanel2.PerformCallback('rbRepNo');"/>&nbsp;--%>
+                                    <asp:RadioButton ID="rbReparaSi" runat="server" GroupName="Repara" Text="&nbsp;Si" />&nbsp;
+                                    <asp:RadioButton ID="rbReparaNo" runat="server" GroupName="Repara" Text="&nbsp;No" />&nbsp;
                                 </div>
                             </div>
                             <div class="row form-group CeroPM">
@@ -1543,7 +1524,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                             </div>
@@ -1558,7 +1539,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-2">Estatus del contrato (No. plan)</label>
@@ -1571,7 +1552,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                             </div>
@@ -1580,10 +1561,9 @@
                                 <div class="col-sm-4">
                                    <asp:TextBox ID="txtContrato" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
                                 </div>
-                                <label class="text-form col-sm-2">Es un artículo que se puede reparar</label>
+                                <label class="text-form col-sm-2">Acción de contención en caso de Inventario 0</label>
                                 <div class="col-sm-4">
-                                    <asp:RadioButton ID="rbReparaSi" runat="server" GroupName="Repara" Text="&nbsp;Si" onchange="ASPxCallbackPanel2.PerformCallback('rbRepSi');"/>&nbsp;
-                                    <asp:RadioButton ID="rbReparaNo" runat="server" GroupName="Repara" Text="&nbsp;No"  onchange="ASPxCallbackPanel2.PerformCallback('rbRepNo');"/>&nbsp;
+                                    <asp:TextBox ID="txtcomoAyudarStockCero" runat="server" CssClass="form-control input-sm Campos" TextMode="MultiLine" Rows="5"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -1625,7 +1605,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-2">Texto de búsqueda</label>
@@ -1644,7 +1624,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-2">País de origen proveedor</label>
@@ -1657,7 +1637,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                             </div>
@@ -1676,7 +1656,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                             </div>
@@ -1695,7 +1675,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                             </div>
@@ -1710,7 +1690,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-2">Tiempo de Entrega (días)</label>
@@ -1729,7 +1709,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-2">Método de Coste Sales/Purchasing</label>
@@ -1742,7 +1722,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                             </div>
@@ -1759,7 +1739,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                     </div>
                                     <label class="text-form col-sm-1">Piezas por Empaque</label>
@@ -1769,14 +1749,14 @@
                                     <label class="text-form col-sm-1">Unidad de Medida</label>
                                     <div class="col-sm-3">
                                         <input type="hidden" id="hdnUMEmpq" value='<%# Eval("UMEmpaque")%>' runat="server"/>
-                                        <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbUmEmpaque" ClientInstanceName="cmbUmEmpaque" runat="server" IncrementalFilteringMode="Contains" 
+                                        <dx:ASPxComboBox CssClass="form-control input-sm Campos Campos6Cols" ID="cmbUmEmpaque" ClientInstanceName="cmbUmEmpaque" runat="server" IncrementalFilteringMode="Contains" 
                                             FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                             PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                             <ValidationSettings>
                                                 <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                             </ValidationSettings>
                                             <ClientSideEvents/>
-                                            <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                            <ButtonStyle BackColor="#0099FF"/>
                                         </dx:ASPxComboBox>
                                     </div>
                                 </div>
@@ -1807,7 +1787,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-2">Purch 2/Categoría</label>
@@ -1820,7 +1800,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                             </div>
@@ -1835,7 +1815,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                             </div>
@@ -1854,7 +1834,6 @@
                             <div class="row form-group CeroPM">
                                 <label class="text-form col-sm-2">Branch Plant</label>
                                 <div class="col-sm-4">
-
                                     <input type="hidden" id="hdnbranch" value='<%# Eval("branch")%>' runat="server"/>
                                     <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbbranch" ClientInstanceName="cmbbranch" runat="server" IncrementalFilteringMode="Contains" 
                                         FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
@@ -1862,36 +1841,33 @@
                                         <ValidationSettings>
                                             <RequiredField IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
-                                        <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ClientSideEvents SelectedIndexChanged="function(s, e) { recalcularReorden(); }" />
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
-
                                 </div>
-                                <label class="text-form col-sm-2">Cantidad de Punto de Reorden (Stock Mínimo)</label>
-                                <div class="col-sm-4">
-                                    <asp:TextBox ID="txtStockMin" ToolTip="AUTOMATICO= RESULTA(CONSUMO/365 X T.E )+ (CONSUMO/365* STOCK SEGURIDAD)" TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="row form-group CeroPM"> 
-                                <label class="text-form col-sm-2">Cantidad a Pedir(Stock Máximo)</label>
-                                <div class="col-sm-4">
-                                    <asp:TextBox ID="txtStockMax" TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos"></asp:TextBox>
-                                </div> 
-                                <label class="text-form col-sm-2">Días de Stock de Seguridad</label>
+                               <label class="text-form col-sm-2">Días de Stock de Seguridad</label>
                                 <div class="col-sm-4">
                                     <input type="hidden" id="hndDias" value='<%# Eval("diasStok")%>' runat="server"/>
-                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos" ID="cmbDias" ClientInstanceName="cmbDias" onChange="recalcularReorden()" runat="server" IncrementalFilteringMode="Contains" 
-                                        FilterMinLength="0" EnableCallbackMode="True" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
+                                    <dx:ASPxComboBox CssClass="form-control input-sm Campos cmbDias" ID="cmbDias" ClientInstanceName="cmbDias" runat="server" IncrementalFilteringMode="Contains" 
+                                        FilterMinLength="0" EnableCallbackMode="true" CallbackPageSize="20" FocusedStyle-Border-BorderColor="#3399ff" Paddings-Padding="0px" Theme="Aqua"  
                                         PopupVerticalAlign="Above" PopupHorizontalAlign="Center" ItemStyle-SelectedStyle-Font-Italic="true">
                                         <ValidationSettings>
                                             <RequiredField IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
-                                        <ClientSideEvents/>
+                                        <ClientSideEvents SelectedIndexChanged="function(s, e) { recalcularReorden(); }" />
                                         <ButtonStyle BackColor="#0099FF"></ButtonStyle>
                                     </dx:ASPxComboBox>
-
                                 </div>
-
+                            </div>
+                            <div class="row form-group CeroPM">
+                                <label class="text-form col-sm-2">Cantidad de Punto de Reorden (Stock Mínimo)</label>
+                                <div class="col-sm-4">
+                                    <asp:TextBox ID="txtStockMin" ToolTip="(CONSUMO EST. ANUAL/365 X T.E )+ (CONSUMO EST. ANUAL/365 x STOCK SEGURIDAD)" TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos" disabled></asp:TextBox>
+                                </div>
+                                <label class="text-form col-sm-2">Cantidad a Pedir(Stock Máximo)</label>
+                                <div class="col-sm-4">
+                                    <asp:TextBox ID="txtStockMax" TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos" onChange="recalcularReorden()"></asp:TextBox>
+                                </div>
                             </div>
                             <div class="row form-group CeroPM">                                
                                 <label class="text-form col-sm-2">Planeador</label>
@@ -1903,8 +1879,8 @@
                                         <ValidationSettings>
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
-                                        <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ClientSideEvents SelectedIndexChanged="function(s, e) { recalcularReorden(); }" />
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                                 <label class="text-form col-sm-2">Categoría de Conteo Cíclico</label>
@@ -1915,8 +1891,8 @@
                                         <ValidationSettings>
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
-                                        <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ClientSideEvents SelectedIndexChanged="function(s, e) { recalcularReorden(); }" />
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                             </div>
@@ -1945,7 +1921,7 @@
                                                 <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                             </ValidationSettings>
                                             <ClientSideEvents/>
-                                            <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                            <ButtonStyle BackColor="#0099FF"/>
                                         </dx:ASPxComboBox>
                                     </div>
                                     <label class="text-form col-sm-1">Ubicación Secundaria</label>
@@ -1958,7 +1934,7 @@
                                                 <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                             </ValidationSettings>
                                             <ClientSideEvents/>
-                                            <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                            <ButtonStyle BackColor="#0099FF"/>
                                         </dx:ASPxComboBox>
                                     </div>
                                     <label class="text-form col-sm-1">Unidad de Medida</label>
@@ -1971,7 +1947,7 @@
                                                 <RequiredField IsRequired="true" ErrorText="Select a option"/>
                                             </ValidationSettings>
                                             <ClientSideEvents/>
-                                            <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                            <ButtonStyle BackColor="#0099FF"/>
                                         </dx:ASPxComboBox>
                                     </div>
                                 </div>
@@ -2009,7 +1985,7 @@
                                 </div>
                                 <label class="text-form col-sm-1">Monto Mensual Inv Promedio</label>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txtTotal"  TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos Campos6Cols"></asp:TextBox>
+                                    <asp:TextBox ID="txtTotal"  TextMode="Number" step="0.1" runat="server" CssClass="form-control input-sm Campos Campos6Cols" disabled></asp:TextBox>
                                 </div>
                                 <label class="text-form col-sm-1">Moneda</label>
                                 <div class="col-sm-3">
@@ -2021,7 +1997,7 @@
                                             <RequiredField  IsRequired="true" ErrorText="Select a option"/>
                                         </ValidationSettings>
                                         <ClientSideEvents/>
-                                        <ButtonStyle BackColor="#0099FF"></ButtonStyle>                                                                                                                       
+                                        <ButtonStyle BackColor="#0099FF"/>
                                     </dx:ASPxComboBox>
                                 </div>
                             </div>
@@ -2067,9 +2043,9 @@
                             <dx:GridViewDataTextColumn  FieldName="codigoEmpleado" Caption="Nombre del Autorizador"/>
                         </Columns>
                         <Styles>
-                            <AlternatingRow BackColor="#F2F2F2"></AlternatingRow>
-                            <RowHotTrack BackColor="#CEECF5"></RowHotTrack>
-                            <Header BackColor="#F2F2F2" HorizontalAlign="Center" Font-Bold="true" CssClass="text-center"></Header>
+                            <AlternatingRow BackColor="#F2F2F2"/>
+                            <RowHotTrack BackColor="#CEECF5"/>
+                            <Header BackColor="#F2F2F2" HorizontalAlign="Center" Font-Bold="true" CssClass="text-center"/>
                         </Styles>
                         <SettingsPager Mode="ShowPager" PageSize="20" />
                         <Settings ShowFilterRow="True" />
