@@ -149,6 +149,7 @@ namespace ControlProductos.Entity
         public decimal totalAnual { get; set; }
         public string monedaComprador { get; set; }
         public decimal montoMensual { get; set; }
+        public bool rechazado { get; set; }
 
         public List<archivos> archivos { get; set; }
 

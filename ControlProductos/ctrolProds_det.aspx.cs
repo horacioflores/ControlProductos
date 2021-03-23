@@ -689,8 +689,8 @@ namespace ControlProductos
                                 }
                                 btnEnviarSolicitante.Visible = true;
                                 btnRechazar.Visible = false;
-                                // btnEnviarSolicitante.Src = "Assets/images/BtnEnviarProveedor.png";
-                                btnEnviarSolicitante.Style["background-image"] = "Assets/images/BtnEnviarProveedor.png";
+                                btnEnviarSolicitante.Src = "Assets/images/BtnEnviarProveedor.png";
+                                // btnEnviarSolicitante.Style["background-image"] = "Assets/images/BtnEnviarProveedor.png";
                                  ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-edit' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Pendiente por el autor para terminar la captura</span>";
                                 break;
                             case "En Aprobación por ":
@@ -752,6 +752,19 @@ namespace ControlProductos
                                         disabledMtoo();
                                         disabledDM();
                                         break;
+                                    case "0008":
+                                        perfil = "DATA MANAGER";
+                                        disabledAutor();
+                                        disabledComprador();
+                                        disabledPlaneador();
+                                        disabledAlmacen();
+                                        disabledMtoo();
+                                        if (ctrlP.operacion == "BAJA")
+                                        {
+                                            disabledDM();
+                                        }
+                                        break;
+
                                 }
                                 btnAsignAutor.Visible = false;
                                 if (ctrlP.sigPerfil != LoginInfo.CurrentPerfil.Codigo)
@@ -800,6 +813,10 @@ namespace ControlProductos
                                 break;
                         }
 
+                        if (ctrlP.rechazado)
+                        {
+                            ltlSts.Text = "<span id='spanStatus' class='alert btn-danger docEstatus'><i class='glyphicon glyphicon-edit' style='padding-right:5px;'></i>Rechazado</span>";
+                        }
                         
                         if (ctrlP.sigPerfil == LoginInfo.CurrentPerfil.Codigo)
                         {
@@ -1196,9 +1213,9 @@ namespace ControlProductos
                         {
                             oItmUmTempq.Selected = true;
                         }
-                        txtAlto.Text = ctrlP.piezasEmpaque.ToString();
-                        txtAncho.Text = ctrlP.piezasEmpaque.ToString();
-                        txtLargo.Text = ctrlP.piezasEmpaque.ToString();
+                        txtAlto.Text = ctrlP.alto.ToString();
+                        txtAncho.Text = ctrlP.ancho.ToString();
+                        txtLargo.Text = ctrlP.largo.ToString();
 
                         ListEditItem oItmpursh1 = cmbPursh1.Items.FindByValue(ctrlP.pursh1);
                         if (oItmpursh1 != null)
@@ -1617,9 +1634,11 @@ namespace ControlProductos
                         {
                             oItmUmTempq.Selected = true;
                         }
-                        txtAlto.Text = ctrlP.piezasEmpaque.ToString();
-                        txtAncho.Text = ctrlP.piezasEmpaque.ToString();
-                        txtLargo.Text = ctrlP.piezasEmpaque.ToString();
+                        
+                        txtAlto.Text = ctrlP.alto.ToString();
+                        txtAncho.Text = ctrlP.ancho.ToString();
+                        txtLargo.Text = ctrlP.largo.ToString();
+
                         ListEditItem oItmpursh1 = cmbPursh1.Items.FindByValue(ctrlP.pursh1);
                         if (oItmpursh1 != null)
                         {
@@ -2612,8 +2631,8 @@ namespace ControlProductos
                                             btnAsignAutor.Visible = true;
                                             btnEnviarSolicitante.Visible = true;
                                             btnRechazar.Visible = false;
-                                            //     btnEnviarSolicitante.Src = "Assets/images/BtnEnviarProveedor.png";
-                                            btnEnviarSolicitante.Style["background-image"] = "Assets/images/BtnEnviarProveedor.png";
+                                            btnEnviarSolicitante.Src = "Assets/images/BtnEnviarProveedor.png";
+                                            // btnEnviarSolicitante.Style["background-image"] = "Assets/images/BtnEnviarProveedor.png";
                                             ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-edit' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Pendiente por el autor para terminar la captura</span>";
                                             break;
                                         case "En Aprobación por ":
@@ -2959,8 +2978,8 @@ namespace ControlProductos
                                             btnAsignAutor.Visible = true;
                                             btnEnviarSolicitante.Visible = true;
                                             btnRechazar.Visible = false;
-                                            //  btnEnviarSolicitante.Src = "Assets/images/BtnEnviarProveedor.png";
-                                            btnEnviarSolicitante.Style["background-image"] = "Assets/images/BtnEnviarProveedor.png";
+                                            btnEnviarSolicitante.Src = "Assets/images/BtnEnviarProveedor.png";
+                                            // btnEnviarSolicitante.Style["background-image"] = "Assets/images/BtnEnviarProveedor.png";
                                             ltlSts.Text = "<span id='spanStatus' class='alert btn-info docEstatus'><i class='glyphicon glyphicon-edit' style='padding-right:5px;'></i>" + ctrlP.sts_Prods + "</span><span style='position: absolute; left: 250px; color:#FBFBFB;padding:2px 0px;'>:Pendiente por el autor para terminar la captura</span>";
                                             break;
                                         case "En Aprobación por ":

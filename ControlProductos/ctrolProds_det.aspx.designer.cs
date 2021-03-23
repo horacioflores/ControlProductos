@@ -28,7 +28,7 @@ namespace ControlProductos {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnSave;
+        protected global::System.Web.UI.HtmlControls.HtmlImage btnSave;
         
         /// <summary>
         /// btnEnviarSolicitante control.
@@ -37,7 +37,7 @@ namespace ControlProductos {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnEnviarSolicitante;
+        protected global::System.Web.UI.HtmlControls.HtmlImage btnEnviarSolicitante;
         
         /// <summary>
         /// btnRechazar control.
@@ -46,7 +46,7 @@ namespace ControlProductos {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnRechazar;
+        protected global::System.Web.UI.HtmlControls.HtmlImage btnRechazar;
         
         /// <summary>
         /// btnAsignAutor control.
@@ -55,7 +55,7 @@ namespace ControlProductos {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnAsignAutor;
+        protected global::System.Web.UI.HtmlControls.HtmlImage btnAsignAutor;
         
         /// <summary>
         /// btnEnviarDM control.
@@ -64,7 +64,7 @@ namespace ControlProductos {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnEnviarDM;
+        protected global::System.Web.UI.HtmlControls.HtmlImage btnEnviarDM;
         
         /// <summary>
         /// btnRegresar control.
@@ -589,13 +589,22 @@ namespace ControlProductos {
         protected global::DevExpress.Web.ASPxComboBox cmbOQ;
         
         /// <summary>
-        /// txtcomoAyudarStockCero control.
+        /// rbReparaSi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtcomoAyudarStockCero;
+        protected global::System.Web.UI.WebControls.RadioButton rbReparaSi;
+        
+        /// <summary>
+        /// rbReparaNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbReparaNo;
         
         /// <summary>
         /// txtPrecio control.
@@ -670,22 +679,13 @@ namespace ControlProductos {
         protected global::System.Web.UI.WebControls.TextBox txtContrato;
         
         /// <summary>
-        /// rbReparaSi control.
+        /// txtcomoAyudarStockCero control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbReparaSi;
-        
-        /// <summary>
-        /// rbReparaNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbReparaNo;
+        protected global::System.Web.UI.WebControls.TextBox txtcomoAyudarStockCero;
         
         /// <summary>
         /// txtDescripcion1 control.
@@ -1039,24 +1039,6 @@ namespace ControlProductos {
         protected global::DevExpress.Web.ASPxComboBox cmbbranch;
         
         /// <summary>
-        /// txtStockMin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStockMin;
-        
-        /// <summary>
-        /// txtStockMax control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStockMax;
-        
-        /// <summary>
         /// hndDias control.
         /// </summary>
         /// <remarks>
@@ -1073,6 +1055,24 @@ namespace ControlProductos {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxComboBox cmbDias;
+        
+        /// <summary>
+        /// txtStockMin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtStockMin;
+        
+        /// <summary>
+        /// txtStockMax control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtStockMax;
         
         /// <summary>
         /// hdnPlaneador control.
