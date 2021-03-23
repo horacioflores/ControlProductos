@@ -36,3 +36,4 @@ C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProducto
 C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll.licenses
 C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.dll
 C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.pdb
+C:\Users\Ramiro Garcia\Desktop\ControlProductos\ControlProductos\ControlProductos\obj\Debug\ControlProductos.csprojResolveAssemblyReference.cache
